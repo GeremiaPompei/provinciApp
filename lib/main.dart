@@ -1,8 +1,6 @@
+import 'package:MC/view/basic_view.dart';
 import 'package:flutter/material.dart';
 
-void main() => MaterialApp(
-  home: Scaffold(
-    backgroundColor: Colors.green,
-    body: Text('Macerata App!'),
-  )
+void main() => runApp(
+  mtrApp()
 );
