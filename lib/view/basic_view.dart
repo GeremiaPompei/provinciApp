@@ -42,18 +42,20 @@ class _pressState extends State<press> {
               onPressed: () {
                 setState(() {
                   result = '';
-                  fetchWord(text).asStream().forEach((element) {
-                    result = element.body + '\n';
+                  fetchWord(text).asStream().any((element) {
+                    element.forEach((e) {
+                      result += e.toString()+'\n';
+                    });
+                    return true;
                   });
-                  //result = result.substring(result.indexOf('ul class="dataset-list unstyled'),result.indexOf('/ul'));
                 });
               },
             ),
             Expanded(
               child: SingleChildScrollView(
                 scrollDirection: Axis.vertical,
-                child: Html(
-                  data: '$result',
+                child: Text(
+                  '$result',
                 ),
               ),
             ),
