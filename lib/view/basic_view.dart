@@ -1,67 +1,93 @@
+import 'package:MC/view/organization_view.dart';
+import 'package:MC/view/search_view.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_html/flutter_html.dart';
 
 import 'package:MC/model/http_request.dart';
 import 'package:flutter/material.dart';
 
-MaterialApp mtrApp() =>
-  MaterialApp(
+import 'category_view.dart';
+
+MaterialApp mtrApp() {
+  return MaterialApp(
     home: Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red,
-        title: Text(
-            'MC Search...'
-        ),
+        title: Text('MC Start...'),
       ),
-      body: press(),
+      bottomNavigationBar: buttonBar(),
     ),
-);
-
-class press extends StatefulWidget {
-  @override
-  _pressState createState() => _pressState();
+  );
 }
 
-class _pressState extends State<press> {
-  String text = '';
-  String result = '';
+class buttonBar extends StatefulWidget {
+  @override
+  _buttonBarState createState() => _buttonBarState();
+}
+
+class _buttonBarState extends State<buttonBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Center(
-        child: Column(
-          children: <Widget>[
-            TextField(
-              onSubmitted: (String input) {
-                setState(() {
-                  text = input;
-                  });
-              },
-            ),
-            FlatButton(
-              child: Text("OK"),
+      color: Colors.red,
+      child: ButtonBar(
+        children: <Widget>[
+          FlatButton(
+            child: IconButton(
+              icon: Icon(Icons.search),
               onPressed: () {
-                setState(() {
-                  result = '';
-                  fetchWord(text).asStream().any((element) {
-                    element.forEach((e) {
-                      result += e.toString()+'\n';
-                    });
-                    return true;
-                  });
-                });
+                launch('MC Search..', searchView());
               },
             ),
-            Expanded(
-              child: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: Text(
-                  '$result',
-                ),
-              ),
+          ),
+          FlatButton(
+            child: IconButton(
+              icon: Icon(Icons.location_city),
+              onPressed: () {
+                launch('MC Organizations...', organizationView());
+              },
             ),
-          ],
-        ),
+          ),
+          FlatButton(
+            child: IconButton(
+              icon: Icon(Icons.category),
+              onPressed: () {
+                launch('MC Category...', categoryView());
+              },
+            ),
+          ),
+          FlatButton(
+            child: IconButton(
+              icon: Icon(Icons.comment),
+              onPressed: () {
+                launch('MC Comment...', Center(child: Icon(Icons.comment)));
+              },
+            ),
+          ),
+          FlatButton(
+            child: IconButton(
+              icon: Icon(Icons.settings),
+              onPressed: () {
+                launch('MC Settings...', Center(child: Icon(Icons.settings)));
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
+}
+
+void launch(String title, Widget widget) {
+  runApp(MaterialApp(
+    home: Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.red,
+        title: Text(title),
+      ),
+      body: widget,
+      bottomNavigationBar: buttonBar(),
+    ),
+  ));
 }
