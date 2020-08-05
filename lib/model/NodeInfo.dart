@@ -7,7 +7,7 @@ class NodeInfo{
 
   @override
   String toString(){
-    if(description==null)
+    if(description == null)
       return name;
     return name + ': ' + description;
   }
