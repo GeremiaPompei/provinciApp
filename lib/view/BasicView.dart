@@ -1,13 +1,13 @@
-import 'package:MC/view/organization_view.dart';
-import 'package:MC/view/search_view.dart';
+import 'package:MC/view/OrganizationView.dart';
+import 'package:MC/view/SearchView.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_html/flutter_html.dart';
 
-import 'package:MC/model/http_request.dart';
+import 'package:MC/model/HttpRequest.dart';
 import 'package:flutter/material.dart';
 
-import 'category_view.dart';
+import 'CategoryView.dart';
 
 MaterialApp mtrApp() {
   return MaterialApp(

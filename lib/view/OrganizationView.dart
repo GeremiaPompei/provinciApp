@@ -2,19 +2,17 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_html/flutter_html.dart';
 
-import 'package:MC/model/http_request.dart';
+import 'package:MC/model/HttpRequest.dart';
 import 'package:flutter/material.dart';
 
-class searchView extends StatefulWidget {
+class organizationView extends StatefulWidget {
   @override
-  _searchViewState createState() => _searchViewState();
+  _organizationViewState createState() => _organizationViewState();
 }
 
-class _searchViewState extends State<searchView> {
-  String text = '';
+class _organizationViewState extends State<organizationView> {
   String result = '';
 
-  @override
   Widget build(BuildContext context) {
     return Container(
       child: Center(
@@ -22,9 +20,7 @@ class _searchViewState extends State<searchView> {
           children: <Widget>[
             TextField(
               onSubmitted: (String input) {
-                setState(() {
-                  text = input;
-                });
+                setState(() {});
               },
             ),
             FlatButton(
@@ -32,7 +28,7 @@ class _searchViewState extends State<searchView> {
               onPressed: () {
                 setState(() {
                   result = '';
-                  searchByWord(text).asStream().any((element) {
+                  organizations().asStream().any((element) {
                     element.forEach((e) {
                       result += e.toString() + '\n';
                     });
