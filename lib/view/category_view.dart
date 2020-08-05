@@ -11,23 +11,43 @@ class categoryView extends StatefulWidget {
 }
 
 class _categoryViewState extends State<categoryView> {
-  @override
+  String result = '';
+
   Widget build(BuildContext context) {
     return Container(
-      child: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Text(
-          str(),
+      child: Center(
+        child: Column(
+          children: <Widget>[
+            TextField(
+              onSubmitted: (String input) {
+                setState(() {});
+              },
+            ),
+            FlatButton(
+              child: Text("OK"),
+              onPressed: () {
+                setState(() {
+                  result = '';
+                  categories().asStream().any((element) {
+                    element.forEach((e) {
+                      result += e.toString() + '\n';
+                    });
+                    return true;
+                  });
+                });
+              },
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: Text(
+                  '$result',
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
-}
-
-String str(){
-  String result = '';
-  categories().asStream().first.asStream().forEach((e) {
-      result += e.toString() + '\n';
-  });
-  return result;
 }

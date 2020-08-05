@@ -11,27 +11,43 @@ class organizationView extends StatefulWidget {
 }
 
 class _organizationViewState extends State<organizationView> {
-  @override
+  String result = '';
+
   Widget build(BuildContext context) {
     return Container(
-      child: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Text(
-          str(),
+      child: Center(
+        child: Column(
+          children: <Widget>[
+            TextField(
+              onSubmitted: (String input) {
+                setState(() {});
+              },
+            ),
+            FlatButton(
+              child: Text("OK"),
+              onPressed: () {
+                setState(() {
+                  result = '';
+                  organizations().asStream().any((element) {
+                    element.forEach((e) {
+                      result += e.toString() + '\n';
+                    });
+                    return true;
+                  });
+                });
+              },
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: Text(
+                  '$result',
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
-}
-
-String str(){
-  String result = '';
-  organizations().asStream().any((element) {
-    element.forEach((e) {
-      result += e.toString() + '\n';
-      print(e.toString());
-    });
-    return true;
-  });
-  return result;
 }

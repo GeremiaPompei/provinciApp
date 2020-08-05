@@ -26,8 +26,8 @@ Future<List> organizations() async {
   final response = await responseByGet('organization');
   if (response.statusCode == 200) {
     document = parse(response.body);
-    document.getElementsByClassName('media-grid masonry').any((element) {
-      element.getElementsByClassName('media-item masonry-brick').forEach((element) {
+    document.getElementsByClassName('media-grid').any((element) {
+      element.getElementsByClassName('media-item').forEach((element) {
         elements.add(element.getElementsByClassName('media-heading').single.text);
       });
       return elements.isNotEmpty;
@@ -42,8 +42,8 @@ Future<List> categories() async {
   final response = await responseByGet('group');
   if (response.statusCode == 200) {
     document = parse(response.body);
-    document.getElementsByClassName('media-grid masonry').any((element) {
-      element.getElementsByClassName('media-item masonry-brick').forEach((element) {
+    document.getElementsByClassName('media-grid').any((element) {
+      element.getElementsByClassName('media-item').forEach((element) {
         elements.add(element.getElementsByClassName('media-heading').single.text);
       });
       return elements.isNotEmpty;
@@ -53,6 +53,5 @@ Future<List> categories() async {
 }
 
 Future<http.Response> responseByGet(String word) {
-  return http.Client()
-      .get(Uri.parse('http://dati.provincia.mc.it/' + word));
+  return http.Client().get(Uri.parse('http://dati.provincia.mc.it/' + word));
 }
