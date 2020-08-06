@@ -30,9 +30,12 @@ class _organizationViewState extends State<organizationView> {
           child: ListTile(
               title: Text(controller.getOrganizations()[index].name.toString()),
               subtitle: Text(
-                  controller.getOrganizations()[index].description.toString())
-          ),
-          onPressed: () {},
+                  controller.getOrganizations()[index].description.toString())),
+          onPressed: () {
+            setState(() {
+              print(controller.getOrganizations()[index].url);
+            });
+          },
         );
       },
       separatorBuilder: (BuildContext context, int index) => const Divider(),

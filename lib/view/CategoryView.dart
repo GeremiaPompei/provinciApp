@@ -26,7 +26,11 @@ class _categoryViewState extends State<categoryView> {
           child: ListTile(
               title: Text(controller.getCategories()[index].name.toString())
           ),
-          onPressed: () {},
+          onPressed: () {
+            setState(() {
+              print(controller.getCategories()[index].url);
+            });
+          },
         );
       },
       separatorBuilder: (BuildContext context, int index) => const Divider(),

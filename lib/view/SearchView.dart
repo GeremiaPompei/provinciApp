@@ -46,7 +46,9 @@ class _searchViewState extends State<searchView> {
             scrollDirection: Axis.vertical,
             shrinkWrap: true,
             padding: const EdgeInsets.all(8),
-            itemCount: controller.getSearch().length,
+            itemCount: controller
+                .getSearch()
+                .length,
             itemBuilder: (context, index) {
               return FlatButton(
                 child: ListTile(
@@ -54,11 +56,21 @@ class _searchViewState extends State<searchView> {
                   subtitle: Text(
                       controller.getSearch()[index].description.toString()),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  setState(() {
+                    //TODO Cambiare in altro widget
+                    controller
+                        .getLeafs(controller.getSearch()[index].url)
+                        .asStream()
+                        .forEach((element) {
+                      print(element);
+                    });
+                  });
+                },
               );
             },
             separatorBuilder: (BuildContext context, int index) =>
-                const Divider(),
+            const Divider(),
           ),
         ),
       ],

@@ -1,35 +1,35 @@
 import 'package:MC/controller/Controller.dart';
 import 'package:MC/view/OrganizationView.dart';
 import 'package:MC/view/SearchView.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_html/flutter_html.dart';
-
-import 'package:MC/model/HttpRequest.dart';
 import 'package:flutter/material.dart';
 
 import 'CategoryView.dart';
 
-MaterialApp mtrApp() {
-  return MaterialApp(
-    home: Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.red,
-        title: Text('MC Start...'),
-      ),
-      bottomNavigationBar: buttonBar(),
-    ),
-  );
+void mtrApp() {
+  Launcher().launch(
+      'MC Start...',
+      Center(
+          child: Text(
+        'Start...',
+        style: TextStyle(fontSize: 40),
+      )));
 }
 
-class buttonBar extends StatefulWidget {
+class ButtonBarDown extends StatefulWidget {
+  Controller controller;
+  void Function(String title, Widget widget) launch;
+  ButtonBarDown(this.controller,this.launch);
+
   @override
-  _buttonBarState createState() => _buttonBarState();
+  _ButtonBarDownState createState() => _ButtonBarDownState(controller,launch);
 }
 
-class _buttonBarState extends State<buttonBar> {
+class _ButtonBarDownState extends State<ButtonBarDown> {
+  Controller controller;
+  void Function(String title, Widget widget) launch;
 
-  Controller controller = new Controller();
+  _ButtonBarDownState(this.controller,this.launch);
 
   @override
   Widget build(BuildContext context) {
@@ -83,15 +83,26 @@ class _buttonBarState extends State<buttonBar> {
   }
 }
 
-void launch(String title, Widget widget) {
-  runApp(MaterialApp(
-    home: Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.red,
-        title: Text(title),
+class Launcher {
+
+  Controller controller;
+  ButtonBarDown bar;
+
+  Launcher(){
+    this.controller = new Controller();
+    this.bar = new ButtonBarDown(controller,launch);
+  }
+
+  void launch(String title, Widget widget) {
+    runApp(MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.red,
+          title: Text(title),
+        ),
+        body: widget,
+        bottomNavigationBar: bar,
       ),
-      body: widget,
-      bottomNavigationBar: buttonBar(),
-    ),
-  ));
+    ));
+  }
 }

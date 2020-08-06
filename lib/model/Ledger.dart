@@ -1,9 +1,11 @@
+import 'package:MC/model/LeafInfo.dart';
 import 'package:MC/model/NodeInfo.dart';
 
 class Ledger{
   List<NodeInfo> search = [];
   List<NodeInfo> organizations = [];
   List<NodeInfo> categories = [];
+  List<LeafInfo> leafs = [];
 
   void initOrganizations(List<NodeInfo> nodes){
     this.organizations = nodes;
@@ -16,4 +18,9 @@ class Ledger{
   void setSearch(List<NodeInfo> nodes){
     this.search = nodes;
   }
+
+  void setLeafs(List<dynamic> parsedJson) {
+    this.leafs = parsedJson.map((i)=>LeafInfo.fromJson(i)).toList();
+  }
+
 }

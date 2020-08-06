@@ -5,7 +5,6 @@ import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
 
 class HttpRequest {
-
   static Future<List<NodeInfo>> getNodeInfo(
       String word,
       String ulClass,
@@ -40,6 +39,28 @@ class HttpRequest {
       });
     }
     return elements;
+  }
+
+  static Future<String> getJson(String word) async {
+    String element = '';
+    html.Document document;
+    final response = await responseByGet(word);
+    if (response.statusCode == 200) {
+      document = parse(response.body);
+      String url = document
+          .getElementsByClassName('resources').single
+          .getElementsByClassName('resource-list').single
+          .getElementsByClassName('resource-item')[1]
+          .getElementsByClassName('resource-url-analytics').single
+          .attributes
+          .putIfAbsent('href', () => null)
+          .trim();
+      final response2 = await http.Client().get(Uri.parse(url));
+      if (response2.statusCode == 200) {
+        element = response2.body;
+      }
+    }
+    return element;
   }
 
   static Future<http.Response> responseByGet(String word) {
