@@ -13,37 +13,23 @@ class categoryView extends StatefulWidget {
 }
 
 class _categoryViewState extends State<categoryView> {
-  String result = '';
   Controller controller;
 
   _categoryViewState(this.controller);
 
-  void onPressed() {
-    setState(() {
-      result = '';
-      controller.getCategories().forEach((e) {
-        result += e.toString() + '\n';
-      });
-    });
-  }
-
   Widget build(BuildContext context) {
-    onPressed();
-    return Container(
-      child: Center(
-        child: Column(
-          children: <Widget>[
-            Expanded(
-              child: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: Text(
-                  '$result',
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
+    return ListView.separated(
+      padding: const EdgeInsets.all(8),
+      itemCount: controller.getCategories().length,
+      itemBuilder: (context, index) {
+        return FlatButton(
+          child: ListTile(
+              title: Text(controller.getCategories()[index].name.toString())
+          ),
+          onPressed: () {},
+        );
+      },
+      separatorBuilder: (BuildContext context, int index) => const Divider(),
     );
   }
 }

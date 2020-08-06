@@ -21,32 +21,21 @@ class _organizationViewState extends State<organizationView> {
 
   _organizationViewState(this.controller);
 
-  void onPressed(){
-    setState(() {
-      result = '';
-      controller.getOrganizations().forEach((e) {
-        result += e.toString() + '\n';
-      });
-    });
-  }
-
   Widget build(BuildContext context) {
-    onPressed();
-    return Container(
-      child: Center(
-        child: Column(
-          children: <Widget>[
-            Expanded(
-              child: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: Text(
-                  '$result',
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
+    return ListView.separated(
+      padding: const EdgeInsets.all(8),
+      itemCount: controller.getCategories().length,
+      itemBuilder: (context, index) {
+        return FlatButton(
+          child: ListTile(
+              title: Text(controller.getOrganizations()[index].name.toString()),
+              subtitle: Text(
+                  controller.getOrganizations()[index].description.toString())
+          ),
+          onPressed: () {},
+        );
+      },
+      separatorBuilder: (BuildContext context, int index) => const Divider(),
     );
   }
 }

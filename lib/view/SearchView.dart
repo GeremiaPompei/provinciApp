@@ -7,7 +7,6 @@ import 'package:MC/model/HttpRequest.dart';
 import 'package:flutter/material.dart';
 
 class searchView extends StatefulWidget {
-
   Controller controller;
 
   searchView(this.controller);
@@ -18,47 +17,51 @@ class searchView extends StatefulWidget {
 
 class _searchViewState extends State<searchView> {
   String text = '';
-  String result = '';
   Controller controller;
 
   _searchViewState(this.controller);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Column(
-          children: <Widget>[
-            TextField(
-              onSubmitted: (String input) {
-                setState(() {
-                  text = input;
-                });
-              },
-            ),
-            FlatButton(
-              child: Text("OK"),
-              onPressed: () {
-                setState(() {
-                  result = '';
-                  controller.setSearch(text);
-                  controller.getSearch().forEach((e) {
-                    result += e.toString() + '\n';
-                  });
-                });
-              },
-            ),
-            Expanded(
-              child: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: Text(
-                  '$result',
-                ),
-              ),
-            ),
-          ],
+    return Flex(
+      direction: Axis.vertical,
+      children: <Widget>[
+        TextField(
+          onSubmitted: (String input) {
+            setState(() {
+              text = input;
+            });
+          },
         ),
-      ),
+        IconButton(
+          icon: Icon(Icons.search),
+          onPressed: () {
+            setState(() {
+              controller.setSearch(text);
+            });
+          },
+        ),
+        Flexible(
+          child: ListView.separated(
+            scrollDirection: Axis.vertical,
+            shrinkWrap: true,
+            padding: const EdgeInsets.all(8),
+            itemCount: controller.getSearch().length,
+            itemBuilder: (context, index) {
+              return FlatButton(
+                child: ListTile(
+                  title: Text(controller.getSearch()[index].name.toString()),
+                  subtitle: Text(
+                      controller.getSearch()[index].description.toString()),
+                ),
+                onPressed: () {},
+              );
+            },
+            separatorBuilder: (BuildContext context, int index) =>
+                const Divider(),
+          ),
+        ),
+      ],
     );
   }
 }
