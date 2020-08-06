@@ -1,3 +1,4 @@
+import 'package:MC/controller/Controller.dart';
 import 'package:MC/view/OrganizationView.dart';
 import 'package:MC/view/SearchView.dart';
 import 'package:flutter/scheduler.dart';
@@ -27,6 +28,9 @@ class buttonBar extends StatefulWidget {
 }
 
 class _buttonBarState extends State<buttonBar> {
+
+  Controller controller = new Controller();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -37,7 +41,7 @@ class _buttonBarState extends State<buttonBar> {
             child: IconButton(
               icon: Icon(Icons.search),
               onPressed: () {
-                launch('MC Search..', searchView());
+                launch('MC Search..', searchView(controller));
               },
             ),
           ),
@@ -45,7 +49,7 @@ class _buttonBarState extends State<buttonBar> {
             child: IconButton(
               icon: Icon(Icons.location_city),
               onPressed: () {
-                launch('MC Organizations...', organizationView());
+                launch('MC Organizations...', organizationView(controller));
               },
             ),
           ),
@@ -53,7 +57,7 @@ class _buttonBarState extends State<buttonBar> {
             child: IconButton(
               icon: Icon(Icons.category),
               onPressed: () {
-                launch('MC Category...', categoryView());
+                launch('MC Category...', categoryView(controller));
               },
             ),
           ),

@@ -1,3 +1,4 @@
+import 'package:MC/controller/Controller.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_html/flutter_html.dart';
@@ -6,13 +7,21 @@ import 'package:MC/model/HttpRequest.dart';
 import 'package:flutter/material.dart';
 
 class searchView extends StatefulWidget {
+
+  Controller controller;
+
+  searchView(this.controller);
+
   @override
-  _searchViewState createState() => _searchViewState();
+  _searchViewState createState() => _searchViewState(controller);
 }
 
 class _searchViewState extends State<searchView> {
   String text = '';
   String result = '';
+  Controller controller;
+
+  _searchViewState(this.controller);
 
   @override
   Widget build(BuildContext context) {
@@ -32,11 +41,9 @@ class _searchViewState extends State<searchView> {
               onPressed: () {
                 setState(() {
                   result = '';
-                  searchByWord(text).asStream().any((element) {
-                    element.forEach((e) {
-                      result += e.toString() + '\n';
-                    });
-                    return true;
+                  controller.setSearch(text);
+                  controller.getSearch().forEach((e) {
+                    result += e.toString() + '\n';
                   });
                 });
               },
