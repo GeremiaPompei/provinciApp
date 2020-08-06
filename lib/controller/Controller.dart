@@ -27,6 +27,10 @@ class Controller {
     this.ledger.setSearch(await HtmlParser.searchByWord(word));
   }
 
+  void setLeafs(String url) async {
+    this.ledger.setLeafs(json.decode(await HttpRequest.getJson(url)));
+  }
+
   List<NodeInfo> getOrganizations() {
     return this.ledger.organizations;
   }
@@ -39,10 +43,7 @@ class Controller {
     return this.ledger.search;
   }
 
-  Future<List<LeafInfo>> getLeafs(String url) async {
-    String val = await HttpRequest.getJson(url);
-    ledger.setLeafs(json.decode(val));
+  List<LeafInfo> getLeafs() {
     return ledger.leafs;
   }
-
 }

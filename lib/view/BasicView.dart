@@ -3,7 +3,6 @@ import 'package:MC/view/OrganizationView.dart';
 import 'package:MC/view/SearchView.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
-
 import 'CategoryView.dart';
 
 void mtrApp() {

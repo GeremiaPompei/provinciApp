@@ -1,4 +1,3 @@
-
 class LeafInfo {
   String argomento;
   String comune;

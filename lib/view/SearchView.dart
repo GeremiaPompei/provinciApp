@@ -1,9 +1,8 @@
-import 'package:MC/controller/Controller.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_html/flutter_html.dart';
+import 'dart:io';
 
-import 'package:MC/model/HttpRequest.dart';
+import 'package:MC/controller/Controller.dart';
+import 'package:MC/view/LeafsInfoView.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 
 class searchView extends StatefulWidget {
@@ -46,9 +45,7 @@ class _searchViewState extends State<searchView> {
             scrollDirection: Axis.vertical,
             shrinkWrap: true,
             padding: const EdgeInsets.all(8),
-            itemCount: controller
-                .getSearch()
-                .length,
+            itemCount: controller.getSearch().length,
             itemBuilder: (context, index) {
               return FlatButton(
                 child: ListTile(
@@ -58,19 +55,19 @@ class _searchViewState extends State<searchView> {
                 ),
                 onPressed: () {
                   setState(() {
-                    //TODO Cambiare in altro widget
-                    controller
-                        .getLeafs(controller.getSearch()[index].url)
-                        .asStream()
-                        .forEach((element) {
-                      print(element);
-                    });
+                    controller.setLeafs(controller.getSearch()[index].url);
+                  });
+                },
+                onLongPress: (){
+                  setState(() {
+                    LeafsInfoView(controller.getLeafs(),
+                        controller.getSearch()[index].name).launch();
                   });
                 },
               );
             },
             separatorBuilder: (BuildContext context, int index) =>
-            const Divider(),
+                const Divider(),
           ),
         ),
       ],
