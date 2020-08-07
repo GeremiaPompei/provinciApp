@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:MC/model/HttpRequest.dart';
+import 'package:MC/model/web/HttpRequest.dart';
 import 'package:MC/model/NodeInfo.dart';
 import 'package:html/dom.dart' as html;
 

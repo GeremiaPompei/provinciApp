@@ -61,24 +61,12 @@ class _ButtonInfoState extends State<ButtonInfo> {
         itemBuilder: (context, index) {
           return FlatButton(
               child: ListTile(
-                title: Text(leafs[index].comune.toString()),
-                subtitle: Text(leafs[index].oggetto.toString()),
+                title: Text(leafs[index].getName()),
+                subtitle: Text(leafs[index].getDescription()),
               ),
               onPressed: () {
                 setState(() {
-                  runApp(MaterialApp(
-                      home: Scaffold(
-                          appBar: AppBar(
-                            title: Text(leafs[index].comune),
-                            backgroundColor: Colors.red,
-                            leading: new IconButton(
-                              icon: new Icon(Icons.arrow_back_ios),
-                              onPressed: () {
-                                  LeafsInfoView(leafs,title,controller).launch();
-                              },
-                            ),
-                          ),
-                          body: Text(leafs[index].toString()))));
+                  leafInfo(index);
                 });
               });
         },
@@ -86,4 +74,21 @@ class _ButtonInfoState extends State<ButtonInfo> {
       ),
     );
   }
+
+  void leafInfo(int index){
+    runApp(MaterialApp(
+        home: Scaffold(
+            appBar: AppBar(
+              title: Text(leafs[index].getName()),
+              backgroundColor: Colors.red,
+              leading: new IconButton(
+                icon: new Icon(Icons.arrow_back_ios),
+                onPressed: () {
+                  LeafsInfoView(leafs,title,controller).launch();
+                },
+              ),
+            ),
+            body: Text(leafs[index].toString()))));
+  }
+
 }

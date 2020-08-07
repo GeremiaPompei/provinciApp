@@ -51,7 +51,7 @@ class _SearchViewState extends State<SearchView> {
                 onPressed: () {
                   setState(() {
                     controller
-                        .setLeafs(controller.getSearch()[index].url)
+                        .setConcorsi(controller.getSearch()[index].url)
                         .then((value) => setState(() {
                               LeafsInfoView(
                                       controller.getLeafs(),

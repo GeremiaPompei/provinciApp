@@ -28,13 +28,14 @@ class _categoryViewState extends State<categoryView> {
       itemBuilder: (context, index) {
         return FlatButton(
           child: ListTile(
-              title: Text(controller.getCategories()[index].name.toString())
-          ),
+              title: Text(controller.getCategories()[index].name.toString())),
           onPressed: () {
             setState(() {
-              controller.setSearch(controller.getOrganizations()[index].url).then((value) => Launcher().launch(
-                  'MC Search...', SearchView(controller),
-                  controller: controller));
+              controller
+                  .setSearch(controller.getCategories()[index].url)
+                  .then((value) => Launcher().launch(
+                      'MC Search...', SearchView(controller),
+                      controller: controller));
             });
           },
         );

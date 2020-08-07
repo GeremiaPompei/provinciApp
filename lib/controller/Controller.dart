@@ -1,7 +1,12 @@
 import 'dart:convert';
 
-import 'package:MC/model/HtmlParser.dart';
-import 'package:MC/model/HttpRequest.dart';
+import 'package:MC/model/LeafsType/Bando.dart';
+import 'package:MC/model/LeafsType/Concorso.dart';
+import 'package:MC/model/LeafsType/Evento.dart';
+import 'package:MC/model/LeafsType/Monumento.dart';
+import 'package:MC/model/LeafsType/StrutturaRicreativa.dart';
+import 'package:MC/model/web/HtmlParser.dart';
+import 'package:MC/model/web/HttpRequest.dart';
 import 'package:MC/model/LeafInfo.dart';
 import 'package:MC/model/Ledger.dart';
 import 'package:MC/model/NodeInfo.dart';
@@ -27,10 +32,30 @@ class Controller {
     this.ledger.setSearch(await HtmlParser.searchByWord(word));
   }
 
-  Future setLeafs(String url) async {
+  Future setConcorsi(String url) async {
+    setLeafInfo(url,(el) => Concorso.fromJson(el));
+  }
+
+  Future setBandi(String url) async {
+    setLeafInfo(url,(el) => Bando.fromJson(el));
+  }
+
+  Future setStruttureRicreative(String url) async {
+    setLeafInfo(url,(el) => StrutturaRicreativa.fromJson(el));
+  }
+
+  Future setEventi(String url) async {
+    setLeafInfo(url,(el) => Evento.fromJson(el));
+  }
+
+  Future setMonumenti(String url) async {
+    setLeafInfo(url,(el) => Monumento.fromJson(el));
+  }
+
+  Future setLeafInfo(String url,LeafInfo Function(Map<String, dynamic> parsedJson) func) async {
     List<dynamic> leafs = json
         .decode(await HttpRequest.getJson(url));
-    this.ledger.setLeafs(leafs.map((i) => LeafInfo.fromJson(i))
+    this.ledger.setLeafs(leafs.map((i) => func(i))
         .toList());
   }
 

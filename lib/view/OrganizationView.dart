@@ -4,11 +4,10 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_html/flutter_html.dart';
 
-import 'package:MC/model/HttpRequest.dart';
+import 'package:MC/model/web/HttpRequest.dart';
 import 'package:flutter/material.dart';
 
 import 'BasicView.dart';
-import 'LeafsInfoView.dart';
 
 class organizationView extends StatefulWidget {
   Controller controller;
@@ -37,9 +36,12 @@ class _organizationViewState extends State<organizationView> {
                   controller.getOrganizations()[index].description.toString())),
           onPressed: () {
             setState(() {
-              controller.setSearch(controller.getOrganizations()[index].url).then((value) => Launcher().launch(
-                  'MC Search...', SearchView(controller),
-                  controller: controller));
+              print(controller.getOrganizations()[index].url);
+              controller
+                  .setSearch(controller.getOrganizations()[index].url)
+                  .then((value) => Launcher().launch(
+                      'MC Search...', SearchView(controller),
+                      controller: controller));
             });
           },
         );
