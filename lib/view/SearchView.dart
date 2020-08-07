@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:MC/controller/Controller.dart';
@@ -5,20 +6,19 @@ import 'package:MC/view/LeafsInfoView.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 
-class searchView extends StatefulWidget {
+class SearchView extends StatefulWidget {
   Controller controller;
 
-  searchView(this.controller);
+  SearchView(this.controller);
 
   @override
-  _searchViewState createState() => _searchViewState(controller);
+  _SearchViewState createState() => _SearchViewState(controller);
 }
 
-class _searchViewState extends State<searchView> {
-  String text = '';
+class _SearchViewState extends State<SearchView> {
   Controller controller;
 
-  _searchViewState(this.controller);
+  _SearchViewState(this.controller);
 
   @override
   Widget build(BuildContext context) {
@@ -26,17 +26,12 @@ class _searchViewState extends State<searchView> {
       direction: Axis.vertical,
       children: <Widget>[
         TextField(
+          decoration: InputDecoration(
+            suffixIcon: Icon(Icons.search),
+          ),
           onSubmitted: (String input) {
             setState(() {
-              text = input;
-            });
-          },
-        ),
-        IconButton(
-          icon: Icon(Icons.search),
-          onPressed: () {
-            setState(() {
-              controller.setSearch(text);
+              controller.setSearch(input).then((value) => null);
             });
           },
         ),
@@ -55,13 +50,13 @@ class _searchViewState extends State<searchView> {
                 ),
                 onPressed: () {
                   setState(() {
-                    controller.setLeafs(controller.getSearch()[index].url);
-                  });
-                },
-                onLongPress: (){
-                  setState(() {
-                    LeafsInfoView(controller.getLeafs(),
-                        controller.getSearch()[index].name).launch();
+                    controller
+                        .setLeafs(controller.getSearch()[index].url)
+                        .then((value) => setState(() {
+                              LeafsInfoView(controller.getLeafs(),
+                                      controller.getSearch()[index].name,controller)
+                                  .launch();
+                            }));
                   });
                 },
               );

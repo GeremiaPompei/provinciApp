@@ -19,8 +19,8 @@ class Ledger{
     this.search = nodes;
   }
 
-  void setLeafs(List<dynamic> parsedJson) {
-    this.leafs = parsedJson.map((i)=>LeafInfo.fromJson(i)).toList();
+  void setLeafs(List<dynamic> leafs) {
+    this.leafs = leafs;
   }
 
 }

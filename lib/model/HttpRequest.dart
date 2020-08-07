@@ -63,7 +63,7 @@ class HttpRequest {
     return element;
   }
 
-  static Future<http.Response> responseByGet(String word) {
-    return http.Client().get(Uri.parse('http://dati.provincia.mc.it/' + word));
+  static Future<http.Response> responseByGet(String word) async {
+    return await http.Client().get(Uri.parse('http://dati.provincia.mc.it/' + word));
   }
 }

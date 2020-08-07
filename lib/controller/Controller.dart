@@ -23,12 +23,15 @@ class Controller {
     this.ledger.initCategories(await HtmlParser.categories());
   }
 
-  void setSearch(String word) async {
+  Future setSearch(String word) async {
     this.ledger.setSearch(await HtmlParser.searchByWord(word));
   }
 
-  void setLeafs(String url) async {
-    this.ledger.setLeafs(json.decode(await HttpRequest.getJson(url)));
+  Future setLeafs(String url) async {
+    List<dynamic> leafs = json
+        .decode(await HttpRequest.getJson(url));
+    this.ledger.setLeafs(leafs.map((i) => LeafInfo.fromJson(i))
+        .toList());
   }
 
   List<NodeInfo> getOrganizations() {

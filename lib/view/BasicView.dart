@@ -18,63 +18,55 @@ void mtrApp() {
 class ButtonBarDown extends StatefulWidget {
   Controller controller;
   void Function(String title, Widget widget) launch;
-  ButtonBarDown(this.controller,this.launch);
+
+  ButtonBarDown(this.controller, this.launch);
 
   @override
-  _ButtonBarDownState createState() => _ButtonBarDownState(controller,launch);
+  _ButtonBarDownState createState() => _ButtonBarDownState(controller, launch);
 }
 
 class _ButtonBarDownState extends State<ButtonBarDown> {
   Controller controller;
   void Function(String title, Widget widget) launch;
 
-  _ButtonBarDownState(this.controller,this.launch);
+  _ButtonBarDownState(this.controller, this.launch);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.red,
-      child: ButtonBar(
-        children: <Widget>[
-          FlatButton(
-            child: IconButton(
-              icon: Icon(Icons.search),
-              onPressed: () {
-                launch('MC Search..', searchView(controller));
-              },
-            ),
+    return DefaultTabController(
+      length: 5,
+      child: TabBar(
+        labelColor: Colors.red,
+        tabs: [
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {
+              launch('MC Search..', SearchView(controller));
+            },
           ),
-          FlatButton(
-            child: IconButton(
-              icon: Icon(Icons.location_city),
-              onPressed: () {
-                launch('MC Organizations...', organizationView(controller));
-              },
-            ),
+          IconButton(
+            icon: Icon(Icons.location_city),
+            onPressed: () {
+              launch('MC Organizations...', organizationView(controller));
+            },
           ),
-          FlatButton(
-            child: IconButton(
-              icon: Icon(Icons.category),
-              onPressed: () {
-                launch('MC Category...', categoryView(controller));
-              },
-            ),
+          IconButton(
+            icon: Icon(Icons.category),
+            onPressed: () {
+              launch('MC Category...', categoryView(controller));
+            },
           ),
-          FlatButton(
-            child: IconButton(
-              icon: Icon(Icons.comment),
-              onPressed: () {
-                launch('MC Comment...', Center(child: Icon(Icons.comment)));
-              },
-            ),
+          IconButton(
+            icon: Icon(Icons.comment),
+            onPressed: () {
+              launch('MC Comment...', Center(child: Icon(Icons.comment)));
+            },
           ),
-          FlatButton(
-            child: IconButton(
-              icon: Icon(Icons.settings),
-              onPressed: () {
-                launch('MC Settings...', Center(child: Icon(Icons.settings)));
-              },
-            ),
+          IconButton(
+            icon: Icon(Icons.settings),
+            onPressed: () {
+              launch('MC Settings...', Center(child: Icon(Icons.settings)));
+            },
           ),
         ],
       ),
@@ -83,16 +75,16 @@ class _ButtonBarDownState extends State<ButtonBarDown> {
 }
 
 class Launcher {
-
   Controller controller;
   ButtonBarDown bar;
 
-  Launcher(){
+  Launcher() {
     this.controller = new Controller();
-    this.bar = new ButtonBarDown(controller,launch);
+    this.bar = new ButtonBarDown(controller, launch);
   }
 
-  void launch(String title, Widget widget) {
+  void launch(String title, Widget widget, {Controller controller}) {
+    {this.controller = controller;}
     runApp(MaterialApp(
       home: Scaffold(
         appBar: AppBar(
