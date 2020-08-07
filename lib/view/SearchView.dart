@@ -1,7 +1,5 @@
-import 'dart:async';
-import 'dart:io';
-
 import 'package:MC/controller/Controller.dart';
+import 'package:MC/view/BasicView.dart';
 import 'package:MC/view/LeafsInfoView.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +29,9 @@ class _SearchViewState extends State<SearchView> {
           ),
           onSubmitted: (String input) {
             setState(() {
-              controller.setSearch(input).then((value) => null);
+              controller.setSearch(input).then((value) => Launcher().launch(
+                  'MC Search...', SearchView(controller),
+                  controller: controller));
             });
           },
         ),
@@ -53,8 +53,10 @@ class _SearchViewState extends State<SearchView> {
                     controller
                         .setLeafs(controller.getSearch()[index].url)
                         .then((value) => setState(() {
-                              LeafsInfoView(controller.getLeafs(),
-                                      controller.getSearch()[index].name,controller)
+                              LeafsInfoView(
+                                      controller.getLeafs(),
+                                      controller.getSearch()[index].name,
+                                      controller)
                                   .launch();
                             }));
                   });

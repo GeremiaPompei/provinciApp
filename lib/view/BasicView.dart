@@ -6,13 +6,27 @@ import 'package:flutter/material.dart';
 import 'CategoryView.dart';
 
 void mtrApp() {
-  Launcher().launch(
-      'MC Start...',
-      Center(
+  runApp(MaterialApp(
+    home: Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.red,
+        title: Text('Login...'),
+      ),
+      body: Center(
+        child: FlatButton(
           child: Text(
-        'Start...',
-        style: TextStyle(fontSize: 40),
-      )));
+            'Login',
+            style: TextStyle(color: Colors.white),
+          ),
+          color: Colors.red,
+          onPressed: (){
+            Controller controller = new Controller();
+            Launcher().launch('MC Search..', SearchView(controller),controller: controller);
+          },
+        ),
+      ),
+    ),
+  ));
 }
 
 class ButtonBarDown extends StatefulWidget {
@@ -28,48 +42,62 @@ class ButtonBarDown extends StatefulWidget {
 class _ButtonBarDownState extends State<ButtonBarDown> {
   Controller controller;
   void Function(String title, Widget widget) launch;
+  int index = 0;
 
   _ButtonBarDownState(this.controller, this.launch);
 
+  void onItemTapped(index) {
+    setState(() {
+      this.index = index;
+      switch (this.index) {
+        case 0:
+          launch('MC Search..', SearchView(controller));
+          break;
+        case 1:
+          launch('MC Organizations...', organizationView(controller));
+          break;
+        case 2:
+          launch('MC Category...', categoryView(controller));
+          break;
+        case 3:
+          launch('MC Comment...', Center(child: Icon(Icons.comment)));
+          break;
+        case 4:
+          launch('MC Settings...', Center(child: Icon(Icons.settings)));
+          break;
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 5,
-      child: TabBar(
-        labelColor: Colors.red,
-        tabs: [
-          IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () {
-              launch('MC Search..', SearchView(controller));
-            },
-          ),
-          IconButton(
-            icon: Icon(Icons.location_city),
-            onPressed: () {
-              launch('MC Organizations...', organizationView(controller));
-            },
-          ),
-          IconButton(
-            icon: Icon(Icons.category),
-            onPressed: () {
-              launch('MC Category...', categoryView(controller));
-            },
-          ),
-          IconButton(
-            icon: Icon(Icons.comment),
-            onPressed: () {
-              launch('MC Comment...', Center(child: Icon(Icons.comment)));
-            },
-          ),
-          IconButton(
-            icon: Icon(Icons.settings),
-            onPressed: () {
-              launch('MC Settings...', Center(child: Icon(Icons.settings)));
-            },
-          ),
-        ],
-      ),
+    return BottomNavigationBar(
+      items: [
+        BottomNavigationBarItem(
+          icon: Icon(Icons.search),
+          title: Text('Search'),
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.location_city),
+          title: Text('Organizations'),
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.category),
+          title: Text('Categories'),
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.comment),
+          title: Text('Comment'),
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.settings),
+          title: Text('Settings'),
+        ),
+      ],
+      unselectedItemColor: Colors.black,
+      currentIndex: index,
+      selectedItemColor: Colors.red,
+      onTap: onItemTapped,
     );
   }
 }
@@ -84,7 +112,9 @@ class Launcher {
   }
 
   void launch(String title, Widget widget, {Controller controller}) {
-    {this.controller = controller;}
+    {
+      this.controller = controller;
+    }
     runApp(MaterialApp(
       home: Scaffold(
         appBar: AppBar(
