@@ -1,72 +1,92 @@
 import '../LeafInfo.dart';
 
 class Bando implements LeafInfo {
-  String argomento;
   String comune;
+  String contratto;
   String dataArchiviazione;
-  String dataInizioPubblicazione;
-  String dataInizioValidita;
-  String descrizione;
+  String CPV;
+  String CUP;
+  String importoBaseAsta;
   String oggetto;
-  String servizioCompetenza;
-  String terminePresentazione;
-  String testoDocumeto;
-  String uffiocioCompetenza;
+  String indirizzo;
+  String provincia;
+  String pubblicazione;
+  String requisitiQualificazione;
+  String riferimento;
+  String rilevanzaComunitaria;
+  String SCP;
+  String settoreApplicazione;
+  String tipologia;
+  String ufficioCompetenza;
+  String urlSCP;
   String url;
 
+
   Bando(
-      this.argomento,
       this.comune,
+      this.contratto,
       this.dataArchiviazione,
-      this.dataInizioPubblicazione,
-      this.dataInizioValidita,
-      this.descrizione,
+      this.CPV,
+      this.CUP,
+      this.importoBaseAsta,
       this.oggetto,
-      this.servizioCompetenza,
-      this.terminePresentazione,
-      this.testoDocumeto,
-      this.uffiocioCompetenza,
+      this.indirizzo,
+      this.provincia,
+      this.pubblicazione,
+      this.requisitiQualificazione,
+      this.riferimento,
+      this.rilevanzaComunitaria,
+      this.SCP,
+      this.settoreApplicazione,
+      this.tipologia,
+      this.ufficioCompetenza,
+      this.urlSCP,
       this.url);
 
   factory Bando.fromJson(Map<String, dynamic> parsedJson) {
     return Bando(
-        parsedJson['Argomento'],
         parsedJson['Comune'],
+        parsedJson['Contratto'],
+        parsedJson['CPV'],
+        parsedJson['CUP'],
         parsedJson['Data di archiviazione'],
-        parsedJson['Data di inizio pubblicazione'],
-        parsedJson['Data di inizio validità'],
-        parsedJson['Descrizione'],
+        parsedJson['Importo a base asta'],
+        parsedJson['Indirizzo'],
         parsedJson['Oggetto'],
-        parsedJson['Servizio di competenza'],
-        parsedJson['Termine di presentazione'],
-        parsedJson['Testo del documento'],
+        parsedJson['Provincia'],
+        parsedJson['Pubblicazione'],
+        parsedJson['Requisiti di qualificazione'],
+        parsedJson['Riferimento'],
+        parsedJson['Rilevanza comunitaria'],
+        parsedJson['SCP'],
+        parsedJson['Settore di applicazione'],
+        parsedJson['Tipologia'],
         parsedJson['Ufficio di competenza'],
-        parsedJson['Url']);
+        parsedJson['Url'],
+        parsedJson['Url SCP']);
   }
 
   @override
   String toString() {
-    return comune +
-        '\n' +
-        dataArchiviazione +
-        '\n' +
-        dataInizioPubblicazione +
-        '\n' +
-        dataInizioValidita +
-        '\n' +
-        descrizione +
-        '\n' +
-        oggetto +
-        '\n' +
-        servizioCompetenza +
-        '\n' +
-        terminePresentazione +
-        '\n' +
-        testoDocumeto +
-        '\n' +
-        uffiocioCompetenza +
-        '\n' +
-        url;
+    return this.comune + '\n' +
+    this.contratto + '\n' +
+    this.dataArchiviazione + '\n' +
+    this.CPV + '\n' +
+    this.CUP + '\n' +
+    this.importoBaseAsta + '\n' +
+    this.oggetto + '\n' +
+    this.indirizzo + '\n' +
+    this.provincia + '\n' +
+    this.pubblicazione + '\n' +
+    this.requisitiQualificazione + '\n' +
+    this.riferimento + '\n' +
+    this.rilevanzaComunitaria + '\n' +
+    this.SCP + '\n' +
+    this.settoreApplicazione + '\n' +
+    this.tipologia + '\n' +
+    this.ufficioCompetenza + '\n' +
+    this.urlSCP + '\n' +
+    this.url;
   }
 
   @override

@@ -1,4 +1,6 @@
 import 'package:MC/controller/Controller.dart';
+import 'package:MC/model/LeafsType/Bando.dart';
+import 'package:MC/model/LeafsType/Concorso.dart';
 import 'package:MC/view/BasicView.dart';
 import 'package:MC/view/LeafsInfoView.dart';
 import 'package:flutter/widgets.dart';
@@ -18,6 +20,16 @@ class _SearchViewState extends State<SearchView> {
 
   _SearchViewState(this.controller);
 
+  void visual(int index){
+    setState(() {
+      LeafsInfoView(
+          controller.getLeafs(),
+          controller.getSearch()[index].name,
+          controller)
+          .launch();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Flex(
@@ -29,9 +41,9 @@ class _SearchViewState extends State<SearchView> {
           ),
           onSubmitted: (String input) {
             setState(() {
-              controller.setSearch('dataset?q=' + input).then((value) => Launcher().launch(
-                  'MC Search...', SearchView(controller),
-                  controller: controller));
+              controller.setSearch('dataset?q=' + input).then((value) =>
+                  Launcher().launch('MC Search...', SearchView(controller),
+                      controller: controller));
             });
           },
         ),
@@ -50,15 +62,17 @@ class _SearchViewState extends State<SearchView> {
                 ),
                 onPressed: () {
                   setState(() {
-                    controller
-                        .setConcorsi(controller.getSearch()[index].url)
-                        .then((value) => setState(() {
-                              LeafsInfoView(
-                                      controller.getLeafs(),
-                                      controller.getSearch()[index].name,
-                                      controller)
-                                  .launch();
-                            }));
+                    String name = controller.getSearch()[index].name.toString();
+                    if (name.contains('Concorsi'))
+                      controller
+                          .setLeafInfo(controller.getSearch()[index].url, (
+                          el) => Concorso.fromJson(el))
+                          .then((value) => visual(index));
+                    else if (name.contains('Bandi'))
+                      controller
+                          .setLeafInfo(controller.getSearch()[index].url, (
+                          el) => Bando.fromJson(el))
+                          .then((value) => visual(index));
                   });
                 },
               );

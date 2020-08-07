@@ -32,26 +32,6 @@ class Controller {
     this.ledger.setSearch(await HtmlParser.searchByWord(word));
   }
 
-  Future setConcorsi(String url) async {
-    setLeafInfo(url,(el) => Concorso.fromJson(el));
-  }
-
-  Future setBandi(String url) async {
-    setLeafInfo(url,(el) => Bando.fromJson(el));
-  }
-
-  Future setStruttureRicreative(String url) async {
-    setLeafInfo(url,(el) => StrutturaRicreativa.fromJson(el));
-  }
-
-  Future setEventi(String url) async {
-    setLeafInfo(url,(el) => Evento.fromJson(el));
-  }
-
-  Future setMonumenti(String url) async {
-    setLeafInfo(url,(el) => Monumento.fromJson(el));
-  }
-
   Future setLeafInfo(String url,LeafInfo Function(Map<String, dynamic> parsedJson) func) async {
     List<dynamic> leafs = json
         .decode(await HttpRequest.getJson(url));
