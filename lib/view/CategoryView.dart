@@ -3,6 +3,10 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 
+import 'BasicView.dart';
+import 'LeafsInfoView.dart';
+import 'SearchView.dart';
+
 class categoryView extends StatefulWidget {
   Controller controller;
 
@@ -28,7 +32,9 @@ class _categoryViewState extends State<categoryView> {
           ),
           onPressed: () {
             setState(() {
-              print(controller.getCategories()[index].url);
+              controller.setSearch(controller.getOrganizations()[index].url).then((value) => Launcher().launch(
+                  'MC Search...', SearchView(controller),
+                  controller: controller));
             });
           },
         );

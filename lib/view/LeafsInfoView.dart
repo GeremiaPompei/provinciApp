@@ -21,7 +21,7 @@ class LeafsInfoView {
             title: Text(title),leading: new IconButton(
             icon: new Icon(Icons.arrow_back_ios),
             onPressed: () => {
-              Launcher().launch('Search...', SearchView(controller))
+              Launcher().launch('MC Search...', SearchView(controller))
             },
           ),
           ),

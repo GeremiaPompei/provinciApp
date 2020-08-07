@@ -21,7 +21,7 @@ void mtrApp() {
           color: Colors.red,
           onPressed: (){
             Controller controller = new Controller();
-            Launcher().launch('MC Search..', SearchView(controller),controller: controller);
+            Launcher().launch('MC Search...', SearchView(controller),controller: controller);
           },
         ),
       ),
@@ -51,7 +51,7 @@ class _ButtonBarDownState extends State<ButtonBarDown> {
       this.index = index;
       switch (this.index) {
         case 0:
-          launch('MC Search..', SearchView(controller));
+          launch('MC Search...', SearchView(controller));
           break;
         case 1:
           launch('MC Organizations...', organizationView(controller));

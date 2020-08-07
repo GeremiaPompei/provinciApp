@@ -20,7 +20,7 @@ class HtmlParser {
         .attributes
         .putIfAbsent('href', () => null)
         .trim();
-    return HttpRequest.getNodeInfo('dataset?q=' + word, 'dataset-list unstyled',
+    return HttpRequest.getNodeInfo(word, 'dataset-list unstyled',
         'dataset-item', fName, fDescriprion, fUrl);
   }
 
