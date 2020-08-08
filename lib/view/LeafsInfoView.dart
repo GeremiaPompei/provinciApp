@@ -101,9 +101,10 @@ class _ButtonInfoState extends State<ButtonInfo> {
                   ),
                   child: Text(
                     leafs[index].toString(),
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 )))));
   }
 }
-

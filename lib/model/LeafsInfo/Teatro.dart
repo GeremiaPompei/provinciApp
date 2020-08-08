@@ -1,6 +1,6 @@
 import '../LeafInfo.dart';
 
-class Museo implements LeafInfo {
+class Teatro implements LeafInfo {
   String comune;
   String nome;
   String descrizione;
@@ -16,12 +16,12 @@ class Museo implements LeafInfo {
   String visitablie;
   String accessibileDisabili;
   String url;
-  String situazione;
-  String costruzione;
-  String opereInMostra;
-  String accesso;
+  String Situazione;
+  String telefonoBiglietteria;
+  String orarioBiglietteria;
+  String prenotazioneOnline;
 
-  Museo(
+  Teatro(
       this.comune,
       this.nome,
       this.descrizione,
@@ -37,13 +37,13 @@ class Museo implements LeafInfo {
       this.visitablie,
       this.accessibileDisabili,
       this.url,
-      this.situazione,
-      this.costruzione,
-      this.opereInMostra,
-      this.accesso);
+      this.Situazione,
+      this.telefonoBiglietteria,
+      this.orarioBiglietteria,
+      this.prenotazioneOnline);
 
-  factory Museo.fromJson(Map<String, dynamic> parsedJson) {
-    return Museo(
+  factory Teatro.fromJson(Map<String, dynamic> parsedJson) {
+    return Teatro(
         parsedJson['Comune'],
         parsedJson['Nome'],
         parsedJson['Descrizione'],
@@ -60,32 +60,32 @@ class Museo implements LeafInfo {
         parsedJson['Accessibile disabili'],
         parsedJson['Url'],
         parsedJson['Situazione'],
-        parsedJson['Costruzione'],
-        parsedJson['Opere in mostra'],
-        parsedJson['Accesso']);
+        parsedJson['Telefono biglietteria'],
+        parsedJson['Orario biglietteria'],
+        parsedJson['Prenotazione online']);
   }
 
   @override
   String toString() {
     return this.comune + '\n' +
-    this.nome + '\n' +
-    this.descrizione + '\n' +
-    this.localita + '\n' +
-    this.indirizzo + '\n' +
-    this.telefono + '\n' +
-    this.fax + '\n' +
-    this.orario + '\n' +
-    this.sitoEsterno + '\n' +
-    this.mail + '\n' +
-    this.latitudine + '\n' +
-    this.longitudine + '\n' +
-    this.visitablie + '\n' +
-    this.accessibileDisabili + '\n' +
-    this.url + '\n' +
-    this.situazione + '\n' +
-    this.costruzione + '\n' +
-    this.opereInMostra + '\n' +
-    this.accesso;
+        this.nome + '\n' +
+        this.descrizione + '\n' +
+        this.localita + '\n' +
+        this.indirizzo + '\n' +
+        this.telefono + '\n' +
+        this.fax + '\n' +
+        this.orario + '\n' +
+        this.sitoEsterno + '\n' +
+        this.mail + '\n' +
+        this.latitudine + '\n' +
+        this.longitudine + '\n' +
+        this.visitablie + '\n' +
+        this.accessibileDisabili + '\n' +
+        this.url + '\n' +
+        this.Situazione + '\n' +
+        this.telefonoBiglietteria + '\n' +
+        this.orarioBiglietteria + '\n' +
+        this.prenotazioneOnline;
   }
 
   @override

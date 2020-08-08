@@ -1,9 +1,9 @@
 import '../LeafInfo.dart';
 
-class StrutturaRicreativa implements LeafInfo {
+class Struttura implements LeafInfo {
   String titolo;
   String tipologiaStruttura;
-  String immagine;
+  var immagine;
   String comune;
   String indirizzo;
   String descrizione;
@@ -19,7 +19,7 @@ class StrutturaRicreativa implements LeafInfo {
   String url;
 
 
-  StrutturaRicreativa(
+  Struttura(
       this.titolo,
       this.tipologiaStruttura,
       this.descrizione,
@@ -37,8 +37,8 @@ class StrutturaRicreativa implements LeafInfo {
       this.accessibileDisabili,
       this.url);
 
-  factory StrutturaRicreativa.fromJson(Map<String, dynamic> parsedJson) {
-    return StrutturaRicreativa(
+  factory Struttura.fromJson(Map<String, dynamic> parsedJson) {
+    return Struttura(
         parsedJson['Titolo'],
         parsedJson['Tipologia struttura'],
         parsedJson['Descrizione'],
@@ -62,7 +62,7 @@ class StrutturaRicreativa implements LeafInfo {
     return this.titolo + '\n' +
     this.tipologiaStruttura + '\n' +
     this.descrizione + '\n' +
-    this.immagine + '\n' +
+    this.immagine.toString() + '\n' +
     this.comune + '\n' +
     this.indirizzo + '\n' +
     this.telefono + '\n' +

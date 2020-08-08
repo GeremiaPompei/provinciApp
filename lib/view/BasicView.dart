@@ -59,12 +59,6 @@ class _ButtonBarDownState extends State<ButtonBarDown> {
         case 2:
           launch('MC Category...', categoryView(controller));
           break;
-        case 3:
-          launch('MC Comment...', Center(child: Icon(Icons.comment)));
-          break;
-        case 4:
-          launch('MC Settings...', Center(child: Icon(Icons.settings)));
-          break;
       }
     });
   }
@@ -84,14 +78,6 @@ class _ButtonBarDownState extends State<ButtonBarDown> {
         BottomNavigationBarItem(
           icon: Icon(Icons.category),
           title: Text('Categories'),
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.comment),
-          title: Text('Comment'),
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.settings),
-          title: Text('Settings'),
         ),
       ],
       unselectedItemColor: Colors.black,

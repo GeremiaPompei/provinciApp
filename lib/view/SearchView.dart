@@ -1,10 +1,14 @@
 import 'package:MC/controller/Controller.dart';
+import 'package:MC/model/LeafInfo.dart';
 import 'package:MC/model/LeafsInfo/Bando.dart';
+import 'package:MC/model/LeafsInfo/Biblioteca.dart';
 import 'package:MC/model/LeafsInfo/Concorso.dart';
+import 'package:MC/model/LeafsInfo/Evento.dart';
 import 'package:MC/model/LeafsInfo/Monumento.dart';
 import 'package:MC/model/LeafsInfo/Museo.dart';
 import 'package:MC/model/LeafsInfo/Shopping.dart';
 import 'package:MC/model/LeafsInfo/Struttura.dart';
+import 'package:MC/model/LeafsInfo/Teatro.dart';
 import 'package:MC/view/BasicView.dart';
 import 'package:MC/view/LeafsInfoView.dart';
 import 'package:flutter/widgets.dart';
@@ -24,49 +28,40 @@ class _SearchViewState extends State<SearchView> {
 
   _SearchViewState(this.controller);
 
-  void visual(int index){
-    setState(() {
-      LeafsInfoView(
-          controller.getLeafs(),
-          controller.getSearch()[index].name,
-          controller)
-          .launch();
-    });
+  void visual(
+      int index, LeafInfo Function(Map<String, dynamic> parsedJson) func) {
+    controller
+        .setLeafInfo(controller.getSearch()[index].url, (el) => func(el))
+        .then((value) => setState(() {
+              LeafsInfoView(controller.getLeafs(),
+                      controller.getSearch()[index].name, controller)
+                  .launch();
+            }));
   }
 
-  void setLeafs(int index){
+  void setLeafs(int index) {
     setState(() {
       String name = controller.getSearch()[index].name.toString();
       if (name.contains('Concorsi'))
-        controller
-            .setLeafInfo(controller.getSearch()[index].url, (
-            el) => Concorso.fromJson(el))
-            .then((value) => visual(index));
+        visual(index, (parsedJson) => Concorso.fromJson(parsedJson));
       else if (name.contains('Bandi'))
-        controller
-            .setLeafInfo(controller.getSearch()[index].url, (
-            el) => Bando.fromJson(el))
-            .then((value) => visual(index));
+        visual(index, (parsedJson) => Bando.fromJson(parsedJson));
       else if (name.contains('Strutture') || name.contains('Case'))
-        controller
-            .setLeafInfo(controller.getSearch()[index].url, (
-            el) => StrutturaRicreativa.fromJson(el))
-            .then((value) => visual(index));
+        visual(index, (parsedJson) => Struttura.fromJson(parsedJson));
       else if (name.contains('Shopping'))
-        controller
-            .setLeafInfo(controller.getSearch()[index].url, (
-            el) => Shopping.fromJson(el))
-            .then((value) => visual(index));
+        visual(index, (parsedJson) => Shopping.fromJson(parsedJson));
       else if (name.contains('Musei'))
-        controller
-            .setLeafInfo(controller.getSearch()[index].url, (
-            el) => Museo.fromJson(el))
-            .then((value) => visual(index));
-      else if (name.contains('Monumenti'))
-        controller
-            .setLeafInfo(controller.getSearch()[index].url, (
-            el) => Monumento.fromJson(el))
-            .then((value) => visual(index));
+        visual(index, (parsedJson) => Museo.fromJson(parsedJson));
+      else if (name.contains('Monumenti') ||
+          name.contains('Chiese') ||
+          name.contains('Rocche'))
+        visual(index, (parsedJson) => Monumento.fromJson(parsedJson));
+      else if (name.contains('Teatri'))
+        visual(index, (parsedJson) => Teatro.fromJson(parsedJson));
+      else if (name.contains('Biblioteche'))
+        visual(index, (parsedJson) => Biblioteca.fromJson(parsedJson));
+      else if (name.contains('Eventi'))
+        visual(index, (parsedJson) => Evento.fromJson(parsedJson));
     });
   }
 
