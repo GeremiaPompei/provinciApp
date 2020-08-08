@@ -27,11 +27,10 @@ class Controller {
     this.cache.setSearch(await HtmlParser.searchByWord(word));
   }
 
-  Future setLeafInfo(String url,LeafInfo Function(Map<String, dynamic> parsedJson) func) async {
-    List<dynamic> leafs = json
-        .decode(await HttpRequest.getJson(url));
-    this.cache.setLeafs(leafs.map((i) => func(i))
-        .toList());
+  Future setLeafInfo(String url,
+      LeafInfo Function(Map<String, dynamic> parsedJson) func) async {
+    List<dynamic> leafs = json.decode(await HttpRequest.getJson(url));
+    this.cache.setLeafs(leafs.map((i) => func(i)).toList());
   }
 
   List<NodeInfo> getOrganizations() {

@@ -27,7 +27,7 @@ class _organizationViewState extends State<organizationView> {
   Widget build(BuildContext context) {
     return ListView.separated(
       padding: const EdgeInsets.all(8),
-      itemCount: controller.getCategories().length,
+      itemCount: controller.getOrganizations().length,
       itemBuilder: (context, index) {
         return FlatButton(
           child: ListTile(
