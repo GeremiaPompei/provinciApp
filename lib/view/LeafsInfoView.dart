@@ -88,8 +88,22 @@ class _ButtonInfoState extends State<ButtonInfo> {
                 },
               ),
             ),
-            body: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: Text(leafs[index].toString())))));
+            body: Container(
+                color: Colors.red,
+                constraints: BoxConstraints.expand(),
+                padding: const EdgeInsets.all(8.0),
+                alignment: Alignment.center,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(),
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                  ),
+                  child: Text(
+                    leafs[index].toString(),
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                )))));
   }
 }
+
