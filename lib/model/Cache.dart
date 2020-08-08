@@ -1,7 +1,7 @@
 import 'package:MC/model/LeafInfo.dart';
 import 'package:MC/model/NodeInfo.dart';
 
-class Ledger{
+class Cache {
   List<NodeInfo> search = [];
   List<NodeInfo> organizations = [];
   List<NodeInfo> categories = [];

@@ -3,50 +3,50 @@ import 'dart:convert';
 import 'package:MC/model/web/HtmlParser.dart';
 import 'package:MC/model/web/HttpRequest.dart';
 import 'package:MC/model/LeafInfo.dart';
-import 'package:MC/model/Ledger.dart';
+import 'package:MC/model/Cache.dart';
 import 'package:MC/model/NodeInfo.dart';
 
 class Controller {
-  Ledger ledger;
+  Cache cache;
 
   Controller() {
-    ledger = new Ledger();
+    cache = new Cache();
     initOrganizations();
     initCategories();
   }
 
   void initOrganizations() async {
-    this.ledger.initOrganizations(await HtmlParser.organizations());
+    this.cache.initOrganizations(await HtmlParser.organizations());
   }
 
   void initCategories() async {
-    this.ledger.initCategories(await HtmlParser.categories());
+    this.cache.initCategories(await HtmlParser.categories());
   }
 
   Future setSearch(String word) async {
-    this.ledger.setSearch(await HtmlParser.searchByWord(word));
+    this.cache.setSearch(await HtmlParser.searchByWord(word));
   }
 
   Future setLeafInfo(String url,LeafInfo Function(Map<String, dynamic> parsedJson) func) async {
     List<dynamic> leafs = json
         .decode(await HttpRequest.getJson(url));
-    this.ledger.setLeafs(leafs.map((i) => func(i))
+    this.cache.setLeafs(leafs.map((i) => func(i))
         .toList());
   }
 
   List<NodeInfo> getOrganizations() {
-    return this.ledger.organizations;
+    return this.cache.organizations;
   }
 
   List<NodeInfo> getCategories() {
-    return this.ledger.categories;
+    return this.cache.categories;
   }
 
   List<NodeInfo> getSearch() {
-    return this.ledger.search;
+    return this.cache.search;
   }
 
   List<LeafInfo> getLeafs() {
-    return ledger.leafs;
+    return cache.leafs;
   }
 }
