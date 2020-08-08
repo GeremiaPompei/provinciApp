@@ -1,6 +1,10 @@
 import 'package:MC/controller/Controller.dart';
-import 'package:MC/model/LeafsType/Bando.dart';
-import 'package:MC/model/LeafsType/Concorso.dart';
+import 'package:MC/model/LeafsInfo/Bando.dart';
+import 'package:MC/model/LeafsInfo/Concorso.dart';
+import 'package:MC/model/LeafsInfo/Monumento.dart';
+import 'package:MC/model/LeafsInfo/Museo.dart';
+import 'package:MC/model/LeafsInfo/Shopping.dart';
+import 'package:MC/model/LeafsInfo/Struttura.dart';
 import 'package:MC/view/BasicView.dart';
 import 'package:MC/view/LeafsInfoView.dart';
 import 'package:flutter/widgets.dart';
@@ -27,6 +31,42 @@ class _SearchViewState extends State<SearchView> {
           controller.getSearch()[index].name,
           controller)
           .launch();
+    });
+  }
+
+  void setLeafs(int index){
+    setState(() {
+      String name = controller.getSearch()[index].name.toString();
+      if (name.contains('Concorsi'))
+        controller
+            .setLeafInfo(controller.getSearch()[index].url, (
+            el) => Concorso.fromJson(el))
+            .then((value) => visual(index));
+      else if (name.contains('Bandi'))
+        controller
+            .setLeafInfo(controller.getSearch()[index].url, (
+            el) => Bando.fromJson(el))
+            .then((value) => visual(index));
+      else if (name.contains('Strutture') || name.contains('Case'))
+        controller
+            .setLeafInfo(controller.getSearch()[index].url, (
+            el) => StrutturaRicreativa.fromJson(el))
+            .then((value) => visual(index));
+      else if (name.contains('Shopping'))
+        controller
+            .setLeafInfo(controller.getSearch()[index].url, (
+            el) => Shopping.fromJson(el))
+            .then((value) => visual(index));
+      else if (name.contains('Musei'))
+        controller
+            .setLeafInfo(controller.getSearch()[index].url, (
+            el) => Museo.fromJson(el))
+            .then((value) => visual(index));
+      else if (name.contains('Monumenti'))
+        controller
+            .setLeafInfo(controller.getSearch()[index].url, (
+            el) => Monumento.fromJson(el))
+            .then((value) => visual(index));
     });
   }
 
@@ -61,19 +101,8 @@ class _SearchViewState extends State<SearchView> {
                       controller.getSearch()[index].description.toString()),
                 ),
                 onPressed: () {
-                  setState(() {
-                    String name = controller.getSearch()[index].name.toString();
-                    if (name.contains('Concorsi'))
-                      controller
-                          .setLeafInfo(controller.getSearch()[index].url, (
-                          el) => Concorso.fromJson(el))
-                          .then((value) => visual(index));
-                    else if (name.contains('Bandi'))
-                      controller
-                          .setLeafInfo(controller.getSearch()[index].url, (
-                          el) => Bando.fromJson(el))
-                          .then((value) => visual(index));
-                  });
+                  setLeafs(index);
+                  ;
                 },
               );
             },

@@ -36,7 +36,6 @@ class _organizationViewState extends State<organizationView> {
                   controller.getOrganizations()[index].description.toString())),
           onPressed: () {
             setState(() {
-              print(controller.getOrganizations()[index].url);
               controller
                   .setSearch(controller.getOrganizations()[index].url)
                   .then((value) => Launcher().launch(

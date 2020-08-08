@@ -1,10 +1,5 @@
 import 'dart:convert';
 
-import 'package:MC/model/LeafsType/Bando.dart';
-import 'package:MC/model/LeafsType/Concorso.dart';
-import 'package:MC/model/LeafsType/Evento.dart';
-import 'package:MC/model/LeafsType/Monumento.dart';
-import 'package:MC/model/LeafsType/StrutturaRicreativa.dart';
 import 'package:MC/model/web/HtmlParser.dart';
 import 'package:MC/model/web/HttpRequest.dart';
 import 'package:MC/model/LeafInfo.dart';

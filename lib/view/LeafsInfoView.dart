@@ -10,7 +10,7 @@ class LeafsInfoView {
   String title;
   Controller controller;
 
-  LeafsInfoView(this.leafs, this.title,this.controller);
+  LeafsInfoView(this.leafs, this.title, this.controller);
 
   void launch() {
     runApp(
@@ -18,14 +18,14 @@ class LeafsInfoView {
         home: Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.red,
-            title: Text(title),leading: new IconButton(
-            icon: new Icon(Icons.arrow_back_ios),
-            onPressed: () => {
-              Launcher().launch('MC Search...', SearchView(controller))
-            },
+            title: Text(title),
+            leading: new IconButton(
+              icon: new Icon(Icons.arrow_back_ios),
+              onPressed: () =>
+                  {Launcher().launch('MC Search...', SearchView(controller))},
+            ),
           ),
-          ),
-          body: ButtonInfo(leafs, title,controller),
+          body: ButtonInfo(leafs, title, controller),
         ),
       ),
     );
@@ -37,10 +37,10 @@ class ButtonInfo extends StatefulWidget {
   String title;
   Controller controller;
 
-  ButtonInfo(this.leafs, this.title,this.controller);
+  ButtonInfo(this.leafs, this.title, this.controller);
 
   @override
-  _ButtonInfoState createState() => _ButtonInfoState(leafs, title,controller);
+  _ButtonInfoState createState() => _ButtonInfoState(leafs, title, controller);
 }
 
 class _ButtonInfoState extends State<ButtonInfo> {
@@ -48,7 +48,7 @@ class _ButtonInfoState extends State<ButtonInfo> {
   String title;
   Controller controller;
 
-  _ButtonInfoState(this.leafs, this.title,this.controller);
+  _ButtonInfoState(this.leafs, this.title, this.controller);
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +75,7 @@ class _ButtonInfoState extends State<ButtonInfo> {
     );
   }
 
-  void leafInfo(int index){
+  void leafInfo(int index) {
     runApp(MaterialApp(
         home: Scaffold(
             appBar: AppBar(
@@ -84,11 +84,12 @@ class _ButtonInfoState extends State<ButtonInfo> {
               leading: new IconButton(
                 icon: new Icon(Icons.arrow_back_ios),
                 onPressed: () {
-                  LeafsInfoView(leafs,title,controller).launch();
+                  LeafsInfoView(leafs, title, controller).launch();
                 },
               ),
             ),
-            body: Text(leafs[index].toString()))));
+            body: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: Text(leafs[index].toString())))));
   }
-
 }
