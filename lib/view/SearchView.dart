@@ -1,5 +1,6 @@
 import 'package:MC/controller/Controller.dart';
 import 'package:MC/model/LeafInfo.dart';
+import 'package:MC/model/LeafsInfo/AreeCamper.dart';
 import 'package:MC/model/LeafsInfo/Bando.dart';
 import 'package:MC/model/LeafsInfo/Biblioteca.dart';
 import 'package:MC/model/LeafsInfo/Concorso.dart';
@@ -62,6 +63,8 @@ class _SearchViewState extends State<SearchView> {
         visual(index, (parsedJson) => Biblioteca.fromJson(parsedJson));
       else if (name.contains('Eventi'))
         visual(index, (parsedJson) => Evento.fromJson(parsedJson));
+      else if (name.contains('Aree'))
+        visual(index, (parsedJson) => AreeCamper.fromJson(parsedJson));
     });
   }
 

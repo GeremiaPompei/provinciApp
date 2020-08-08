@@ -1,6 +1,6 @@
 import '../LeafInfo.dart';
 
-class Struttura implements LeafInfo {
+class AreeCamper implements LeafInfo {
   String titolo;
   String tipologiaStruttura;
   var immagine;
@@ -8,7 +8,6 @@ class Struttura implements LeafInfo {
   String indirizzo;
   String descrizione;
   String telefono;
-  String fax;
   String mail;
   String sitoWeb;
   String periodoApertura;
@@ -18,7 +17,7 @@ class Struttura implements LeafInfo {
   String accessibileDisabili;
   String url;
 
-  Struttura(
+  AreeCamper(
       this.titolo,
       this.tipologiaStruttura,
       this.descrizione,
@@ -26,7 +25,6 @@ class Struttura implements LeafInfo {
       this.comune,
       this.indirizzo,
       this.telefono,
-      this.fax,
       this.mail,
       this.sitoWeb,
       this.periodoApertura,
@@ -36,8 +34,8 @@ class Struttura implements LeafInfo {
       this.accessibileDisabili,
       this.url);
 
-  factory Struttura.fromJson(Map<String, dynamic> parsedJson) {
-    return Struttura(
+  factory AreeCamper.fromJson(Map<String, dynamic> parsedJson) {
+    return AreeCamper(
         parsedJson['Titolo'],
         parsedJson['Tipologia struttura'],
         parsedJson['Descrizione'],
@@ -45,7 +43,6 @@ class Struttura implements LeafInfo {
         parsedJson['Comune'],
         parsedJson['Indirizzo'],
         parsedJson['Telefono'],
-        parsedJson['Fax'],
         parsedJson['E-mail'],
         parsedJson['Sito web'],
         parsedJson['Periodo apertura'],
@@ -71,8 +68,6 @@ class Struttura implements LeafInfo {
         this.indirizzo +
         '\n' +
         this.telefono +
-        '\n' +
-        this.fax +
         '\n' +
         this.mail +
         '\n' +
