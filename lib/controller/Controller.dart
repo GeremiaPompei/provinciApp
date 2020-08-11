@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:MC/model/UnitCache.dart';
 import 'package:MC/model/web/HtmlParser.dart';
 import 'package:MC/model/web/HttpRequest.dart';
 import 'package:MC/model/LeafInfo.dart';
@@ -24,7 +25,24 @@ class Controller {
   }
 
   Future setSearch(String word) async {
-    this.cache.setSearch(await HtmlParser.searchByWord(word));
+//    UnitCache<List<NodeInfo>> cacheUnit = this.cache.getSearch(word);
+//    if (cacheUnit == null) {
+//      List<NodeInfo> nodes = await HtmlParser.searchByWord(word);
+//      String oldUrl;
+//      DateTime tmpDate;
+//      this.cache.search.keys.forEach((el) => {
+//            if (tmpDate == null ||
+//                tmpDate.isAfter(this.cache.getSearch(el).getDate()))
+//              tmpDate = this.cache.getSearch(el).getDate(),
+//            oldUrl = el,
+//          });
+//      this.cache.removeSearch(oldUrl);
+//      cacheUnit.setElement(nodes);
+//      this.cache.putSearch(word, cacheUnit);
+//    }
+//    cacheUnit.setDate(DateTime.now());
+
+  cache.setSearch(await HtmlParser.searchByWord(word));
   }
 
   Future setLeafInfo(String url,
@@ -34,11 +52,11 @@ class Controller {
   }
 
   List<NodeInfo> getOrganizations() {
-    return this.cache.organizations;
+    return this.cache.getOrganizations();
   }
 
   List<NodeInfo> getCategories() {
-    return this.cache.categories;
+    return this.cache.getCategories();
   }
 
   List<NodeInfo> getSearch() {
@@ -46,6 +64,15 @@ class Controller {
   }
 
   List<LeafInfo> getLeafs() {
-    return cache.leafs;
+    return this.cache.leafs;
   }
+
+
+//  UnitCache<List<NodeInfo>> getSearch(String url) {
+//    return this.cache.getSearch(url);
+//  }
+//
+//  UnitCache<List<LeafInfo>> getLeafs(String url) {
+//    return this.cache.getLeafs(url);
+//  }
 }

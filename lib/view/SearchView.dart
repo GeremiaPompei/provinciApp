@@ -34,9 +34,12 @@ class _SearchViewState extends State<SearchView> {
     controller
         .setLeafInfo(controller.getSearch()[index].url, (el) => func(el))
         .then((value) => setState(() {
-              LeafsInfoView(controller.getLeafs(),
-                      controller.getSearch()[index].name, controller)
-                  .launch();
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => LeafsInfoView(controller.getLeafs(),
+                              controller.getSearch()[index].name, controller)
+                          .launch(context)));
             }));
   }
 
@@ -100,7 +103,6 @@ class _SearchViewState extends State<SearchView> {
                 ),
                 onPressed: () {
                   setLeafs(index);
-                  ;
                 },
               );
             },

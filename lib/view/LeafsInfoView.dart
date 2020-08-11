@@ -2,9 +2,6 @@ import 'package:MC/controller/Controller.dart';
 import 'package:MC/model/LeafInfo.dart';
 import 'package:flutter/material.dart';
 
-import 'BasicView.dart';
-import 'SearchView.dart';
-
 class LeafsInfoView {
   List<LeafInfo> leafs;
   String title;
@@ -12,22 +9,17 @@ class LeafsInfoView {
 
   LeafsInfoView(this.leafs, this.title, this.controller);
 
-  void launch() {
-    runApp(
-      MaterialApp(
-        home: Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.red,
-            title: Text(title),
-            leading: new IconButton(
-              icon: new Icon(Icons.arrow_back_ios),
-              onPressed: () =>
-                  {Launcher().launch('MC Search...', SearchView(controller))},
-            ),
-          ),
-          body: ButtonInfo(leafs, title, controller),
+  Scaffold launch(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.red,
+        title: Text(title),
+        leading: new IconButton(
+          icon: new Icon(Icons.arrow_back_ios),
+          onPressed: () => {Navigator.pop(context)},
         ),
       ),
+      body: ButtonInfo(leafs, title, controller),
     );
   }
 }
@@ -66,7 +58,10 @@ class _ButtonInfoState extends State<ButtonInfo> {
               ),
               onPressed: () {
                 setState(() {
-                  leafInfo(index);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => leafInfo(index, context)));
                 });
               });
         },
@@ -75,38 +70,37 @@ class _ButtonInfoState extends State<ButtonInfo> {
     );
   }
 
-  void leafInfo(int index) {
-    runApp(MaterialApp(
-        home: Scaffold(
-            appBar: AppBar(
-              title: Text(leafs[index].getName()),
-              backgroundColor: Colors.red,
-              leading: new IconButton(
-                icon: new Icon(Icons.arrow_back_ios),
-                onPressed: () {
-                  LeafsInfoView(leafs, title, controller).launch();
-                },
-              ),
-            ),
-            body: Container(
-                color: Colors.red,
-                constraints: BoxConstraints.expand(),
-                padding: const EdgeInsets.all(8.0),
-                alignment: Alignment.center,
-                child: SingleChildScrollView(
-                    scrollDirection: Axis.vertical,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(),
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                      ),
-                      child: Text(
-                        leafs[index].toString(),
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ))))));
+  Scaffold leafInfo(int index, BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text(leafs[index].getName()),
+          backgroundColor: Colors.red,
+          leading: new IconButton(
+            icon: new Icon(Icons.arrow_back_ios),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+        ),
+        body: Container(
+            color: Colors.red,
+            constraints: BoxConstraints.expand(),
+            padding: const EdgeInsets.all(8.0),
+            alignment: Alignment.center,
+            child: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(),
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                  ),
+                  child: Text(
+                    leafs[index].toString(),
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ))));
   }
 }
