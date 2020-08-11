@@ -7,14 +7,14 @@ class Cache {
 
   List<NodeInfo> categories;
   List<NodeInfo> organizations;
-  List<NodeInfo> search;
-  List<LeafInfo> leafs;
+  Map<String,UnitCache<List<NodeInfo>>> search;
+  Map<String,UnitCache<List<LeafInfo>>> leafs;
 
   Cache(){
     this.categories = [];
     this.organizations = [];
-    this.search = [];
-    this.leafs = [];
+    this.search = {'1':new UnitCache(),'2':new UnitCache(),'3':new UnitCache(),'4':new UnitCache(),'5':new UnitCache()};
+    this.leafs = {'1':new UnitCache(),'2':new UnitCache(),'3':new UnitCache(),'4':new UnitCache(),'5':new UnitCache()};
   }
 
   void initOrganizations(List<NodeInfo> nodes) {
@@ -26,11 +26,11 @@ class Cache {
   }
 
   void putSearch(String url, UnitCache<List<NodeInfo>> nodes){
-    //this.search[url] = nodes;
+    this.search[url] = nodes;
   }
 
   void putLeafs(String url, UnitCache<List<dynamic>> leafs) {
-    //this.leafs[url] = leafs;
+    this.leafs[url] = leafs;
   }
 
   void removeSearch(String url){
@@ -49,20 +49,12 @@ class Cache {
     return this.categories;
   }
 
-  List<NodeInfo> getSearch(String url) {
-    return this.search;
+  UnitCache<List<NodeInfo>> getSearch(String url) {
+    return this.search[url];
   }
 
-  List<LeafInfo> getLeafs(String url) {
-    return this.leafs;
-  }
-
-  void setSearch(List<NodeInfo> nodes) {
-    this.search = nodes;
-  }
-
-  void setLeafs(List<LeafInfo> leafs) {
-    this.leafs = leafs;
+  UnitCache<List<LeafInfo>> getLeafs(String url) {
+    return this.leafs[url];
   }
 
 }

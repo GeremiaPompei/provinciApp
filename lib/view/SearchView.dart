@@ -29,18 +29,29 @@ class _SearchViewState extends State<SearchView> {
 
   _SearchViewState(this.controller);
 
-  void visual(
-      int index, LeafInfo Function(Map<String, dynamic> parsedJson) func) {
+  void visual(int index,
+      LeafInfo Function(Map<String, dynamic> parsedJson) func) {
     controller
         .setLeafInfo(controller.getSearch()[index].url, (el) => func(el))
-        .then((value) => setState(() {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => LeafsInfoView(controller.getLeafs(),
-                              controller.getSearch()[index].name, controller)
+        .then((value) =>
+        setState(() {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      LeafsInfoView(controller.getLeafs(),
+                          controller.getSearch()[index].name, controller)
                           .launch(context)));
-            }));
+        }));
+  }
+
+  int length() {
+    if (controller.getSearch() != null)
+      return controller
+          .getSearch()
+          .length;
+    else
+      return 0;
   }
 
   void setLeafs(int index) {
@@ -93,7 +104,7 @@ class _SearchViewState extends State<SearchView> {
             scrollDirection: Axis.vertical,
             shrinkWrap: true,
             padding: const EdgeInsets.all(8),
-            itemCount: controller.getSearch().length,
+            itemCount: length(),
             itemBuilder: (context, index) {
               return FlatButton(
                 child: ListTile(
@@ -107,7 +118,7 @@ class _SearchViewState extends State<SearchView> {
               );
             },
             separatorBuilder: (BuildContext context, int index) =>
-                const Divider(),
+            const Divider(),
           ),
         ),
       ],

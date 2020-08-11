@@ -42,6 +42,15 @@ class _ButtonInfoState extends State<ButtonInfo> {
 
   _ButtonInfoState(this.leafs, this.title, this.controller);
 
+  int length() {
+    if (controller.getLeafs() != null)
+      return controller
+          .getLeafs()
+          .length;
+    else
+      return 0;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -49,7 +58,7 @@ class _ButtonInfoState extends State<ButtonInfo> {
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
         padding: const EdgeInsets.all(8),
-        itemCount: leafs.length,
+        itemCount: length(),
         itemBuilder: (context, index) {
           return FlatButton(
               child: ListTile(
