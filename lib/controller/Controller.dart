@@ -9,11 +9,11 @@ import 'package:MC/model/NodeInfo.dart';
 
 class Controller {
   Cache cache;
-  String lastSearch = '1';
-  String lastLeafs = '1';
+  String lastSearch = 'Empty';
+  String lastLeafs = 'Empty';
 
   Controller() {
-    cache = new Cache();
+    cache = new Cache(5, 5);
     initOrganizations();
     initCategories();
   }
@@ -34,18 +34,17 @@ class Controller {
       String oldUrl;
       DateTime tmpDate;
       this.cache.search.keys.forEach((el) => {
-            if (tmpDate == null ||
-                tmpDate.isAfter(this.cache.getSearch(el).getDate()))
-              {
-                tmpDate = this.cache.getSearch(el).getDate(),
-                oldUrl = el,
-              }
-          });
-      this.cache.removeSearch(oldUrl);
+        if (tmpDate == null ||
+            tmpDate.isAfter(this.cache.getSearch(el).getDate()))
+          {
+            tmpDate = this.cache.getSearch(el).getDate(),
+            oldUrl = el,
+          }
+      });
       cacheUnit.setElement(nodes);
-      this.cache.putSearch(word, cacheUnit);
+      this.cache.changeSearch(oldUrl,word, cacheUnit);
     }
-    cacheUnit.setDate(DateTime.now());
+    cacheUnit.updateDate();
     this.lastSearch = word;
   }
 
@@ -59,18 +58,17 @@ class Controller {
       String oldUrl;
       DateTime tmpDate;
       this.cache.leafs.keys.forEach((el) => {
-            if (tmpDate == null ||
-                tmpDate.isAfter(this.cache.getLeafs(el).getDate()))
-              {
-                tmpDate = this.cache.getLeafs(el).getDate(),
-                oldUrl = el,
-              }
-          });
-      this.cache.removeLeafs(oldUrl);
+        if (tmpDate == null ||
+            tmpDate.isAfter(this.cache.getLeafs(el).getDate()))
+          {
+            tmpDate = this.cache.getLeafs(el).getDate(),
+            oldUrl = el,
+          }
+      });
       cacheUnit.setElement(leafs);
-      this.cache.putLeafs(url, cacheUnit);
+      this.cache.changeLeafs(oldUrl,url, cacheUnit);
     }
-    cacheUnit.setDate(DateTime.now());
+    cacheUnit.updateDate();
     this.lastLeafs = url;
   }
 

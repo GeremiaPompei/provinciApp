@@ -8,8 +8,8 @@ class UnitCache <T> {
     this.element = null;
   }
 
-  void setDate(DateTime date) {
-    this.date = date;
+  void updateDate(){
+    this.date = DateTime.now();
   }
 
   void setElement(T element) {
