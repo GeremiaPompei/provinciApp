@@ -1,5 +1,6 @@
 import 'dart:convert';
-
+import 'package:MC/model/SerializeDeserializeCache.dart';
+import 'package:MC/model/StoreManager.dart';
 import 'package:MC/model/UnitCache.dart';
 import 'package:MC/model/web/HtmlParser.dart';
 import 'package:MC/model/web/HttpRequest.dart';
@@ -14,38 +15,32 @@ class Controller {
 
   Controller() {
     cache = new Cache(5, 5);
-    initOrganizations();
-    initCategories();
+    init();
   }
 
-  void initOrganizations() async {
-    this.cache.initOrganizations(await HtmlParser.organizations());
+  void init() async {
+    try {
+      this.cache.initOrganizations(await HtmlParser.organizations());
+      this.cache.initCategories(await HtmlParser.categories());
+      await store();
+    } catch (e) {
+      await load();
+    }
   }
 
-  void initCategories() async {
-    this.cache.initCategories(await HtmlParser.categories());
-  }
-
-  Future setSearch(String word) async {
-    UnitCache<List<NodeInfo>> cacheUnit = this.cache.getSearch(word);
+  Future setSearch(String url) async {
+    UnitCache<List<NodeInfo>> cacheUnit = this.cache.getSearch(url);
     if (cacheUnit == null) {
       cacheUnit = new UnitCache();
-      List<NodeInfo> nodes = await HtmlParser.searchByWord(word);
-      String oldUrl;
-      DateTime tmpDate;
-      this.cache.search.keys.forEach((el) => {
-        if (tmpDate == null ||
-            tmpDate.isAfter(this.cache.getSearch(el).getDate()))
-          {
-            tmpDate = this.cache.getSearch(el).getDate(),
-            oldUrl = el,
-          }
-      });
+      List<NodeInfo> nodes = await HtmlParser.searchByWord(url);
+      String oldUrl =
+          oldestUrl(this.cache.search.keys, (el) => this.cache.getSearch(el));
       cacheUnit.setElement(nodes);
-      this.cache.changeSearch(oldUrl,word, cacheUnit);
+      this.cache.changeSearch(oldUrl, url, cacheUnit);
     }
     cacheUnit.updateDate();
-    this.lastSearch = word;
+    this.lastSearch = url;
+    await store();
   }
 
   Future setLeafInfo(String url,
@@ -55,21 +50,27 @@ class Controller {
       cacheUnit = new UnitCache();
       List<dynamic> tmp = json.decode(await HttpRequest.getJson(url));
       List<LeafInfo> leafs = tmp.map((i) => func(i)).toList();
-      String oldUrl;
-      DateTime tmpDate;
-      this.cache.leafs.keys.forEach((el) => {
-        if (tmpDate == null ||
-            tmpDate.isAfter(this.cache.getLeafs(el).getDate()))
-          {
-            tmpDate = this.cache.getLeafs(el).getDate(),
-            oldUrl = el,
-          }
-      });
+      String oldUrl =
+          oldestUrl(this.cache.leafs.keys, (el) => this.cache.getLeafs(el));
       cacheUnit.setElement(leafs);
-      this.cache.changeLeafs(oldUrl,url, cacheUnit);
+      this.cache.changeLeafs(oldUrl, url, cacheUnit);
     }
     cacheUnit.updateDate();
     this.lastLeafs = url;
+    await store();
+  }
+
+  String oldestUrl(Iterable<String> list, UnitCache Function(String) func) {
+    String oldUrl;
+    DateTime tmpDate;
+    list.forEach((el) => {
+          if (tmpDate == null || tmpDate.isAfter(func(el).getDate()))
+            {
+              tmpDate = func(el).getDate(),
+              oldUrl = el,
+            }
+        });
+    return oldUrl;
   }
 
   List<NodeInfo> getOrganizations() {
@@ -86,5 +87,15 @@ class Controller {
 
   List<LeafInfo> getLeafs() {
     return this.cache.getLeafs(this.lastLeafs).getElement();
+  }
+
+  Future load() async {
+    this.cache =
+        SerializeDeserializerCache.deserialize(await StoreManager.load());
+  }
+
+  Future store() async {
+    return await StoreManager.store(
+        SerializeDeserializerCache.serialize(this.cache));
   }
 }
