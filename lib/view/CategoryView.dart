@@ -33,9 +33,8 @@ class _categoryViewState extends State<categoryView> {
             setState(() {
               controller
                   .setSearch(controller.getCategories()[index].url)
-                  .then((value) => Launcher().launch(
-                      'MC Search...', SearchView(controller),
-                      controller: controller));
+                  .then((value) => Launcher(controller).launch(
+                      'MC Search...', SearchView(controller)));
             });
           },
         );

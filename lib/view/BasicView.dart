@@ -21,7 +21,7 @@ void mtrApp() {
           color: Colors.red,
           onPressed: (){
             Controller controller = new Controller();
-            Launcher().launch('MC Search...', SearchView(controller),controller: controller);
+            Launcher(controller).launch('MC Search...', SearchView(controller));
           },
         ),
       ),
@@ -92,12 +92,12 @@ class Launcher {
   Controller controller;
   ButtonBarDown bar;
 
-  Launcher() {
-    this.controller = new Controller();
+  Launcher(Controller controller) {
+    this.controller = controller;
     this.bar = new ButtonBarDown(controller, launch);
   }
 
-  void launch(String title, Widget widget, {Controller controller}) {
+  void launch(String title, Widget widget) {
     {
       this.controller = controller;
     }

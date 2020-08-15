@@ -10,8 +10,8 @@ import 'package:MC/model/NodeInfo.dart';
 
 class Controller {
   Cache cache;
-  String lastSearch = 'Empty';
-  String lastLeafs = 'Empty';
+  String lastSearch = 'Empty 0';
+  String lastLeafs = 'Empty 0';
 
   Controller() {
     cache = new Cache(5, 5);
@@ -22,42 +22,47 @@ class Controller {
     try {
       this.cache.initOrganizations(await HtmlParser.organizations());
       this.cache.initCategories(await HtmlParser.categories());
-      await store();
+      store();
     } catch (e) {
-      await load();
+      load();
     }
   }
 
   Future setSearch(String url) async {
-    UnitCache<List<NodeInfo>> cacheUnit = this.cache.getSearch(url);
-    if (cacheUnit == null) {
-      cacheUnit = new UnitCache();
-      List<NodeInfo> nodes = await HtmlParser.searchByWord(url);
-      String oldUrl =
-          oldestUrl(this.cache.search.keys, (el) => this.cache.getSearch(el));
-      cacheUnit.setElement(nodes);
-      this.cache.changeSearch(oldUrl, url, cacheUnit);
+    try {
+      UnitCache<List<NodeInfo>> cacheUnit = this.cache.getSearchByUrl(url);
+      if (cacheUnit == null) {
+        List<NodeInfo> nodes = await HtmlParser.searchByWord(url);
+        String oldUrl = oldestUrl(
+            this.cache.search.keys, (el) => this.cache.getSearchByUrl(el));
+        cacheUnit = this.cache.search[oldUrl];
+        cacheUnit.setElement(nodes);
+        this.cache.changeSearch(oldUrl, url, cacheUnit);
+        cacheUnit.updateDate();
+        store();
+      } else
+        cacheUnit.updateDate();
+      this.lastSearch = url;
+    } catch (e) {
+      print(e.toString());
     }
-    cacheUnit.updateDate();
-    this.lastSearch = url;
-    await store();
   }
 
   Future setLeafInfo(String url,
       LeafInfo Function(Map<String, dynamic> parsedJson) func) async {
-    UnitCache<List<LeafInfo>> cacheUnit = this.cache.getLeafs(url);
+    UnitCache<List<LeafInfo>> cacheUnit = this.cache.getLeafsByUrl(url);
     if (cacheUnit == null) {
-      cacheUnit = new UnitCache();
       List<dynamic> tmp = json.decode(await HttpRequest.getJson(url));
       List<LeafInfo> leafs = tmp.map((i) => func(i)).toList();
-      String oldUrl =
-          oldestUrl(this.cache.leafs.keys, (el) => this.cache.getLeafs(el));
+      String oldUrl = oldestUrl(
+          this.cache.leafs.keys, (el) => this.cache.getLeafsByUrl(el));
+      cacheUnit = this.cache.leafs[oldUrl];
       cacheUnit.setElement(leafs);
       this.cache.changeLeafs(oldUrl, url, cacheUnit);
     }
     cacheUnit.updateDate();
+    store();
     this.lastLeafs = url;
-    await store();
   }
 
   String oldestUrl(Iterable<String> list, UnitCache Function(String) func) {
@@ -82,11 +87,11 @@ class Controller {
   }
 
   List<NodeInfo> getSearch() {
-    return this.cache.getSearch(this.lastSearch).getElement();
+    return this.cache.getSearchByUrl(this.lastSearch).getElement();
   }
 
   List<LeafInfo> getLeafs() {
-    return this.cache.getLeafs(this.lastLeafs).getElement();
+    return this.cache.getLeafsByUrl(this.lastLeafs).getElement();
   }
 
   Future load() async {

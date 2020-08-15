@@ -14,13 +14,13 @@ class Cache {
     this.organizations = [];
     this.search = {};
     this.leafs = {};
-    initMap<List<NodeInfo>>(this.search, searchCount);
-    initMap<List<LeafInfo>>(this.leafs, leafsCount);
+    initMap<NodeInfo>(this.search, searchCount);
+    initMap<LeafInfo>(this.leafs, leafsCount);
   }
 
-  void initMap<T>(Map<String,UnitCache<T>> map, int num) {
+  void initMap<T>(Map<String,UnitCache<List<T>>> map, int num) {
     for (int i = 0; i < num; i++) {
-      map['Empty'] = new UnitCache<T>();
+      map['Empty ${i}'] = new UnitCache(List<T>(),DateTime.now());
     }
   }
 
@@ -38,10 +38,18 @@ class Cache {
     this.search[newUrl] = nodes;
   }
 
+  void setSearch(Map<String, UnitCache<List<NodeInfo>>> map) {
+    this.search = map;
+  }
+
   void changeLeafs(
       String oldUrl, String newUrl, UnitCache<List<dynamic>> leafs) {
     this.leafs.remove(oldUrl);
     this.leafs[newUrl] = leafs;
+  }
+
+  void setLeafs(Map<String, UnitCache<List<LeafInfo>>> map) {
+    this.leafs = map;
   }
 
   List<NodeInfo> getOrganizations() {
@@ -52,11 +60,19 @@ class Cache {
     return this.categories;
   }
 
-  UnitCache<List<NodeInfo>> getSearch(String url) {
+  Map<String, UnitCache<List<NodeInfo>>> getSearch() {
+    return this.search;
+  }
+
+  Map<String, UnitCache<List<LeafInfo>>> getLeafs() {
+    return this.leafs;
+  }
+
+  UnitCache<List<NodeInfo>> getSearchByUrl(String url) {
     return this.search[url];
   }
 
-  UnitCache<List<LeafInfo>> getLeafs(String url) {
+  UnitCache<List<LeafInfo>> getLeafsByUrl(String url) {
     return this.leafs[url];
   }
 }

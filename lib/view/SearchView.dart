@@ -94,8 +94,7 @@ class _SearchViewState extends State<SearchView> {
           onSubmitted: (String input) {
             setState(() {
               controller.setSearch('dataset?q=' + input).then((value) =>
-                  Launcher().launch('MC Search...', SearchView(controller),
-                      controller: controller));
+                  Launcher(controller).launch('MC Search...', SearchView(controller)));
             });
           },
         ),

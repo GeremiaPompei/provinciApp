@@ -38,9 +38,8 @@ class _organizationViewState extends State<organizationView> {
             setState(() {
               controller
                   .setSearch(controller.getOrganizations()[index].url)
-                  .then((value) => Launcher().launch(
-                      'MC Search...', SearchView(controller),
-                      controller: controller));
+                  .then((value) => Launcher(controller).launch(
+                      'MC Search...', SearchView(controller)));
             });
           },
         );

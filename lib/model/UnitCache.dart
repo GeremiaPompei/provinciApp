@@ -3,9 +3,9 @@ class UnitCache <T> {
   DateTime date;
   T element;
 
-  UnitCache() {
-    this.date = DateTime.now();
-    this.element = null;
+  UnitCache(T element, DateTime date) {
+    this.date = date;
+    this.element = element;
   }
 
   void updateDate(){
