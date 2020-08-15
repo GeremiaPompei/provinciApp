@@ -13,6 +13,7 @@ class Shopping implements LeafInfo {
   String latitudine;
   String longitudine;
   String url;
+  Map<String, dynamic> json;
 
   Shopping(
       this.comune,
@@ -26,7 +27,8 @@ class Shopping implements LeafInfo {
       this.mail,
       this.latitudine,
       this.longitudine,
-      this.url);
+      this.url,
+      this.json);
 
   factory Shopping.fromJson(Map<String, dynamic> parsedJson) {
     return Shopping(
@@ -41,22 +43,34 @@ class Shopping implements LeafInfo {
         parsedJson['E-mail'],
         parsedJson['Latitudine'],
         parsedJson['Longitudine'],
-        parsedJson['Url']);
+        parsedJson['Url'],
+        parsedJson);
   }
 
   @override
   String toString() {
-    return this.nome + '\n' +
-        this.descrizione + '\n' +
-        this.comune + '\n' +
-        this.indirizzo + '\n' +
-        this.telefono + '\n' +
-        this.fax + '\n' +
-        this.mail + '\n' +
-        this.sitoWeb + '\n' +
-        this.orario + '\n' +
-        this.latitudine + '\n' +
-        this.longitudine + '\n' +
+    return this.nome +
+        '\n' +
+        this.descrizione +
+        '\n' +
+        this.comune +
+        '\n' +
+        this.indirizzo +
+        '\n' +
+        this.telefono +
+        '\n' +
+        this.fax +
+        '\n' +
+        this.mail +
+        '\n' +
+        this.sitoWeb +
+        '\n' +
+        this.orario +
+        '\n' +
+        this.latitudine +
+        '\n' +
+        this.longitudine +
+        '\n' +
         this.url;
   }
 
@@ -73,5 +87,10 @@ class Shopping implements LeafInfo {
   @override
   String getUrl() {
     return this.url;
+  }
+
+  @override
+  Map<String, dynamic> getJson() {
+    return this.json;
   }
 }

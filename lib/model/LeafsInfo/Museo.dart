@@ -20,6 +20,7 @@ class Museo implements LeafInfo {
   String costruzione;
   String opereInMostra;
   String accesso;
+  Map<String, dynamic> json;
 
   Museo(
       this.comune,
@@ -40,7 +41,8 @@ class Museo implements LeafInfo {
       this.situazione,
       this.costruzione,
       this.opereInMostra,
-      this.accesso);
+      this.accesso,
+      this.json);
 
   factory Museo.fromJson(Map<String, dynamic> parsedJson) {
     return Museo(
@@ -62,30 +64,49 @@ class Museo implements LeafInfo {
         parsedJson['Situazione'],
         parsedJson['Costruzione'],
         parsedJson['Opere in mostra'],
-        parsedJson['Accesso']);
+        parsedJson['Accesso'],
+        parsedJson);
   }
 
   @override
   String toString() {
-    return this.comune + '\n' +
-    this.nome + '\n' +
-    this.descrizione + '\n' +
-    this.localita + '\n' +
-    this.indirizzo + '\n' +
-    this.telefono + '\n' +
-    this.fax + '\n' +
-    this.orario + '\n' +
-    this.sitoEsterno + '\n' +
-    this.mail + '\n' +
-    this.latitudine + '\n' +
-    this.longitudine + '\n' +
-    this.visitablie + '\n' +
-    this.accessibileDisabili + '\n' +
-    this.url + '\n' +
-    this.situazione + '\n' +
-    this.costruzione + '\n' +
-    this.opereInMostra + '\n' +
-    this.accesso;
+    return this.comune +
+        '\n' +
+        this.nome +
+        '\n' +
+        this.descrizione +
+        '\n' +
+        this.localita +
+        '\n' +
+        this.indirizzo +
+        '\n' +
+        this.telefono +
+        '\n' +
+        this.fax +
+        '\n' +
+        this.orario +
+        '\n' +
+        this.sitoEsterno +
+        '\n' +
+        this.mail +
+        '\n' +
+        this.latitudine +
+        '\n' +
+        this.longitudine +
+        '\n' +
+        this.visitablie +
+        '\n' +
+        this.accessibileDisabili +
+        '\n' +
+        this.url +
+        '\n' +
+        this.situazione +
+        '\n' +
+        this.costruzione +
+        '\n' +
+        this.opereInMostra +
+        '\n' +
+        this.accesso;
   }
 
   @override
@@ -101,5 +122,10 @@ class Museo implements LeafInfo {
   @override
   String getUrl() {
     return this.url;
+  }
+
+  @override
+  Map<String, dynamic> getJson() {
+    return this.json;
   }
 }

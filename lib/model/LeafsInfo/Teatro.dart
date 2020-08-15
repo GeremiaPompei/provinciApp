@@ -20,6 +20,7 @@ class Teatro implements LeafInfo {
   String telefonoBiglietteria;
   String orarioBiglietteria;
   String prenotazioneOnline;
+  Map<String, dynamic> json;
 
   Teatro(
       this.comune,
@@ -40,7 +41,8 @@ class Teatro implements LeafInfo {
       this.Situazione,
       this.telefonoBiglietteria,
       this.orarioBiglietteria,
-      this.prenotazioneOnline);
+      this.prenotazioneOnline,
+      this.json);
 
   factory Teatro.fromJson(Map<String, dynamic> parsedJson) {
     return Teatro(
@@ -62,29 +64,48 @@ class Teatro implements LeafInfo {
         parsedJson['Situazione'],
         parsedJson['Telefono biglietteria'],
         parsedJson['Orario biglietteria'],
-        parsedJson['Prenotazione online']);
+        parsedJson['Prenotazione online'],
+        parsedJson);
   }
 
   @override
   String toString() {
-    return this.comune + '\n' +
-        this.nome + '\n' +
-        this.descrizione + '\n' +
-        this.localita + '\n' +
-        this.indirizzo + '\n' +
-        this.telefono + '\n' +
-        this.fax + '\n' +
-        this.orario + '\n' +
-        this.sitoEsterno + '\n' +
-        this.mail + '\n' +
-        this.latitudine + '\n' +
-        this.longitudine + '\n' +
-        this.visitablie + '\n' +
-        this.accessibileDisabili + '\n' +
-        this.url + '\n' +
-        this.Situazione + '\n' +
-        this.telefonoBiglietteria + '\n' +
-        this.orarioBiglietteria + '\n' +
+    return this.comune +
+        '\n' +
+        this.nome +
+        '\n' +
+        this.descrizione +
+        '\n' +
+        this.localita +
+        '\n' +
+        this.indirizzo +
+        '\n' +
+        this.telefono +
+        '\n' +
+        this.fax +
+        '\n' +
+        this.orario +
+        '\n' +
+        this.sitoEsterno +
+        '\n' +
+        this.mail +
+        '\n' +
+        this.latitudine +
+        '\n' +
+        this.longitudine +
+        '\n' +
+        this.visitablie +
+        '\n' +
+        this.accessibileDisabili +
+        '\n' +
+        this.url +
+        '\n' +
+        this.Situazione +
+        '\n' +
+        this.telefonoBiglietteria +
+        '\n' +
+        this.orarioBiglietteria +
+        '\n' +
         this.prenotazioneOnline;
   }
 
@@ -101,5 +122,10 @@ class Teatro implements LeafInfo {
   @override
   String getUrl() {
     return this.url;
+  }
+
+  @override
+  Map<String, dynamic> getJson() {
+    return this.json;
   }
 }

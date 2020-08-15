@@ -17,6 +17,7 @@ class Biblioteca implements LeafInfo {
   String accessibileDisabili;
   String url;
   String situazione;
+  Map<String, dynamic> json;
 
   Biblioteca(
       this.comune,
@@ -34,8 +35,8 @@ class Biblioteca implements LeafInfo {
       this.visitablie,
       this.accessibileDisabili,
       this.url,
-      this.situazione
-      );
+      this.situazione,
+      this.json);
 
   factory Biblioteca.fromJson(Map<String, dynamic> parsedJson) {
     return Biblioteca(
@@ -54,27 +55,42 @@ class Biblioteca implements LeafInfo {
         parsedJson['Visitabile'],
         parsedJson['Accessibile disabili'],
         parsedJson['Url'],
-        parsedJson['Situazione']
-    );
+        parsedJson['Situazione'],
+        parsedJson);
   }
 
   @override
   String toString() {
-    return this.comune + '\n' +
-        this.nome + '\n' +
-        this.descrizione + '\n' +
-        this.localita + '\n' +
-        this.indirizzo + '\n' +
-        this.telefono + '\n' +
-        this.fax + '\n' +
-        this.orario + '\n' +
-        this.sitoEsterno + '\n' +
-        this.mail + '\n' +
-        this.latitudine + '\n' +
-        this.longitudine + '\n' +
-        this.visitablie + '\n' +
-        this.accessibileDisabili + '\n' +
-        this.url + '\n' +
+    return this.comune +
+        '\n' +
+        this.nome +
+        '\n' +
+        this.descrizione +
+        '\n' +
+        this.localita +
+        '\n' +
+        this.indirizzo +
+        '\n' +
+        this.telefono +
+        '\n' +
+        this.fax +
+        '\n' +
+        this.orario +
+        '\n' +
+        this.sitoEsterno +
+        '\n' +
+        this.mail +
+        '\n' +
+        this.latitudine +
+        '\n' +
+        this.longitudine +
+        '\n' +
+        this.visitablie +
+        '\n' +
+        this.accessibileDisabili +
+        '\n' +
+        this.url +
+        '\n' +
         this.situazione;
   }
 
@@ -91,5 +107,10 @@ class Biblioteca implements LeafInfo {
   @override
   String getUrl() {
     return this.url;
+  }
+
+  @override
+  Map<String, dynamic> getJson() {
+    return this.json;
   }
 }

@@ -17,6 +17,7 @@ class Struttura implements LeafInfo {
   String longitudine;
   String accessibileDisabili;
   String url;
+  Map<String, dynamic> json;
 
   Struttura(
       this.titolo,
@@ -34,7 +35,8 @@ class Struttura implements LeafInfo {
       this.latitudine,
       this.longitudine,
       this.accessibileDisabili,
-      this.url);
+      this.url,
+      this.json);
 
   factory Struttura.fromJson(Map<String, dynamic> parsedJson) {
     return Struttura(
@@ -53,7 +55,8 @@ class Struttura implements LeafInfo {
         parsedJson['Latitudine'],
         parsedJson['Longitudine'],
         parsedJson['Accessibile disabili'],
-        parsedJson['Url']);
+        parsedJson['Url'],
+        parsedJson);
   }
 
   @override
@@ -104,5 +107,10 @@ class Struttura implements LeafInfo {
   @override
   String getUrl() {
     return this.url;
+  }
+
+  @override
+  Map<String, dynamic> getJson() {
+    return this.json;
   }
 }

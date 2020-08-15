@@ -8,12 +8,18 @@ class Cache {
   List<NodeInfo> organizations;
   Map<String, UnitCache<List<NodeInfo>>> search;
   Map<String, UnitCache<List<LeafInfo>>> leafs;
+  int searchCount;
+  int leafsCount;
+  String lastSearch = 'Empty 0';
+  String lastLeafs = 'Empty 0';
 
   Cache(int searchCount, int leafsCount) {
     this.categories = [];
     this.organizations = [];
     this.search = {};
     this.leafs = {};
+    this.searchCount = searchCount;
+    this.leafsCount = leafsCount;
     initMap<NodeInfo>(this.search, searchCount);
     initMap<LeafInfo>(this.leafs, leafsCount);
   }
@@ -52,6 +58,14 @@ class Cache {
     this.leafs = map;
   }
 
+  void setLastSearch(String str) {
+   this.lastSearch = str;
+  }
+
+  void setLastLeafs(String str) {
+    this.lastLeafs = str;
+  }
+
   List<NodeInfo> getOrganizations() {
     return this.organizations;
   }
@@ -74,5 +88,21 @@ class Cache {
 
   UnitCache<List<LeafInfo>> getLeafsByUrl(String url) {
     return this.leafs[url];
+  }
+
+  int getSeachCount(){
+    return this.searchCount;
+  }
+
+  int getLeafsCount(){
+    return this.leafsCount;
+  }
+
+  String getLastSearch() {
+    return this.lastSearch;
+  }
+
+  String getLastLeafs() {
+    return this.lastLeafs;
   }
 }

@@ -20,7 +20,7 @@ class Bando implements LeafInfo {
   String ufficioCompetenza;
   String urlSCP;
   String url;
-
+  Map<String, dynamic> json;
 
   Bando(
       this.comune,
@@ -41,7 +41,8 @@ class Bando implements LeafInfo {
       this.tipologia,
       this.ufficioCompetenza,
       this.urlSCP,
-      this.url);
+      this.url,
+      this.json);
 
   factory Bando.fromJson(Map<String, dynamic> parsedJson) {
     return Bando(
@@ -63,30 +64,49 @@ class Bando implements LeafInfo {
         parsedJson['Tipologia'],
         parsedJson['Ufficio di competenza'],
         parsedJson['Url'],
-        parsedJson['Url SCP']);
+        parsedJson['Url SCP'],
+        parsedJson);
   }
 
   @override
   String toString() {
-    return this.comune + '\n' +
-    this.contratto + '\n' +
-    this.dataArchiviazione + '\n' +
-    this.CPV + '\n' +
-    this.CUP + '\n' +
-    this.importoBaseAsta + '\n' +
-    this.oggetto + '\n' +
-    this.indirizzo + '\n' +
-    this.provincia + '\n' +
-    this.pubblicazione + '\n' +
-    this.requisitiQualificazione + '\n' +
-    this.riferimento + '\n' +
-    this.rilevanzaComunitaria + '\n' +
-    this.SCP + '\n' +
-    this.settoreApplicazione + '\n' +
-    this.tipologia + '\n' +
-    this.ufficioCompetenza + '\n' +
-    this.urlSCP + '\n' +
-    this.url;
+    return this.comune +
+        '\n' +
+        this.contratto +
+        '\n' +
+        this.dataArchiviazione +
+        '\n' +
+        this.CPV +
+        '\n' +
+        this.CUP +
+        '\n' +
+        this.importoBaseAsta +
+        '\n' +
+        this.oggetto +
+        '\n' +
+        this.indirizzo +
+        '\n' +
+        this.provincia +
+        '\n' +
+        this.pubblicazione +
+        '\n' +
+        this.requisitiQualificazione +
+        '\n' +
+        this.riferimento +
+        '\n' +
+        this.rilevanzaComunitaria +
+        '\n' +
+        this.SCP +
+        '\n' +
+        this.settoreApplicazione +
+        '\n' +
+        this.tipologia +
+        '\n' +
+        this.ufficioCompetenza +
+        '\n' +
+        this.urlSCP +
+        '\n' +
+        this.url;
   }
 
   @override
@@ -102,5 +122,10 @@ class Bando implements LeafInfo {
   @override
   String getUrl() {
     return this.url;
+  }
+
+  @override
+  Map<String, dynamic> getJson() {
+    return this.json;
   }
 }

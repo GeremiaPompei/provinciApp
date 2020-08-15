@@ -48,10 +48,13 @@ class HttpRequest {
     if (response.statusCode == 200) {
       document = parse(response.body);
       String url = document
-          .getElementsByClassName('resources').single
-          .getElementsByClassName('resource-list').single
+          .getElementsByClassName('resources')
+          .single
+          .getElementsByClassName('resource-list')
+          .single
           .getElementsByClassName('resource-item')[1]
-          .getElementsByClassName('resource-url-analytics').single
+          .getElementsByClassName('resource-url-analytics')
+          .single
           .attributes
           .putIfAbsent('href', () => null)
           .trim();
@@ -64,6 +67,7 @@ class HttpRequest {
   }
 
   static Future<http.Response> responseByGet(String word) async {
-    return await http.Client().get(Uri.parse('http://dati.provincia.mc.it/' + word));
+    return await http.Client()
+        .get(Uri.parse('http://dati.provincia.mc.it/' + word));
   }
 }

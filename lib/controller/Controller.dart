@@ -1,6 +1,7 @@
 import 'dart:convert';
-import 'package:MC/model/SerializeDeserializeCache.dart';
-import 'package:MC/model/StoreManager.dart';
+import 'package:MC/model/Persistence/DeserializeCache.dart';
+import 'package:MC/model/Persistence/SerializeCache.dart';
+import 'package:MC/model/Persistence/StoreManager.dart';
 import 'package:MC/model/UnitCache.dart';
 import 'package:MC/model/web/HtmlParser.dart';
 import 'package:MC/model/web/HttpRequest.dart';
@@ -10,8 +11,6 @@ import 'package:MC/model/NodeInfo.dart';
 
 class Controller {
   Cache cache;
-  String lastSearch = 'Empty 0';
-  String lastLeafs = 'Empty 0';
 
   Controller() {
     cache = new Cache(5, 5);
@@ -42,7 +41,7 @@ class Controller {
         store();
       } else
         cacheUnit.updateDate();
-      this.lastSearch = url;
+      this.cache.setLastSearch(url);
     } catch (e) {
       print(e.toString());
     }
@@ -62,7 +61,7 @@ class Controller {
     }
     cacheUnit.updateDate();
     store();
-    this.lastLeafs = url;
+    this.cache.setLastLeafs(url);
   }
 
   String oldestUrl(Iterable<String> list, UnitCache Function(String) func) {
@@ -87,20 +86,20 @@ class Controller {
   }
 
   List<NodeInfo> getSearch() {
-    return this.cache.getSearchByUrl(this.lastSearch).getElement();
+    return this.cache.getSearchByUrl(this.cache.getLastSearch()).getElement();
   }
 
   List<LeafInfo> getLeafs() {
-    return this.cache.getLeafsByUrl(this.lastLeafs).getElement();
+    return this.cache.getLeafsByUrl(this.cache.getLastLeafs()).getElement();
   }
 
   Future load() async {
     this.cache =
-        SerializeDeserializerCache.deserialize(await StoreManager.load());
+        DeserializeCache.deserialize(await StoreManager.load());
   }
 
   Future store() async {
     return await StoreManager.store(
-        SerializeDeserializerCache.serialize(this.cache));
+        SerializeCache.serialize(this.cache));
   }
 }

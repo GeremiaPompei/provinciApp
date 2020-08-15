@@ -18,6 +18,7 @@ class Monumento implements LeafInfo {
   String accessibileDisabili;
   String url;
   String costruzione;
+  Map<String, dynamic> json;
 
   Monumento(
       this.comune,
@@ -36,7 +37,8 @@ class Monumento implements LeafInfo {
       this.visitablie,
       this.accessibileDisabili,
       this.url,
-      this.costruzione);
+      this.costruzione,
+      this.json);
 
   factory Monumento.fromJson(Map<String, dynamic> parsedJson) {
     return Monumento(
@@ -56,27 +58,44 @@ class Monumento implements LeafInfo {
         parsedJson['Visitabile'],
         parsedJson['Accessibile disabili'],
         parsedJson['Url'],
-        parsedJson['Costruzione']);
+        parsedJson['Costruzione'],
+        parsedJson);
   }
 
   @override
   String toString() {
-    return this.comune + '\n' +
-        this.nome + '\n' +
-        this.tipologiaMonumento + '\n' +
-        this.descrizione + '\n' +
-        this.localita + '\n' +
-        this.indirizzo + '\n' +
-        this.telefono + '\n' +
-        this.fax + '\n' +
-        this.orario + '\n' +
-        this.mail + '\n' +
-        this.sitoEsterno + '\n' +
-        this.latitudine + '\n' +
-        this.longitudine + '\n' +
-        this.visitablie + '\n' +
-        this.accessibileDisabili + '\n' +
-        this.url + '\n' +
+    return this.comune +
+        '\n' +
+        this.nome +
+        '\n' +
+        this.tipologiaMonumento +
+        '\n' +
+        this.descrizione +
+        '\n' +
+        this.localita +
+        '\n' +
+        this.indirizzo +
+        '\n' +
+        this.telefono +
+        '\n' +
+        this.fax +
+        '\n' +
+        this.orario +
+        '\n' +
+        this.mail +
+        '\n' +
+        this.sitoEsterno +
+        '\n' +
+        this.latitudine +
+        '\n' +
+        this.longitudine +
+        '\n' +
+        this.visitablie +
+        '\n' +
+        this.accessibileDisabili +
+        '\n' +
+        this.url +
+        '\n' +
         this.costruzione;
   }
 
@@ -93,5 +112,10 @@ class Monumento implements LeafInfo {
   @override
   String getUrl() {
     return this.url;
+  }
+
+  @override
+  Map<String, dynamic> getJson() {
+    return this.json;
   }
 }

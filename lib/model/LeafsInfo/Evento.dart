@@ -14,6 +14,7 @@ class Evento implements LeafInfo {
   String longitudine;
   String inizio;
   String termine;
+  Map<String, dynamic> json;
 
   Evento(
       this.comune,
@@ -28,7 +29,8 @@ class Evento implements LeafInfo {
       this.latitudine,
       this.longitudine,
       this.inizio,
-      this.termine);
+      this.termine,
+      this.json);
 
   factory Evento.fromJson(Map<String, dynamic> parsedJson) {
     return Evento(
@@ -44,7 +46,8 @@ class Evento implements LeafInfo {
         parsedJson['Latitudine'],
         parsedJson['Longitudine'],
         parsedJson['Inizio'],
-        parsedJson['Termine']);
+        parsedJson['Termine'],
+        parsedJson);
   }
 
   @override
@@ -89,5 +92,10 @@ class Evento implements LeafInfo {
   @override
   String getUrl() {
     return this.url;
+  }
+
+  @override
+  Map<String, dynamic> getJson() {
+    return this.json;
   }
 }

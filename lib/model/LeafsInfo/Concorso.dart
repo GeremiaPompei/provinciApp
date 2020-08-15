@@ -13,6 +13,7 @@ class Concorso implements LeafInfo {
   String testoDocumeto;
   String uffiocioCompetenza;
   String url;
+  Map<String, dynamic> json;
 
   Concorso(
       this.argomento,
@@ -26,7 +27,8 @@ class Concorso implements LeafInfo {
       this.terminePresentazione,
       this.testoDocumeto,
       this.uffiocioCompetenza,
-      this.url);
+      this.url,
+      this.json);
 
   factory Concorso.fromJson(Map<String, dynamic> parsedJson) {
     return Concorso(
@@ -41,7 +43,8 @@ class Concorso implements LeafInfo {
         parsedJson['Termine di presentazione'],
         parsedJson['Testo del documento'],
         parsedJson['Ufficio di competenza'],
-        parsedJson['Url']);
+        parsedJson['Url'],
+        parsedJson);
   }
 
   @override
@@ -82,5 +85,10 @@ class Concorso implements LeafInfo {
   @override
   String getUrl() {
     return this.url;
+  }
+
+  @override
+  Map<String, dynamic> getJson() {
+    return this.json;
   }
 }
