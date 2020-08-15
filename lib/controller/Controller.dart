@@ -21,6 +21,9 @@ class Controller {
     try {
       this.cache.initOrganizations(await HtmlParser.organizations());
       this.cache.initCategories(await HtmlParser.categories());
+      try{
+        await loadLastInfo();
+      }catch(e){}
       store();
     } catch (e) {
       load();
@@ -96,6 +99,15 @@ class Controller {
   Future load() async {
     this.cache =
         DeserializeCache.deserialize(await StoreManager.load());
+  }
+
+  Future loadLastInfo() async {
+    Cache tmpCache =
+        DeserializeCache.deserialize(await StoreManager.load());
+    this.cache.setSearch(tmpCache.getSearch());
+    this.cache.setLastSearch(tmpCache.getLastSearch());
+    this.cache.setLeafs(tmpCache.getLeafs());
+    this.cache.setLastLeafs(tmpCache.getLastLeafs());
   }
 
   Future store() async {
