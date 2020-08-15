@@ -1,6 +1,7 @@
 import 'package:MC/controller/Controller.dart';
 import 'package:MC/model/LeafInfo.dart';
 import 'package:flutter/material.dart';
+import 'package:share/share.dart';
 
 class LeafsInfoView {
   List<LeafInfo> leafs;
@@ -44,9 +45,7 @@ class _ButtonInfoState extends State<ButtonInfo> {
 
   int length() {
     if (controller.getLeafs() != null)
-      return controller
-          .getLeafs()
-          .length;
+      return controller.getLeafs().length;
     else
       return 0;
   }
@@ -90,6 +89,20 @@ class _ButtonInfoState extends State<ButtonInfo> {
               Navigator.pop(context);
             },
           ),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.share),
+              onPressed: () {
+                setState(() {
+                  final RenderBox box = context.findRenderObject();
+                  Share.share(leafs[index].toString(),
+                      subject: title,
+                      sharePositionOrigin:
+                          box.localToGlobal(Offset.zero) & box.size);
+                });
+              },
+            )
+          ],
         ),
         body: Container(
             color: Colors.red,
