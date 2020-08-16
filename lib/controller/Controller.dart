@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:MC/model/LeafsInfo/Suap.dart';
 import 'package:MC/model/Persistence/DeserializeCache.dart';
 import 'package:MC/model/Persistence/SerializeCache.dart';
 import 'package:MC/model/Persistence/StoreManager.dart';
@@ -54,8 +55,14 @@ class Controller {
       LeafInfo Function(Map<String, dynamic> parsedJson) func) async {
     UnitCache<List<LeafInfo>> cacheUnit = this.cache.getLeafsByUrl(url);
     if (cacheUnit == null) {
-      List<dynamic> tmp = json.decode(await HttpRequest.getJson(url));
-      List<LeafInfo> leafs = tmp.map((i) => func(i)).toList();
+      List<LeafInfo> leafs = [];
+      try {
+        List<dynamic> tmp = json.decode(await HttpRequest.getJson(url));
+        leafs = tmp.map((i) => func(i)).toList();
+      } catch(e) {
+        Map<String,dynamic> tmp = json.decode(await HttpRequest.getJson(url));
+        leafs.add(func(tmp));
+      }
       String oldUrl = oldestUrl(
           this.cache.leafs.keys, (el) => this.cache.getLeafsByUrl(el));
       cacheUnit = this.cache.leafs[oldUrl];

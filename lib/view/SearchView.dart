@@ -9,6 +9,7 @@ import 'package:MC/model/LeafsInfo/Monumento.dart';
 import 'package:MC/model/LeafsInfo/Museo.dart';
 import 'package:MC/model/LeafsInfo/Shopping.dart';
 import 'package:MC/model/LeafsInfo/Struttura.dart';
+import 'package:MC/model/LeafsInfo/Suap.dart';
 import 'package:MC/model/LeafsInfo/Teatro.dart';
 import 'package:MC/view/BasicView.dart';
 import 'package:MC/view/LeafsInfoView.dart';
@@ -29,27 +30,23 @@ class _SearchViewState extends State<SearchView> {
 
   _SearchViewState(this.controller);
 
-  void visual(int index,
-      LeafInfo Function(Map<String, dynamic> parsedJson) func) {
+  void visual(
+      int index, LeafInfo Function(Map<String, dynamic> parsedJson) func) {
     controller
         .setLeafInfo(controller.getSearch()[index].url, (el) => func(el))
-        .then((value) =>
-        setState(() {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      LeafsInfoView(controller.getLeafs(),
-                          controller.getSearch()[index].name, controller)
+        .then((value) => setState(() {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => LeafsInfoView(controller.getLeafs(),
+                              controller.getSearch()[index].name, controller)
                           .launch(context)));
-        }));
+            }));
   }
 
   int length() {
     if (controller.getSearch() != null)
-      return controller
-          .getSearch()
-          .length;
+      return controller.getSearch().length;
     else
       return 0;
   }
@@ -61,7 +58,9 @@ class _SearchViewState extends State<SearchView> {
         visual(index, (parsedJson) => Concorso.fromJson(parsedJson));
       else if (name.contains('Bandi'))
         visual(index, (parsedJson) => Bando.fromJson(parsedJson));
-      else if (name.contains('Strutture') || name.contains('Case'))
+      else if (name.contains('Strutture') ||
+          name.contains('Case') ||
+          name.contains('Stabilimenti'))
         visual(index, (parsedJson) => Struttura.fromJson(parsedJson));
       else if (name.contains('Shopping'))
         visual(index, (parsedJson) => Shopping.fromJson(parsedJson));
@@ -79,6 +78,8 @@ class _SearchViewState extends State<SearchView> {
         visual(index, (parsedJson) => Evento.fromJson(parsedJson));
       else if (name.contains('Aree'))
         visual(index, (parsedJson) => AreeCamper.fromJson(parsedJson));
+      else if (name.contains('Suap'))
+        visual(index, (parsedJson) => Suap.fromJson(parsedJson));
     });
   }
 
@@ -94,7 +95,8 @@ class _SearchViewState extends State<SearchView> {
           onSubmitted: (String input) {
             setState(() {
               controller.setSearch('dataset?q=' + input).then((value) =>
-                  Launcher(controller).launch('MC Search...', SearchView(controller)));
+                  Launcher(controller)
+                      .launch('MC Search...', SearchView(controller)));
             });
           },
         ),
@@ -117,7 +119,7 @@ class _SearchViewState extends State<SearchView> {
               );
             },
             separatorBuilder: (BuildContext context, int index) =>
-            const Divider(),
+                const Divider(),
           ),
         ),
       ],

@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:MC/model/LeafsInfo/Suap.dart';
+
 import '../Cache.dart';
 import '../LeafInfo.dart';
 import '../LeafsInfo/AreeCamper.dart';
@@ -70,6 +72,9 @@ class DeserializeCache{
           break;
         case 'Teatro':
           listRes.add(Teatro.fromJson(element['Json']));
+          break;
+        case 'Suap':
+          listRes.add(Suap.fromJson(element['Json']));
           break;
       }
     });
