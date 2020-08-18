@@ -12,8 +12,10 @@ import 'package:MC/model/NodeInfo.dart';
 
 class Controller {
   Cache cache;
+  List<NodeInfo> events;
 
   Controller() {
+    events = [];
     cache = new Cache(5, 5);
     init();
   }
@@ -22,6 +24,7 @@ class Controller {
     try {
       this.cache.initOrganizations(await HtmlParser.organizations());
       this.cache.initCategories(await HtmlParser.categories());
+      this.events = await HtmlParser.events();
       try{
         await loadLastInfo();
       }catch(e){}
@@ -85,6 +88,10 @@ class Controller {
             }
         });
     return oldUrl;
+  }
+
+  List<NodeInfo> getEvents() {
+    return this.events;
   }
 
   List<NodeInfo> getOrganizations() {

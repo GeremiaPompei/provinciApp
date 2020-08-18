@@ -1,10 +1,9 @@
 import 'package:MC/controller/Controller.dart';
 import 'package:MC/view/CardsSizedBox.dart';
 import 'package:MC/view/ScrollListView.dart';
+import 'package:flappy_search_bar/flappy_search_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'LeafsInfoView.dart';
 
 class EsploraView extends StatefulWidget {
   Controller controller;
@@ -25,42 +24,48 @@ class _EsploraViewState extends State<EsploraView> {
     return Flex(
       direction: Axis.vertical,
       children: <Widget>[
-        TextField(
-          decoration: InputDecoration(
-            suffixIcon: Icon(Icons.search),
-          ),
-          onSubmitted: (String input) {
-            setState(() {
-              controller
-                  .setSearch('dataset?q=' + input)
-                  .then((value) => setState(() {
+        Flexible(
+          child: ListView(shrinkWrap: true, children: <Widget>[
+            TextField(
+              decoration: InputDecoration(
+                suffixIcon: Icon(Icons.search),
+              ),
+              onSubmitted: (String input) {
+                setState(() {
+                  controller
+                      .setSearch('dataset?q=' + input)
+                      .then((value) =>
+                      setState(() {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                    ScrollListView(this.controller,input)));
+                                    ScrollListView(
+                                        this.controller, input)));
                       }));
-            });
-          },
-        ),
-        SizedBox(
-          child: Center(
-            child: Text(
-              'Comuni',
-              style: TextStyle(fontSize: 20),
+                });
+              },
             ),
-          ),
-        ),
-        CardsSizedBox(this.controller,this.controller.getOrganizations()),
-        SizedBox(
-          child: Center(
-            child: Text(
-              'Categorie',
-              style: TextStyle(fontSize: 20),
+            SizedBox(
+              child: Center(
+                child: Text(
+                  'Comuni',
+                  style: TextStyle(fontSize: 20),
+                ),
+              ),
             ),
-          ),
+            CardsSizedBox(this.controller, this.controller.getOrganizations()),
+            SizedBox(
+              child: Center(
+                child: Text(
+                  'Categorie',
+                  style: TextStyle(fontSize: 20),
+                ),
+              ),
+            ),
+            CardsSizedBox(this.controller, this.controller.getCategories()),
+          ]),
         ),
-        CardsSizedBox(this.controller,this.controller.getCategories()),
       ],
     );
   }

@@ -31,12 +31,17 @@ class HttpRequest {
     final response = await responseByGet(word);
     if (response.statusCode == 200) {
       document = parse(response.body);
-      document.getElementsByClassName(ulClass).any((element) {
-        element.getElementsByClassName(liClass).forEach((element) {
+      if (ulClass == null)
+        document.getElementsByClassName(liClass).forEach((element) {
           elements.add(element);
         });
-        return elements.isNotEmpty;
-      });
+      else
+        document.getElementsByClassName(ulClass).any((element) {
+          element.getElementsByClassName(liClass).forEach((element) {
+            elements.add(element);
+          });
+          return elements.isNotEmpty;
+        });
     }
     return elements;
   }
@@ -67,7 +72,6 @@ class HttpRequest {
   }
 
   static Future<http.Response> responseByGet(String word) async {
-    return await http.Client()
-        .get(Uri.parse('http://dati.provincia.mc.it/' + word));
+    return await http.Client().get(Uri.parse(word));
   }
 }
