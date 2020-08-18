@@ -67,7 +67,7 @@ class Suap implements LeafInfo {
         '\n' +
         this.descrizione +
         '\n' +
-        this.referente.toString() +
+        this.referente +
         '\n' +
         this.contatto +
         '\n' +

@@ -3,14 +3,28 @@ import 'package:MC/model/LeafInfo.dart';
 import 'package:flutter/material.dart';
 import 'package:share/share.dart';
 
-class LeafsInfoView {
+class LeafsInfoView extends StatefulWidget {
   List<LeafInfo> leafs;
   String title;
   Controller controller;
 
   LeafsInfoView(this.leafs, this.title, this.controller);
 
-  Scaffold launch(BuildContext context) {
+  @override
+  _LeafsInfoViewState createState() => _LeafsInfoViewState(this.leafs, this.title, this.controller);
+}
+
+class _LeafsInfoViewState extends State<LeafsInfoView> {
+
+  List<LeafInfo> leafs;
+  String title;
+  Controller controller;
+
+
+  _LeafsInfoViewState(this.leafs, this.title, this.controller);
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red,

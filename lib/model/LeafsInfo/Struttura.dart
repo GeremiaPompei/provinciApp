@@ -22,10 +22,10 @@ class Struttura implements LeafInfo {
   Struttura(
       this.titolo,
       this.tipologiaStruttura,
+      this.descrizione,
       this.immagine,
       this.comune,
       this.indirizzo,
-      this.descrizione,
       this.telefono,
       this.fax,
       this.mail,

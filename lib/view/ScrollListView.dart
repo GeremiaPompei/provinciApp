@@ -1,4 +1,7 @@
 import 'package:MC/controller/Controller.dart';
+import 'package:MC/view/LeafsInfoView.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:MC/model/LeafInfo.dart';
 import 'package:MC/model/LeafsInfo/AreeCamper.dart';
 import 'package:MC/model/LeafsInfo/Bando.dart';
@@ -11,24 +14,22 @@ import 'package:MC/model/LeafsInfo/Shopping.dart';
 import 'package:MC/model/LeafsInfo/Struttura.dart';
 import 'package:MC/model/LeafsInfo/Suap.dart';
 import 'package:MC/model/LeafsInfo/Teatro.dart';
-import 'package:MC/view/BasicView.dart';
-import 'package:MC/view/LeafsInfoView.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter/material.dart';
 
-class SearchView extends StatefulWidget {
+class ScrollListView extends StatefulWidget {
   Controller controller;
+  String title;
 
-  SearchView(this.controller);
+  ScrollListView(this.controller,this.title);
 
   @override
-  _SearchViewState createState() => _SearchViewState(controller);
+  _ScrollListViewState createState() => _ScrollListViewState(this.controller,this.title);
 }
 
-class _SearchViewState extends State<SearchView> {
+class _ScrollListViewState extends State<ScrollListView> {
   Controller controller;
+  String title;
 
-  _SearchViewState(this.controller);
+  _ScrollListViewState(this.controller,this.title);
 
   void visual(
       int index, LeafInfo Function(Map<String, dynamic> parsedJson) func) {
@@ -38,9 +39,10 @@ class _SearchViewState extends State<SearchView> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => LeafsInfoView(controller.getLeafs(),
-                              controller.getSearch()[index].name, controller)
-                          .launch(context)));
+                      builder: (context) => LeafsInfoView(
+                          this.controller.getLeafs(),
+                          this.controller.getSearch()[index].name,
+                          this.controller)));
             }));
   }
 
@@ -85,44 +87,38 @@ class _SearchViewState extends State<SearchView> {
 
   @override
   Widget build(BuildContext context) {
-    return Flex(
-      direction: Axis.vertical,
-      children: <Widget>[
-        TextField(
-          decoration: InputDecoration(
-            suffixIcon: Icon(Icons.search),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(this.title),
+        backgroundColor: Colors.red,
+      ),
+      body: Flex(
+        direction: Axis.vertical,
+        children: <Widget>[
+          Flexible(
+            child: ListView.separated(
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              padding: const EdgeInsets.all(8),
+              itemCount: length(),
+              itemBuilder: (context, index) {
+                return FlatButton(
+                  child: ListTile(
+                    title: Text(controller.getSearch()[index].name.toString()),
+                    subtitle: Text(
+                        controller.getSearch()[index].description.toString()),
+                  ),
+                  onPressed: () {
+                    setLeafs(index);
+                  },
+                );
+              },
+              separatorBuilder: (BuildContext context, int index) =>
+                  const Divider(),
+            ),
           ),
-          onSubmitted: (String input) {
-            setState(() {
-              controller.setSearch('dataset?q=' + input).then((value) =>
-                  Launcher(controller)
-                      .launch('MC Search...', SearchView(controller)));
-            });
-          },
-        ),
-        Flexible(
-          child: ListView.separated(
-            scrollDirection: Axis.vertical,
-            shrinkWrap: true,
-            padding: const EdgeInsets.all(8),
-            itemCount: length(),
-            itemBuilder: (context, index) {
-              return FlatButton(
-                child: ListTile(
-                  title: Text(controller.getSearch()[index].name.toString()),
-                  subtitle: Text(
-                      controller.getSearch()[index].description.toString()),
-                ),
-                onPressed: () {
-                  setLeafs(index);
-                },
-              );
-            },
-            separatorBuilder: (BuildContext context, int index) =>
-                const Divider(),
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
