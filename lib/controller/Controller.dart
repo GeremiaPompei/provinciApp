@@ -24,14 +24,14 @@ class Controller {
       this.cache.initOrganizations(await HtmlParser.organizations());
       this.cache.initCategories(await HtmlParser.categories());
       this.events = await HtmlParser.events();
-      try{
+      try {
         await loadLastInfo();
-      }catch(e){}
+      } catch (e) {}
       store();
     } catch (e) {
-      load();
+      await load();
     }
-    return this.cache.getOrganizations();
+    return this.events;
   }
 
   Future setSearch(String url) async {
@@ -62,8 +62,8 @@ class Controller {
       try {
         List<dynamic> tmp = json.decode(await HttpRequest.getJson(url));
         leafs = tmp.map((i) => func(i)).toList();
-      } catch(e) {
-        Map<String,dynamic> tmp = json.decode(await HttpRequest.getJson(url));
+      } catch (e) {
+        Map<String, dynamic> tmp = json.decode(await HttpRequest.getJson(url));
         leafs.add(func(tmp));
       }
       String oldUrl = oldestUrl(
@@ -111,13 +111,11 @@ class Controller {
   }
 
   Future load() async {
-    this.cache =
-        DeserializeCache.deserialize(await StoreManager.load());
+    this.cache = DeserializeCache.deserialize(await StoreManager.load());
   }
 
   Future loadLastInfo() async {
-    Cache tmpCache =
-        DeserializeCache.deserialize(await StoreManager.load());
+    Cache tmpCache = DeserializeCache.deserialize(await StoreManager.load());
     this.cache.setSearch(tmpCache.getSearch());
     this.cache.setLastSearch(tmpCache.getLastSearch());
     this.cache.setLeafs(tmpCache.getLeafs());
@@ -125,7 +123,6 @@ class Controller {
   }
 
   Future store() async {
-    return await StoreManager.store(
-        SerializeCache.serialize(this.cache));
+    return await StoreManager.store(SerializeCache.serialize(this.cache));
   }
 }

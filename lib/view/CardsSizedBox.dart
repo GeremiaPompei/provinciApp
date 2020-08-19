@@ -25,10 +25,10 @@ class _CardsSizedBoxState extends State<CardsSizedBox> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 200,
+      height: 150,
       child: PageView.builder(
         itemCount: this.list.length,
-        controller: PageController(viewportFraction: 0.7),
+        controller: PageController(viewportFraction: 0.5),
         onPageChanged: (int index) => setState(() => _index = index),
         itemBuilder: (_, i) => Transform.scale(
             scale: _index == i ? 1 : 0.9,
