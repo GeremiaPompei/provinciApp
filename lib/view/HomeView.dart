@@ -6,7 +6,6 @@ import 'package:MC/view/EventiView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-
 class HomeView extends StatefulWidget {
   Controller controller;
 
@@ -24,7 +23,7 @@ class _HomeViewState extends State<HomeView> {
     varWidget = EsploraView(this.controller);
   }
 
-  void onItemTapped(index) async{
+  void onItemTapped(index) async {
     setState(() {
       switch (index) {
         case 0:

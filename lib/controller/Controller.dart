@@ -17,10 +17,9 @@ class Controller {
   Controller() {
     events = [];
     cache = new Cache(5, 5);
-    init();
   }
 
-  void init() async {
+  Future<dynamic> init() async {
     try {
       this.cache.initOrganizations(await HtmlParser.organizations());
       this.cache.initCategories(await HtmlParser.categories());
@@ -32,6 +31,7 @@ class Controller {
     } catch (e) {
       load();
     }
+    return this.cache.getOrganizations();
   }
 
   Future setSearch(String url) async {

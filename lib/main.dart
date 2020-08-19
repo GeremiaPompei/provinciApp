@@ -6,9 +6,20 @@ import 'controller/Controller.dart';
 
 void main() {
   Controller controller = new Controller();
-  return runApp(
-      MaterialApp(
-        home: HomeView(controller),
-      )
-  );
+  Widget varWidget;
+  return runApp(MaterialApp(
+    home: FutureBuilder<dynamic>(
+      future: controller.init(),
+      builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+        if (snapshot.hasData)
+          varWidget = HomeView(controller);
+        else
+          //TODO sostituire Scaffold con Widget per immagini di caricamento
+          varWidget = Scaffold(
+            body: Center(child: CircularProgressIndicator()),
+          );
+        return varWidget;
+      },
+    ),
+  ));
 }
