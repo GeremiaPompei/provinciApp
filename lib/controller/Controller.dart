@@ -12,9 +12,11 @@ import 'package:MC/model/NodeInfo.dart';
 class Controller {
   Cache cache;
   List<NodeInfo> events;
+  List<NodeInfo> promos;
 
   Controller() {
     events = [];
+    promos = [];
     cache = new Cache(5, 5);
   }
 
@@ -23,6 +25,7 @@ class Controller {
       this.cache.initOrganizations(await HtmlParser.organizations());
       this.cache.initCategories(await HtmlParser.categories());
       this.events = await HtmlParser.events();
+      this.promos = await HtmlParser.promos();
       try {
         await loadLastInfo();
       } catch (e) {}
@@ -91,6 +94,10 @@ class Controller {
 
   List<NodeInfo> getEvents() {
     return this.events;
+  }
+
+  List<NodeInfo> getPromos() {
+    return this.promos;
   }
 
   List<NodeInfo> getOrganizations() {

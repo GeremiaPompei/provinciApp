@@ -7,6 +7,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
+import 'PromoView.dart';
+
 class HomeView extends StatefulWidget {
   Controller controller;
 
@@ -33,6 +35,9 @@ class _HomeViewState extends State<HomeView> {
         case 1:
           varWidget = EventiView(this.controller.events);
           break;
+        case 2:
+          varWidget = PromoView(this.controller.promos);
+          break;
       }
     });
   }
@@ -44,7 +49,9 @@ class _HomeViewState extends State<HomeView> {
         backgroundColor: Colors.red,
         title: Text(varWidget.runtimeType == EsploraView
             ? 'Esplora'
-            : (varWidget.runtimeType == EventiView ? 'Eventi' : '')),
+            : (varWidget.runtimeType == EventiView
+                ? 'Eventi'
+                : (varWidget.runtimeType == PromoView ? 'Promo' : ''))),
       ),
       body: varWidget,
       bottomNavigationBar: BottomButtonDown(controller, onItemTapped),

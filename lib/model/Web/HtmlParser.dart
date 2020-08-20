@@ -7,6 +7,7 @@ class HtmlParser {
   static final String MCDATI = 'http://dati.provincia.mc.it/';
   static final String MCEVENTI =
       'https://www.cronachemaceratesi.it/category/archivi/eventi-spettacoli/';
+  static final String MCPROMO = 'https://www.groupon.it/offerte/marche/';
 
   static Future<List<NodeInfo>> events() async {
     Function fName = (html.Element el) => el
@@ -26,6 +27,24 @@ class HtmlParser {
         .trim();
     return HttpRequest.getNodeInfo(
         MCEVENTI, null, 'articolo_lista', fName, fDescription, fUrl);
+  }
+
+  static Future<List<NodeInfo>> promos() async {
+    Function fName = (html.Element el) =>
+        el.getElementsByClassName('grpn-dc-title').single.text.trim();
+    Function fDescription = (html.Element el) => el
+        .getElementsByClassName('fc-description should-truncate is-truncated')
+        .single
+        .text
+        .trim();
+    Function fUrl = (html.Element el) => el
+        .getElementsByTagName('a')
+        .first
+        .attributes
+        .putIfAbsent('href', () => null)
+        .trim();
+    return HttpRequest.getNodeInfo(
+        MCPROMO, null, 'deal-card', fName, fDescription, fUrl);
   }
 
   static Future<List<NodeInfo>> searchByWord(String word) async {
@@ -54,14 +73,13 @@ class HtmlParser {
         el.getElementsByClassName('media-heading').single.text.trim();
     Function fDescription = (html.Element el) =>
         el.getElementsByClassName('count').single.text.trim();
-    Function fUrl = (html.Element el) => (
-        (el
-            .getElementsByClassName('media-view')
-            .first
-            .attributes
-            .putIfAbsent('href', () => null)
-            .substring(1)
-            .trim()));
+    Function fUrl = (html.Element el) => ((el
+        .getElementsByClassName('media-view')
+        .first
+        .attributes
+        .putIfAbsent('href', () => null)
+        .substring(1)
+        .trim()));
     return HttpRequest.getNodeInfo(MCDATI + 'organization', 'media-grid',
         'media-item', fName, fDescription, fUrl);
   }
@@ -70,14 +88,13 @@ class HtmlParser {
     Function fName = (html.Element el) =>
         el.getElementsByClassName('media-heading').single.text.trim();
     Function fDescription = (html.Element el) => null;
-    Function fUrl = (html.Element el) => (
-        (el
-            .getElementsByClassName('media-view')
-            .first
-            .attributes
-            .putIfAbsent('href', () => null)
-            .substring(1)
-            .trim()));
+    Function fUrl = (html.Element el) => ((el
+        .getElementsByClassName('media-view')
+        .first
+        .attributes
+        .putIfAbsent('href', () => null)
+        .substring(1)
+        .trim()));
     return HttpRequest.getNodeInfo(MCDATI + 'group', 'media-grid', 'media-item',
         fName, fDescription, fUrl);
   }
