@@ -23,7 +23,7 @@ class _HomeViewState extends State<HomeView> {
   Widget varWidget;
 
   _HomeViewState(this.controller) {
-    varWidget = EsploraView(this.controller);
+    this.varWidget = EsploraView(this.controller);
   }
 
   void onItemTapped(index) async {

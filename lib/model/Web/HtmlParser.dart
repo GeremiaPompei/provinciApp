@@ -33,7 +33,7 @@ class HtmlParser {
     Function fName = (html.Element el) =>
         el.getElementsByClassName('grpn-dc-title').single.text.trim();
     Function fDescription = (html.Element el) => el
-        .getElementsByClassName('fc-description should-truncate is-truncated')
+        .getElementsByClassName('grpn-dc-loc')
         .single
         .text
         .trim();
