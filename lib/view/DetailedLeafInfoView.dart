@@ -73,6 +73,7 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
                     : ListView.builder(
                         scrollDirection: Axis.vertical,
                         shrinkWrap: true,
+                        primary: false,
                         itemCount: this.leafInfo.getTelefono().length,
                         itemBuilder: (context, index) => FlatButton(
                               onPressed: () async {
@@ -117,6 +118,7 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
                 ListView.builder(
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
+                  primary: false,
                   itemCount: this.leafInfo.getInfo().length,
                   itemBuilder: (context, index) => ListTile(
                     title: Text(this.leafInfo.getInfo().keys.toList()[index]),

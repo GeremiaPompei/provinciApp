@@ -5,6 +5,7 @@ import 'package:MC/view/EsploraView.dart';
 import 'package:MC/view/EventiView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class HomeView extends StatefulWidget {
   Controller controller;

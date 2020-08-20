@@ -1,5 +1,7 @@
 import 'package:MC/controller/Controller.dart';
+import 'package:MC/model/LeafInfo.dart';
 import 'package:MC/view/CardsSizedBox.dart';
+import 'package:MC/view/LeafsInfoView.dart';
 import 'package:MC/view/ScrollListView.dart';
 import 'package:flappy_search_bar/flappy_search_bar.dart';
 import 'package:flutter/cupertino.dart';
@@ -34,15 +36,13 @@ class _EsploraViewState extends State<EsploraView> {
                 setState(() {
                   controller
                       .setSearch('dataset?q=' + input)
-                      .then((value) =>
-                      setState(() {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    ScrollListView(
+                      .then((value) => setState(() {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ScrollListView(
                                         this.controller, input)));
-                      }));
+                          }));
                 });
               },
             ),
@@ -64,6 +64,33 @@ class _EsploraViewState extends State<EsploraView> {
               ),
             ),
             CardsSizedBox(this.controller, this.controller.getCategories()),
+            ListView.builder(
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                primary: false,
+                itemCount: this.controller.getSearch().length,
+                itemBuilder: (context, index) => FlatButton(
+                      child: ListTile(
+                        title: Text(this.controller.getSearch()[index].name),
+                        subtitle: Text(
+                            this.controller.getSearch()[index].description),
+                      ),
+                      onPressed: () {
+                        controller
+                            .setLeafInfo(controller.getSearch()[index].url, (el) => LeafInfo(el))
+                            .then((value) =>
+                            setState(() {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          LeafsInfoView(
+                                              this.controller.getLeafs(),
+                                              this.controller.getSearch()[index].name,
+                                              this.controller)));
+                            }));
+                      },
+                    ))
           ]),
         ),
       ],
