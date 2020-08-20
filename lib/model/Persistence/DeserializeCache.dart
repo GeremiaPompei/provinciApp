@@ -1,19 +1,6 @@
 import 'dart:convert';
-
-import 'package:MC/model/LeafsInfo/Suap.dart';
-
 import '../Cache.dart';
 import '../LeafInfo.dart';
-import '../LeafsInfo/AreeCamper.dart';
-import '../LeafsInfo/Bando.dart';
-import '../LeafsInfo/Biblioteca.dart';
-import '../LeafsInfo/Concorso.dart';
-import '../LeafsInfo/Evento.dart';
-import '../LeafsInfo/Monumento.dart';
-import '../LeafsInfo/Museo.dart';
-import '../LeafsInfo/Shopping.dart';
-import '../LeafsInfo/Struttura.dart';
-import '../LeafsInfo/Teatro.dart';
 import '../NodeInfo.dart';
 import '../UnitCache.dart';
 
@@ -42,41 +29,7 @@ class DeserializeCache{
   static List<LeafInfo> deserializeLeafListInfo(List listIn) {
     List<LeafInfo> listRes = [];
     listIn.forEach((element) {
-      switch (element['Type']) {
-        case 'AreeCamper':
-          listRes.add(AreeCamper.fromJson(element['Json']));
-          break;
-        case 'Bando':
-          listRes.add(Bando.fromJson(element['Json']));
-          break;
-        case 'Biblioteca':
-          listRes.add(Biblioteca.fromJson(element['Json']));
-          break;
-        case 'Concorso':
-          listRes.add(Concorso.fromJson(element['Json']));
-          break;
-        case 'Evento':
-          listRes.add(Evento.fromJson(element['Json']));
-          break;
-        case 'Monumento':
-          listRes.add(Monumento.fromJson(element['Json']));
-          break;
-        case 'Museo':
-          listRes.add(Museo.fromJson(element['Json']));
-          break;
-        case 'Shopping':
-          listRes.add(Shopping.fromJson(element['Json']));
-          break;
-        case 'Struttura':
-          listRes.add(Struttura.fromJson(element['Json']));
-          break;
-        case 'Teatro':
-          listRes.add(Teatro.fromJson(element['Json']));
-          break;
-        case 'Suap':
-          listRes.add(Suap.fromJson(element['Json']));
-          break;
-      }
+      listRes.add(LeafInfo(element['Json']));
     });
     return listRes;
   }

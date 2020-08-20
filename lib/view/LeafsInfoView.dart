@@ -17,11 +17,9 @@ class LeafsInfoView extends StatefulWidget {
 }
 
 class _LeafsInfoViewState extends State<LeafsInfoView> {
-
   List<LeafInfo> leafs;
   String title;
   Controller controller;
-
 
   _LeafsInfoViewState(this.leafs, this.title, this.controller);
 
@@ -61,9 +59,7 @@ class _ButtonInfoState extends State<ButtonInfo> {
 
   int length() {
     if (controller.getLeafs() != null)
-      return controller
-          .getLeafs()
-          .length;
+      return controller.getLeafs().length;
     else
       return 0;
   }
@@ -77,19 +73,23 @@ class _ButtonInfoState extends State<ButtonInfo> {
         padding: const EdgeInsets.all(8),
         itemCount: length(),
         itemBuilder: (context, index) {
-          return FlatButton(
-              child: ListTile(
-                title: Text(leafs[index].getName()),
-                subtitle: Text(leafs[index].getDescription()),
-              ),
-              onPressed: () {
-                setState(() {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => DetailedLeafInfoView(title, leafs[index])));
-                });
-              });
+          return Card(
+              child: FlatButton(
+                  child: ListTile(
+                    title: Text('${leafs[index].getName()}'),
+                    subtitle: leafs[index].getDescription() == null
+                        ? Text('')
+                        : Text('${leafs[index].getDescription()}'),
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  DetailedLeafInfoView(title, leafs[index])));
+                    });
+                  }));
         },
         separatorBuilder: (BuildContext context, int index) => const Divider(),
       ),
