@@ -63,7 +63,7 @@ class Controller {
         leafs = tmp.map((i) => func(i)).toList();
       } catch (e) {
         Map<String, dynamic> tmp = json.decode(await HttpRequest.getJson(url));
-        leafs.add(func(tmp));
+        leafs.add(func(tmp['MetaData']));
       }
       String oldUrl = oldestUrl(
           this.cache.leafs.keys, (el) => this.cache.getLeafsByUrl(el));
