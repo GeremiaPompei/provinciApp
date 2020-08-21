@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:MC/model/LeafInfo.dart';
 
+import 'LoadingView.dart';
+
 class ScrollListView extends StatefulWidget {
   Controller controller;
   String title;
@@ -18,31 +20,37 @@ class ScrollListView extends StatefulWidget {
 class _ScrollListViewState extends State<ScrollListView> {
   Controller controller;
   String title;
+  Widget varWidget;
 
   _ScrollListViewState(this.controller, this.title);
 
-  void visual(int index,
-      LeafInfo Function(Map<String, dynamic> parsedJson) func) {
-    controller
-        .setLeafInfo(controller.getSearch()[index].url, (el) => func(el))
-        .then((value) =>
-        setState(() {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      LeafsInfoView(
+  void visual(
+      int index, LeafInfo Function(Map<String, dynamic> parsedJson) func) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => FutureBuilder<dynamic>(
+                  future: controller.setLeafInfo(
+                      controller.getSearch()[index].getName(),
+                      controller.getSearch()[index].getUrl(),
+                      (el) => func(el)),
+                  builder:
+                      (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                    if (snapshot.hasData)
+                      varWidget = LeafsInfoView(
                           this.controller.getLeafs(),
-                          this.controller.getSearch()[index].name,
-                          this.controller)));
-        }));
+                          this.controller.getSearch()[index].getName(),
+                          this.controller);
+                    else
+                      varWidget = LoadingView();
+                    return varWidget;
+                  },
+                )));
   }
 
   int length() {
     if (controller.getSearch() != null)
-      return controller
-          .getSearch()
-          .length;
+      return controller.getSearch().length;
     else
       return 0;
   }
@@ -73,10 +81,9 @@ class _ScrollListViewState extends State<ScrollListView> {
                 return FlatButton(
                   child: ListTile(
                     title: Text(
-                        '${controller.getSearch()[index].name.toString()}'),
+                        '${controller.getSearch()[index].getName().toString()}'),
                     subtitle: Text(
-                        '${controller.getSearch()[index].description
-                            .toString()}'),
+                        '${controller.getSearch()[index].getDescription().toString()}'),
                   ),
                   onPressed: () {
                     setLeafs(index);
@@ -84,7 +91,7 @@ class _ScrollListViewState extends State<ScrollListView> {
                 );
               },
               separatorBuilder: (BuildContext context, int index) =>
-              const Divider(),
+                  const Divider(),
             ),
           ),
         ],

@@ -3,24 +3,27 @@ import 'package:MC/model/NodeInfo.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'LoadingView.dart';
 import 'ScrollListView.dart';
 
 class CardsSizedBox extends StatefulWidget {
   Controller controller;
   List<NodeInfo> list;
 
-  CardsSizedBox(this.controller,this.list);
+  CardsSizedBox(this.controller, this.list);
 
   @override
-  _CardsSizedBoxState createState() => _CardsSizedBoxState(this.controller,this.list);
+  _CardsSizedBoxState createState() =>
+      _CardsSizedBoxState(this.controller, this.list);
 }
 
 class _CardsSizedBoxState extends State<CardsSizedBox> {
   Controller controller;
   List<NodeInfo> list;
   int _index;
+  Widget varWidget;
 
-  _CardsSizedBoxState(this.controller,this.list);
+  _CardsSizedBoxState(this.controller, this.list);
 
   @override
   Widget build(BuildContext context) {
@@ -41,13 +44,22 @@ class _CardsSizedBoxState extends State<CardsSizedBox> {
                 child: Text(this.list[i].name),
                 onPressed: () {
                   setState(() {
-                    controller
-                        .setSearch(this.list[i].url)
-                        .then((value) => Navigator.push(
+                    Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                                ScrollListView(this.controller,list[i].name))));
+                            builder: (context) => FutureBuilder<dynamic>(
+                                  future: controller.setSearch(
+                                      this.list[i].name, this.list[i].url),
+                                  builder: (BuildContext context,
+                                      AsyncSnapshot<dynamic> snapshot) {
+                                    if (snapshot.hasData)
+                                      varWidget = ScrollListView(
+                                          this.controller, list[i].name);
+                                    else
+                                      varWidget = LoadingView();
+                                    return varWidget;
+                                  },
+                                )));
                   });
                 },
               ),

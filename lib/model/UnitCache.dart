@@ -1,27 +1,27 @@
 class UnitCache <T> {
 
-  DateTime date;
   T element;
+  DateTime date;
+  String name;
 
-  UnitCache(T element, DateTime date) {
-    this.date = date;
-    this.element = element;
-  }
+  UnitCache(this.element, this.date, this.name);
 
   void updateDate(){
     this.date = DateTime.now();
+  }
+
+  void setName(String name) {
+    this.name = name;
   }
 
   void setElement(T element) {
     this.element = element;
   }
 
-  DateTime getDate() {
-    return this.date;
-  }
+  DateTime getDate() => this.date;
 
-  T getElement() {
-    return this.element;
-  }
+  T getElement() => this.element;
+
+  String getName() => this.name;
 
 }

@@ -1,9 +1,10 @@
 import 'package:MC/controller/Controller.dart';
 import 'package:MC/model/LeafInfo.dart';
 import 'package:MC/view/CardsSizedBox.dart';
+import 'package:MC/view/LastSearchedWidget.dart';
 import 'package:MC/view/LeafsInfoView.dart';
+import 'package:MC/view/LoadingView.dart';
 import 'package:MC/view/ScrollListView.dart';
-import 'package:flappy_search_bar/flappy_search_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -18,8 +19,14 @@ class EsploraView extends StatefulWidget {
 
 class _EsploraViewState extends State<EsploraView> {
   Controller controller;
+  List searched;
+  List leafs;
+  Widget varWidget;
 
-  _EsploraViewState(this.controller);
+  _EsploraViewState(this.controller) {
+    this.searched = this.controller.cache.getSearch().entries.toList();
+    this.leafs = this.controller.cache.getLeafs().entries.toList();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,17 +40,22 @@ class _EsploraViewState extends State<EsploraView> {
                 suffixIcon: Icon(Icons.search),
               ),
               onSubmitted: (String input) {
-                setState(() {
-                  controller
-                      .setSearch('dataset?q=' + input)
-                      .then((value) => setState(() {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ScrollListView(
-                                        this.controller, input)));
-                          }));
-                });
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => FutureBuilder<dynamic>(
+                              future: controller.setSearch(
+                                  input, 'dataset?q=' + input),
+                              builder: (BuildContext context,
+                                  AsyncSnapshot<dynamic> snapshot) {
+                                if (snapshot.hasData)
+                                  varWidget =
+                                      ScrollListView(this.controller, input);
+                                else
+                                  varWidget = LoadingView();
+                                return varWidget;
+                              },
+                            )));
               },
             ),
             SizedBox(
@@ -64,33 +76,24 @@ class _EsploraViewState extends State<EsploraView> {
               ),
             ),
             CardsSizedBox(this.controller, this.controller.getCategories()),
-            ListView.builder(
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
-                primary: false,
-                itemCount: this.controller.getSearch().length,
-                itemBuilder: (context, index) => FlatButton(
-                      child: ListTile(
-                        title: Text(this.controller.getSearch()[index].name),
-                        subtitle: Text(
-                            this.controller.getSearch()[index].description),
-                      ),
-                      onPressed: () {
-                        controller
-                            .setLeafInfo(controller.getSearch()[index].url, (el) => LeafInfo(el))
-                            .then((value) =>
-                            setState(() {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          LeafsInfoView(
-                                              this.controller.getLeafs(),
-                                              this.controller.getSearch()[index].name,
-                                              this.controller)));
-                            }));
-                      },
-                    ))
+            LastSearchedWidget(
+                this.controller,
+                this.searched,
+                (index) => ScrollListView(
+                    this.controller, this.searched[index].value.getName()),
+                (index) => controller.setSearch(
+                    this.searched[index].value.getName(),
+                    this.searched[index].key)),
+            Divider(),
+            LastSearchedWidget(
+                this.controller,
+                this.leafs,
+                (index) => LeafsInfoView(this.controller.getLeafs(),
+                    this.leafs[index].value.getName(), this.controller),
+                (index) => controller.setLeafInfo(
+                    this.leafs[index].value.getName(),
+                    this.leafs[index].key,
+                    (el) => LeafInfo(el)))
           ]),
         ),
       ],

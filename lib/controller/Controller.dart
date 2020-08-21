@@ -33,10 +33,10 @@ class Controller {
     } catch (e) {
       await load();
     }
-    return this.events;
+    return this.promos;
   }
 
-  Future setSearch(String url) async {
+  Future setSearch(String name, String url) async {
     try {
       UnitCache<List<NodeInfo>> cacheUnit = this.cache.getSearchByUrl(url);
       if (cacheUnit == null) {
@@ -44,6 +44,7 @@ class Controller {
         String oldUrl = oldestUrl(
             this.cache.search.keys, (el) => this.cache.getSearchByUrl(el));
         cacheUnit = this.cache.search[oldUrl];
+        cacheUnit.setName(name);
         cacheUnit.setElement(nodes);
         this.cache.changeSearch(oldUrl, url, cacheUnit);
         cacheUnit.updateDate();
@@ -54,9 +55,10 @@ class Controller {
     } catch (e) {
       print(e.toString());
     }
+    return getSearch();
   }
 
-  Future setLeafInfo(String url,
+  Future setLeafInfo(String name, String url,
       LeafInfo Function(Map<String, dynamic> parsedJson) func) async {
     UnitCache<List<LeafInfo>> cacheUnit = this.cache.getLeafsByUrl(url);
     if (cacheUnit == null) {
@@ -71,12 +73,14 @@ class Controller {
       String oldUrl = oldestUrl(
           this.cache.leafs.keys, (el) => this.cache.getLeafsByUrl(el));
       cacheUnit = this.cache.leafs[oldUrl];
+      cacheUnit.setName(name);
       cacheUnit.setElement(leafs);
       this.cache.changeLeafs(oldUrl, url, cacheUnit);
     }
     cacheUnit.updateDate();
     store();
     this.cache.setLastLeafs(url);
+    return getLeafs();
   }
 
   String oldestUrl(Iterable<String> list, UnitCache Function(String) func) {

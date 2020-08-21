@@ -26,7 +26,7 @@ class Cache {
 
   void initMap<T>(Map<String,UnitCache<List<T>>> map, int num) {
     for (int i = 0; i < num; i++) {
-      map['Empty ${i}'] = new UnitCache(List<T>(),DateTime.now());
+      map['Empty ${i}'] = new UnitCache(List<T>(),DateTime.now(),'Empty ${i}');
     }
   }
 

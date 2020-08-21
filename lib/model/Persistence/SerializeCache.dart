@@ -25,9 +25,9 @@ class SerializeCache {
     List<Map> listRes = [];
     listIn.forEach((element) {
       Map<String, dynamic> mapTmp = {
-        'Name': element.name,
-        'Description': element.description,
-        'Url': element.url
+        'Name': element.getName(),
+        'Description': element.getDescription(),
+        'Url': element.getUrl()
       };
       listRes.add(mapTmp);
     });
@@ -55,6 +55,7 @@ class SerializeCache {
         'Unit Cache': {
           'Date':
           DateFormat('yyy-MM-dd HH:mm:ss').format(mapIn[element].getDate()),
+          'Name': mapIn[element].getName(),
           'Elements': func(mapIn[element].getElement())
         }
       };

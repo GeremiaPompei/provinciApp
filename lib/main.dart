@@ -1,4 +1,5 @@
 import 'package:MC/view/HomeView.dart';
+import 'package:MC/view/LoadingView.dart';
 import 'package:flutter/material.dart';
 import 'controller/Controller.dart';
 
@@ -12,10 +13,7 @@ void main() {
         if (snapshot.hasData)
           varWidget = HomeView(controller);
         else
-          //TODO sostituire Scaffold con Widget per immagini di caricamento
-          varWidget = Scaffold(
-            body: Center(child: CircularProgressIndicator()),
-          );
+          varWidget = LoadingView();
         return varWidget;
       },
     ),

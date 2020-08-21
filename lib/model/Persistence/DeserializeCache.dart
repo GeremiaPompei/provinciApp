@@ -4,16 +4,19 @@ import '../LeafInfo.dart';
 import '../NodeInfo.dart';
 import '../UnitCache.dart';
 
-class DeserializeCache{
+class DeserializeCache {
   static Cache deserialize(String contents) {
     Map<String, dynamic> jsonMap = json.decode(contents);
-    Cache cache = Cache(int.parse(jsonMap['Search Count']),int.parse(jsonMap['Leafs Count']));
+    Cache cache = Cache(
+        int.parse(jsonMap['Search Count']), int.parse(jsonMap['Leafs Count']));
     cache.setLastSearch(jsonMap['Last Search']);
     cache.setLastLeafs(jsonMap['Last Leafs']);
     cache.initOrganizations(deserializeNodeListInfo(jsonMap['Organizations']));
     cache.initCategories(deserializeNodeListInfo(jsonMap['Categories']));
-    cache.setSearch(deserializeMapInfo(jsonMap['Search'],(el)=>deserializeNodeListInfo(el)));
-    cache.setLeafs(deserializeMapInfo(jsonMap['Leafs'],(el)=>deserializeLeafListInfo(el)));
+    cache.setSearch(deserializeMapInfo(
+        jsonMap['Search'], (el) => deserializeNodeListInfo(el)));
+    cache.setLeafs(deserializeMapInfo(
+        jsonMap['Leafs'], (el) => deserializeLeafListInfo(el)));
     return cache;
   }
 
@@ -35,12 +38,14 @@ class DeserializeCache{
   }
 
   static Map<String, UnitCache<List<T>>> deserializeMapInfo<T>(
-      List listIn,List<T> Function(List) func) {
+      List listIn, List<T> Function(List) func) {
     Map<String, UnitCache<List<T>>> mapRes = {};
     listIn.forEach((element) {
       List el = func(element['Unit Cache']['Elements']);
-      mapRes[element['Key']] =
-          UnitCache(el, DateTime.parse(element['Unit Cache']['Date']));
+      mapRes[element['Key']] = UnitCache(
+          el,
+          DateTime.parse(element['Unit Cache']['Date']),
+          element['Unit Cache']['Name']);
     });
     return mapRes;
   }
