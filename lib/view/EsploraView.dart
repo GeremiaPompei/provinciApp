@@ -54,22 +54,24 @@ class _EsploraViewState extends State<EsploraView> {
                 suffixIcon: Icon(Icons.search),
               ),
               onSubmitted: (String input) {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => FutureBuilder<dynamic>(
-                              future: controller.setSearch(
-                                  input, 'dataset?q=' + input),
-                              builder: (BuildContext context,
-                                  AsyncSnapshot<dynamic> snapshot) {
-                                if (snapshot.hasData)
-                                  varWidget =
-                                      ScrollListView(this.controller, input);
-                                else
-                                  varWidget = LoadingView();
-                                return varWidget;
-                              },
-                            )));
+                setState(() {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => FutureBuilder<dynamic>(
+                                future: controller.setSearch(
+                                    input, 'dataset?q=' + input),
+                                builder: (BuildContext context,
+                                    AsyncSnapshot<dynamic> snapshot) {
+                                  if (snapshot.hasData)
+                                    varWidget =
+                                        ScrollListView(this.controller, input);
+                                  else
+                                    varWidget = LoadingView();
+                                  return varWidget;
+                                },
+                              )));
+                });
               },
             ),
             FlatButton(
@@ -115,6 +117,15 @@ class _EsploraViewState extends State<EsploraView> {
               ),
             ),
             CardsSizedBox(this.controller, this.controller.getCategories()),
+            IconButton(
+                icon: Icon(Icons.refresh),
+                onPressed: () {
+                  setState(() {
+                    (context as Element).reassemble();
+                  });
+                }
+            ),
+            Divider(),
             LastSearchedWidget(
                 this.controller,
                 this.searched,

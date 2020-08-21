@@ -24,30 +24,6 @@ class _ScrollListViewState extends State<ScrollListView> {
 
   _ScrollListViewState(this.controller, this.title);
 
-  void visual(
-      int index, LeafInfo Function(Map<String, dynamic> parsedJson) func) {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => FutureBuilder<dynamic>(
-                  future: controller.setLeafInfo(
-                      controller.getSearch()[index].getName(),
-                      controller.getSearch()[index].getUrl(),
-                      (el) => func(el)),
-                  builder:
-                      (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-                    if (snapshot.hasData)
-                      varWidget = LeafsInfoView(
-                          this.controller.getLeafs(),
-                          this.controller.getSearch()[index].getName(),
-                          this.controller);
-                    else
-                      varWidget = LoadingView();
-                    return varWidget;
-                  },
-                )));
-  }
-
   int length() {
     if (controller.getSearch() != null)
       return controller.getSearch().length;
@@ -57,7 +33,26 @@ class _ScrollListViewState extends State<ScrollListView> {
 
   void setLeafs(int index) {
     setState(() {
-      visual(index, (parsedJson) => LeafInfo(parsedJson));
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => FutureBuilder<dynamic>(
+                    future: controller.setLeafInfo(
+                        controller.getSearch()[index].getName(),
+                        controller.getSearch()[index].getUrl(),
+                        (parsedJson) => LeafInfo(parsedJson)),
+                    builder: (BuildContext context,
+                        AsyncSnapshot<dynamic> snapshot) {
+                      if (snapshot.hasData)
+                        varWidget = LeafsInfoView(
+                            this.controller.getLeafs(),
+                            this.controller.getSearch()[index].getName(),
+                            this.controller);
+                      else
+                        varWidget = LoadingView();
+                      return varWidget;
+                    },
+                  )));
     });
   }
 
@@ -67,6 +62,12 @@ class _ScrollListViewState extends State<ScrollListView> {
       appBar: AppBar(
         title: Text(this.title),
         backgroundColor: Colors.red,
+        leading: new IconButton(
+            icon: new Icon(Icons.arrow_back_ios),
+            onPressed: () {setState(() {
+              Navigator.pop(context);
+              });
+            }),
       ),
       body: Flex(
         direction: Axis.vertical,
