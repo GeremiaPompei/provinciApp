@@ -7,6 +7,7 @@ import 'package:MC/view/LoadingView.dart';
 import 'package:MC/view/ScrollListView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 
 class EsploraView extends StatefulWidget {
   Controller controller;
@@ -22,10 +23,23 @@ class _EsploraViewState extends State<EsploraView> {
   List searched;
   List leafs;
   Widget varWidget;
+  String location;
 
   _EsploraViewState(this.controller) {
     this.searched = this.controller.cache.getSearch().entries.toList();
     this.leafs = this.controller.cache.getLeafs().entries.toList();
+  }
+
+  Future findPosition() async {
+    final Geolocator geolocator = Geolocator()..forceAndroidLocationManager;
+    Position position = await geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.best);
+    List<Placemark> placemark =
+        await geolocator.placemarkFromPosition(position);
+    this.location = placemark[0].locality;
+    return this
+        .controller
+        .setSearch(this.location, 'dataset?q=' + this.location);
   }
 
   @override
@@ -51,6 +65,31 @@ class _EsploraViewState extends State<EsploraView> {
                                 if (snapshot.hasData)
                                   varWidget =
                                       ScrollListView(this.controller, input);
+                                else
+                                  varWidget = LoadingView();
+                                return varWidget;
+                              },
+                            )));
+              },
+            ),
+            FlatButton(
+              child: Row(
+                children: <Widget>[
+                  Icon(Icons.add_location),
+                  Text('Posizione Attuale')
+                ],
+              ),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => FutureBuilder<dynamic>(
+                              future: findPosition(),
+                              builder: (BuildContext context,
+                                  AsyncSnapshot<dynamic> snapshot) {
+                                if (snapshot.hasData)
+                                  varWidget = ScrollListView(
+                                      this.controller, this.location);
                                 else
                                   varWidget = LoadingView();
                                 return varWidget;

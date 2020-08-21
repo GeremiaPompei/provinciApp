@@ -22,12 +22,19 @@ class LeafInfo {
         double.parse(checkRemove(parsedJson, 'Latitudine')),
         double.parse(checkRemove(parsedJson, 'Longitudine'))
       ];
-    this.name = parsedJson.values.first;
-    parsedJson.remove(parsedJson.keys.first);
+    this.name = checkRemove(parsedJson, 'Nome');
+    this.name == null ? this.name = checkRemove(parsedJson, 'Titolo'):null;
+    this.name == null ? this.name = checkRemove(parsedJson, 'Tipologia'):null;
+    this.name == null ? this.name = checkRemove(parsedJson, 'Argomento'):null;
+    this.name == null ? this.name = checkRemove(parsedJson, 'Comune'):null;
     this.info = {};
     parsedJson.forEach((key, value) {
       if (check(value)) this.info[key] = value.toString();
     });
+    if(this.name == null) {
+      this.name = this.info.values.first;
+      this.info.remove(this.info.keys.first);
+    }
   }
 
   String checkRemove(Map<String, dynamic> parsedJson, String s) {
