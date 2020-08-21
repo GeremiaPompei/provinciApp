@@ -13,7 +13,7 @@
 
      <item>
         <bitmap
-            android:gravity="start"
-            android:src="@drawable/primo" />
+            android:gravity="center"
+            android:src="@drawable/LogoSample_ByTailorBrands" />
     </item>
 </layer-list>
