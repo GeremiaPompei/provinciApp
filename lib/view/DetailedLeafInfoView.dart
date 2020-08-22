@@ -1,8 +1,11 @@
 import 'package:MC/model/LeafInfo.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:latlong/latlong.dart';
+import 'package:map_launcher/map_launcher.dart' as mapLauncher;
 import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -20,8 +23,142 @@ class DetailedLeafInfoView extends StatefulWidget {
 class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
   LeafInfo leafInfo;
   String title;
+  List<Widget> widgets;
 
-  _DetailedLeafInfoViewState(this.title, this.leafInfo);
+  _DetailedLeafInfoViewState(this.title, this.leafInfo) {
+    initWidgets();
+  }
+
+  void initWidgets() => this.widgets = [
+        Text(
+          this.leafInfo.getName(),
+          style: TextStyle(fontSize: 20),
+        ),
+        this.leafInfo.getDescription() == null
+            ? Container()
+            : Text(this.leafInfo.getDescription()),
+        this.leafInfo.getImage() == null
+            ? Container()
+            : Image(image: NetworkImage(this.leafInfo.getImage())),
+        this.leafInfo.getTelefono() == null
+            ? Container()
+            : ListView.builder(
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                primary: false,
+                itemCount: this.leafInfo.getTelefono().length,
+                itemBuilder: (context, index) => FlatButton(
+                      onPressed: () async {
+                        FlutterPhoneDirectCaller.callNumber(
+                            '${this.leafInfo.getTelefono()[index]}');
+                      },
+                      child: Row(
+                        children: <Widget>[
+                          Icon(
+                            (Icons.call),
+                          ),
+                          Text('${this.leafInfo.getTelefono()[index]}')
+                        ],
+                      ),
+                    )),
+        this.leafInfo.getEmail() == null
+            ? Container()
+            : FlatButton(
+                onPressed: () async {
+                  await launch('mailto:${this.leafInfo.getEmail()}');
+                },
+                child: Row(
+                  children: <Widget>[
+                    Icon(
+                      (Icons.email),
+                    ),
+                    Text('${this.leafInfo.getEmail()}')
+                  ],
+                ),
+              ),
+        this.leafInfo.getPosition() == null
+            ? Container()
+            : Column(
+                children: <Widget>[
+                  Container(
+                    height: 400,
+                    alignment: Alignment.centerLeft,
+                    child: FlutterMap(
+                      options: MapOptions(
+                        center: LatLng(this.leafInfo.getPosition()[0],
+                            this.leafInfo.getPosition()[1]),
+                        zoom: 13.0,
+                      ),
+                      layers: [
+                        new TileLayerOptions(
+                            urlTemplate:
+                                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                            subdomains: ['a', 'b', 'c']),
+                        new MarkerLayerOptions(
+                          markers: [
+                            new Marker(
+                              width: 80.0,
+                              height: 80.0,
+                              point: LatLng(this.leafInfo.getPosition()[0],
+                                  this.leafInfo.getPosition()[1]),
+                              builder: (ctx) => Container(
+                                child: this.leafInfo.getImage() == null
+                                    ? Icon(
+                                        (Icons.location_on),
+                                      )
+                                    : Image(
+                                        image: NetworkImage(
+                                            this.leafInfo.getImage())),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  this.leafInfo.getPosition() == null
+                      ? Container()
+                      : IconButton(
+                          onPressed: () async {
+                            if (await mapLauncher.MapLauncher.isMapAvailable(
+                                mapLauncher.MapType.google)) {
+                              await mapLauncher.MapLauncher.showMarker(
+                                mapType: mapLauncher.MapType.google,
+                                coords: mapLauncher.Coords(
+                                    this.leafInfo.getPosition()[0],
+                                    this.leafInfo.getPosition()[1]),
+                                title: this.leafInfo.getName(),
+                              );
+                            }
+                          },
+                          icon: Icon(
+                            (Icons.location_on),
+                          ),
+                        ),
+                ],
+              ),
+        ListView.builder(
+          scrollDirection: Axis.vertical,
+          shrinkWrap: true,
+          primary: false,
+          itemCount: this.leafInfo.getInfo().length,
+          itemBuilder: (context, index) => ListTile(
+            title: Text(this.leafInfo.getInfo().keys.toList()[index]),
+            subtitle: Text(this.leafInfo.getInfo().values.toList()[index]),
+          ),
+        ),
+        this.leafInfo.getUrl() == null
+            ? Container()
+            : ListTile(
+                title: Text('Link'),
+                subtitle: Linkify(
+                  text: '${this.leafInfo.getUrl()}',
+                  onOpen: (LinkableElement link) {
+                    launch(this.leafInfo.getUrl());
+                  },
+                ),
+              )
+      ];
 
   @override
   Widget build(BuildContext context) {
@@ -55,89 +192,16 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
         body: Flex(direction: Axis.vertical, children: <Widget>[
           Flexible(
               child: Center(
-            child: ListView(
+            child: ListView.separated(
+              scrollDirection: Axis.vertical,
               shrinkWrap: true,
-              children: <Widget>[
-                Text(
-                  this.leafInfo.getName(),
-                  style: TextStyle(fontSize: 20),
-                ),
-                this.leafInfo.getDescription() == null
-                    ? Container()
-                    : Text(this.leafInfo.getDescription()),
-                this.leafInfo.getImage() == null
-                    ? Container()
-                    : Image(image: NetworkImage(this.leafInfo.getImage())),
-                this.leafInfo.getTelefono() == null
-                    ? Container()
-                    : ListView.builder(
-                        scrollDirection: Axis.vertical,
-                        shrinkWrap: true,
-                        primary: false,
-                        itemCount: this.leafInfo.getTelefono().length,
-                        itemBuilder: (context, index) => FlatButton(
-                              onPressed: () async {
-                                FlutterPhoneDirectCaller.callNumber(
-                                    '${this.leafInfo.getTelefono()[index]}');
-                              },
-                              child: Row(
-                                children: <Widget>[
-                                  Icon(
-                                    (Icons.call),
-                                  ),
-                                  Text('${this.leafInfo.getTelefono()[index]}')
-                                ],
-                              ),
-                            )),
-                this.leafInfo.getEmail() == null
-                    ? Container()
-                    : FlatButton(
-                        onPressed: () async {
-                          await launch('mailto:${this.leafInfo.getEmail()}');
-                        },
-                        child: Row(
-                          children: <Widget>[
-                            Icon(
-                              (Icons.email),
-                            ),
-                            Text('${this.leafInfo.getEmail()}')
-                          ],
-                        ),
-                      ),
-                this.leafInfo.getPosition() == null
-                    ? Container()
-                    : IconButton(
-                        onPressed: () async {
-                          launch(
-                              "comgooglemaps://?center=${this.leafInfo.getPosition()[0]},${this.leafInfo.getPosition()[1]}");
-                        },
-                        icon: Icon(
-                          (Icons.map),
-                        ),
-                      ),
-                ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  primary: false,
-                  itemCount: this.leafInfo.getInfo().length,
-                  itemBuilder: (context, index) => ListTile(
-                    title: Text(this.leafInfo.getInfo().keys.toList()[index]),
-                    subtitle:
-                        Text(this.leafInfo.getInfo().values.toList()[index]),
-                  ),
-                ),
-                this.leafInfo.getUrl() == null
-                    ? Container()
-                    : ListTile(
-                        title: Text('Link'),
-                        subtitle: Linkify(
-                          text: '${this.leafInfo.getUrl()}',
-                          onOpen: (LinkableElement link) {
-                            launch(this.leafInfo.getUrl());
-                          },
-                        ),
-                      )
-              ],
+              padding: const EdgeInsets.all(8),
+              itemCount: this.widgets.length,
+              itemBuilder: (context, index) {
+                return this.widgets[index];
+              },
+              separatorBuilder: (BuildContext context, int index) =>
+                  const Divider(),
             ),
           ))
         ]));

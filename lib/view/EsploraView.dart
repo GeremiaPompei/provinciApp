@@ -8,6 +8,7 @@ import 'package:MC/view/ScrollListView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class EsploraView extends StatefulWidget {
   Controller controller;
@@ -24,6 +25,8 @@ class _EsploraViewState extends State<EsploraView> {
   List leafs;
   Widget varWidget;
   String location;
+  RefreshController _refreshController =
+      RefreshController(initialRefresh: false);
 
   _EsploraViewState(this.controller) {
     this.searched = this.controller.cache.getSearch().entries.toList();
@@ -44,108 +47,105 @@ class _EsploraViewState extends State<EsploraView> {
 
   @override
   Widget build(BuildContext context) {
-    return Flex(
-      direction: Axis.vertical,
-      children: <Widget>[
-        Flexible(
-          child: ListView(shrinkWrap: true, children: <Widget>[
-            TextField(
-              decoration: InputDecoration(
-                suffixIcon: Icon(Icons.search),
-              ),
-              onSubmitted: (String input) {
-                setState(() {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => FutureBuilder<dynamic>(
-                                future: controller.setSearch(
-                                    input, 'dataset?q=' + input),
-                                builder: (BuildContext context,
-                                    AsyncSnapshot<dynamic> snapshot) {
-                                  if (snapshot.hasData)
-                                    varWidget =
-                                        ScrollListView(this.controller, input);
-                                  else
-                                    varWidget = LoadingView();
-                                  return varWidget;
-                                },
-                              )));
-                });
-              },
+    return Scaffold(
+      body: SmartRefresher(
+        enablePullDown: true,
+        header: ClassicHeader(),
+        controller: _refreshController,
+        onRefresh: () => setState(() {
+          (context as Element).reassemble();
+          _refreshController.refreshCompleted();
+        }),
+        child: ListView(shrinkWrap: true, children: <Widget>[
+          TextField(
+            decoration: InputDecoration(
+              suffixIcon: Icon(Icons.search),
             ),
-            FlatButton(
-              child: Row(
-                children: <Widget>[
-                  Icon(Icons.add_location),
-                  Text('Posizione Attuale')
-                ],
-              ),
-              onPressed: () {
+            onSubmitted: (String input) {
+              setState(() {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => FutureBuilder<dynamic>(
-                              future: findPosition(),
+                              future: controller.setSearch(
+                                  input, 'dataset?q=' + input),
                               builder: (BuildContext context,
                                   AsyncSnapshot<dynamic> snapshot) {
                                 if (snapshot.hasData)
-                                  varWidget = ScrollListView(
-                                      this.controller, this.location);
+                                  varWidget =
+                                      ScrollListView(this.controller, input);
                                 else
                                   varWidget = LoadingView();
                                 return varWidget;
                               },
                             )));
-              },
+              });
+            },
+          ),
+          FlatButton(
+            child: Row(
+              children: <Widget>[
+                Icon(Icons.location_on),
+                Text('Posizione Attuale')
+              ],
             ),
-            SizedBox(
-              child: Center(
-                child: Text(
-                  'Comuni',
-                  style: TextStyle(fontSize: 20, fontFamily: 'StencilArmyWWI'),
-                ),
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => FutureBuilder<dynamic>(
+                            future: findPosition(),
+                            builder: (BuildContext context,
+                                AsyncSnapshot<dynamic> snapshot) {
+                              if (snapshot.hasData)
+                                varWidget = ScrollListView(
+                                    this.controller, this.location);
+                              else
+                                varWidget = LoadingView();
+                              return varWidget;
+                            },
+                          )));
+            },
+          ),
+          SizedBox(
+            child: Center(
+              child: Text(
+                'Comuni',
+                style: TextStyle(fontSize: 20, fontFamily: 'StencilArmyWWI'),
               ),
             ),
-            CardsSizedBox(this.controller, this.controller.getOrganizations()),
-            SizedBox(
-              child: Center(
-                child: Text(
-                  'Categorie',
-                  style: TextStyle(fontSize: 20, fontFamily: 'StencilArmyWWI'),
-                ),
+          ),
+          CardsSizedBox(this.controller, this.controller.getOrganizations()),
+          SizedBox(
+            child: Center(
+              child: Text(
+                'Categorie',
+                style: TextStyle(fontSize: 20, fontFamily: 'StencilArmyWWI'),
               ),
             ),
-            CardsSizedBox(this.controller, this.controller.getCategories()),
-            IconButton(
-                icon: Icon(Icons.refresh),
-                onPressed: () {
-                  setState(() {
-                    (context as Element).reassemble();
-                  });
-                }),
-            Divider(),
-            LastSearchedWidget(
-                this.controller,
-                this.searched,
-                (index) => ScrollListView(
-                    this.controller, this.searched[index].value.getName()),
-                (index) => controller.setSearch(
-                    this.searched[index].value.getName(),
-                    this.searched[index].key)),
-            Divider(),
-            LastSearchedWidget(
-                this.controller,
-                this.leafs,
-                (index) => LeafsInfoView(this.controller.getLeafs(),
-                    this.leafs[index].value.getName(), this.controller),
-                (index) => controller.setLeafInfo(
-                    this.leafs[index].value.getName(),
-                    this.leafs[index].key,
-                    (el) => LeafInfo(el)))
-          ]),
-        ),
-      ],
+          ),
+          CardsSizedBox(this.controller, this.controller.getCategories()),
+          Divider(),
+          LastSearchedWidget(
+              this.controller,
+              this.searched,
+              (index) => ScrollListView(
+                  this.controller, this.searched[index].value.getName()),
+              (index) => controller.setSearch(
+                  this.searched[index].value.getName(),
+                  this.searched[index].key)),
+          Divider(),
+          LastSearchedWidget(
+              this.controller,
+              this.leafs,
+              (index) => LeafsInfoView(this.controller.getLeafs(),
+                  this.leafs[index].value.getName(), this.controller),
+              (index) => controller.setLeafInfo(
+                  this.leafs[index].value.getName(),
+                  this.leafs[index].key,
+                  (el) => LeafInfo(el)))
+        ]),
+      ),
     );
   }
 }

@@ -3,9 +3,9 @@ import 'package:MC/view/BottomButtonBar.dart';
 import 'package:MC/view/EsploraView.dart';
 import 'package:MC/view/EventiView.dart';
 import 'package:MC/view/LoadingView.dart';
+import 'package:MC/view/OfflineWidget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import 'PromoView.dart';
 
@@ -22,34 +22,33 @@ class _HomeViewState extends State<HomeView> {
   Controller controller;
   String title;
   Widget varWidget;
-  Map<String,bool> flags = {'Esplora': true, 'Eventi': true, 'Promo': true};
+  Future esploraF;
+  Future eventiF;
+  Future promoF;
 
-  Widget initWidgetFuture(Future<dynamic> Function() func, Widget input) {
-    if(this.flags[this.title]){
-      return FutureBuilder<dynamic>(
+  _HomeViewState(this.controller) {
+    this.esploraF = this.controller.init();
+    this.eventiF = this.controller.initEvents();
+    this.promoF = this.controller.initPromos();
+    this.title = 'Esplora';
+    this.varWidget =
+        initWidgetFuture(() => this.esploraF, EsploraView(this.controller));
+  }
+
+  Widget initWidgetFuture(Future<dynamic> Function() func, Widget input) =>
+      FutureBuilder<dynamic>(
         future: func(),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           Widget tmpWidget;
           if (snapshot.hasData)
             tmpWidget = input;
           else if (snapshot.hasError)
-            tmpWidget = Text('Offline');
+            tmpWidget = OfflineWidget(this.controller);
           else
             tmpWidget = LoadingView();
-          this.flags[this.title] = false;
           return tmpWidget;
         },
       );
-    }else{
-      return input;
-    }
-  }
-
-  _HomeViewState(this.controller) {
-    this.title = 'Esplora';
-    this.varWidget = initWidgetFuture(
-        () => this.controller.init(), EsploraView(this.controller));
-  }
 
   void onItemTapped(index) async {
     setState(() {
@@ -57,17 +56,17 @@ class _HomeViewState extends State<HomeView> {
         case 0:
           this.title = 'Esplora';
           this.varWidget = initWidgetFuture(
-                  () => this.controller.init(), EsploraView(this.controller));
+              () => this.esploraF, EsploraView(this.controller));
           break;
         case 1:
           this.title = 'Eventi';
-          this.varWidget = initWidgetFuture(
-                  () => this.controller.initEvents(), EventiView(this.controller));
+          this.varWidget =
+              initWidgetFuture(() => this.eventiF, EventiView(this.controller));
           break;
         case 2:
           this.title = 'Promo';
-          this.varWidget = initWidgetFuture(
-                  () => this.controller.initPromos(), PromoView(this.controller));
+          this.varWidget =
+              initWidgetFuture(() => this.promoF, PromoView(this.controller));
           break;
       }
     });
