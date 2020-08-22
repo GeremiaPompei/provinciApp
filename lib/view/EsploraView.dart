@@ -103,7 +103,7 @@ class _EsploraViewState extends State<EsploraView> {
               child: Center(
                 child: Text(
                   'Comuni',
-                  style: TextStyle(fontSize: 20),
+                  style: TextStyle(fontSize: 20, fontFamily: 'StencilArmyWWI'),
                 ),
               ),
             ),
@@ -112,7 +112,7 @@ class _EsploraViewState extends State<EsploraView> {
               child: Center(
                 child: Text(
                   'Categorie',
-                  style: TextStyle(fontSize: 20),
+                  style: TextStyle(fontSize: 20, fontFamily: 'StencilArmyWWI'),
                 ),
               ),
             ),
@@ -123,8 +123,7 @@ class _EsploraViewState extends State<EsploraView> {
                   setState(() {
                     (context as Element).reassemble();
                   });
-                }
-            ),
+                }),
             Divider(),
             LastSearchedWidget(
                 this.controller,

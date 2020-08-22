@@ -1,21 +1,23 @@
+import 'package:MC/controller/Controller.dart';
 import 'package:MC/model/NodeInfo.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class EventiView extends StatefulWidget {
-  List<NodeInfo> list;
+  Controller controller;
 
-  EventiView(this.list);
+  EventiView(this.controller);
 
   @override
-  _EventiViewState createState() => _EventiViewState(this.list);
+  _EventiViewState createState() => _EventiViewState(this.controller);
 }
 
 class _EventiViewState extends State<EventiView> {
-  List<NodeInfo> list;
+  Controller controller;
+  Widget varWidget;
 
-  _EventiViewState(this.list);
+  _EventiViewState(this.controller);
 
   @override
   Widget build(BuildContext context) {
@@ -27,18 +29,18 @@ class _EventiViewState extends State<EventiView> {
             scrollDirection: Axis.vertical,
             shrinkWrap: true,
             padding: const EdgeInsets.all(8),
-            itemCount: this.list.length,
+            itemCount: this.controller.getEvents().length,
             itemBuilder: (context, index) {
               return FlatButton(
                   child: ListTile(
-                    title: Text(this.list[index].name.toString()),
-                    subtitle: Text(this.list[index].description.toString()),
+                    title: Text(this.controller.getEvents()[index].name.toString()),
+                    subtitle: Text(this.controller.getEvents()[index].description.toString()),
                   ),
                   onPressed: () async {
-                      if (await canLaunch(this.list[index].url)) {
-                        await launch(this.list[index].url);
+                      if (await canLaunch(this.controller.getEvents()[index].url)) {
+                        await launch(this.controller.getEvents()[index].url);
                       } else {
-                        throw 'Could not launch ${this.list[index].url}';
+                        throw 'Could not launch ${this.controller.getEvents()[index].url}';
                       }
                   });
             },

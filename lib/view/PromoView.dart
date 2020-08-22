@@ -1,21 +1,22 @@
+import 'package:MC/controller/Controller.dart';
 import 'package:MC/model/NodeInfo.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class PromoView extends StatefulWidget {
-  List<NodeInfo> list;
+  Controller controller;
 
-  PromoView(this.list);
+  PromoView(this.controller);
 
   @override
-  _PromoViewState createState() => _PromoViewState(this.list);
+  _PromoViewState createState() => _PromoViewState(this.controller);
 }
 
 class _PromoViewState extends State<PromoView> {
-  List<NodeInfo> list;
+  Controller controller;
 
-  _PromoViewState(this.list);
+  _PromoViewState(this.controller);
 
   @override
   Widget build(BuildContext context) {
@@ -27,18 +28,18 @@ class _PromoViewState extends State<PromoView> {
             scrollDirection: Axis.vertical,
             shrinkWrap: true,
             padding: const EdgeInsets.all(8),
-            itemCount: this.list.length,
+            itemCount: this.controller.getPromos().length,
             itemBuilder: (context, index) {
               return FlatButton(
                   child: ListTile(
-                    title: Text(this.list[index].name),
-                    subtitle: Text(this.list[index].description),
+                    title: Text(this.controller.getPromos()[index].name),
+                    subtitle: Text(this.controller.getPromos()[index].description),
                   ),
                   onPressed: () async {
-                    if (await canLaunch(this.list[index].url)) {
-                      await launch(this.list[index].url);
+                    if (await canLaunch(this.controller.getPromos()[index].url)) {
+                      await launch(this.controller.getPromos()[index].url);
                     } else {
-                      throw 'Could not launch ${this.list[index].url}';
+                      throw 'Could not launch ${this.controller.getPromos()[index].url}';
                     }
                   });
             },

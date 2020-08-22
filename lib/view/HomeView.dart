@@ -1,8 +1,8 @@
 import 'package:MC/controller/Controller.dart';
-import 'package:MC/model/Web/HtmlParser.dart';
 import 'package:MC/view/BottomButtonBar.dart';
 import 'package:MC/view/EsploraView.dart';
 import 'package:MC/view/EventiView.dart';
+import 'package:MC/view/LoadingView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -20,23 +20,54 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   Controller controller;
+  String title;
   Widget varWidget;
+  Map<String,bool> flags = {'Esplora': true, 'Eventi': true, 'Promo': true};
+
+  Widget initWidgetFuture(Future<dynamic> Function() func, Widget input) {
+    if(this.flags[this.title]){
+      return FutureBuilder<dynamic>(
+        future: func(),
+        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+          Widget tmpWidget;
+          if (snapshot.hasData)
+            tmpWidget = input;
+          else if (snapshot.hasError)
+            tmpWidget = Text('Offline');
+          else
+            tmpWidget = LoadingView();
+          this.flags[this.title] = false;
+          return tmpWidget;
+        },
+      );
+    }else{
+      return input;
+    }
+  }
 
   _HomeViewState(this.controller) {
-    this.varWidget = EsploraView(this.controller);
+    this.title = 'Esplora';
+    this.varWidget = initWidgetFuture(
+        () => this.controller.init(), EsploraView(this.controller));
   }
 
   void onItemTapped(index) async {
     setState(() {
       switch (index) {
         case 0:
-          varWidget = EsploraView(controller);
+          this.title = 'Esplora';
+          this.varWidget = initWidgetFuture(
+                  () => this.controller.init(), EsploraView(this.controller));
           break;
         case 1:
-          varWidget = EventiView(this.controller.events);
+          this.title = 'Eventi';
+          this.varWidget = initWidgetFuture(
+                  () => this.controller.initEvents(), EventiView(this.controller));
           break;
         case 2:
-          varWidget = PromoView(this.controller.promos);
+          this.title = 'Promo';
+          this.varWidget = initWidgetFuture(
+                  () => this.controller.initPromos(), PromoView(this.controller));
           break;
       }
     });
@@ -47,11 +78,12 @@ class _HomeViewState extends State<HomeView> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red,
-        title: Text(varWidget.runtimeType == EsploraView
-            ? 'Esplora'
-            : (varWidget.runtimeType == EventiView
-                ? 'Eventi'
-                : (varWidget.runtimeType == PromoView ? 'Promo' : ''))),
+        title: Text(
+          title,
+          style: TextStyle(
+            fontFamily: 'StencilArmyWWI',
+          ),
+        ),
       ),
       body: varWidget,
       bottomNavigationBar: BottomButtonDown(controller, onItemTapped),

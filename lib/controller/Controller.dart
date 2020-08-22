@@ -24,8 +24,6 @@ class Controller {
     try {
       this.cache.initOrganizations(await HtmlParser.organizations());
       this.cache.initCategories(await HtmlParser.categories());
-      this.events = await HtmlParser.events();
-      this.promos = await HtmlParser.promos();
       try {
         await loadLastInfo();
       } catch (e) {}
@@ -33,6 +31,16 @@ class Controller {
     } catch (e) {
       await load();
     }
+    return this.getCategories();
+  }
+
+  Future<dynamic> initEvents() async {
+    this.events = await HtmlParser.events();
+    return this.events;
+  }
+
+  Future<dynamic> initPromos() async {
+    this.promos = await HtmlParser.promos();
     return this.promos;
   }
 
