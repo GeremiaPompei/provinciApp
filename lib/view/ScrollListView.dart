@@ -39,8 +39,7 @@ class _ScrollListViewState extends State<ScrollListView> {
               builder: (context) => FutureBuilder<dynamic>(
                     future: controller.setLeafInfo(
                         controller.getSearch()[index].getName(),
-                        controller.getSearch()[index].getUrl(),
-                        (parsedJson) => LeafInfo(parsedJson)),
+                        controller.getSearch()[index].getUrl()),
                     builder: (BuildContext context,
                         AsyncSnapshot<dynamic> snapshot) {
                       if (snapshot.hasData)

@@ -6,6 +6,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:latlong/latlong.dart';
 import 'package:map_launcher/map_launcher.dart' as mapLauncher;
+import 'package:map_launcher/map_launcher.dart';
+import 'package:photo_view/photo_view.dart';
 import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -39,7 +41,26 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
             : Text(this.leafInfo.getDescription()),
         this.leafInfo.getImage() == null
             ? Container()
-            : Image(image: NetworkImage(this.leafInfo.getImage())),
+            : FlatButton(
+                child: Image(image: NetworkImage(this.leafInfo.getImage())),
+                onPressed: () {
+                  setState(() {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Scaffold(
+                                appBar: AppBar(
+                                  backgroundColor: Colors.black,
+                                  title: Text(this.leafInfo.getName()),
+                                ),
+                                body: Container(
+                                  child: PhotoView(
+                                    imageProvider:
+                                        NetworkImage(this.leafInfo.getImage()),
+                                  ),
+                                ))));
+                  });
+                }),
         this.leafInfo.getTelefono() == null
             ? Container()
             : ListView.builder(
@@ -118,21 +139,10 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
                   ),
                   this.leafInfo.getPosition() == null
                       ? Container()
-                      : IconButton(
-                          onPressed: () async {
-                            if (await mapLauncher.MapLauncher.isMapAvailable(
-                                mapLauncher.MapType.google)) {
-                              await mapLauncher.MapLauncher.showMarker(
-                                mapType: mapLauncher.MapType.google,
-                                coords: mapLauncher.Coords(
-                                    this.leafInfo.getPosition()[0],
-                                    this.leafInfo.getPosition()[1]),
-                                title: this.leafInfo.getName(),
-                              );
-                            }
-                          },
-                          icon: Icon(
-                            (Icons.location_on),
+                      : FlatButton(
+                          onPressed: () => openMapsSheet(context),
+                          child: Text(
+                            ('Apri in Mappe'),
                           ),
                         ),
                 ],
@@ -150,7 +160,7 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
         this.leafInfo.getUrl() == null
             ? Container()
             : ListTile(
-                title: Text('Link'),
+                title: Text('Url'),
                 subtitle: Linkify(
                   text: '${this.leafInfo.getUrl()}',
                   onOpen: (LinkableElement link) {
@@ -205,5 +215,45 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
             ),
           ))
         ]));
+  }
+
+  openMapsSheet(context) async {
+    try {
+      final coords = mapLauncher.Coords(
+          this.leafInfo.getPosition()[0], this.leafInfo.getPosition()[1]);
+      final title = this.leafInfo.getName();
+      final availableMaps = await MapLauncher.installedMaps;
+
+      showModalBottomSheet(
+        context: context,
+        builder: (BuildContext context) {
+          return SafeArea(
+            child: SingleChildScrollView(
+              child: Container(
+                child: Wrap(
+                  children: <Widget>[
+                    for (var map in availableMaps)
+                      ListTile(
+                        onTap: () => map.showMarker(
+                          coords: coords,
+                          title: title,
+                        ),
+                        title: Text(map.mapName),
+                        leading: Image(
+                          image: map.icon,
+                          height: 30.0,
+                          width: 30.0,
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
+      );
+    } catch (e) {
+      print(e);
+    }
   }
 }

@@ -53,8 +53,10 @@ class _EsploraViewState extends State<EsploraView> {
         header: ClassicHeader(),
         controller: _refreshController,
         onRefresh: () => setState(() {
-          (context as Element).reassemble();
-          _refreshController.refreshCompleted();
+          this.controller.init().then((value) {
+            (context as Element).reassemble();
+            _refreshController.refreshCompleted();
+          });
         }),
         child: ListView(shrinkWrap: true, children: <Widget>[
           TextField(
@@ -141,9 +143,7 @@ class _EsploraViewState extends State<EsploraView> {
               (index) => LeafsInfoView(this.controller.getLeafs(),
                   this.leafs[index].value.getName(), this.controller),
               (index) => controller.setLeafInfo(
-                  this.leafs[index].value.getName(),
-                  this.leafs[index].key,
-                  (el) => LeafInfo(el)))
+                  this.leafs[index].value.getName(), this.leafs[index].key))
         ]),
       ),
     );

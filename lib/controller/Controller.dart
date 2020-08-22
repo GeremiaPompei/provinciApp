@@ -66,17 +66,17 @@ class Controller {
     return getSearch();
   }
 
-  Future setLeafInfo(String name, String url,
-      LeafInfo Function(Map<String, dynamic> parsedJson) func) async {
+  Future setLeafInfo(String name, String url) async {
     UnitCache<List<LeafInfo>> cacheUnit = this.cache.getLeafsByUrl(url);
     if (cacheUnit == null) {
       List<LeafInfo> leafs = [];
       try {
         List<dynamic> tmp = json.decode(await HttpRequest.getJson(url));
-        leafs = tmp.map((i) => func(i)).toList();
+        leafs = tmp.map(
+          (parsedJson) => LeafInfo(parsedJson)).toList();
       } catch (e) {
         Map<String, dynamic> tmp = json.decode(await HttpRequest.getJson(url));
-        leafs.add(func(tmp['MetaData']));
+        leafs.add(LeafInfo(tmp['MetaData']));
       }
       String oldUrl = oldestUrl(
           this.cache.leafs.keys, (el) => this.cache.getLeafsByUrl(el));
@@ -94,13 +94,14 @@ class Controller {
   String oldestUrl(Iterable<String> list, UnitCache Function(String) func) {
     String oldUrl;
     DateTime tmpDate;
-    list.forEach((el) => {
-          if (tmpDate == null || tmpDate.isAfter(func(el).getDate()))
-            {
-              tmpDate = func(el).getDate(),
-              oldUrl = el,
-            }
-        });
+    list.forEach((el) =>
+    {
+      if (tmpDate == null || tmpDate.isAfter(func(el).getDate()))
+        {
+          tmpDate = func(el).getDate(),
+          oldUrl = el,
+        }
+    });
     return oldUrl;
   }
 
@@ -135,8 +136,23 @@ class Controller {
   Future loadLastInfo() async {
     Cache tmpCache = DeserializeCache.deserialize(await StoreManager.load());
     this.cache.setSearch(tmpCache.getSearch());
+    this.cache.getSearch().forEach((key, value) async{
+      value.setElement(await HtmlParser.searchByWord(key));
+    });
     this.cache.setLastSearch(tmpCache.getLastSearch());
     this.cache.setLeafs(tmpCache.getLeafs());
+    this.cache.getLeafs().forEach((key, value) async{
+      List<LeafInfo> leafs = [];
+      try {
+        List<dynamic> tmp = json.decode(await HttpRequest.getJson(key));
+        leafs = tmp.map(
+                (parsedJson) => LeafInfo(parsedJson)).toList();
+      } catch (e) {
+        Map<String, dynamic> tmp = json.decode(await HttpRequest.getJson(key));
+        leafs.add(LeafInfo(tmp['MetaData']));
+      }
+      value.setElement(leafs);
+    });
     this.cache.setLastLeafs(tmpCache.getLastLeafs());
   }
 
