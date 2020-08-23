@@ -1,6 +1,7 @@
 import 'package:MC/controller/Controller.dart';
 import 'package:MC/view/EsploraView.dart';
 import 'package:MC/view/EventiView.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -33,24 +34,17 @@ class _BottomButtonDownState extends State<BottomButtonDown> {
 
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      items: [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.search),
-          title: Text('Esplora'),
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.event),
-          title: Text('Eventi'),
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.free_breakfast),
-          title: Text('Promo'),
-        ),
+    return CurvedNavigationBar(
+      color: Colors.red,
+      backgroundColor: Colors.white,
+      buttonBackgroundColor: Colors.white,
+      items: <Widget>[
+        Icon(Icons.home),
+        Icon(Icons.event_note),
+        Icon(Icons.free_breakfast),
       ],
-      unselectedItemColor: Colors.black,
-      currentIndex: index,
-      selectedItemColor: Colors.red,
+      animationDuration: Duration(milliseconds: 200),
+      animationCurve: Curves.bounceInOut,
       onTap: onItemTapped,
     );
   }
