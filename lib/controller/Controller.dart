@@ -21,16 +21,16 @@ class Controller {
   }
 
   Future<dynamic> init() async {
-    try {
+    try{
       this.cache.initOrganizations(await HtmlParser.organizations());
       this.cache.initCategories(await HtmlParser.categories());
-      try {
-        await loadLastInfo();
-      } catch (e) {}
+      await loadLastInfo();
       store();
-    } catch (e) {
-      await load();
-    }
+      List<dynamic> list = json.decode(await StoreManager.load('Offline.json'));
+      list.forEach((element) {
+        getOffline().add(LeafInfo(element));
+      });
+    }catch(e){}
     return this.getCategories();
   }
 
@@ -72,8 +72,7 @@ class Controller {
       List<LeafInfo> leafs = [];
       try {
         List<dynamic> tmp = json.decode(await HttpRequest.getJson(url));
-        leafs = tmp.map(
-          (parsedJson) => LeafInfo(parsedJson)).toList();
+        leafs = tmp.map((parsedJson) => LeafInfo(parsedJson)).toList();
       } catch (e) {
         Map<String, dynamic> tmp = json.decode(await HttpRequest.getJson(url));
         leafs.add(LeafInfo(tmp['MetaData']));
@@ -94,15 +93,34 @@ class Controller {
   String oldestUrl(Iterable<String> list, UnitCache Function(String) func) {
     String oldUrl;
     DateTime tmpDate;
-    list.forEach((el) =>
-    {
-      if (tmpDate == null || tmpDate.isAfter(func(el).getDate()))
-        {
-          tmpDate = func(el).getDate(),
-          oldUrl = el,
-        }
-    });
+    list.forEach((el) => {
+          if (tmpDate == null || tmpDate.isAfter(func(el).getDate()))
+            {
+              tmpDate = func(el).getDate(),
+              oldUrl = el,
+            }
+        });
     return oldUrl;
+  }
+
+  Future<dynamic> addOffline(LeafInfo leafInfo) async {
+    this.cache.addOffline(leafInfo);
+    List<dynamic> list = [];
+    getOffline().forEach((element) {
+      list.add(element.getJson());
+    });
+    await StoreManager.store(json.encode(list),'Offline.json');
+    return this.getOffline();
+  }
+
+  Future<dynamic> removeOffline(LeafInfo leafInfo) async {
+    this.cache.removeOffline(leafInfo);
+    List<dynamic> list = [];
+    getOffline().forEach((element) {
+      list.add(element.getJson());
+    });
+    await StoreManager.store(json.encode(list),'Offline.json');
+    return this.getOffline();
   }
 
   List<NodeInfo> getEvents() {
@@ -129,24 +147,25 @@ class Controller {
     return this.cache.getLeafsByUrl(this.cache.getLastLeafs()).getElement();
   }
 
+  List<LeafInfo> getOffline() => this.cache.getOffline();
+
   Future load() async {
-    this.cache = DeserializeCache.deserialize(await StoreManager.load());
+    this.cache = DeserializeCache.deserialize(await StoreManager.load('Cache.json'));
   }
 
   Future loadLastInfo() async {
-    Cache tmpCache = DeserializeCache.deserialize(await StoreManager.load());
+    Cache tmpCache = DeserializeCache.deserialize(await StoreManager.load('Cache.json'));
     this.cache.setSearch(tmpCache.getSearch());
-    this.cache.getSearch().forEach((key, value) async{
+    this.cache.getSearch().forEach((key, value) async {
       value.setElement(await HtmlParser.searchByWord(key));
     });
     this.cache.setLastSearch(tmpCache.getLastSearch());
     this.cache.setLeafs(tmpCache.getLeafs());
-    this.cache.getLeafs().forEach((key, value) async{
+    this.cache.getLeafs().forEach((key, value) async {
       List<LeafInfo> leafs = [];
       try {
         List<dynamic> tmp = json.decode(await HttpRequest.getJson(key));
-        leafs = tmp.map(
-                (parsedJson) => LeafInfo(parsedJson)).toList();
+        leafs = tmp.map((parsedJson) => LeafInfo(parsedJson)).toList();
       } catch (e) {
         Map<String, dynamic> tmp = json.decode(await HttpRequest.getJson(key));
         leafs.add(LeafInfo(tmp['MetaData']));
@@ -157,6 +176,6 @@ class Controller {
   }
 
   Future store() async {
-    return await StoreManager.store(SerializeCache.serialize(this.cache));
+    return await StoreManager.store(SerializeCache.serialize(this.cache),'Cache.json');
   }
 }

@@ -14,40 +14,13 @@ class SerializeCache {
     jsonMap['Leafs Count'] = cache.getLeafsCount().toString();
     jsonMap['Last Search'] = cache.getLastSearch();
     jsonMap['Last Leafs'] = cache.getLastLeafs();
-    jsonMap['Organizations'] = serializeListNodeInfo(cache.getOrganizations());
-    jsonMap['Categories'] = serializeListNodeInfo(cache.getCategories());
-    jsonMap['Search'] = serializeMapInfo(cache.getSearch(),(el)=>serializeListNodeInfo(el));
-    jsonMap['Leafs'] = serializeMapInfo(cache.getLeafs(),(el)=>serializeListLeafInfo(el));
+    jsonMap['Search'] = serializeMapInfo(cache.getSearch());
+    jsonMap['Leafs'] = serializeMapInfo(cache.getLeafs());
     return json.encode(jsonMap);
   }
 
-  static List<Map> serializeListNodeInfo(List<NodeInfo> listIn) {
-    List<Map> listRes = [];
-    listIn.forEach((element) {
-      Map<String, dynamic> mapTmp = {
-        'Name': element.getName(),
-        'Description': element.getDescription(),
-        'Url': element.getUrl()
-      };
-      listRes.add(mapTmp);
-    });
-    return listRes;
-  }
-
-  static List<Map> serializeListLeafInfo(List<LeafInfo> listIn) {
-    List<Map> listRes = [];
-    listIn.forEach((element) {
-      Map<String, dynamic> mapTmp = {
-        'Type': element.runtimeType.toString(),
-        'Json': element.getJson()
-      };
-      listRes.add(mapTmp);
-    });
-    return listRes;
-  }
-
   static List<Map> serializeMapInfo <T> (
-      Map<String, UnitCache<List<T>>> mapIn,List<Map> Function(List<T>) func) {
+      Map<String, UnitCache<List<T>>> mapIn) {
     List<Map> listRes = [];
     mapIn.keys.forEach((element) {
       Map<String, dynamic> mapTmp = {
@@ -55,8 +28,7 @@ class SerializeCache {
         'Unit Cache': {
           'Date':
           DateFormat('yyy-MM-dd HH:mm:ss').format(mapIn[element].getDate()),
-          'Name': mapIn[element].getName(),
-          'Elements': func(mapIn[element].getElement())
+          'Name': mapIn[element].getName()
         }
       };
       listRes.add(mapTmp);

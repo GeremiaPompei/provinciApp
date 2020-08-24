@@ -1,3 +1,4 @@
+import 'package:MC/controller/Controller.dart';
 import 'package:MC/model/LeafInfo.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -14,20 +15,22 @@ import 'package:url_launcher/url_launcher.dart';
 class DetailedLeafInfoView extends StatefulWidget {
   LeafInfo leafInfo;
   String title;
+  Controller controller;
 
-  DetailedLeafInfoView(this.title, this.leafInfo);
+  DetailedLeafInfoView(this.title, this.leafInfo, this.controller);
 
   @override
   _DetailedLeafInfoViewState createState() =>
-      _DetailedLeafInfoViewState(this.title, this.leafInfo);
+      _DetailedLeafInfoViewState(this.title, this.leafInfo, this.controller);
 }
 
 class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
   LeafInfo leafInfo;
   String title;
   List<Widget> widgets;
+  Controller controller;
 
-  _DetailedLeafInfoViewState(this.title, this.leafInfo) {
+  _DetailedLeafInfoViewState(this.title, this.leafInfo, this.controller) {
     initWidgets();
   }
 
@@ -123,13 +126,9 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
                               point: LatLng(this.leafInfo.getPosition()[0],
                                   this.leafInfo.getPosition()[1]),
                               builder: (ctx) => Container(
-                                child: this.leafInfo.getImage() == null
-                                    ? Icon(
-                                        (Icons.location_on),
-                                      )
-                                    : Image(
-                                        image: NetworkImage(
-                                            this.leafInfo.getImage())),
+                                child: Icon(
+                                  (Icons.location_on),
+                                ),
                               ),
                             ),
                           ],
@@ -167,7 +166,19 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
                     launch(this.leafInfo.getUrl());
                   },
                 ),
-              )
+              ),
+        IconButton(
+          icon: Icon(Icons.add_circle_outline),
+          onPressed: () {
+            this.controller.addOffline(leafInfo);
+          },
+        ),
+        IconButton(
+          icon: Icon(Icons.remove_circle_outline),
+          onPressed: () {
+            this.controller.removeOffline(leafInfo);
+          },
+        )
       ];
 
   @override

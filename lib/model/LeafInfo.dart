@@ -10,7 +10,10 @@ class LeafInfo {
   Map<String, dynamic> json;
 
   LeafInfo(Map<String, dynamic> parsedJson) {
-    this.json = parsedJson;
+    this.json = {};
+    parsedJson.forEach((key, value) {
+      if (check(value)) this.json[key] = value.toString();
+    });
     this.description = checkRemove(parsedJson, 'Descrizione');
     this.url = checkRemove(parsedJson, 'Url');
     this.image = checkRemove(parsedJson, 'Immagine');

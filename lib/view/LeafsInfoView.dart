@@ -87,7 +87,7 @@ class _ButtonInfoState extends State<ButtonInfo> {
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  DetailedLeafInfoView(title, leafs[index])));
+                                  DetailedLeafInfoView(title, leafs[index],controller)));
                     });
                   }));
         },

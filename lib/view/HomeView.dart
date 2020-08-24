@@ -1,9 +1,12 @@
 import 'package:MC/controller/Controller.dart';
 import 'package:MC/view/BottomButtonBar.dart';
+import 'package:MC/view/DetailedLeafInfoView.dart';
 import 'package:MC/view/EsploraView.dart';
 import 'package:MC/view/EventiView.dart';
+import 'package:MC/view/LeafsInfoView.dart';
 import 'package:MC/view/LoadingView.dart';
 import 'package:MC/view/OfflineWidget.dart';
+import 'package:MC/view/ScrollListView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -67,6 +70,36 @@ class _HomeViewState extends State<HomeView> {
           this.title = 'Promo';
           this.varWidget =
               initWidgetFuture(() => this.promoF, PromoView(this.controller));
+          break;
+        case 3:
+          this.title = 'Salvati';
+          this.varWidget = initWidgetFuture(
+              () => this.esploraF, ListView.separated(
+            scrollDirection: Axis.vertical,
+            shrinkWrap: true,
+            padding: const EdgeInsets.all(8),
+            itemCount: this.controller.getOffline().length,
+            itemBuilder: (context, index) {
+              return Card(
+                  child: FlatButton(
+                      child: ListTile(
+                        title: Text('${this.controller.getOffline()[index].getName()}'),
+                        subtitle: this.controller.getOffline()[index].getDescription() == null
+                            ? Text('')
+                            : Text('${this.controller.getOffline()[index].getDescription()}'),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      DetailedLeafInfoView(title, this.controller.getOffline()[index],controller)));
+                        });
+                      }));
+            },
+            separatorBuilder: (BuildContext context, int index) => const Divider(),
+          ),);
           break;
       }
     });

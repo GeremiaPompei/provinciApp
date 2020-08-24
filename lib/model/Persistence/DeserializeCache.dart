@@ -11,39 +11,19 @@ class DeserializeCache {
         int.parse(jsonMap['Search Count']), int.parse(jsonMap['Leafs Count']));
     cache.setLastSearch(jsonMap['Last Search']);
     cache.setLastLeafs(jsonMap['Last Leafs']);
-    cache.initOrganizations(deserializeNodeListInfo(jsonMap['Organizations']));
-    cache.initCategories(deserializeNodeListInfo(jsonMap['Categories']));
     cache.setSearch(deserializeMapInfo(
-        jsonMap['Search'], (el) => deserializeNodeListInfo(el)));
+        jsonMap['Search']));
     cache.setLeafs(deserializeMapInfo(
-        jsonMap['Leafs'], (el) => deserializeLeafListInfo(el)));
+        jsonMap['Leafs']));
     return cache;
   }
 
-  static List<NodeInfo> deserializeNodeListInfo(List listIn) {
-    List<NodeInfo> listRes = [];
-    listIn.forEach((element) {
-      listRes.add(
-          NodeInfo(element['Name'], element['Description'], element['Url']));
-    });
-    return listRes;
-  }
-
-  static List<LeafInfo> deserializeLeafListInfo(List listIn) {
-    List<LeafInfo> listRes = [];
-    listIn.forEach((element) {
-      listRes.add(LeafInfo(element['Json']));
-    });
-    return listRes;
-  }
-
   static Map<String, UnitCache<List<T>>> deserializeMapInfo<T>(
-      List listIn, List<T> Function(List) func) {
+      List listIn) {
     Map<String, UnitCache<List<T>>> mapRes = {};
     listIn.forEach((element) {
-      List el = func(element['Unit Cache']['Elements']);
       mapRes[element['Key']] = UnitCache(
-          el,
+          [],
           DateTime.parse(element['Unit Cache']['Date']),
           element['Unit Cache']['Name']);
     });

@@ -47,6 +47,10 @@ class _BottomButtonDownState extends State<BottomButtonDown> {
           icon: Icon(Icons.free_breakfast),
           title: Text('Promo'),
         ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.save_alt),
+          title: Text('Salvati'),
+        ),
       ],
       unselectedItemColor: Colors.black,
       currentIndex: index,

@@ -8,12 +8,14 @@ class Cache {
   List<NodeInfo> organizations;
   Map<String, UnitCache<List<NodeInfo>>> search;
   Map<String, UnitCache<List<LeafInfo>>> leafs;
+  List<LeafInfo> offline;
   int searchCount;
   int leafsCount;
   String lastSearch = 'Empty 0';
   String lastLeafs = 'Empty 0';
 
   Cache(int searchCount, int leafsCount) {
+    this.offline = [];
     this.categories = [];
     this.organizations = [];
     this.search = {};
@@ -66,6 +68,10 @@ class Cache {
     this.lastLeafs = str;
   }
 
+  void addOffline(LeafInfo leafInfo) => this.offline.add(leafInfo);
+
+  void removeOffline(LeafInfo leafInfo) => this.offline.remove(leafInfo);
+
   List<NodeInfo> getOrganizations() {
     return this.organizations;
   }
@@ -105,4 +111,6 @@ class Cache {
   String getLastLeafs() {
     return this.lastLeafs;
   }
+
+  List<LeafInfo> getOffline() => this.offline;
 }
