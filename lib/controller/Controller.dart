@@ -21,16 +21,23 @@ class Controller {
   }
 
   Future<dynamic> init() async {
-    try{
+    //TODO correggere
+    try {
       this.cache.initOrganizations(await HtmlParser.organizations());
       this.cache.initCategories(await HtmlParser.categories());
-      await loadLastInfo();
+      try {
+        await loadLastInfo();
+      } catch (e) {}
       store();
+    } catch (e) {}
+    try{
       List<dynamic> list = json.decode(await StoreManager.load('Offline.json'));
       list.forEach((element) {
         getOffline().add(LeafInfo(element));
       });
-    }catch(e){}
+    }catch (e) {
+      print(e.toString());
+    }
     return this.getCategories();
   }
 
@@ -109,7 +116,7 @@ class Controller {
     getOffline().forEach((element) {
       list.add(element.getJson());
     });
-    await StoreManager.store(json.encode(list),'Offline.json');
+    await StoreManager.store(json.encode(list), 'Offline.json');
     return this.getOffline();
   }
 
@@ -119,7 +126,7 @@ class Controller {
     getOffline().forEach((element) {
       list.add(element.getJson());
     });
-    await StoreManager.store(json.encode(list),'Offline.json');
+    await StoreManager.store(json.encode(list), 'Offline.json');
     return this.getOffline();
   }
 
@@ -150,11 +157,13 @@ class Controller {
   List<LeafInfo> getOffline() => this.cache.getOffline();
 
   Future load() async {
-    this.cache = DeserializeCache.deserialize(await StoreManager.load('Cache.json'));
+    this.cache =
+        DeserializeCache.deserialize(await StoreManager.load('Cache.json'));
   }
 
   Future loadLastInfo() async {
-    Cache tmpCache = DeserializeCache.deserialize(await StoreManager.load('Cache.json'));
+    Cache tmpCache =
+        DeserializeCache.deserialize(await StoreManager.load('Cache.json'));
     this.cache.setSearch(tmpCache.getSearch());
     this.cache.getSearch().forEach((key, value) async {
       value.setElement(await HtmlParser.searchByWord(key));
@@ -176,6 +185,7 @@ class Controller {
   }
 
   Future store() async {
-    return await StoreManager.store(SerializeCache.serialize(this.cache),'Cache.json');
+    return await StoreManager.store(
+        SerializeCache.serialize(this.cache), 'Cache.json');
   }
 }

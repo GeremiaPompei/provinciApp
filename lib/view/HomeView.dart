@@ -73,8 +73,7 @@ class _HomeViewState extends State<HomeView> {
           break;
         case 3:
           this.title = 'Salvati';
-          this.varWidget = initWidgetFuture(
-              () => this.esploraF, ListView.separated(
+          this.varWidget = ListView.separated(
             scrollDirection: Axis.vertical,
             shrinkWrap: true,
             padding: const EdgeInsets.all(8),
@@ -83,23 +82,32 @@ class _HomeViewState extends State<HomeView> {
               return Card(
                   child: FlatButton(
                       child: ListTile(
-                        title: Text('${this.controller.getOffline()[index].getName()}'),
-                        subtitle: this.controller.getOffline()[index].getDescription() == null
+                        title: Text(
+                            '${this.controller.getOffline()[index].getName()}'),
+                        subtitle: this
+                                    .controller
+                                    .getOffline()[index]
+                                    .getDescription() ==
+                                null
                             ? Text('')
-                            : Text('${this.controller.getOffline()[index].getDescription()}'),
+                            : Text(
+                                '${this.controller.getOffline()[index].getDescription()}'),
                       ),
                       onPressed: () {
                         setState(() {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) =>
-                                      DetailedLeafInfoView(title, this.controller.getOffline()[index],controller)));
+                                  builder: (context) => DetailedLeafInfoView(
+                                      title,
+                                      this.controller.getOffline()[index],
+                                      controller)));
                         });
                       }));
             },
-            separatorBuilder: (BuildContext context, int index) => const Divider(),
-          ),);
+            separatorBuilder: (BuildContext context, int index) =>
+                const Divider(),
+          );
           break;
       }
     });
