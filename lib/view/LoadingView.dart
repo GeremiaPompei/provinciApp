@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class LoadingView extends StatelessWidget {
   //TODO widget loading
@@ -9,8 +10,8 @@ class LoadingView extends StatelessWidget {
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Container(height: 150,),
             Text(
               'MACERATA',
               style: TextStyle(
@@ -18,7 +19,10 @@ class LoadingView extends StatelessWidget {
                 fontFamily: 'StencilArmyWWI',
               ),
             ),
-            CircularProgressIndicator(),
+            SpinKitCubeGrid(
+              color: Colors.red,
+              duration: Duration(milliseconds: 300),
+            ),
             Image(
               image: AssetImage('assets/logo_mc.PNG'),
               height: 200,

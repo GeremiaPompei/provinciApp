@@ -4,12 +4,12 @@ import 'package:MC/view/EsploraView.dart';
 import 'package:MC/view/EventiView.dart';
 import 'package:MC/view/LoadingView.dart';
 import 'package:MC/view/OfflineWidget.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter/widgets.dart';
 
 import 'PromoView.dart';
+import 'ScrollListView.dart';
 
 class HomeView extends StatefulWidget {
   Controller controller;
@@ -27,6 +27,17 @@ class _HomeViewState extends State<HomeView> {
   Future esploraF;
   Future eventiF;
   Future promoF;
+  Icon cusIcon = Icon(Icons.search, size: 30, color: Colors.red[600]);
+  Widget appBarTitle = new Text(
+    "McApp",
+    textAlign: TextAlign.left,
+    style: TextStyle(
+      color: Colors.red,
+      fontFamily: "Poppins",
+      fontWeight: FontWeight.w900,
+      fontSize: 35,
+    ),
+  );
 
   _HomeViewState(this.controller) {
     this.esploraF = this.controller.init();
@@ -76,49 +87,98 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        /*appBar: AppBar(
+    return Scaffold(
+      appBar: AppBar(
+        brightness: Brightness.light,
         backgroundColor: Colors.transparent,
-        elevation: 0.0,
-        title: Text(
-          title,
-          style: GoogleFonts.poppins(
-              color: Colors.red, fontWeight: FontWeight.w900),
+        elevation: 0,
+        title: Align(alignment: Alignment.topLeft, child: appBarTitle),
+        actions: [
+          Row(children: [
+            IconButton(
+              padding: EdgeInsets.only(right: 30),
+              icon: cusIcon,
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              onPressed: () {
+                setState(
+                  () {
+                    if (this.cusIcon.icon == Icons.search) {
+                      this.cusIcon =
+                          Icon(Icons.cancel, color: Colors.red[600], size: 20);
+                      this.appBarTitle = new TextField(
+                        cursorColor: Colors.red,
+                        style: new TextStyle(
+                          color: Colors.red,
+                          fontFamily: "Poppins",
+                          fontSize: 25,
+                        ),
+                        decoration: new InputDecoration(
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.red),
+                          ),
+                          hintText: "Search...",
+                          hintStyle: new TextStyle(color: Colors.white),
+                        ),
+                        onSubmitted: (String input) {
+                          setState(
+                            () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => FutureBuilder<dynamic>(
+                                    future: controller.setSearch(
+                                        input, 'dataset?q=' + input),
+                                    builder: (BuildContext context,
+                                        AsyncSnapshot<dynamic> snapshot) {
+                                      if (snapshot.hasData)
+                                        varWidget = ScrollListView(
+                                            this.controller, input);
+                                      else
+                                        varWidget = LoadingView();
+                                      return varWidget;
+                                    },
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        },
+                      );
+                    } else {
+                      this.cusIcon =
+                          Icon(Icons.search, color: Colors.red[600], size: 30);
+                      this.appBarTitle = new Text(
+                        "McApp",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          color: Colors.red,
+                          fontFamily: "Poppins",
+                          fontWeight: FontWeight.w900,
+                          fontSize: 35,
+                        ),
+                      );
+                    }
+                  },
+                );
+              },
+            ),
+            IconButton(
+              icon: Icon(Icons.location_on, color: Colors.red[600], size: 30),
+            ),
+          ]),
+        ],
+      ),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Expanded(
+              child: varWidget,
+            ),
+          ],
         ),
-      ),*/
-          body: Column(
-            children: [
-              Container(
-                margin: EdgeInsets.only(left: 20, top: 45),
-                child: Align(
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    "ESPLORA",
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      color: Colors.red,
-                      fontFamily: "Poppins",
-                      fontWeight: FontWeight.w900,
-                      fontSize: 30,
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                height: MediaQuery
-                    .of(context)
-                    .size
-                    .height,
-                width: MediaQuery
-                    .of(context)
-                    .size
-                    .width,
-                child: varWidget,
-              ),
-            ],
-          ),
-          bottomNavigationBar: BottomButtonDown(controller, onItemTapped)),
+      ),
+      bottomNavigationBar: BottomButtonDown(controller, onItemTapped),
     );
   }
 }

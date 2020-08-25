@@ -4,6 +4,8 @@ import 'package:MC/view/EventiView.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 
 import 'HomeView.dart';
 
@@ -11,7 +13,7 @@ class BottomButtonDown extends StatefulWidget {
   Controller controller;
   void Function(int) func;
 
-  BottomButtonDown(this.controller, this.func);
+  BottomButtonDown(this.controller, this.func, {onTap});
 
   @override
   _BottomButtonDownState createState() =>
@@ -35,7 +37,7 @@ class _BottomButtonDownState extends State<BottomButtonDown> {
   @override
   Widget build(BuildContext context) {
     return CurvedNavigationBar(
-      color: Colors.red,
+      color: Colors.red[600],
       backgroundColor: Colors.white,
       buttonBackgroundColor: Colors.white,
       items: <Widget>[

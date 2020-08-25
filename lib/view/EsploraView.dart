@@ -59,35 +59,35 @@ class _EsploraViewState extends State<EsploraView> {
           });
         }),
         child: ListView(shrinkWrap: true, children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-            child: TextField(
-              decoration: InputDecoration(
-                suffixIcon: Icon(Icons.search),
-              ),
-              onSubmitted: (String input) {
-                setState(() {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => FutureBuilder<dynamic>(
-                                future: controller.setSearch(
-                                    input, 'dataset?q=' + input),
-                                builder: (BuildContext context,
-                                    AsyncSnapshot<dynamic> snapshot) {
-                                  if (snapshot.hasData)
-                                    varWidget =
-                                        ScrollListView(this.controller, input);
-                                  else
-                                    varWidget = LoadingView();
-                                  return varWidget;
-                                },
-                              )));
-                });
-              },
+          /*TextField(
+            decoration: InputDecoration(
+              suffixIcon: Icon(Icons.search),
             ),
-          ),
-          FlatButton(
+            onSubmitted: (String input) {
+              setState(
+                () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => FutureBuilder<dynamic>(
+                        future:
+                            controller.setSearch(input, 'dataset?q=' + input),
+                        builder: (BuildContext context,
+                            AsyncSnapshot<dynamic> snapshot) {
+                          if (snapshot.hasData)
+                            varWidget = ScrollListView(this.controller, input);
+                          else
+                            varWidget = LoadingView();
+                          return varWidget;
+                        },
+                      ),
+                    ),
+                  );
+                },
+              );
+            },
+          ),*/
+          /*FlatButton(
             child: Row(
               children: <Widget>[
                 Icon(Icons.location_on),
@@ -111,12 +111,15 @@ class _EsploraViewState extends State<EsploraView> {
                             },
                           )));
             },
-          ),
-          SizedBox(
-            child: Center(
-              child: Text(
-                'Comuni',
-                style: TextStyle(fontSize: 20, fontFamily: 'StencilArmyWWI'),
+          ),*/
+          Padding(
+            padding: const EdgeInsets.only(top: 20.0),
+            child: SizedBox(
+              child: Center(
+                child: Text(
+                  'Comuni',
+                  style: TextStyle(fontSize: 20, fontFamily: 'StencilArmyWWI'),
+                ),
               ),
             ),
           ),
