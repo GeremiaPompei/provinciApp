@@ -158,7 +158,13 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
           itemCount: this.leafInfo.info.length,
           itemBuilder: (context, index) => ListTile(
             title: Text(this.leafInfo.info.keys.toList()[index]),
-            subtitle: Text(this.leafInfo.info.values.toList()[index]),
+            subtitle: Linkify(
+              text: '${this.leafInfo.info.values.toList()[index]}',
+              onOpen: (LinkableElement link) async {
+                if(await canLaunch(this.leafInfo.info.values.toList()[index]))
+                  await launch(this.leafInfo.info.values.toList()[index]);
+              },
+            ),
           ),
         ),
         this.leafInfo.url == null

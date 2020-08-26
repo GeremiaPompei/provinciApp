@@ -25,7 +25,9 @@ class Controller {
   Future<dynamic> init() async {
     this._cache.initOrganizations(await HtmlParser.organizations());
     this._cache.initCategories(await HtmlParser.categories());
-    await loadCacheLastInfo();
+    try {
+      await loadCacheLastInfo();
+    }catch(e){}
     storeCache();
     return this.getCategories();
   }

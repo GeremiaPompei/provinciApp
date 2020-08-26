@@ -11,7 +11,8 @@ class LeafInfo {
   String _sourceUrl;
   int _sourceIndex;
 
-  LeafInfo(Map<String, dynamic> parsedJson, this._sourceUrl, this._sourceIndex) {
+  LeafInfo(
+      Map<String, dynamic> parsedJson, this._sourceUrl, this._sourceIndex) {
     this._json = {};
     parsedJson.forEach((key, value) {
       if (check(value)) this._json[key] = value.toString();
@@ -28,15 +29,19 @@ class LeafInfo {
         double.parse(checkRemove(parsedJson, 'Longitudine'))
       ];
     this._name = checkRemove(parsedJson, 'Nome');
-    this._name == null ? this._name = checkRemove(parsedJson, 'Titolo'):null;
-    this._name == null ? this._name = checkRemove(parsedJson, 'Tipologia'):null;
-    this._name == null ? this._name = checkRemove(parsedJson, 'Argomento'):null;
-    this._name == null ? this._name = checkRemove(parsedJson, 'Comune'):null;
+    this._name == null ? this._name = checkRemove(parsedJson, 'Titolo') : null;
+    this._name == null
+        ? this._name = checkRemove(parsedJson, 'Tipologia')
+        : null;
+    this._name == null
+        ? this._name = checkRemove(parsedJson, 'Argomento')
+        : null;
+    this._name == null ? this._name = checkRemove(parsedJson, 'Comune') : null;
     this._info = {};
     parsedJson.forEach((key, value) {
       if (check(value)) this._info[key] = value.toString();
     });
-    if(this._name == null) {
+    if (this._name == null) {
       this._name = this._info.values.first;
       this._info.remove(this._info.keys.first);
     }
@@ -45,14 +50,14 @@ class LeafInfo {
   String checkRemove(Map<String, dynamic> parsedJson, String s) {
     String rtn;
     if (check(parsedJson[s])) {
-      if (parsedJson[s].toString() != 'false') rtn = parsedJson[s].toString();
+      if (parsedJson[s].toString() != 'false')
+        rtn = parsedJson[s].toString().replaceAll('\\', '');
       parsedJson.remove(s);
     }
     return rtn;
   }
 
   bool check(dynamic s) => (s != null && s.toString() != '');
-
 
   String get name => _name;
 
