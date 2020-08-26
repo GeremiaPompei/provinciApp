@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:convert';
+import 'package:MC/model/LeafInfo.dart';
 import 'package:MC/model/web/HttpRequest.dart';
 import 'package:MC/model/NodeInfo.dart';
 import 'package:html/dom.dart' as html;
@@ -32,11 +34,8 @@ class HtmlParser {
   static Future<List<NodeInfo>> promos() async {
     Function fName = (html.Element el) =>
         el.getElementsByClassName('grpn-dc-title').single.text.trim();
-    Function fDescription = (html.Element el) => el
-        .getElementsByClassName('grpn-dc-loc')
-        .single
-        .text
-        .trim();
+    Function fDescription = (html.Element el) =>
+        el.getElementsByClassName('grpn-dc-loc').single.text.trim();
     Function fUrl = (html.Element el) => el
         .getElementsByTagName('a')
         .first
@@ -66,6 +65,20 @@ class HtmlParser {
             .trim()));
     return HttpRequest.getNodeInfo(MCDATI + word, 'dataset-list unstyled',
         'dataset-item', fName, fDescription, fUrl);
+  }
+
+  static Future<List<LeafInfo>> leafsByWord(String word) async {
+    List<LeafInfo> list = [];
+    try {
+      List<dynamic> tmp = json.decode(await HttpRequest.getJson(word));
+      for (int i = 0; i < tmp.length; i++) list.add(LeafInfo(tmp[i], word, i));
+    } catch (e) {
+      try {
+        Map<String, dynamic> tmp = json.decode(await HttpRequest.getJson(word));
+        list.add(LeafInfo(tmp['MetaData'], word, 0));
+      } catch (e) {}
+    }
+    return list;
   }
 
   static Future<List<NodeInfo>> organizations() async {

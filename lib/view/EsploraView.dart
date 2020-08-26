@@ -145,8 +145,7 @@ class _EsploraViewState extends State<EsploraView> {
                   this.leafs[index].value.name, this.controller),
               (index) => controller.setLeafInfo(
                   this.leafs[index].value.name,
-                  this.leafs[index].key,
-                  index))
+                  this.leafs[index].key))
         ]),
       ),
     );

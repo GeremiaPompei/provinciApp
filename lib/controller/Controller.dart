@@ -31,23 +31,12 @@ class Controller {
   }
 
   Future<dynamic> initOffline() async {
-    //TODO controllare aggiornamento
-//    try {
-//      for (var el in this._cache.offline) {
-//        List list;
-//        try {
-//          List<dynamic> tmp = json.decode(await HttpRequest.getJson(el.sourceUrl));
-//          list =
-//              tmp.map((parsedJson) => LeafInfo(parsedJson,  el.sourceUrl, el.sourceIndex)).toList();
-//        } catch (e) {
-//          try {
-//            Map<String, dynamic> tmp =
-//            json.decode(await HttpRequest.getJson(el.sourceUrl));
-//            list.add(LeafInfo(tmp['MetaData'], el.sourceUrl, el.sourceIndex));
-//          } catch (e) {}
-//        }
-//      }
-//    } catch (e) {}
+    try {
+      for (var el in this._cache.offline) {
+        List<LeafInfo> list = await HtmlParser.leafsByWord(el.sourceUrl);
+        el = list[el.sourceIndex];
+      }
+    } catch (e) {}
     loadOffline();
     return getOffline();
   }
@@ -84,18 +73,10 @@ class Controller {
     return getSearch();
   }
 
-  Future setLeafInfo(String name, String url, int index) async {
+  Future setLeafInfo(String name, String url) async {
     UnitCache<List<LeafInfo>> cacheUnit = this._cache.getLeafsByUrl(url);
     if (cacheUnit == null) {
-      List<LeafInfo> leafs = [];
-      try {
-        List<dynamic> tmp = json.decode(await HttpRequest.getJson(url));
-        leafs =
-            tmp.map((parsedJson) => LeafInfo(parsedJson, url, index)).toList();
-      } catch (e) {
-        Map<String, dynamic> tmp = json.decode(await HttpRequest.getJson(url));
-        leafs.add(LeafInfo(tmp['MetaData'], url, index));
-      }
+      List<LeafInfo> leafs = await HtmlParser.leafsByWord(url);
       String oldUrl = oldestUrl(
           this._cache.leafs.keys, (el) => this._cache.getLeafsByUrl(el));
       cacheUnit = this._cache.leafs[oldUrl];
@@ -176,19 +157,7 @@ class Controller {
     this._cache.lastSearch = tmpCache.lastSearch;
     this._cache.leafs = tmpCache.leafs;
     this._cache.leafs.forEach((key, value) async {
-      List<LeafInfo> leafs = [];
-      try {
-        List<dynamic> tmp = json.decode(await HttpRequest.getJson(key));
-        int i = 0;
-        leafs =
-            tmp.map((parsedJson) => LeafInfo(parsedJson, key, i++)).toList();
-      } catch (e) {
-        try {
-          Map<String, dynamic> tmp =
-              json.decode(await HttpRequest.getJson(key));
-          leafs.add(LeafInfo(tmp['MetaData'], key, 0));
-        } catch (e) {}
-      }
+      List<LeafInfo> leafs = await HtmlParser.leafsByWord(key);
       value.element = leafs;
     });
     this._cache.lastLeafs = tmpCache.lastLeafs;
