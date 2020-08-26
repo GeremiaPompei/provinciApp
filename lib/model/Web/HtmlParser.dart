@@ -27,8 +27,14 @@ class HtmlParser {
         .attributes
         .putIfAbsent('href', () => null)
         .trim();
+    Function fImage = (html.Element el) => el
+        .getElementsByTagName('img')
+        .first
+        .attributes
+        .putIfAbsent('src', () => null)
+        .trim();
     return HttpRequest.getNodeInfo(
-        MCEVENTI, null, 'articolo_lista', fName, fDescription, fUrl);
+        MCEVENTI, null, 'articolo_lista', fName, fDescription, fUrl, fImage);
   }
 
   static Future<List<NodeInfo>> promos() async {
@@ -42,8 +48,14 @@ class HtmlParser {
         .attributes
         .putIfAbsent('href', () => null)
         .trim();
+    Function fImage = (html.Element el) => el
+        .getElementsByTagName('img')
+        .first
+        .attributes
+        .putIfAbsent('src', () => null)
+        .trim();
     return HttpRequest.getNodeInfo(
-        MCPROMO, null, 'deal-card', fName, fDescription, fUrl);
+        MCPROMO, null, 'deal-card', fName, fDescription, fUrl, fImage);
   }
 
   static Future<List<NodeInfo>> searchByWord(String word) async {
@@ -63,8 +75,15 @@ class HtmlParser {
             .attributes
             .putIfAbsent('href', () => null)
             .trim()));
-    return HttpRequest.getNodeInfo(MCDATI + word, 'dataset-list unstyled',
-        'dataset-item', fName, fDescription, fUrl);
+    Function fImage = (html.Element el) => '';
+    return await _scrollPage((page) => HttpRequest.getNodeInfo(
+        MCDATI+word+page,
+        'dataset-list unstyled',
+        'dataset-item',
+        fName,
+        fDescription,
+        fUrl,
+        fImage));
   }
 
   static Future<List<LeafInfo>> leafsByWord(String word) async {
@@ -93,8 +112,20 @@ class HtmlParser {
         .putIfAbsent('href', () => null)
         .substring(1)
         .trim()));
-    return HttpRequest.getNodeInfo(MCDATI + 'organization', 'media-grid',
-        'media-item', fName, fDescription, fUrl);
+    Function fImage = (html.Element el) => el
+        .getElementsByTagName('img')
+        .first
+        .attributes
+        .putIfAbsent('src', () => null)
+        .trim();
+    return await _scrollPage((page) => HttpRequest.getNodeInfo(
+        MCDATI + 'organization?$page',
+        'media-grid',
+        'media-item',
+        fName,
+        fDescription,
+        fUrl,
+        fImage));
   }
 
   static Future<List<NodeInfo>> categories() async {
@@ -108,7 +139,30 @@ class HtmlParser {
         .putIfAbsent('href', () => null)
         .substring(1)
         .trim()));
-    return HttpRequest.getNodeInfo(MCDATI + 'group', 'media-grid', 'media-item',
-        fName, fDescription, fUrl);
+    Function fImage = (html.Element el) => el
+        .getElementsByTagName('img')
+        .first
+        .attributes
+        .putIfAbsent('src', () => null)
+        .trim();
+    return await _scrollPage((page) => HttpRequest.getNodeInfo(
+        MCDATI + 'group?$page',
+        'media-grid',
+        'media-item',
+        fName,
+        fDescription,
+        fUrl,
+        fImage));
+  }
+
+  static Future<List> _scrollPage(
+      Future<List<NodeInfo>> Function(String page) func) async {
+    List<NodeInfo> list = [];
+    for (int i = 1; i > 0; i++) {
+      List<NodeInfo> tmp = await func('page=$i');
+      list.addAll(tmp);
+      if (tmp.isEmpty) i = -1;
+    }
+    return list;
   }
 }

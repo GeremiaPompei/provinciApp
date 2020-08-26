@@ -41,6 +41,9 @@ class _PromoViewState extends State<PromoView> {
         itemBuilder: (context, index) {
           return FlatButton(
               child: ListTile(
+                leading: Image(
+                    image: NetworkImage(
+                        this.controller.getPromos()[index].image.toString())),
                 title: Text(this.controller.getPromos()[index].name),
                 subtitle: Text(this.controller.getPromos()[index].description),
               ),

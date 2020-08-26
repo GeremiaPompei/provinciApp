@@ -1,15 +1,14 @@
-class NodeInfo{
+class NodeInfo {
   String _name;
   String _description;
   String _url;
   String _image;
 
-  NodeInfo(this._name, this._description, this._url);
+  NodeInfo(this._name, this._description, this._url, this._image);
 
   @override
-  String toString(){
-    if(_description == null)
-      return _name;
+  String toString() {
+    if (_description == null) return _name;
     return _name + ': ' + _description;
   }
 

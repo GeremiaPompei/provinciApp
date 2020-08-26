@@ -77,6 +77,8 @@ class _ButtonInfoState extends State<ButtonInfo> {
           return Card(
               child: FlatButton(
                   child: ListTile(
+                    leading: Image(
+                        image: NetworkImage('${leafs[index].image.toString()}')),
                     title: Text('${leafs[index].name}'),
                     subtitle: leafs[index].description == null
                         ? Text('')

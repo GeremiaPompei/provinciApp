@@ -41,6 +41,9 @@ class _EventiViewState extends State<EventiView> {
         itemBuilder: (context, index) {
           return FlatButton(
               child: ListTile(
+                leading: Image(
+                    image: NetworkImage(
+                        this.controller.getEvents()[index].image.toString())),
                 title: Text(this.controller.getEvents()[index].name.toString()),
                 subtitle: Text(
                     this.controller.getEvents()[index].description.toString()),

@@ -28,7 +28,7 @@ class _CardsSizedBoxState extends State<CardsSizedBox> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 150,
+      height: 200,
       child: PageView.builder(
         itemCount: this.list.length,
         controller: PageController(viewportFraction: 0.5),
@@ -41,7 +41,10 @@ class _CardsSizedBoxState extends State<CardsSizedBox> {
                 borderRadius: BorderRadius.circular(20),
               ),
               child: FlatButton(
-                child: Text(this.list[i].name),
+                child: ListTile(
+                    subtitle: Image(
+                        image: NetworkImage(this.list[i].image)),
+                    title: Text(this.list[i].name)),
                 onPressed: () {
                   setState(() {
                     Navigator.push(
@@ -49,7 +52,7 @@ class _CardsSizedBoxState extends State<CardsSizedBox> {
                         MaterialPageRoute(
                             builder: (context) => FutureBuilder<dynamic>(
                                   future: controller.setSearch(
-                                      this.list[i].name, this.list[i].url),
+                                      this.list[i].name, this.list[i].url+'?'),
                                   builder: (BuildContext context,
                                       AsyncSnapshot<dynamic> snapshot) {
                                     if (snapshot.hasData)

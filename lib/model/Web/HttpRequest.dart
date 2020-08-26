@@ -38,14 +38,16 @@ class HttpRequest {
       String liClass,
       String Function(html.Element) nameClass,
       String Function(html.Element) descriptionClass,
-      String Function(html.Element) urlClass) async {
+      String Function(html.Element) urlClass,
+      String Function(html.Element) imageClass) async {
     List<NodeInfo> nodes = [];
     List<html.Element> elements = await _getListInfo(word, ulClass, liClass);
     elements.forEach((element) {
       String name = nameClass(element);
       String description = descriptionClass(element);
       String url = urlClass(element);
-      NodeInfo node = new NodeInfo(name, description, url);
+      String image = imageClass(element);
+      NodeInfo node = new NodeInfo(name, description, url,image);
       nodes.add(node);
     });
     return nodes;
