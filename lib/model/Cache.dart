@@ -4,26 +4,26 @@ import 'package:MC/model/NodeInfo.dart';
 import 'UnitCache.dart';
 
 class Cache {
-  List<NodeInfo> categories;
-  List<NodeInfo> organizations;
-  Map<String, UnitCache<List<NodeInfo>>> search;
-  Map<String, UnitCache<List<LeafInfo>>> leafs;
-  List<LeafInfo> offline;
-  int searchCount;
-  int leafsCount;
-  String lastSearch = 'Empty 0';
-  String lastLeafs = 'Empty 0';
+  List<NodeInfo> _categories;
+  List<NodeInfo> _organizations;
+  Map<String, UnitCache<List<NodeInfo>>> _search;
+  Map<String, UnitCache<List<LeafInfo>>> _leafs;
+  List<LeafInfo> _offline;
+  int _searchCount;
+  int _leafsCount;
+  String _lastSearch = 'Empty 0';
+  String _lastLeafs = 'Empty 0';
 
   Cache(int searchCount, int leafsCount) {
-    this.offline = [];
-    this.categories = [];
-    this.organizations = [];
-    this.search = {};
-    this.leafs = {};
-    this.searchCount = searchCount;
-    this.leafsCount = leafsCount;
-    initMap<NodeInfo>(this.search, searchCount);
-    initMap<LeafInfo>(this.leafs, leafsCount);
+    this._offline = [];
+    this._categories = [];
+    this._organizations = [];
+    this._search = {};
+    this._leafs = {};
+    this._searchCount = searchCount;
+    this._leafsCount = leafsCount;
+    initMap<NodeInfo>(this._search, searchCount);
+    initMap<LeafInfo>(this._leafs, leafsCount);
   }
 
   void initMap<T>(Map<String,UnitCache<List<T>>> map, int num) {
@@ -33,84 +33,68 @@ class Cache {
   }
 
   void initOrganizations(List<NodeInfo> nodes) {
-    this.organizations = nodes;
+    this._organizations = nodes;
   }
 
   void initCategories(List<NodeInfo> nodes) {
-    this.categories = nodes;
+    this._categories = nodes;
   }
 
   void changeSearch(
       String oldUrl, String newUrl, UnitCache<List<NodeInfo>> nodes) {
-    this.search.remove(oldUrl);
-    this.search[newUrl] = nodes;
-  }
-
-  void setSearch(Map<String, UnitCache<List<NodeInfo>>> map) {
-    this.search = map;
+    this._search.remove(oldUrl);
+    this._search[newUrl] = nodes;
   }
 
   void changeLeafs(
       String oldUrl, String newUrl, UnitCache<List<dynamic>> leafs) {
-    this.leafs.remove(oldUrl);
-    this.leafs[newUrl] = leafs;
+    this._leafs.remove(oldUrl);
+    this._leafs[newUrl] = leafs;
   }
 
-  void setLeafs(Map<String, UnitCache<List<LeafInfo>>> map) {
-    this.leafs = map;
+  void addOffline(LeafInfo leafInfo) => this._offline.add(leafInfo);
+
+  void removeOffline(LeafInfo leafInfo) => this._offline.remove(leafInfo);
+
+  UnitCache<List<NodeInfo>> getSearchByUrl(String url) =>  this._search[url];
+
+  UnitCache<List<LeafInfo>> getLeafsByUrl(String url) => this._leafs[url];
+
+  String get lastLeafs => _lastLeafs;
+
+  String get lastSearch => _lastSearch;
+
+  int get leafsCount => _leafsCount;
+
+  int get searchCount => _searchCount;
+
+  List<LeafInfo> get offline => _offline;
+
+  Map<String, UnitCache<List<LeafInfo>>> get leafs => _leafs;
+
+  Map<String, UnitCache<List<NodeInfo>>> get search => _search;
+
+  List<NodeInfo> get organizations => _organizations;
+
+  List<NodeInfo> get categories => _categories;
+
+  set search(Map<String, UnitCache<List<NodeInfo>>> value) {
+    _search = value;
   }
 
-  void setLastSearch(String str) {
-   this.lastSearch = str;
+  set leafs(Map<String, UnitCache<List<LeafInfo>>> value) {
+    _leafs = value;
   }
 
-  void setLastLeafs(String str) {
-    this.lastLeafs = str;
+  set lastSearch(String value) {
+    _lastSearch = value;
   }
 
-  void addOffline(LeafInfo leafInfo) => this.offline.add(leafInfo);
-
-  void removeOffline(LeafInfo leafInfo) => this.offline.remove(leafInfo);
-
-  List<NodeInfo> getOrganizations() {
-    return this.organizations;
+  set lastLeafs(String value) {
+    _lastLeafs = value;
   }
 
-  List<NodeInfo> getCategories() {
-    return this.categories;
+  set offline(List<LeafInfo> value) {
+    _offline = value;
   }
-
-  Map<String, UnitCache<List<NodeInfo>>> getSearch() {
-    return this.search;
-  }
-
-  Map<String, UnitCache<List<LeafInfo>>> getLeafs() {
-    return this.leafs;
-  }
-
-  UnitCache<List<NodeInfo>> getSearchByUrl(String url) {
-    return this.search[url];
-  }
-
-  UnitCache<List<LeafInfo>> getLeafsByUrl(String url) {
-    return this.leafs[url];
-  }
-
-  int getSeachCount(){
-    return this.searchCount;
-  }
-
-  int getLeafsCount(){
-    return this.leafsCount;
-  }
-
-  String getLastSearch() {
-    return this.lastSearch;
-  }
-
-  String getLastLeafs() {
-    return this.lastLeafs;
-  }
-
-  List<LeafInfo> getOffline() => this.offline;
 }

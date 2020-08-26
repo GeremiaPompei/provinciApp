@@ -1,7 +1,5 @@
 import 'dart:convert';
 import '../Cache.dart';
-import '../LeafInfo.dart';
-import '../NodeInfo.dart';
 import '../UnitCache.dart';
 
 class DeserializeCache {
@@ -9,21 +7,17 @@ class DeserializeCache {
     Map<String, dynamic> jsonMap = json.decode(contents);
     Cache cache = Cache(
         int.parse(jsonMap['Search Count']), int.parse(jsonMap['Leafs Count']));
-    cache.setLastSearch(jsonMap['Last Search']);
-    cache.setLastLeafs(jsonMap['Last Leafs']);
-    cache.setSearch(deserializeMapInfo(
-        jsonMap['Search']));
-    cache.setLeafs(deserializeMapInfo(
-        jsonMap['Leafs']));
+    cache.lastSearch = jsonMap['Last Search'];
+    cache.lastLeafs = jsonMap['Last Leafs'];
+    cache.search = deserializeMapInfo(jsonMap['Search']);
+    cache.leafs = deserializeMapInfo(jsonMap['Leafs']);
     return cache;
   }
 
-  static Map<String, UnitCache<List<T>>> deserializeMapInfo<T>(
-      List listIn) {
+  static Map<String, UnitCache<List<T>>> deserializeMapInfo<T>(List listIn) {
     Map<String, UnitCache<List<T>>> mapRes = {};
     listIn.forEach((element) {
-      mapRes[element['Key']] = UnitCache(
-          [],
+      mapRes[element['Key']] = UnitCache([],
           DateTime.parse(element['Unit Cache']['Date']),
           element['Unit Cache']['Name']);
     });

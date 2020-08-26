@@ -1,4 +1,5 @@
 import 'package:MC/controller/Controller.dart';
+import 'package:MC/utility/Colore.dart';
 import 'package:MC/view/LeafsInfoView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -38,14 +39,14 @@ class _ScrollListViewState extends State<ScrollListView> {
           MaterialPageRoute(
               builder: (context) => FutureBuilder<dynamic>(
                     future: controller.setLeafInfo(
-                        controller.getSearch()[index].getName(),
-                        controller.getSearch()[index].getUrl()),
+                        controller.getSearch()[index].name,
+                        controller.getSearch()[index].url,index),
                     builder: (BuildContext context,
                         AsyncSnapshot<dynamic> snapshot) {
                       if (snapshot.hasData)
                         varWidget = LeafsInfoView(
                             this.controller.getLeafs(),
-                            this.controller.getSearch()[index].getName(),
+                            this.controller.getSearch()[index].name,
                             this.controller);
                       else
                         varWidget = LoadingView();
@@ -60,7 +61,7 @@ class _ScrollListViewState extends State<ScrollListView> {
     return Scaffold(
       appBar: AppBar(
         title: Text(this.title),
-        backgroundColor: Colors.red,
+        backgroundColor: Colore.primario(),
         leading: new IconButton(
             icon: new Icon(Icons.arrow_back_ios),
             onPressed: () {setState(() {
@@ -81,9 +82,9 @@ class _ScrollListViewState extends State<ScrollListView> {
                 return FlatButton(
                   child: ListTile(
                     title: Text(
-                        '${controller.getSearch()[index].getName().toString()}'),
+                        '${controller.getSearch()[index].name.toString()}'),
                     subtitle: Text(
-                        '${controller.getSearch()[index].getDescription().toString()}'),
+                        '${controller.getSearch()[index].description.toString()}'),
                   ),
                   onPressed: () {
                     setLeafs(index);

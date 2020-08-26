@@ -1,5 +1,6 @@
 import 'package:MC/controller/Controller.dart';
 import 'package:MC/model/LeafInfo.dart';
+import 'package:MC/utility/Font.dart';
 import 'package:MC/view/CardsSizedBox.dart';
 import 'package:MC/view/LastSearchedWidget.dart';
 import 'package:MC/view/LeafsInfoView.dart';
@@ -29,8 +30,8 @@ class _EsploraViewState extends State<EsploraView> {
       RefreshController(initialRefresh: false);
 
   _EsploraViewState(this.controller) {
-    this.searched = this.controller.cache.getSearch().entries.toList();
-    this.leafs = this.controller.cache.getLeafs().entries.toList();
+    this.searched = this.controller.getLastSearched();
+    this.leafs = this.controller.getLastLeafs();
   }
 
   Future findPosition() async {
@@ -113,7 +114,7 @@ class _EsploraViewState extends State<EsploraView> {
             child: Center(
               child: Text(
                 'Comuni',
-                style: TextStyle(fontSize: 20, fontFamily: 'StencilArmyWWI'),
+                style: TextStyle(fontSize: 20, fontFamily: Font.primario()),
               ),
             ),
           ),
@@ -122,7 +123,7 @@ class _EsploraViewState extends State<EsploraView> {
             child: Center(
               child: Text(
                 'Categorie',
-                style: TextStyle(fontSize: 20, fontFamily: 'StencilArmyWWI'),
+                style: TextStyle(fontSize: 20, fontFamily: Font.primario()),
               ),
             ),
           ),
@@ -132,18 +133,20 @@ class _EsploraViewState extends State<EsploraView> {
               this.controller,
               this.searched,
               (index) => ScrollListView(
-                  this.controller, this.searched[index].value.getName()),
+                  this.controller, this.searched[index].value.name),
               (index) => controller.setSearch(
-                  this.searched[index].value.getName(),
+                  this.searched[index].value.name,
                   this.searched[index].key)),
           Divider(),
           LastSearchedWidget(
               this.controller,
               this.leafs,
               (index) => LeafsInfoView(this.controller.getLeafs(),
-                  this.leafs[index].value.getName(), this.controller),
+                  this.leafs[index].value.name, this.controller),
               (index) => controller.setLeafInfo(
-                  this.leafs[index].value.getName(), this.leafs[index].key))
+                  this.leafs[index].value.name,
+                  this.leafs[index].key,
+                  index))
         ]),
       ),
     );

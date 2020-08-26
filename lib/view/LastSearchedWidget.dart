@@ -10,10 +10,11 @@ class LastSearchedWidget extends StatefulWidget {
   Widget Function(int index) funcWidget;
   Future Function(int index) funcSet;
 
-  LastSearchedWidget(this.controller, this.list,this.funcWidget,this.funcSet);
+  LastSearchedWidget(this.controller, this.list, this.funcWidget, this.funcSet);
 
   @override
-  _LastSearchedWidgetState createState() => _LastSearchedWidgetState(this.controller, this.list,this.funcWidget,this.funcSet);
+  _LastSearchedWidgetState createState() => _LastSearchedWidgetState(
+      this.controller, this.list, this.funcWidget, this.funcSet);
 }
 
 class _LastSearchedWidgetState extends State<LastSearchedWidget> {
@@ -22,7 +23,8 @@ class _LastSearchedWidgetState extends State<LastSearchedWidget> {
   Widget Function(int index) funcWidget;
   Future Function(int index) funcSet;
 
-  _LastSearchedWidgetState(this.controller, this.list,this.funcWidget,this.funcSet);
+  _LastSearchedWidgetState(
+      this.controller, this.list, this.funcWidget, this.funcSet);
 
   @override
   Widget build(BuildContext context) {
@@ -32,25 +34,23 @@ class _LastSearchedWidgetState extends State<LastSearchedWidget> {
         primary: false,
         itemCount: this.list.length,
         itemBuilder: (context, index) =>
-        this.list[index].value.getName().contains('Empty')
-            ? Container()
-            : FlatButton(
-          child: ListTile(
-            title: Text(this.list[index].value.getName()),
-            subtitle: Text(DateFormat('yyy-MM-dd HH:mm')
-                .format(this.list[index].value.getDate())
-                .toString()),
-          ),
-          onPressed: () {
-            funcSet(index)
-                .then((value) => setState(() {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          funcWidget(index)));
-            }));
-          },
-        ));
+            this.list[index].value.name.contains('Empty')
+                ? Container()
+                : FlatButton(
+                    child: ListTile(
+                      title: Text(this.list[index].value.name),
+                      subtitle: Text(DateFormat('yyy-MM-dd HH:mm')
+                          .format(this.list[index].value.date)
+                          .toString()),
+                    ),
+                    onPressed: () {
+                      funcSet(index).then((value) => setState(() {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => funcWidget(index)));
+                          }));
+                    },
+                  ));
   }
 }

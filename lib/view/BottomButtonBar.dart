@@ -1,4 +1,5 @@
 import 'package:MC/controller/Controller.dart';
+import 'package:MC/utility/Colore.dart';
 import 'package:MC/view/EsploraView.dart';
 import 'package:MC/view/EventiView.dart';
 import 'package:flutter/cupertino.dart';
@@ -52,9 +53,9 @@ class _BottomButtonDownState extends State<BottomButtonDown> {
           title: Text('Salvati'),
         ),
       ],
-      unselectedItemColor: Colors.black,
+      unselectedItemColor: Colore.terziario(),
       currentIndex: index,
-      selectedItemColor: Colors.red,
+      selectedItemColor: Colore.primario(),
       onTap: onItemTapped,
     );
   }

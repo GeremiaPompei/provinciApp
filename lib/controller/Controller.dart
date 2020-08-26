@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:MC/model/Persistence/DeserializeCache.dart';
+import 'package:MC/model/Persistence/DeserializeOffline.dart';
 import 'package:MC/model/Persistence/SerializeCache.dart';
+import 'package:MC/model/Persistence/SerializeOffline.dart';
 import 'package:MC/model/Persistence/StoreManager.dart';
 import 'package:MC/model/UnitCache.dart';
 import 'package:MC/model/web/HtmlParser.dart';
@@ -10,90 +12,100 @@ import 'package:MC/model/Cache.dart';
 import 'package:MC/model/NodeInfo.dart';
 
 class Controller {
-  Cache cache;
-  List<NodeInfo> events;
-  List<NodeInfo> promos;
+  Cache _cache;
+  List<NodeInfo> _events;
+  List<NodeInfo> _promos;
 
   Controller() {
-    events = [];
-    promos = [];
-    cache = new Cache(5, 5);
+    _events = [];
+    _promos = [];
+    _cache = new Cache(5, 5);
   }
 
   Future<dynamic> init() async {
-    //TODO correggere
-    try {
-      this.cache.initOrganizations(await HtmlParser.organizations());
-      this.cache.initCategories(await HtmlParser.categories());
-      try {
-        await loadLastInfo();
-      } catch (e) {}
-      store();
-    } catch (e) {}
-    try{
-      List<dynamic> list = json.decode(await StoreManager.load('Offline.json'));
-      list.forEach((element) {
-        getOffline().add(LeafInfo(element));
-      });
-    }catch (e) {
-      print(e.toString());
-    }
+    this._cache.initOrganizations(await HtmlParser.organizations());
+    this._cache.initCategories(await HtmlParser.categories());
+    await loadCacheLastInfo();
+    storeCache();
     return this.getCategories();
   }
 
+  Future<dynamic> initOffline() async {
+    //TODO controllare aggiornamento
+//    try {
+//      for (var el in this._cache.offline) {
+//        List list;
+//        try {
+//          List<dynamic> tmp = json.decode(await HttpRequest.getJson(el.sourceUrl));
+//          list =
+//              tmp.map((parsedJson) => LeafInfo(parsedJson,  el.sourceUrl, el.sourceIndex)).toList();
+//        } catch (e) {
+//          try {
+//            Map<String, dynamic> tmp =
+//            json.decode(await HttpRequest.getJson(el.sourceUrl));
+//            list.add(LeafInfo(tmp['MetaData'], el.sourceUrl, el.sourceIndex));
+//          } catch (e) {}
+//        }
+//      }
+//    } catch (e) {}
+    loadOffline();
+    return getOffline();
+  }
+
   Future<dynamic> initEvents() async {
-    this.events = await HtmlParser.events();
-    return this.events;
+    this._events = await HtmlParser.events();
+    return this._events;
   }
 
   Future<dynamic> initPromos() async {
-    this.promos = await HtmlParser.promos();
-    return this.promos;
+    this._promos = await HtmlParser.promos();
+    return this._promos;
   }
 
   Future setSearch(String name, String url) async {
     try {
-      UnitCache<List<NodeInfo>> cacheUnit = this.cache.getSearchByUrl(url);
+      UnitCache<List<NodeInfo>> cacheUnit = this._cache.getSearchByUrl(url);
       if (cacheUnit == null) {
         List<NodeInfo> nodes = await HtmlParser.searchByWord(url);
         String oldUrl = oldestUrl(
-            this.cache.search.keys, (el) => this.cache.getSearchByUrl(el));
-        cacheUnit = this.cache.search[oldUrl];
-        cacheUnit.setName(name);
-        cacheUnit.setElement(nodes);
-        this.cache.changeSearch(oldUrl, url, cacheUnit);
+            this._cache.search.keys, (el) => this._cache.getSearchByUrl(el));
+        cacheUnit = this._cache.search[oldUrl];
+        cacheUnit.name = name;
+        cacheUnit.element = nodes;
+        this._cache.changeSearch(oldUrl, url, cacheUnit);
         cacheUnit.updateDate();
-        store();
+        storeCache();
       } else
         cacheUnit.updateDate();
-      this.cache.setLastSearch(url);
+      this._cache.lastSearch = url;
     } catch (e) {
       print(e.toString());
     }
     return getSearch();
   }
 
-  Future setLeafInfo(String name, String url) async {
-    UnitCache<List<LeafInfo>> cacheUnit = this.cache.getLeafsByUrl(url);
+  Future setLeafInfo(String name, String url, int index) async {
+    UnitCache<List<LeafInfo>> cacheUnit = this._cache.getLeafsByUrl(url);
     if (cacheUnit == null) {
       List<LeafInfo> leafs = [];
       try {
         List<dynamic> tmp = json.decode(await HttpRequest.getJson(url));
-        leafs = tmp.map((parsedJson) => LeafInfo(parsedJson)).toList();
+        leafs =
+            tmp.map((parsedJson) => LeafInfo(parsedJson, url, index)).toList();
       } catch (e) {
         Map<String, dynamic> tmp = json.decode(await HttpRequest.getJson(url));
-        leafs.add(LeafInfo(tmp['MetaData']));
+        leafs.add(LeafInfo(tmp['MetaData'], url, index));
       }
       String oldUrl = oldestUrl(
-          this.cache.leafs.keys, (el) => this.cache.getLeafsByUrl(el));
-      cacheUnit = this.cache.leafs[oldUrl];
-      cacheUnit.setName(name);
-      cacheUnit.setElement(leafs);
-      this.cache.changeLeafs(oldUrl, url, cacheUnit);
+          this._cache.leafs.keys, (el) => this._cache.getLeafsByUrl(el));
+      cacheUnit = this._cache.leafs[oldUrl];
+      cacheUnit.name = name;
+      cacheUnit.element = leafs;
+      this._cache.changeLeafs(oldUrl, url, cacheUnit);
     }
     cacheUnit.updateDate();
-    store();
-    this.cache.setLastLeafs(url);
+    storeCache();
+    this._cache.lastLeafs = url;
     return getLeafs();
   }
 
@@ -101,9 +113,9 @@ class Controller {
     String oldUrl;
     DateTime tmpDate;
     list.forEach((el) => {
-          if (tmpDate == null || tmpDate.isAfter(func(el).getDate()))
+          if (tmpDate == null || tmpDate.isAfter(func(el).date))
             {
-              tmpDate = func(el).getDate(),
+              tmpDate = func(el).date,
               oldUrl = el,
             }
         });
@@ -111,81 +123,94 @@ class Controller {
   }
 
   Future<dynamic> addOffline(LeafInfo leafInfo) async {
-    this.cache.addOffline(leafInfo);
-    List<dynamic> list = [];
-    getOffline().forEach((element) {
-      list.add(element.getJson());
-    });
-    await StoreManager.store(json.encode(list), 'Offline.json');
+    this._cache.addOffline(leafInfo);
+    storeOffline();
     return this.getOffline();
   }
 
   Future<dynamic> removeOffline(LeafInfo leafInfo) async {
-    this.cache.removeOffline(leafInfo);
-    List<dynamic> list = [];
-    getOffline().forEach((element) {
-      list.add(element.getJson());
-    });
-    await StoreManager.store(json.encode(list), 'Offline.json');
+    this._cache.removeOffline(leafInfo);
+    storeOffline();
     return this.getOffline();
   }
 
   List<NodeInfo> getEvents() {
-    return this.events;
+    return this._events;
   }
 
   List<NodeInfo> getPromos() {
-    return this.promos;
+    return this._promos;
   }
 
   List<NodeInfo> getOrganizations() {
-    return this.cache.getOrganizations();
+    return this._cache.organizations;
   }
 
   List<NodeInfo> getCategories() {
-    return this.cache.getCategories();
+    return this._cache.categories;
   }
 
   List<NodeInfo> getSearch() {
-    return this.cache.getSearchByUrl(this.cache.getLastSearch()).getElement();
+    return this._cache.getSearchByUrl(this._cache.lastSearch).element;
   }
+
+  List<MapEntry<String, dynamic>> getLastSearched() =>
+      this._cache.search.entries.toList();
+
+  List<MapEntry<String, dynamic>> getLastLeafs() =>
+      this._cache.leafs.entries.toList();
 
   List<LeafInfo> getLeafs() {
-    return this.cache.getLeafsByUrl(this.cache.getLastLeafs()).getElement();
+    return this._cache.getLeafsByUrl(this._cache.lastLeafs).element;
   }
 
-  List<LeafInfo> getOffline() => this.cache.getOffline();
+  List<LeafInfo> getOffline() => this._cache.offline;
 
-  Future load() async {
-    this.cache =
-        DeserializeCache.deserialize(await StoreManager.load('Cache.json'));
-  }
-
-  Future loadLastInfo() async {
+  Future loadCacheLastInfo() async {
     Cache tmpCache =
-        DeserializeCache.deserialize(await StoreManager.load('Cache.json'));
-    this.cache.setSearch(tmpCache.getSearch());
-    this.cache.getSearch().forEach((key, value) async {
-      value.setElement(await HtmlParser.searchByWord(key));
+        DeserializeCache.deserialize(await StoreManager.load('cache.json'));
+    this._cache.search = tmpCache.search;
+    this._cache.search.forEach((key, value) async {
+      value.element = await HtmlParser.searchByWord(key);
     });
-    this.cache.setLastSearch(tmpCache.getLastSearch());
-    this.cache.setLeafs(tmpCache.getLeafs());
-    this.cache.getLeafs().forEach((key, value) async {
+    this._cache.lastSearch = tmpCache.lastSearch;
+    this._cache.leafs = tmpCache.leafs;
+    this._cache.leafs.forEach((key, value) async {
       List<LeafInfo> leafs = [];
       try {
         List<dynamic> tmp = json.decode(await HttpRequest.getJson(key));
-        leafs = tmp.map((parsedJson) => LeafInfo(parsedJson)).toList();
+        int i = 0;
+        leafs =
+            tmp.map((parsedJson) => LeafInfo(parsedJson, key, i++)).toList();
       } catch (e) {
-        Map<String, dynamic> tmp = json.decode(await HttpRequest.getJson(key));
-        leafs.add(LeafInfo(tmp['MetaData']));
+        try {
+          Map<String, dynamic> tmp =
+              json.decode(await HttpRequest.getJson(key));
+          leafs.add(LeafInfo(tmp['MetaData'], key, 0));
+        } catch (e) {}
       }
-      value.setElement(leafs);
+      value.element = leafs;
     });
-    this.cache.setLastLeafs(tmpCache.getLastLeafs());
+    this._cache.lastLeafs = tmpCache.lastLeafs;
   }
 
-  Future store() async {
+  Future loadCache() async {
+    this._cache =
+        DeserializeCache.deserialize(await StoreManager.load('cache.json'));
+  }
+
+  Future storeCache() async {
     return await StoreManager.store(
-        SerializeCache.serialize(this.cache), 'Cache.json');
+        SerializeCache.serialize(this._cache), 'cache.json');
+  }
+
+  Future loadOffline() async {
+    this._cache.offline =
+        DeserializeOffline.deserialize(await StoreManager.load('Offline.json'));
+  }
+
+  Future storeOffline() async {
+    return await StoreManager.store(
+        SerializeOffline.serialize(this._cache.offline), 'Offline.json');
   }
 }

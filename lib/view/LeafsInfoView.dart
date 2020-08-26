@@ -1,5 +1,6 @@
 import 'package:MC/controller/Controller.dart';
 import 'package:MC/model/LeafInfo.dart';
+import 'package:MC/utility/Colore.dart';
 import 'package:MC/view/DetailedLeafInfoView.dart';
 import 'package:flutter/material.dart';
 import 'package:share/share.dart';
@@ -27,7 +28,7 @@ class _LeafsInfoViewState extends State<LeafsInfoView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.red,
+        backgroundColor: Colore.primario(),
         title: Text(title),
         leading: new IconButton(
           icon: new Icon(Icons.arrow_back_ios),
@@ -76,18 +77,18 @@ class _ButtonInfoState extends State<ButtonInfo> {
           return Card(
               child: FlatButton(
                   child: ListTile(
-                    title: Text('${leafs[index].getName()}'),
-                    subtitle: leafs[index].getDescription() == null
+                    title: Text('${leafs[index].name}'),
+                    subtitle: leafs[index].description == null
                         ? Text('')
-                        : Text('${leafs[index].getDescription()}'),
+                        : Text('${leafs[index].description}'),
                   ),
                   onPressed: () {
                     setState(() {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>
-                                  DetailedLeafInfoView(title, leafs[index],controller)));
+                              builder: (context) => DetailedLeafInfoView(
+                                  title, leafs[index], controller)));
                     });
                   }));
         },

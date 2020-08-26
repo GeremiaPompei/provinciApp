@@ -1,4 +1,6 @@
 import 'package:MC/controller/Controller.dart';
+import 'package:MC/utility/Colore.dart';
+import 'package:MC/utility/Font.dart';
 import 'package:MC/view/HomeView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -31,14 +33,14 @@ class _OfflineWidgetState extends State<OfflineWidget> {
               'OFFLINE',
               style: TextStyle(
                 fontSize: 30,
-                fontFamily: 'StencilArmyWWI',
+                fontFamily: Font.primario(),
               ),
             ),
             FlatButton(
-              color: Colors.red,
+              color: Colore.primario(),
               child: Text(
                 'Ricarica',
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: Colore.secondario()),
               ),
               onPressed: () {
                 setState(() {
