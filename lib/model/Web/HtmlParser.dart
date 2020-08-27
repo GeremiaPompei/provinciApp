@@ -9,7 +9,7 @@ class HtmlParser {
   static final String MCDATI = 'http://dati.provincia.mc.it/';
   static final String MCEVENTI =
       'https://www.cronachemaceratesi.it/category/archivi/eventi-spettacoli/';
-  static final String MCPROMO = 'https://www.groupon.it/offerte/marche/';
+  static final String MCPROMO = 'https://www.groupon.it/offerte/macerata/';
 
   static Future<List<NodeInfo>> events() async {
     Function fName = (html.Element el) => el

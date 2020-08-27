@@ -29,11 +29,11 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
   LeafInfo leafInfo;
   String title;
   List<Widget> widgets;
-  Controller controller;
+  Controller _controller;
   Icon icon;
 
-  _DetailedLeafInfoViewState(this.title, this.leafInfo, this.controller) {
-    this.controller.getOffline().contains(this.leafInfo)
+  _DetailedLeafInfoViewState(this.title, this.leafInfo, this._controller) {
+    this._controller.getOffline().contains(this.leafInfo)
         ? this.icon = Icon(Icons.remove_circle_outline)
         : this.icon = Icon(Icons.add_circle_outline);
     initWidgets();
@@ -211,11 +211,11 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
               icon: this.icon,
               onPressed: () {
                 setState(() {
-                  if (this.controller.getOffline().contains(this.leafInfo)) {
-                    this.controller.removeOffline(leafInfo);
+                  if (this._controller.getOffline().contains(this.leafInfo)) {
+                    this._controller.removeOffline(leafInfo);
                     this.icon = Icon(Icons.add_circle_outline);
                   } else {
-                    this.controller.addOffline(leafInfo);
+                    this._controller.addOffline(leafInfo);
                     this.icon = Icon(Icons.remove_circle_outline);
                   }
                 });

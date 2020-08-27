@@ -19,10 +19,12 @@ class SalvatiView extends StatefulWidget {
 class _SalvatiViewState extends State<SalvatiView> {
   String _title;
   Controller _controller;
-  RefreshController _refreshController =
-      RefreshController(initialRefresh: false);
+  RefreshController _refreshController;
 
-  _SalvatiViewState(this._title, this._controller);
+  _SalvatiViewState(this._title, this._controller){
+    _refreshController =
+        RefreshController(initialRefresh: false);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,9 +44,30 @@ class _SalvatiViewState extends State<SalvatiView> {
         padding: const EdgeInsets.all(8),
         itemCount: this._controller.getOffline().length,
         itemBuilder: (context, index) {
+          Icon icon;
+          this._controller.getOffline().contains(this._controller.getOffline()[index])
+              ? icon = Icon(Icons.remove_circle_outline)
+              : icon = Icon(Icons.add_circle_outline);
           return Card(
               child: FlatButton(
                   child: ListTile(
+                    trailing: IconButton(
+                      icon: icon,
+                      onPressed: () {
+                        setState(() {
+                          if (this._controller.getOffline().contains(this._controller.getOffline()[index])) {
+                            this._controller.removeOffline(this._controller.getOffline()[index]);
+                            icon = Icon(Icons.add_circle_outline);
+                          } else {
+                            this._controller.addOffline(this._controller.getOffline()[index]);
+                            icon = Icon(Icons.remove_circle_outline);
+                          }
+                        });
+                      },
+                    ),
+                    leading: Image(
+                        image: NetworkImage(
+                            '${this._controller.getOffline()[index].image.toString()}')),
                     title: Text('${this._controller.getOffline()[index].name}'),
                     subtitle: this
                                 ._controller

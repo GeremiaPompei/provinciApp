@@ -42,9 +42,8 @@ class _CardsSizedBoxState extends State<CardsSizedBox> {
               ),
               child: FlatButton(
                 child: ListTile(
-                    subtitle: Image(
-                        image: NetworkImage(this.list[i].image)),
-                    title: Text(this.list[i].name)),
+                    title: Text(this.list[i].name),
+                    subtitle: Image(image: NetworkImage(this.list[i].image))),
                 onPressed: () {
                   setState(() {
                     Navigator.push(
@@ -52,7 +51,8 @@ class _CardsSizedBoxState extends State<CardsSizedBox> {
                         MaterialPageRoute(
                             builder: (context) => FutureBuilder<dynamic>(
                                   future: controller.setSearch(
-                                      this.list[i].name, this.list[i].url+'?'),
+                                      this.list[i].name,
+                                      this.list[i].url + '?'),
                                   builder: (BuildContext context,
                                       AsyncSnapshot<dynamic> snapshot) {
                                     if (snapshot.hasData)

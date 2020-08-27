@@ -54,13 +54,13 @@ class ButtonInfo extends StatefulWidget {
 class _ButtonInfoState extends State<ButtonInfo> {
   List<LeafInfo> leafs;
   String title;
-  Controller controller;
+  Controller _controller;
 
-  _ButtonInfoState(this.leafs, this.title, this.controller);
+  _ButtonInfoState(this.leafs, this.title, this._controller);
 
   int length() {
-    if (controller.getLeafs() != null)
-      return controller.getLeafs().length;
+    if (_controller.getLeafs() != null)
+      return _controller.getLeafs().length;
     else
       return 0;
   }
@@ -74,11 +74,36 @@ class _ButtonInfoState extends State<ButtonInfo> {
         padding: const EdgeInsets.all(8),
         itemCount: length(),
         itemBuilder: (context, index) {
+          Icon icon;
+          this
+                  ._controller
+                  .getOffline()
+                  .contains(leafs[index])
+              ? icon = Icon(Icons.remove_circle_outline)
+              : icon = Icon(Icons.add_circle_outline);
           return Card(
               child: FlatButton(
                   child: ListTile(
+                    trailing: IconButton(
+                      icon: icon,
+                      onPressed: () {
+                        setState(() {
+                          if (this
+                              ._controller
+                              .getOffline()
+                              .contains(leafs[index])) {
+                            this._controller.removeOffline(leafs[index]);
+                            icon = Icon(Icons.add_circle_outline);
+                          } else {
+                            this._controller.addOffline(leafs[index]);
+                            icon = Icon(Icons.remove_circle_outline);
+                          }
+                        });
+                      },
+                    ),
                     leading: Image(
-                        image: NetworkImage('${leafs[index].image.toString()}')),
+                        image:
+                            NetworkImage('${leafs[index].image.toString()}')),
                     title: Text('${leafs[index].name}'),
                     subtitle: leafs[index].description == null
                         ? Text('')
@@ -90,7 +115,7 @@ class _ButtonInfoState extends State<ButtonInfo> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => DetailedLeafInfoView(
-                                  title, leafs[index], controller)));
+                                  title, leafs[index], _controller)));
                     });
                   }));
         },

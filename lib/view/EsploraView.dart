@@ -1,5 +1,4 @@
 import 'package:MC/controller/Controller.dart';
-import 'package:MC/model/LeafInfo.dart';
 import 'package:MC/utility/Font.dart';
 import 'package:MC/view/CardsSizedBox.dart';
 import 'package:MC/view/LastSearchedWidget.dart';
