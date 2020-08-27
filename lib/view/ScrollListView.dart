@@ -2,7 +2,6 @@ import 'package:MC/controller/Controller.dart';
 import 'package:MC/view/LeafsInfoView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:MC/model/LeafInfo.dart';
 
 import 'LoadingView.dart';
 
@@ -32,27 +31,30 @@ class _ScrollListViewState extends State<ScrollListView> {
   }
 
   void setLeafs(int index) {
-    setState(() {
-      Navigator.push(
+    setState(
+      () {
+        Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => FutureBuilder<dynamic>(
-                    future: controller.setLeafInfo(
-                        controller.getSearch()[index].getName(),
-                        controller.getSearch()[index].getUrl()),
-                    builder: (BuildContext context,
-                        AsyncSnapshot<dynamic> snapshot) {
-                      if (snapshot.hasData)
-                        varWidget = LeafsInfoView(
-                            this.controller.getLeafs(),
-                            this.controller.getSearch()[index].getName(),
-                            this.controller);
-                      else
-                        varWidget = LoadingView();
-                      return varWidget;
-                    },
-                  )));
-    });
+            builder: (context) => FutureBuilder<dynamic>(
+              future: controller.setLeafInfo(
+                  controller.getSearch()[index].getName(),
+                  controller.getSearch()[index].getUrl()),
+              builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                if (snapshot.hasData)
+                  varWidget = LeafsInfoView(
+                      this.controller.getLeafs(),
+                      this.controller.getSearch()[index].getName(),
+                      this.controller);
+                else
+                  varWidget = LoadingView();
+                return varWidget;
+              },
+            ),
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -63,8 +65,9 @@ class _ScrollListViewState extends State<ScrollListView> {
         backgroundColor: Colors.red,
         leading: new IconButton(
             icon: new Icon(Icons.arrow_back_ios),
-            onPressed: () {setState(() {
-              Navigator.pop(context);
+            onPressed: () {
+              setState(() {
+                Navigator.pop(context);
               });
             }),
       ),

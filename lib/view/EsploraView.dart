@@ -4,6 +4,7 @@ import 'package:MC/view/CardsSizedBox.dart';
 import 'package:MC/view/LastSearchedWidget.dart';
 import 'package:MC/view/LeafsInfoView.dart';
 import 'package:MC/view/ScrollListView.dart';
+import 'package:MC/widgets/SimpleRoundButton.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -111,49 +112,78 @@ class _EsploraViewState extends State<EsploraView> {
                           )));
             },
           ),*/
-          Padding(
-            padding: const EdgeInsets.only(top: 20.0),
-            child: SizedBox(
+            Container(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Row(
+                    children: [
+                      Flexible(
+                        child: SimpleRoundButton(
+                          backgroundColor: ThemeSecondaryColor,
+                          icon: Icon(Icons.home),
+                        ),
+                      ),
+                      Flexible(
+                        child: SimpleRoundButton(
+                          backgroundColor: ThemeSecondaryColor,
+                          icon: Icon(Icons.card_travel),
+                        ),
+                      ),
+                      Flexible(
+                        child: SimpleRoundButton(
+                          backgroundColor: ThemeSecondaryColor,
+                          icon: Icon(Icons
+                              .signal_cellular_connected_no_internet_4_bar),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 20.0),
+              child: SizedBox(
+                child: Center(
+                  child: Text(
+                    'Comuni',
+                    style:
+                        TextStyle(fontSize: 20, fontFamily: 'StencilArmyWWI'),
+                  ),
+                ),
+              ),
+            ),
+            CardsSizedBox(this.controller, this.controller.getOrganizations()),
+            SizedBox(
               child: Center(
                 child: Text(
-                  'Comuni',
+                  'Categorie',
                   style: TextStyle(fontSize: 20, fontFamily: 'StencilArmyWWI'),
                 ),
               ),
             ),
-          ),
-          CardsSizedBox(this.controller, this.controller.getOrganizations()),
-          SizedBox(
-            child: Center(
-              child: Text(
-                'Categorie',
-                style: TextStyle(fontSize: 20, fontFamily: 'StencilArmyWWI'),
-              ),
-            ),
-          ),
-          CardsSizedBox(this.controller, this.controller.getCategories()),
-          Divider(),
-          LastSearchedWidget(
-              this.controller,
-              this.searched,
-                  (index) =>
-                  ScrollListView(
-                      this.controller, this.searched[index].value.getName()),
-                  (index) =>
-                  controller.setSearch(
-                      this.searched[index].value.getName(),
-                      this.searched[index].key)),
-          Divider(),
-          LastSearchedWidget(
-              this.controller,
-              this.leafs,
-                  (index) =>
-                  LeafsInfoView(this.controller.getLeafs(),
-                      this.leafs[index].value.getName(), this.controller),
-                  (index) =>
-                  controller.setLeafInfo(
-                      this.leafs[index].value.getName(), this.leafs[index].key))
-        ]),
+            CardsSizedBox(this.controller, this.controller.getCategories()),
+            Divider(),
+            LastSearchedWidget(
+                this.controller,
+                this.searched,
+                (index) => ScrollListView(
+                    this.controller, this.searched[index].value.getName()),
+                (index) => controller.setSearch(
+                    this.searched[index].value.getName(),
+                    this.searched[index].key)),
+            Divider(),
+            LastSearchedWidget(
+                this.controller,
+                this.leafs,
+                (index) => LeafsInfoView(this.controller.getLeafs(),
+                    this.leafs[index].value.getName(), this.controller),
+                (index) => controller.setLeafInfo(
+                    this.leafs[index].value.getName(), this.leafs[index].key))
+          ],
+        ),
       ),
     );
   }

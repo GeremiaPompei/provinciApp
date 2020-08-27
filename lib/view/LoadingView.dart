@@ -9,21 +9,25 @@ class LoadingView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: BackgroundColor,
       body: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('MACERATA', style: TitleTextStyle),
-            Image(
-              image: AssetImage("assets/images/Provincia_di_Macerata-Logo.png"),
-              height: 200,
-            ),
-            SpinKitCubeGrid(
-              color: ThemePrimaryColor,
-              duration: Duration(milliseconds: 300),
-            ),
-          ],
+        child: Container(
+          child: Stack(
+            overflow: Overflow.clip,
+            alignment: Alignment.center,
+            children: [
+              Image(
+                image:
+                    AssetImage("assets/images/Provincia_di_Macerata-Logo.png"),
+                height: 200,
+              ),
+              SpinKitCubeGrid(
+                size: 200,
+                color: BackgroundColor,
+                duration: Duration(milliseconds: 1000),
+              ),
+            ],
+          ),
         ),
       ),
     );

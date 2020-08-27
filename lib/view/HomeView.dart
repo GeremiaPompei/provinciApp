@@ -190,13 +190,7 @@ class _HomeViewState extends State<HomeView> {
         ],
       ),
       body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: varWidget,
-            ),
-          ],
-        ),
+        child: Expanded(child: varWidget),
       ),
       bottomNavigationBar: BottomButtonDown(controller, onItemTapped),
     );

@@ -28,42 +28,54 @@ class _CardsSizedBoxState extends State<CardsSizedBox> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 150,
+      height: 200,
       child: PageView.builder(
         itemCount: this.list.length,
         controller: PageController(viewportFraction: 0.5),
         onPageChanged: (int index) => setState(() => _index = index),
         itemBuilder: (_, i) => Transform.scale(
-            scale: _index == i ? 1 : 0.9,
-            child: Card(
-              elevation: 6,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: FlatButton(
-                child: Text(this.list[i].name),
-                onPressed: () {
-                  setState(() {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
+          scale: _index == i ? 1 : 0.9,
+          child: Card(
+            elevation: 6,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            child: Column(
+              children: [
+                FlatButton(
+                  child: Text(this.list[i].name, textAlign: TextAlign.center),
+                  onPressed: () {
+                    setState(
+                      () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
                             builder: (context) => FutureBuilder<dynamic>(
-                                  future: controller.setSearch(
-                                      this.list[i].name, this.list[i].url),
-                                  builder: (BuildContext context,
-                                      AsyncSnapshot<dynamic> snapshot) {
-                                    if (snapshot.hasData)
-                                      varWidget = ScrollListView(
-                                          this.controller, list[i].name);
-                                    else
-                                      varWidget = LoadingView();
-                                    return varWidget;
-                                  },
-                                )));
-                  });
-                },
-              ),
-            )),
+                              future: controller.setSearch(
+                                  this.list[i].name, this.list[i].url),
+                              builder: (BuildContext context,
+                                  AsyncSnapshot<dynamic> snapshot) {
+                                if (snapshot.hasData)
+                                  varWidget = ScrollListView(
+                                      this.controller, list[i].name);
+                                else
+                                  varWidget = LoadingView();
+                                return varWidget;
+                              },
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                ),
+                Image(
+                  height: 115,
+                  image: AssetImage("assets/images/logo_mc.PNG"),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

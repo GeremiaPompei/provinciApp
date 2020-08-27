@@ -4,12 +4,12 @@ const TitleTextStyle = TextStyle(
   fontFamily: 'Poppins',
   fontWeight: FontWeight.w900,
   fontSize: 35,
-  color: Color.fromARGB(255, 72, 179, 179),
+  color: ThemePrimaryColor,
 );
 const TitleTextStyle_20 = TextStyle(
   fontFamily: 'Poppins',
   fontSize: 20,
-  color: Color.fromARGB(255, 72, 179, 179),
+  color: ThemePrimaryColor,
 );
 
 const ThemePrimaryColor = Color.fromARGB(255, 72, 179, 179);
