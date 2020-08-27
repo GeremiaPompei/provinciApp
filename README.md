@@ -13,7 +13,7 @@ Il concorso si propone di conseguire i seguenti obiettivi:
 ## Contenuti
    - Azioni possibili
    - Come utilizzare l'applicazione
-   - 
+   - Diagrammi uml
 
 - [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
 - [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
