@@ -35,6 +35,12 @@ Il concorso si propone di conseguire i seguenti obiettivi:
  ```
  informazioni intermedie
  ```
-   
- 
+## Condivisione
+[2]:
+## Salvataggio
+[3]:
+## Foto
+[4]:
+## Mappe
+[5]:
  
