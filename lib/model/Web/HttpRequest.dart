@@ -68,7 +68,7 @@ class HttpRequest {
     html.Document document;
     final response = await _responseByGet(word);
     if (response.statusCode == 200) {
-      document = parse(response.body);
+      document = parse(response.body,encoding: 'utf-8');
       if (ulClass == null)
         document.getElementsByClassName(liClass).forEach((element) {
           elements.add(element);

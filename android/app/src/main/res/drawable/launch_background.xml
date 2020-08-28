@@ -14,6 +14,6 @@
      <item>
         <bitmap
             android:gravity="center"
-            android:src="@drawable/LogoSample_ByTailorBrands" />
+            android:src="@drawable/ic_launcher" />
     </item>
 </layer-list>
