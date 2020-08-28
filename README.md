@@ -46,7 +46,7 @@ Lo sviluppo dell'applicazione nasce dalla base dei requisiti richiesti dal conco
 
 ***[La nostra proposta][9]***
 
-[Introduzione all'utilizzo]
+[Introduzione all'utilizzo](https://github.com/GeremiaPompei/mc/blob/master/README.md#introduzione-allutilizzo-dellapplicazione)
 
 ## Flutter
 [1]:https://github.com/GeremiaPompei/mc/blob/master/README.md#flutter
@@ -86,6 +86,7 @@ Lo sviluppo dell'applicazione nasce dalla base dei requisiti richiesti dal conco
 [Torna](https://github.com/GeremiaPompei/mc/blob/master/README.md#obiettivi-del-concorso)
 
 ## Introduzione all'utilizzo dell'applicazione
+[Torna](https://github.com/GeremiaPompei/mc/blob/master/README.md#provinciappmc)
 
 ### Authors
 - [Geremia Pompei](https://github.com/GeremiaPompei)
