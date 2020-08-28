@@ -11,20 +11,30 @@ Il concorso si propone di conseguire i seguenti obiettivi:
 3. promuovere le risorse culturali e turistiche del territorio provinciale.  
   
 ## Contenuti  
- - Funzioni
+ - Funzionionalità
 	 - [Ricerca ][1]
- - Come utilizzare l'applicazione  
- - Diagrammi uml  
+	 - [Condivisione][2]
+	 - [Salvataggio][3]
+	 - [Foto][4]
+	 - [Mappe][5]
      
   ## Ricerca  
-  [1]: https://github.com/GeremiaPompei/mc/blob/master/README.md#ricerca
+  [1]:https://github.com/GeremiaPompei/mc/edit/master/README.md/Ricerca 
  La ricerca si compone di tre diverse tipologie:  
-   ### Ricerca classica  
-  La ricerca classica consiste nella normale tipologia di ricerca per nome  
-  
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)  
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)  
-  
-For help getting started with Flutter, view our  
-[online documentation](https://flutter.dev/docs), which offers tutorials,  
-samples, guidance on mobile development, and a full API reference.
+  -  #### Ricerca per nome
+	  La ricerca classica consiste nella normale tipologia di ricerca per   nome 
+ - #### Ricerca per categoria
+  ```
+ informazioni intermedie
+  ```
+ - #### Ricerca per comune/organizzazione
+  ```
+  informzioni intermedie
+```
+ - #### Ricerca per posizione
+ ```
+ informazioni intermedie
+ ```
+   
+ 
+ 
