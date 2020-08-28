@@ -54,7 +54,7 @@ class _CardsSizedBoxState extends State<CardsSizedBox> {
                             builder: (context) => FutureBuilder<dynamic>(
                                   future: controller.setSearch(
                                       this.list[i].name,
-                                      this.list[i].url + '?'),
+                                      this.list[i].url),
                                   builder: (BuildContext context,
                                       AsyncSnapshot<dynamic> snapshot) {
                                     if (snapshot.hasData)

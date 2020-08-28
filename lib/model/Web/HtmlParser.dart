@@ -76,6 +76,10 @@ class HtmlParser {
             .putIfAbsent('href', () => null)
             .trim()));
     Function fImage = (html.Element el) => '';
+    if(word.contains('?'))
+      word+='&';
+    else
+      word+='?';
     return await _scrollPage((page) => HttpRequest.getNodeInfo(
         MCDATI+word+page,
         'dataset-list unstyled',

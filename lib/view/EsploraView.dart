@@ -42,7 +42,7 @@ class _EsploraViewState extends State<EsploraView> {
     this.location = placemark[0].locality;
     return this
         .controller
-        .setSearch(this.location, 'dataset?q=' + this.location+'&');
+        .setSearch(this.location, 'dataset?q=' + this.location);
   }
 
   @override
@@ -70,7 +70,7 @@ class _EsploraViewState extends State<EsploraView> {
                     MaterialPageRoute(
                         builder: (context) => FutureBuilder<dynamic>(
                               future: controller.setSearch(
-                                  input, 'dataset?q=' + input+'&'),
+                                  input, 'dataset?q=' + input),
                               builder: (BuildContext context,
                                   AsyncSnapshot<dynamic> snapshot) {
                                 if (snapshot.hasData)
@@ -135,7 +135,7 @@ class _EsploraViewState extends State<EsploraView> {
                   this.controller, this.searched[index].value.name),
               (index) => controller.setSearch(
                   this.searched[index].value.name,
-                  this.searched[index].key+'&')),
+                  this.searched[index].key)),
           Divider(),
           LastSearchedWidget(
               this.controller,
