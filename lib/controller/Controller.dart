@@ -5,8 +5,8 @@ import 'package:MC/model/Persistence/SerializeCache.dart';
 import 'package:MC/model/Persistence/SerializeOffline.dart';
 import 'package:MC/model/Persistence/StoreManager.dart';
 import 'package:MC/model/UnitCache.dart';
+import 'package:MC/model/Web/HttpRequest.dart';
 import 'package:MC/model/web/HtmlParser.dart';
-import 'package:MC/model/web/HttpRequest.dart';
 import 'package:MC/model/LeafInfo.dart';
 import 'package:MC/model/Cache.dart';
 import 'package:MC/model/NodeInfo.dart';
@@ -15,6 +15,8 @@ class Controller {
   Cache _cache;
   List<NodeInfo> _events;
   List<NodeInfo> _promos;
+  static const FNCACHE = 'cache.json';
+  static const FNOFFLINE = 'offline.json';
 
   Controller() {
     _events = [];
@@ -27,7 +29,7 @@ class Controller {
     this._cache.initCategories(await HtmlParser.categories());
     try {
       await loadCacheLastInfo();
-    }catch(e){}
+    } catch (e) {}
     storeCache();
     return this.getCategories();
   }
@@ -107,11 +109,21 @@ class Controller {
 
   Future<dynamic> addOffline(LeafInfo leafInfo) async {
     this._cache.addOffline(leafInfo);
+    if (leafInfo.image != null) {
+      leafInfo.imageFile = await StoreManager.localFile(
+          leafInfo.image.substring(leafInfo.image.lastIndexOf('/') + 1));
+      StoreManager.storeBytes(await HttpRequest.getImage(leafInfo.image),
+          leafInfo.imageFile.path);
+    }
     storeOffline();
     return this.getOffline();
   }
 
   Future<dynamic> removeOffline(LeafInfo leafInfo) async {
+    if (leafInfo.imageFile != null) {
+      StoreManager.localFile(leafInfo.imageFile.path)
+          .then((value) => value.delete());
+    }
     this._cache.removeOffline(leafInfo);
     storeOffline();
     return this.getOffline();
@@ -151,7 +163,7 @@ class Controller {
 
   Future loadCacheLastInfo() async {
     Cache tmpCache =
-        DeserializeCache.deserialize(await StoreManager.load('cache.json'));
+        DeserializeCache.deserialize(await StoreManager.load(FNCACHE));
     this._cache.search = tmpCache.search;
     this._cache.search.forEach((key, value) async {
       value.element = await HtmlParser.searchByWord(key);
@@ -167,21 +179,21 @@ class Controller {
 
   Future loadCache() async {
     this._cache =
-        DeserializeCache.deserialize(await StoreManager.load('cache.json'));
+        DeserializeCache.deserialize(await StoreManager.load(FNCACHE));
   }
 
   Future storeCache() async {
     return await StoreManager.store(
-        SerializeCache.serialize(this._cache), 'cache.json');
+        SerializeCache.serialize(this._cache), FNCACHE);
   }
 
   Future loadOffline() async {
     this._cache.offline =
-        DeserializeOffline.deserialize(await StoreManager.load('Offline.json'));
+        DeserializeOffline.deserialize(await StoreManager.load(FNOFFLINE));
   }
 
   Future storeOffline() async {
     return await StoreManager.store(
-        SerializeOffline.serialize(this._cache.offline), 'Offline.json');
+        SerializeOffline.serialize(this._cache.offline), FNOFFLINE);
   }
 }

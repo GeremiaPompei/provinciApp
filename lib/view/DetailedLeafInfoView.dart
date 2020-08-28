@@ -1,5 +1,6 @@
 import 'package:MC/controller/Controller.dart';
 import 'package:MC/model/LeafInfo.dart';
+import 'package:MC/model/Web/HttpRequest.dart';
 import 'package:MC/utility/Colore.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -13,16 +14,19 @@ import 'package:photo_view/photo_view.dart';
 import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'LoadingView.dart';
+
 class DetailedLeafInfoView extends StatefulWidget {
   LeafInfo leafInfo;
   String title;
   Controller controller;
+  Image image;
 
-  DetailedLeafInfoView(this.title, this.leafInfo, this.controller);
+  DetailedLeafInfoView(this.title, this.leafInfo, this.controller, this.image);
 
   @override
-  _DetailedLeafInfoViewState createState() =>
-      _DetailedLeafInfoViewState(this.title, this.leafInfo, this.controller);
+  _DetailedLeafInfoViewState createState() => _DetailedLeafInfoViewState(
+      this.title, this.leafInfo, this.controller, this.image);
 }
 
 class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
@@ -31,8 +35,10 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
   List<Widget> widgets;
   Controller _controller;
   Icon icon;
+  Image image;
 
-  _DetailedLeafInfoViewState(this.title, this.leafInfo, this._controller) {
+  _DetailedLeafInfoViewState(
+      this.title, this.leafInfo, this._controller, this.image) {
     this._controller.getOffline().contains(this.leafInfo)
         ? this.icon = Icon(Icons.remove_circle_outline)
         : this.icon = Icon(Icons.add_circle_outline);
@@ -47,10 +53,10 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
         this.leafInfo.description == null
             ? Container()
             : Text(this.leafInfo.description),
-        this.leafInfo.image == null
+        this.image == null
             ? Container()
             : FlatButton(
-                child: Image(image: NetworkImage(this.leafInfo.image)),
+                child: this.image,
                 onPressed: () {
                   setState(() {
                     Navigator.push(
@@ -61,12 +67,7 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
                                   backgroundColor: Colore.terziario(),
                                   title: Text(this.leafInfo.name),
                                 ),
-                                body: Container(
-                                  child: PhotoView(
-                                    imageProvider:
-                                        NetworkImage(this.leafInfo.image),
-                                  ),
-                                ))));
+                                body: Container(child: this.image))));
                   });
                 }),
         this.leafInfo.telefono == null
@@ -161,7 +162,7 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
             subtitle: Linkify(
               text: '${this.leafInfo.info.values.toList()[index]}',
               onOpen: (LinkableElement link) async {
-                if(await canLaunch(this.leafInfo.info.values.toList()[index]))
+                if (await canLaunch(this.leafInfo.info.values.toList()[index]))
                   await launch(this.leafInfo.info.values.toList()[index]);
               },
             ),

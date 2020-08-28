@@ -14,8 +14,15 @@ class StoreManager {
     return file.readAsString();
   }
 
-  static Future store(String contents, String fileName) async {
+  static Future<String> store(String contents, String fileName) async {
     File file = await localFile(fileName);
     file.writeAsString(contents);
+    return file.path;
+  }
+
+  static Future<String> storeBytes(List<int> contents, String fileName) async {
+    File file = await localFile(fileName);
+    file.writeAsBytes(contents);
+    return file.path;
   }
 }

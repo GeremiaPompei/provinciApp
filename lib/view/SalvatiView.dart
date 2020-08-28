@@ -21,9 +21,8 @@ class _SalvatiViewState extends State<SalvatiView> {
   Controller _controller;
   RefreshController _refreshController;
 
-  _SalvatiViewState(this._title, this._controller){
-    _refreshController =
-        RefreshController(initialRefresh: false);
+  _SalvatiViewState(this._title, this._controller) {
+    _refreshController = RefreshController(initialRefresh: false);
   }
 
   @override
@@ -45,7 +44,10 @@ class _SalvatiViewState extends State<SalvatiView> {
         itemCount: this._controller.getOffline().length,
         itemBuilder: (context, index) {
           Icon icon;
-          this._controller.getOffline().contains(this._controller.getOffline()[index])
+          this
+                  ._controller
+                  .getOffline()
+                  .contains(this._controller.getOffline()[index])
               ? icon = Icon(Icons.remove_circle_outline)
               : icon = Icon(Icons.add_circle_outline);
           return Card(
@@ -55,19 +57,26 @@ class _SalvatiViewState extends State<SalvatiView> {
                       icon: icon,
                       onPressed: () {
                         setState(() {
-                          if (this._controller.getOffline().contains(this._controller.getOffline()[index])) {
-                            this._controller.removeOffline(this._controller.getOffline()[index]);
+                          if (this
+                              ._controller
+                              .getOffline()
+                              .contains(this._controller.getOffline()[index])) {
+                            this._controller.removeOffline(
+                                this._controller.getOffline()[index]);
                             icon = Icon(Icons.add_circle_outline);
                           } else {
-                            this._controller.addOffline(this._controller.getOffline()[index]);
+                            this._controller.addOffline(
+                                this._controller.getOffline()[index]);
                             icon = Icon(Icons.remove_circle_outline);
                           }
                         });
                       },
                     ),
-                    leading: Image(
-                        image: NetworkImage(
-                            '${this._controller.getOffline()[index].image.toString()}')),
+                    leading:
+                        this._controller.getOffline()[index].imageFile == null
+                            ? null
+                            : Image.file(
+                                this._controller.getOffline()[index].imageFile),
                     title: Text('${this._controller.getOffline()[index].name}'),
                     subtitle: this
                                 ._controller
@@ -85,9 +94,20 @@ class _SalvatiViewState extends State<SalvatiView> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => DetailedLeafInfoView(
-                                  _title,
-                                  this._controller.getOffline()[index],
-                                  _controller)));
+                                    _title,
+                                    this._controller.getOffline()[index],
+                                    _controller,
+                                    this
+                                                ._controller
+                                                .getOffline()[index]
+                                                .imageFile ==
+                                            null
+                                        ? null
+                                        : Image.file(this
+                                            ._controller
+                                            .getOffline()[index]
+                                            .imageFile),
+                                  )));
                     });
                   }));
         },

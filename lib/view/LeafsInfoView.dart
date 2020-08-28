@@ -75,10 +75,7 @@ class _ButtonInfoState extends State<ButtonInfo> {
         itemCount: length(),
         itemBuilder: (context, index) {
           Icon icon;
-          this
-                  ._controller
-                  .getOffline()
-                  .contains(leafs[index])
+          this._controller.getOffline().contains(leafs[index])
               ? icon = Icon(Icons.remove_circle_outline)
               : icon = Icon(Icons.add_circle_outline);
           return Card(
@@ -101,9 +98,11 @@ class _ButtonInfoState extends State<ButtonInfo> {
                         });
                       },
                     ),
-                    leading: Image(
-                        image:
-                            NetworkImage('${leafs[index].image.toString()}')),
+                    leading: leafs[index].image == null
+                        ? null
+                        : Image(
+                            image: NetworkImage(
+                                '${leafs[index].image.toString()}')),
                     title: Text('${leafs[index].name}'),
                     subtitle: leafs[index].description == null
                         ? Text('')
@@ -115,7 +114,12 @@ class _ButtonInfoState extends State<ButtonInfo> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => DetailedLeafInfoView(
-                                  title, leafs[index], _controller)));
+                                  title,
+                                  leafs[index],
+                                  _controller,
+                                  Image(
+                                      image: NetworkImage(
+                                          '${leafs[index].image.toString()}')))));
                     });
                   }));
         },

@@ -43,7 +43,9 @@ class _CardsSizedBoxState extends State<CardsSizedBox> {
               child: FlatButton(
                 child: ListTile(
                     title: Text(this.list[i].name),
-                    subtitle: Image(image: NetworkImage(this.list[i].image))),
+                    subtitle: this.list[i].image == null
+                        ? null
+                        : Image(image: NetworkImage(this.list[i].image))),
                 onPressed: () {
                   setState(() {
                     Navigator.push(

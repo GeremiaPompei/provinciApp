@@ -1,8 +1,13 @@
+import 'dart:io';
+
+import 'package:MC/model/Persistence/StoreManager.dart';
+
 class LeafInfo {
   String _name;
   String _description;
   String _url;
   String _image;
+  File _imageFile;
   List<String> _telefono;
   String _email;
   List<double> _position;
@@ -20,6 +25,8 @@ class LeafInfo {
     this._description = checkRemove(parsedJson, 'Descrizione');
     this._url = checkRemove(parsedJson, 'Url');
     this._image = checkRemove(parsedJson, 'Immagine');
+    if(check(this._image)&&!this._image.startsWith('http'))
+      this._image = null;
     String cells = checkRemove(parsedJson, 'Telefono');
     this._telefono = cells == null ? null : cells.split('-');
     this._email = checkRemove(parsedJson, 'E-mail');
@@ -53,13 +60,16 @@ class LeafInfo {
       if (parsedJson[s].toString() != 'false')
         rtn = parsedJson[s].toString().replaceAll('\\', '');
       parsedJson.remove(s);
-    }
+    }else
+      rtn = null;
     return rtn;
   }
 
   bool check(dynamic s) => (s != null && s.toString() != '');
 
-  String get name => _name;
+  set imageFile(File value) {
+    _imageFile = value;
+  }
 
   @override
   bool operator ==(Object other) =>
@@ -71,6 +81,10 @@ class LeafInfo {
 
   @override
   int get hashCode => _sourceUrl.hashCode ^ _sourceIndex.hashCode;
+
+  File get imageFile => _imageFile;
+
+  String get name => _name;
 
   String get description => _description;
 

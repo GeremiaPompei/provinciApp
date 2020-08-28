@@ -1,6 +1,7 @@
 import 'package:MC/model/LeafInfo.dart';
 import 'package:MC/model/NodeInfo.dart';
 
+import 'Persistence/StoreManager.dart';
 import 'UnitCache.dart';
 
 class Cache {
@@ -26,9 +27,10 @@ class Cache {
     initMap<LeafInfo>(this._leafs, leafsCount);
   }
 
-  void initMap<T>(Map<String,UnitCache<List<T>>> map, int num) {
+  void initMap<T>(Map<String, UnitCache<List<T>>> map, int num) {
     for (int i = 0; i < num; i++) {
-      map['Empty ${i}'] = new UnitCache(List<T>(),DateTime.now(),'Empty ${i}');
+      map['Empty ${i}'] =
+          new UnitCache(List<T>(), DateTime.now(), 'Empty ${i}');
     }
   }
 
@@ -47,7 +49,7 @@ class Cache {
   }
 
   void changeLeafs(
-      String oldUrl, String newUrl, UnitCache<List<dynamic>> leafs) {
+      String oldUrl, String newUrl, UnitCache<List<dynamic>> leafs) async {
     this._leafs.remove(oldUrl);
     this._leafs[newUrl] = leafs;
   }
@@ -56,7 +58,7 @@ class Cache {
 
   void removeOffline(LeafInfo leafInfo) => this._offline.remove(leafInfo);
 
-  UnitCache<List<NodeInfo>> getSearchByUrl(String url) =>  this._search[url];
+  UnitCache<List<NodeInfo>> getSearchByUrl(String url) => this._search[url];
 
   UnitCache<List<LeafInfo>> getLeafsByUrl(String url) => this._leafs[url];
 

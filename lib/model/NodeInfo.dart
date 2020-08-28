@@ -4,7 +4,10 @@ class NodeInfo {
   String _url;
   String _image;
 
-  NodeInfo(this._name, this._description, this._url, this._image);
+  NodeInfo(this._name, this._description, this._url, this._image){
+    if(this._image != null && !this._image.startsWith('http'))
+      this._image = null;
+  }
 
   @override
   String toString() {

@@ -10,6 +10,7 @@ class SerializeOffline {
         'Source Url': element.sourceUrl,
         'Source Index': element.sourceIndex.toString(),
         'List Element': element.json,
+        'Image Path': element.imageFile == null ? '': element.imageFile.path,
       };
       listMap.add(jsonMap);
     });

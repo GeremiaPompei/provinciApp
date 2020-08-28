@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:MC/model/NodeInfo.dart';
+import 'package:MC/model/Persistence/StoreManager.dart';
 import 'package:html/dom.dart' as html;
 import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
@@ -8,7 +10,7 @@ class HttpRequest {
   static Future<String> getJson(String word) async {
     String element;
     html.Document document;
-    if(!word.contains('Empty')) {
+    if (!word.contains('Empty')) {
       final response = await _responseByGet(word);
       if (response.statusCode == 200) {
         document = parse(response.body);
@@ -32,6 +34,13 @@ class HttpRequest {
     return element;
   }
 
+  static Future<List<int>> getImage(String url) async {
+    final response = await _responseByGet(url);
+    if (response.statusCode == 200) {
+      return response.bodyBytes;
+    }
+  }
+
   static Future<List<NodeInfo>> getNodeInfo(
       String word,
       String ulClass,
@@ -47,7 +56,7 @@ class HttpRequest {
       String description = descriptionClass(element);
       String url = urlClass(element);
       String image = imageClass(element);
-      NodeInfo node = new NodeInfo(name, description, url,image);
+      NodeInfo node = new NodeInfo(name, description, url, image);
       nodes.add(node);
     });
     return nodes;
