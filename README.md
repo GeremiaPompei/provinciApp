@@ -46,35 +46,44 @@ Lo sviluppo dell'applicazione nasce dalla base dei requisiti richiesti dal conco
 ***[La nostra proposta][9]***
 
 ## Flutter
-[1]:
+[1]:https://github.com/GeremiaPompei/mc/blob/master/README.md#flutter
+
+[Torna](https://github.com/GeremiaPompei/mc/blob/master/README.md#obiettivi-del-concorso)
 
 ## Layout
-[2]:
+[2]:https://github.com/GeremiaPompei/mc/blob/master/README.md#layout
+[Torna](https://github.com/GeremiaPompei/mc/blob/master/README.md#obiettivi-del-concorso)
 
 ## Cache
-[3]:
+[3]:https://github.com/GeremiaPompei/mc/blob/master/README.md#cache
+[Torna](https://github.com/GeremiaPompei/mc/blob/master/README.md#obiettivi-del-concorso)
 
 ## Dimensione
-[4]:
+[4]:https://github.com/GeremiaPompei/mc/blob/master/README.md#dimensione
+[Torna](https://github.com/GeremiaPompei/mc/blob/master/README.md#obiettivi-del-concorso)
 
 ## Offline
-[5]:
+[5]:https://github.com/GeremiaPompei/mc/blob/master/README.md#offline
+[Torna](https://github.com/GeremiaPompei/mc/blob/master/README.md#obiettivi-del-concorso)
 
 ## Database
-[6]:
+[6]:https://github.com/GeremiaPompei/mc/blob/master/README.md#database
+[Torna](https://github.com/GeremiaPompei/mc/blob/master/README.md#obiettivi-del-concorso)
 
 ## Gps
-[7]:
+[7]:https://github.com/GeremiaPompei/mc/blob/master/README.md#gps
+[Torna](https://github.com/GeremiaPompei/mc/blob/master/README.md#obiettivi-del-concorso)
 
 ## Social
-[8]:
+[8]:https://github.com/GeremiaPompei/mc/blob/master/README.md#social
+[Torna](https://github.com/GeremiaPompei/mc/blob/master/README.md#obiettivi-del-concorso)
 
 ## Connessione dati
-[9]:
+[9]:https://github.com/GeremiaPompei/mc/blob/master/README.md#connessione-dati
+[Torna](https://github.com/GeremiaPompei/mc/blob/master/README.md#obiettivi-del-concorso)
 
 
 ### Authors
 [Geremia Pompei](https://github.com/GeremiaPompei)
 [Alex Pop](https://github.com/axel2104)
 [Lorenzo Longarini](https://github.com/LorenzoLongarini)
- 
