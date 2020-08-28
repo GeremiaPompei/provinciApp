@@ -17,7 +17,7 @@ Il concorso si propone di conseguire i seguenti obiettivi:
  - Diagrammi uml  
      
   ## Ricerca  
-  [1]:https://github.com/GeremiaPompei/mc/edit/master/README.md/Ricerca 
+  [1]: https://github.com/GeremiaPompei/mc/blob/master/README.md#ricerca
  La ricerca si compone di tre diverse tipologie:  
    ### Ricerca classica  
   La ricerca classica consiste nella normale tipologia di ricerca per nome  
