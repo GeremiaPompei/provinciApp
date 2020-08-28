@@ -1,12 +1,19 @@
-# MC
+# Applicazione MC
 
-A new Flutter project.
+MC è un'applicazione sviluppata tramite l'utilizzo di flutter, 
+un framework open-source creato da Google per la creazione di interfacce native per iOS e Android.
 
-## Getting Started
+### Obiettivi del concorso
 
-This project is a starting point for a Flutter application.
+Il concorso si propone di conseguire i seguenti obiettivi:
+1. contribuire a creare una community provinciale di sviluppo intorno ai dati pubblicati nel portale provinciale e ad identificare e sfruttare le potenzialità di riutilizzo dei dati esposti;
+2. favorire lo sviluppo di opportunità economiche legate al riuso dei dati per le imprese del territorio e la creazione di valore sociale, rafforzando i principi del governo aperto (trasparenza, partecipazione, collaborazione);
+3. promuovere le risorse culturali e turistiche del territorio provinciale.
 
-A few resources to get you started if this is your first Flutter project:
+## Contenuti
+   - Azioni possibili
+   - Come utilizzare l'applicazione
+   - Diagrammi uml
 
 - [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
 - [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
