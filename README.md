@@ -5,48 +5,48 @@ Dietro il progetto ci sono tre semplici studenti con molta voglia di divertirsi 
 Lo sviluppo dell'applicazione nasce dalla base dei requisiti richiesti dal concorso, arricchiti dalle nostre idee e competenze al fine di creare qualcosa di semplice ed intuibile, in grado di attrarre ogni fascia di età della nostra provincia.
   
 ### Obiettivi del concorso  
-  L’applicazione mobile dovrà presentare le seguenti caratteristiche tecniche:  
-  
+  *L’applicazione mobile dovrà presentare le seguenti caratteristiche tecniche:*  
+  ```
 • dovrà essere realizzata con linguaggio open source secondo modalità “cross-platform”, funzionando correttamente su dispositivi basati sia su sistema operativo iOS (versione 6 o superiore) che su Android (versione 3.2 o superiore);  
-
+```
 ***[La nostra proposta][1]***
 
-
+```
 • layout grafico progettato e realizzato per dispositivi mobile sia di tipo smartphone sia di tipo tablet;  
-
+```
 ***[La nostra proposta][2]***
-
+```
 • dovrà utilizzare un sistema di caching delle informazioni multimediali per ottimizzare i tempi e le modalità di reperimento dei dati;  
-
+```
 ***[La nostra proposta][3]***
-
+```
 • avere una dimensione al download compatibile con l’installazione via 3G;  
-
+```
 ***[La nostra proposta][4]***
-
+```
 • funzionare anche in modalità off-line;  
-
+```
 ***[La nostra proposta][5]***
-
+```
 • dovrà basarsi sull’utilizzo degli Opendata della provincia di Macerata, pubblicati e reperibili al link [http://dati.provincia.mc.it](http://dati.provincia.mc.it/), e potrà trattarsi di un’applicazione per la rappresentazione di dati geo-riferiti.
-
+```
 ***[La nostra proposta][6]***
 
 *Saranno ritenuti motivo di maggiore punteggio:*
-
+```
 • l’utilizzo dei sensori del dispositivo mobile (GPS, bussola, accelerometro, fotocamera, ecc.);  
-
+```
 ***[La nostra proposta][7]***
-
+```
 • l’interoperabilità con il mondo dei social network: possibilità di interazione con le APP social presenti sui device, all’interno delle community di appassionati;  
-
+```
 ***[La nostra proposta][8]***
-
+```
 • l’ottimizzazione dei tempi di risposta necessari ad un utilizzo dell’applicazione in mobilità minimizzando il consumo di banda mobile internet e/o saturazione dell’accesspoint nel caso di wi-fi pubblico.
-
+```
 ***[La nostra proposta][9]***
 
-[Introduzione all'utilizzo](https://github.com/GeremiaPompei/mc/blob/master/README.md#introduzione-allutilizzo-dellapplicazione)
+In seguito all'implementazione, abbiamo documento una guida all'utilizzo: [Introduzione all'utilizzo](https://github.com/GeremiaPompei/mc/blob/master/README.md#introduzione-allutilizzo-dellapplicazione)
 
 ## Flutter
 [1]:https://github.com/GeremiaPompei/mc/blob/master/README.md#flutter
