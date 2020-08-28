@@ -36,11 +36,13 @@ Il concorso si propone di conseguire i seguenti obiettivi:
  informazioni intermedie
  ```
 ## Condivisione
-[2]:
+[2]:https://github.com/GeremiaPompei/mc/blob/master/README.md#condivisione
 ## Salvataggio
-[3]:
+[3]:https://github.com/GeremiaPompei/mc/blob/master/README.md#salvataggio
 ## Foto
-[4]:
+[4]:https://github.com/GeremiaPompei/mc/blob/master/README.md#foto
 ## Mappe
-[5]:
+[5]:https://github.com/GeremiaPompei/mc/blob/master/README.md#mappe
+ 
+ 
  
