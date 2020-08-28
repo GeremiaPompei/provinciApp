@@ -1,48 +1,80 @@
-# Applicazione MC  
+# provinciAppMc
   
-MC è un'applicazione sviluppata tramite l'utilizzo di flutter,   
-un framework open-source creato da Google per la creazione di interfacce native per iOS e Android.  
+**provinciAppMc** è la nostra idea di applicazione per la provincia di Macerata secondo il concorso *Un'app per la provincia di Macerata* .
+Dietro il progetto ci sono tre semplici studenti con molta voglia di divertirsi e mettersi in gioco.
+Lo sviluppo dell'applicazione nasce dalla base dei requisiti richiesti dal concorso, arricchiti dalle nostre idee e competenze al fine di creare qualcosa di semplice ed intuibile, in grado di attrarre ogni fascia di età della nostra provincia.
   
 ### Obiettivi del concorso  
-  
-Il concorso si propone di conseguire i seguenti obiettivi:  
-1. contribuire a creare una community provinciale di sviluppo intorno ai dati pubblicati nel portale provinciale e ad identificare e sfruttare le potenzialità di riutilizzo dei dati esposti;  
-2. favorire lo sviluppo di opportunità economiche legate al riuso dei dati per le imprese del territorio e la creazione di valore sociale, rafforzando i principi del governo aperto (trasparenza, partecipazione, collaborazione);  
-3. promuovere le risorse culturali e turistiche del territorio provinciale.  
-  
-## Contenuti  
- - Funzionionalità
-	 - [Ricerca ][1]
-	 - [Condivisione][2]
-	 - [Salvataggio][3]
-	 - [Foto][4]
-	 - [Mappe][5]
-     
-  ## Ricerca  
-  [1]:https://github.com/GeremiaPompei/mc/blob/master/README.md#ricerca 
- La ricerca si compone di tre diverse tipologie:  
-  -  #### Ricerca per nome
-	  La ricerca classica consiste nella normale tipologia di ricerca per   nome 
- - #### Ricerca per categoria
-  ```
- informazioni intermedie
-  ```
- - #### Ricerca per comune/organizzazione
-  ```
-  informzioni intermedie
-```
- - #### Ricerca per posizione
- ```
- informazioni intermedie
- ```
-## Condivisione
-[2]:https://github.com/GeremiaPompei/mc/blob/master/README.md#condivisione
-## Salvataggio
-[3]:https://github.com/GeremiaPompei/mc/blob/master/README.md#salvataggio
-## Foto
-[4]:https://github.com/GeremiaPompei/mc/blob/master/README.md#foto
-## Mappe
-[5]:https://github.com/GeremiaPompei/mc/blob/master/README.md#mappe
- 
- 
+  L’applicazione mobile dovrà presentare le seguenti caratteristiche tecniche:  
+• dovrà essere realizzata con linguaggio open source secondo modalità “cross-platform”, funzionando correttamente su dispositivi basati sia su sistema operativo iOS (versione 6 o superiore) che su Android (versione 3.2 o superiore);  
+
+***[La nostra proposta][1]***
+
+
+• layout grafico progettato e realizzato per dispositivi mobile sia di tipo smartphone sia di tipo tablet;  
+
+***[La nostra proposta][2]***
+
+• dovrà utilizzare un sistema di caching delle informazioni multimediali per ottimizzare i tempi e le modalità di reperimento dei dati;  
+
+***[La nostra proposta][3]***
+
+• avere una dimensione al download compatibile con l’installazione via 3G;  
+
+***[La nostra proposta][4]***
+
+• funzionare anche in modalità off-line;  
+
+***[La nostra proposta][5]***
+
+• dovrà basarsi sull’utilizzo degli Opendata della provincia di Macerata, pubblicati e reperibili al link [http://dati.provincia.mc.it](http://dati.provincia.mc.it/), e potrà trattarsi di un’applicazione per la rappresentazione di dati geo-riferiti.
+
+***[La nostra proposta][6]***
+
+*Saranno ritenuti motivo di maggiore punteggio:*
+
+• l’utilizzo dei sensori del dispositivo mobile (GPS, bussola, accelerometro, fotocamera, ecc.);  
+
+***[La nostra proposta][7]***
+
+• l’interoperabilità con il mondo dei social network: possibilità di interazione con le APP social presenti sui device, all’interno delle community di appassionati;  
+
+***[La nostra proposta][8]***
+
+• l’ottimizzazione dei tempi di risposta necessari ad un utilizzo dell’applicazione in mobilità minimizzando il consumo di banda mobile internet e/o saturazione dell’accesspoint nel caso di wi-fi pubblico.
+
+***[La nostra proposta][9]***
+
+## Flutter
+[1]:
+
+## Layout
+[2]:
+
+## Cache
+[3]:
+
+## Dimensione
+[4]:
+
+## Offline
+[5]:
+
+## Database
+[6]:
+
+## Gps
+[7]:
+
+## Social
+[8]:
+
+## Connessione dati
+[9]:
+
+
+### Authors
+[Geremia Pompei](https://github.com/GeremiaPompei)
+[Alex Pop](https://github.com/axel2104)
+[Lorenzo Longarini](https://github.com/LorenzoLongarini)
  
