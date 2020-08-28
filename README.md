@@ -6,6 +6,7 @@ Lo sviluppo dell'applicazione nasce dalla base dei requisiti richiesti dal conco
   
 ### Obiettivi del concorso  
   L’applicazione mobile dovrà presentare le seguenti caratteristiche tecniche:  
+  
 • dovrà essere realizzata con linguaggio open source secondo modalità “cross-platform”, funzionando correttamente su dispositivi basati sia su sistema operativo iOS (versione 6 o superiore) che su Android (versione 3.2 o superiore);  
 
 ***[La nostra proposta][1]***
@@ -45,6 +46,8 @@ Lo sviluppo dell'applicazione nasce dalla base dei requisiti richiesti dal conco
 
 ***[La nostra proposta][9]***
 
+[Introduzione all'utilizzo]
+
 ## Flutter
 [1]:https://github.com/GeremiaPompei/mc/blob/master/README.md#flutter
 
@@ -82,8 +85,15 @@ Lo sviluppo dell'applicazione nasce dalla base dei requisiti richiesti dal conco
 [9]:https://github.com/GeremiaPompei/mc/blob/master/README.md#connessione-dati
 [Torna](https://github.com/GeremiaPompei/mc/blob/master/README.md#obiettivi-del-concorso)
 
+## Introduzione all'utilizzo dell'applicazione
 
 ### Authors
-[Geremia Pompei](https://github.com/GeremiaPompei)
-[Alex Pop](https://github.com/axel2104)
-[Lorenzo Longarini](https://github.com/LorenzoLongarini)
+- [Geremia Pompei](https://github.com/GeremiaPompei)
+- [Alex Pop](https://github.com/axel2104)
+- [Lorenzo Longarini](https://github.com/LorenzoLongarini)
+ 
+ 
+ 
+ 
+
+  
