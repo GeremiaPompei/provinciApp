@@ -89,7 +89,7 @@ class _HomeViewState extends State<HomeView> {
       appBar: AppBar(
         brightness: Brightness.light,
         backgroundColor: BackgroundColor,
-        elevation: 0,
+        elevation: 10,
         title: Align(alignment: Alignment.topLeft, child: appBarTitle),
         actions: [
           Row(
@@ -190,7 +190,7 @@ class _HomeViewState extends State<HomeView> {
         ],
       ),
       body: SafeArea(
-        child: Expanded(child: varWidget),
+        child: varWidget,
       ),
       bottomNavigationBar: BottomButtonDown(controller, onItemTapped),
     );

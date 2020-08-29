@@ -81,7 +81,11 @@ flutter:
   fonts:
     - family: StencilArmyWWI
       fonts:
-          - asset: fonts/StencilArmyWWI.ttf
+        - asset: fonts/StencilArmyWWI.ttf
+
+    - family: CostumIcons
+      fonts:
+        - asset: assets/fonts/CostumIcons.ttf
 
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

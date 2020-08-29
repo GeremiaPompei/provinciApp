@@ -1,3 +1,4 @@
+import 'package:MC/assets/costum_icons_icons.dart';
 import 'package:MC/controller/Controller.dart';
 import 'package:MC/style.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
@@ -36,8 +37,8 @@ class _BottomButtonDownState extends State<BottomButtonDown> {
       buttonBackgroundColor: ThemeSecondaryColor,
       items: <Widget>[
         Icon(Icons.home),
-        Icon(Icons.event_note),
-        Icon(Icons.free_breakfast),
+        Icon(CostumIcons.newspaper),
+        Icon(CostumIcons.ticket_1),
       ],
       animationDuration: Duration(milliseconds: 500),
       animationCurve: Curves.fastOutSlowIn,
