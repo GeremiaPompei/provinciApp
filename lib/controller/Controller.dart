@@ -165,7 +165,7 @@ class Controller {
 
   List<LeafInfo> getOffline() => this._cache.offline;
 
-  Future loadCacheLastInfo() async {
+  Future<dynamic> loadCacheLastInfo() async {
     Cache tmpCache =
         DeserializeCache.deserialize(await StoreManager.load(FNCACHE));
     this._cache.search = tmpCache.search;
@@ -179,6 +179,7 @@ class Controller {
       value.element = leafs;
     });
     this._cache.lastLeafs = tmpCache.lastLeafs;
+    return this._cache.lastLeafs;
   }
 
   Future loadCache() async {

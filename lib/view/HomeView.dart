@@ -22,16 +22,16 @@ class _HomeViewState extends State<HomeView> {
   Controller _controller;
   String title;
   Widget varWidget;
-  Future offlineF;
+  Future esploraF;
   Future organizationsF;
   Future categoriesF;
 
   _HomeViewState(this._controller) {
-    this.offlineF = this._controller.initOffline();
+    this.esploraF = this._controller.initOffline();
     this.organizationsF = this._controller.initOrganizations();
     this.categoriesF = this._controller.initCategories();
     this.title = 'Esplora';
-    this.varWidget = initWidgetFuture(() => this.offlineF, EsploraView(this._controller));
+    this.varWidget = initWidgetFuture(() => this.esploraF, EsploraView(this._controller));
   }
 
   Widget initWidgetFuture(Future<dynamic> Function() func, Widget input) =>
@@ -55,7 +55,7 @@ class _HomeViewState extends State<HomeView> {
         case 0:
           this.title = 'Esplora';
           this.varWidget =
-              initWidgetFuture(() => this.offlineF, EsploraView(this._controller));
+              initWidgetFuture(() => this.esploraF, EsploraView(this._controller));
           break;
         case 1:
           this.title = 'Comuni';
@@ -74,7 +74,7 @@ class _HomeViewState extends State<HomeView> {
         case 3:
           this.title = 'Extra';
           this.varWidget = initWidgetFuture(
-              () => this.offlineF, ExtraView(this._controller));
+              () => this.esploraF, ExtraView(this._controller));
           break;
       }
     });
