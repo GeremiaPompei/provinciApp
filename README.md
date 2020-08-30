@@ -1,6 +1,6 @@
-# provinciApp
+# provinciAppMc
   
-**provinciAppMc** è la nostra idea di applicazione per la provincia di Macerata secondo il concorso *Un'app per la provincia di Macerata*.
+**provinciApp** è la nostra idea di applicazione per la provincia di Macerata secondo il concorso *Un'app per la provincia di Macerata*.
 Il progetto nasce da tre semplici studenti con molta voglia di divertirsi e mettersi in gioco.
 Lo sviluppo dell'applicazione nasce dalla base dei requisiti richiesti dal concorso, arricchiti dalle nostre idee e competenze al fine di creare qualcosa di semplice ed intuibile, in grado di attrarre ogni fascia di età della nostra provincia.
   
@@ -94,7 +94,7 @@ La dimensione dell'applicazione è di circa 120Mb, ad indicare come, sebbene ess
 [5]:https://github.com/GeremiaPompei/mc/blob/master/README.md#offline
 All'interno dell'applicazione è possibile scaricare alcuni elementi ai quali è poi possibile accedere senza l'utilizzo della connessione ad internet. I dati salvati possono essere reperibili nell'apposita sezione alla quale è possibile accedere tramite il pulsante 'Offline' in alto a destra.
 
-[Cliccare qui per il funzionamento della modalità offline.]
+[Cliccare qui per il funzionamento](https://github.com/GeremiaPompei/mc/blob/master/README.md#introduzione-allutilizzo-dellapplicazione)
 
 [Torna ad Obiettivi](https://github.com/GeremiaPompei/mc/blob/master/README.md#obiettivi-del-concorso)
 
@@ -108,7 +108,7 @@ L'organizzazione dei dati segue il modello del database fornito, inoltre la stru
 [7]:https://github.com/GeremiaPompei/mc/blob/master/README.md#gps
 All'interno di **provinciApp** è possibile visualizzare la posizione dell'evento cercato tramite una mappa posizionata in fondo alla pagina aperta. Se presente all'interno del proprio smartphone sarà inoltre possibile aprire la mappa all'interno di *google maps*, così da avere informazioni aggiuntive relative alla posizione di ricerca in relazione a quella dell'utente.
 
-[Cliccare qui per il funzionamento della modalità gps.]
+[Cliccare qui per il funzionamento](https://github.com/GeremiaPompei/mc/blob/master/README.md#introduzione-allutilizzo-dellapplicazione)
 
 [Torna ad Obiettivi](https://github.com/GeremiaPompei/mc/blob/master/README.md#obiettivi-del-concorso)
 
@@ -117,7 +117,7 @@ All'interno di **provinciApp** è possibile visualizzare la posizione dell'event
 La funzionalità legata ai social consiste nella possibilità di condividere l'informazione cercata dall'utente nelle varie piattaforme social presenti all'interno del proprio smartphone.
 Una volta condiviso l'evento, l'interazione sarà possibile attraverso un click sul link url.
 
-[Cliccare qui per il funzionamento della modalità social.]
+[Cliccare qui per il funzionamento](https://github.com/GeremiaPompei/mc/blob/master/README.md#introduzione-allutilizzo-dellapplicazione)
 
 [Torna ad Obiettivi](https://github.com/GeremiaPompei/mc/blob/master/README.md#obiettivi-del-concorso)
 
