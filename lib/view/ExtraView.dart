@@ -17,8 +17,13 @@ class ExtraView extends StatefulWidget {
 
 class _ExtraViewState extends State<ExtraView> {
   Controller _controller;
+  Future _eventsF;
+  Future _promosF;
 
-  _ExtraViewState(this._controller);
+  _ExtraViewState(this._controller) {
+    this._eventsF = this._controller.initEvents();
+    this._promosF = this._controller.initPromos();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,15 +31,17 @@ class _ExtraViewState extends State<ExtraView> {
       Flexible(
           child: ListView(
         children: [
-          FlatButton(
-            child: Text('Eventi'),
-            onPressed: () {
+          Card(
+              child: ListTile(
+            title: Text('Eventi'),
+            trailing: Icon(Icons.event_available),
+            onTap: () {
               setState(() {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => FutureBuilder<dynamic>(
-                              future: _controller.initEvents(),
+                              future: this._eventsF,
                               builder: (BuildContext context,
                                   AsyncSnapshot<dynamic> snapshot) {
                                 Widget varWidget;
@@ -50,32 +57,34 @@ class _ExtraViewState extends State<ExtraView> {
                             )));
               });
             },
+          )),
+          Card(
+            child: ListTile(
+                title: Text('Promo'),
+                trailing: Icon(Icons.monetization_on),
+                onTap: () {
+                  setState(() {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => FutureBuilder<dynamic>(
+                                  future: this._promosF,
+                                  builder: (BuildContext context,
+                                      AsyncSnapshot<dynamic> snapshot) {
+                                    Widget varWidget;
+                                    if (snapshot.hasData)
+                                      varWidget = PromoView(this._controller);
+                                    else if (snapshot.hasError)
+                                      Navigator.pushReplacementNamed(
+                                          context, '/offline');
+                                    else
+                                      varWidget = LoadingView();
+                                    return varWidget;
+                                  },
+                                )));
+                  });
+                }),
           ),
-          RaisedButton(
-              elevation: 6,
-              child: Text('Promo'),
-              onPressed: () {
-                setState(() {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => FutureBuilder<dynamic>(
-                                future: _controller.initPromos(),
-                                builder: (BuildContext context,
-                                    AsyncSnapshot<dynamic> snapshot) {
-                                  Widget varWidget;
-                                  if (snapshot.hasData)
-                                    varWidget = PromoView(this._controller);
-                                  else if (snapshot.hasError)
-                                    Navigator.pushReplacementNamed(
-                                        context, '/offline');
-                                  else
-                                    varWidget = LoadingView();
-                                  return varWidget;
-                                },
-                              )));
-                });
-              })
         ],
       ))
     ]);

@@ -9,23 +9,23 @@ import 'ScrollListView.dart';
 
 class CardsSizedBox extends StatefulWidget {
   List<MapEntry<String, UnitCache>> _list;
-  Future<dynamic> Function(String name,String url) _func;
+  Future<dynamic> Function(String name, String url) _func;
   Widget Function(String name) _funcWidget;
 
-  CardsSizedBox(this._list, this._func,this._funcWidget);
+  CardsSizedBox(this._list, this._func, this._funcWidget);
 
   @override
   _CardsSizedBoxState createState() =>
-      _CardsSizedBoxState(this._list,this._func,this._funcWidget);
+      _CardsSizedBoxState(this._list, this._func, this._funcWidget);
 }
 
 class _CardsSizedBoxState extends State<CardsSizedBox> {
   List<MapEntry<String, UnitCache>> _list;
   int _index;
-  Future<dynamic> Function(String name,String url) _func;
+  Future<dynamic> Function(String name, String url) _func;
   Widget Function(String name) _funcWidget;
 
-  _CardsSizedBoxState(this._list,this._func,this._funcWidget);
+  _CardsSizedBoxState(this._list, this._func, this._funcWidget);
 
   @override
   Widget build(BuildContext context) {
@@ -38,28 +38,22 @@ class _CardsSizedBoxState extends State<CardsSizedBox> {
         itemBuilder: (_, i) => Transform.scale(
             scale: _index == i ? 1 : 0.9,
             child: Card(
-              elevation: 6,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: FlatButton(
-                child: ListTile(
-                  title: Text(this._list[i].value.name),
-                ),
-                onPressed: () {
+              child: ListTile(
+                title: Text(this._list[i].value.name),
+                onTap: () {
                   setState(() {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => FutureBuilder<dynamic>(
-                                  future: _func(
-                                      this._list[i].value.name,
+                                  future: _func(this._list[i].value.name,
                                       this._list[i].key),
                                   builder: (BuildContext context,
                                       AsyncSnapshot<dynamic> snapshot) {
                                     Widget tmpWidget;
                                     if (snapshot.hasData)
-                                      tmpWidget = this._funcWidget(_list[i].value.name);
+                                      tmpWidget =
+                                          this._funcWidget(_list[i].value.name);
                                     else
                                       tmpWidget = LoadingView();
                                     return tmpWidget;

@@ -33,12 +33,14 @@ class _OrganizationsViewState extends State<OrganizationsView> {
       header: ClassicHeader(),
       controller: _refreshController,
       onRefresh: () => setState(() {
+        this._controller.getOrganizations().removeWhere((element) => true);
         this._controller.initOrganizations().then((value) {
           (context as Element).reassemble();
           _refreshController.refreshCompleted();
         });
       }),
       child: GridView.count(
+        primary: false,
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
         padding: const EdgeInsets.all(8),
@@ -46,30 +48,46 @@ class _OrganizationsViewState extends State<OrganizationsView> {
         children: List.generate(
           this._controller.getOrganizations().length,
           (index) {
-            return FlatButton(
-                child: Card(
-                  elevation: 6,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: ListTile(
-                    title: Text(this._controller.getOrganizations()[index].name.toString()),
-                  ),
-                ),
-                onPressed: () async {
+            return Card(
+              child: ListTile(
+                title: Text(
+                    this._controller.getOrganizations()[index].name.toString() +
+                        ' (' +
+                        this
+                            ._controller
+                            .getOrganizations()[index]
+                            .description
+                            .replaceAll(' Dataset', '') +
+                        ')'),
+                subtitle: this._controller.getOrganizations()[index].image != null
+                    ? Image(
+                    image: NetworkImage(
+                        this._controller.getOrganizations()[index].image))
+                    : null,
+                onTap: () async {
                   setState(() {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => FutureBuilder<dynamic>(
                                   future: _controller.setSearch(
-                                      this._controller.getOrganizations()[index].name,
-                                      this._controller.getOrganizations()[index].url),
+                                      this
+                                          ._controller
+                                          .getOrganizations()[index]
+                                          .name,
+                                      this
+                                          ._controller
+                                          .getOrganizations()[index]
+                                          .url),
                                   builder: (BuildContext context,
                                       AsyncSnapshot<dynamic> snapshot) {
                                     if (snapshot.hasData)
                                       varWidget = ScrollListView(
-                                          this._controller, this._controller.getOrganizations()[index].name);
+                                          this._controller,
+                                          this
+                                              ._controller
+                                              .getOrganizations()[index]
+                                              .name);
                                     else if (snapshot.hasError)
                                       Navigator.pushReplacementNamed(
                                           context, '/offline');
@@ -79,7 +97,9 @@ class _OrganizationsViewState extends State<OrganizationsView> {
                                   },
                                 )));
                   });
-                });
+                },
+              ),
+            );
           },
         ),
       ),

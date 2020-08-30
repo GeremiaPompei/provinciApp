@@ -25,17 +25,19 @@ class Controller {
   }
 
   Future<dynamic> initLoadAndStore() async {
-    try {
-      await loadSavedLastInfo();
-    } catch (e) {
-    try {
-      await loadStaticLastInfo(5, 5);
-    } catch (e) {
-      print(e.toString());
+    if (this._cache.lastLeafs == null) {
+      try {
+        await loadSavedLastInfo();
+      } catch (e) {
+        try {
+          await loadStaticLastInfo(5, 5);
+        } catch (e) {
+          print(e.toString());
+        }
+      }
+      await initOffline();
+      storeCache();
     }
-    }
-    await initOffline();
-    storeCache();
     return this._cache.lastLeafs;
   }
 
@@ -86,12 +88,14 @@ class Controller {
   }
 
   Future<dynamic> initCategories() async {
-    this._cache.initCategories(await HtmlParser.categories());
+    if (this.getCategories().isEmpty)
+      this._cache.initCategories(await HtmlParser.categories());
     return this.getCategories();
   }
 
   Future<dynamic> initOrganizations() async {
-    this._cache.initOrganizations(await HtmlParser.organizations());
+    if (this.getOrganizations().isEmpty)
+      this._cache.initOrganizations(await HtmlParser.organizations());
     return this.getOrganizations();
   }
 
@@ -107,12 +111,12 @@ class Controller {
   }
 
   Future<dynamic> initEvents() async {
-    this._events = await HtmlParser.events();
+    if (this._events.isEmpty) this._events = await HtmlParser.events();
     return this._events;
   }
 
   Future<dynamic> initPromos() async {
-    this._promos = await HtmlParser.promos();
+    if (this._promos.isEmpty) this._promos = await HtmlParser.promos();
     return this._promos;
   }
 
@@ -199,7 +203,8 @@ class Controller {
   }
 
   List<NodeInfo> getOrganizations() {
-    return this._cache.organizations;
+    return this._cache.organizations.where((e) =>
+        int.parse(e.description.replaceAll(' Dataset', '')) > 0).toList();
   }
 
   List<NodeInfo> getCategories() {
@@ -213,12 +218,10 @@ class Controller {
   List<MapEntry<String, dynamic>> getLastSearched() => this
       ._cache
       .search
-      .entries
-      .where((e) => !e.key.contains('Empty'))
-      .toList();
+      .entries.toList();
 
   List<MapEntry<String, dynamic>> getLastLeafs() =>
-      this._cache.leafs.entries.where((e) => !e.key.contains('Empty')).toList();
+      this._cache.leafs.entries.toList();
 
   List<LeafInfo> getLeafs() {
     return this._cache.getLeafsByUrl(this._cache.lastLeafs).element;

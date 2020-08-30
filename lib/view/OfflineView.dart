@@ -28,7 +28,7 @@ class _OfflineWidgetState extends State<OfflineWidget> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Offline'),
-        backgroundColor: Colore.primario(),
+        backgroundColor: Colore.primario,
         actions: [
           IconButton(
             icon: Icon(Icons.offline_pin),
@@ -64,43 +64,42 @@ class _OfflineWidgetState extends State<OfflineWidget> {
                 ? icon = Icon(Icons.remove_circle_outline)
                 : icon = Icon(Icons.add_circle_outline);
             return Card(
-                child: FlatButton(
-                    child: ListTile(
-                      trailing: IconButton(
-                        icon: icon,
-                        onPressed: () {
-                          setState(() {
-                            if (this._controller.getOffline().contains(
-                                this._controller.getOffline()[index])) {
-                              this._controller.removeOffline(
-                                  this._controller.getOffline()[index]);
-                              icon = Icon(Icons.add_circle_outline);
-                            } else {
-                              this._controller.addOffline(
-                                  this._controller.getOffline()[index]);
-                              icon = Icon(Icons.remove_circle_outline);
-                            }
-                          });
-                        },
-                      ),
-                      leading: this._controller.getOffline()[index].imageFile ==
-                              null
-                          ? null
-                          : Image.file(
-                              this._controller.getOffline()[index].imageFile),
-                      title:
-                          Text('${this._controller.getOffline()[index].name}'),
-                      subtitle: this
-                                  ._controller
-                                  .getOffline()
-                                  .toList()[index]
-                                  .description ==
-                              null
-                          ? Text('')
-                          : Text(
-                              '${this._controller.getOffline()[index].description}'),
+                child: ListTile(
+                    trailing: IconButton(
+                      icon: icon,
+                      onPressed: () {
+                        setState(() {
+                          if (this
+                              ._controller
+                              .getOffline()
+                              .contains(this._controller.getOffline()[index])) {
+                            this._controller.removeOffline(
+                                this._controller.getOffline()[index]);
+                            icon = Icon(Icons.add_circle_outline);
+                          } else {
+                            this._controller.addOffline(
+                                this._controller.getOffline()[index]);
+                            icon = Icon(Icons.remove_circle_outline);
+                          }
+                        });
+                      },
                     ),
-                    onPressed: () {
+                    leading:
+                        this._controller.getOffline()[index].imageFile == null
+                            ? null
+                            : Image.file(
+                                this._controller.getOffline()[index].imageFile),
+                    title: Text('${this._controller.getOffline()[index].name}'),
+                    subtitle: this
+                                ._controller
+                                .getOffline()
+                                .toList()[index]
+                                .description ==
+                            null
+                        ? Text('')
+                        : Text(
+                            '${this._controller.getOffline()[index].description}'),
+                    onTap: () {
                       setState(() {
                         Navigator.push(
                             context,

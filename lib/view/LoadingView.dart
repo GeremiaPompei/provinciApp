@@ -16,7 +16,7 @@ class LoadingView extends StatelessWidget {
               'MACERATA',
               style: TextStyle(
                 fontSize: 30,
-                fontFamily: Font.primario(),
+                fontFamily: Font.primario,
               ),
             ),
             CircularProgressIndicator(),

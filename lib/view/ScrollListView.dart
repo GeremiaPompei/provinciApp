@@ -62,11 +62,12 @@ class _ScrollListViewState extends State<ScrollListView> {
     return Scaffold(
       appBar: AppBar(
         title: Text(this.title),
-        backgroundColor: Colore.primario(),
+        backgroundColor: Colore.primario,
         leading: new IconButton(
             icon: new Icon(Icons.arrow_back_ios),
-            onPressed: () {setState(() {
-              Navigator.pop(context);
+            onPressed: () {
+              setState(() {
+                Navigator.pop(context);
               });
             }),
       ),
@@ -80,14 +81,12 @@ class _ScrollListViewState extends State<ScrollListView> {
               padding: const EdgeInsets.all(8),
               itemCount: length(),
               itemBuilder: (context, index) {
-                return FlatButton(
-                  child: ListTile(
-                    title: Text(
-                        '${controller.getSearch()[index].name.toString()}'),
-                    subtitle: Text(
-                        '${controller.getSearch()[index].description.toString()}'),
-                  ),
-                  onPressed: () {
+                return ListTile(
+                  title:
+                      Text('${controller.getSearch()[index].name.toString()}'),
+                  subtitle: Text(
+                      '${controller.getSearch()[index].description.toString()}'),
+                  onTap: () {
                     setLeafs(index);
                   },
                 );

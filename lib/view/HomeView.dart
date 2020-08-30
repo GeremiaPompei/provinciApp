@@ -29,10 +29,11 @@ class _HomeViewState extends State<HomeView> {
 
   _HomeViewState(this._controller) {
     this.esploraF = this._controller.initLoadAndStore();
-    this.organizationsF = this._controller.initOrganizations();
     this.categoriesF = this._controller.initCategories();
+    this.organizationsF = this._controller.initOrganizations();
     this.title = 'Esplora';
-    this.varWidget = initWidgetFuture(() => this.esploraF, EsploraView(this._controller));
+    this.varWidget =
+        initWidgetFuture(() => this.esploraF, EsploraView(this._controller));
   }
 
   Widget initWidgetFuture(Future<dynamic> Function() func, Widget input) =>
@@ -55,24 +56,23 @@ class _HomeViewState extends State<HomeView> {
       switch (index) {
         case 0:
           this.title = 'Esplora';
-          this.varWidget =
-              initWidgetFuture(() => this.esploraF, EsploraView(this._controller));
+          this.varWidget = initWidgetFuture(
+              () => this.esploraF, EsploraView(this._controller));
           break;
         case 1:
           this.title = 'Comuni';
           this.varWidget = initWidgetFuture(
-              () => this.organizationsF,
-              OrganizationsView(this._controller));
+              () => this.organizationsF, OrganizationsView(this._controller));
           break;
         case 2:
           this.title = 'Categorie';
           this.varWidget = initWidgetFuture(
-              () => this.categoriesF,
-              CategoriesView(this._controller));
+              () => this.categoriesF, CategoriesView(this._controller));
           break;
         case 3:
           this.title = 'Extra';
-          this.varWidget = ExtraView(this._controller);
+          this.varWidget = initWidgetFuture(
+                  () => Future(()=>0), ExtraView(this._controller));
           break;
       }
     });
@@ -82,11 +82,11 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colore.primario(),
+        backgroundColor: Colore.primario,
         title: Text(
           title,
           style: TextStyle(
-            fontFamily: Font.primario(),
+            fontFamily: Font.primario,
           ),
         ),
         actions: [

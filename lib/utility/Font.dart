@@ -1,3 +1,3 @@
 class Font {
-  static String primario() => 'StencilArmyWWI';
+  static const primario = 'StencilArmyWWI';
 }

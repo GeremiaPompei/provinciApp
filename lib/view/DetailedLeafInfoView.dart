@@ -64,7 +64,7 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
                         MaterialPageRoute(
                             builder: (context) => Scaffold(
                                 appBar: AppBar(
-                                  backgroundColor: Colore.terziario(),
+                                  backgroundColor: Colore.background,
                                   title: Text(this.leafInfo.name),
                                 ),
                                 body: Container(child: this.image))));
@@ -186,7 +186,7 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
     return Scaffold(
         appBar: AppBar(
           title: Text(this.leafInfo.name),
-          backgroundColor: Colore.primario(),
+          backgroundColor: Colore.primario,
           leading: new IconButton(
             icon: new Icon(Icons.arrow_back_ios),
             onPressed: () {

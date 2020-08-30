@@ -53,9 +53,9 @@ class _BottomButtonDownState extends State<BottomButtonDown> {
           title: Text('Extra'),
         ),
       ],
-      unselectedItemColor: Colore.terziario(),
+      unselectedItemColor: Colore.background,
       currentIndex: index,
-      selectedItemColor: Colore.primario(),
+      selectedItemColor: Colore.primario,
       onTap: onItemTapped,
     );
   }

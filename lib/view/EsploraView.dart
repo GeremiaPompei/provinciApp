@@ -1,7 +1,6 @@
 import 'package:MC/controller/Controller.dart';
 import 'package:MC/model/NodeInfo.dart';
 import 'package:MC/model/UnitCache.dart';
-import 'package:MC/utility/Colore.dart';
 import 'package:MC/view/CardsSizedBox.dart';
 import 'package:MC/view/LeafsInfoView.dart';
 import 'package:MC/view/LoadingView.dart';
@@ -27,8 +26,6 @@ class _EsploraViewState extends State<EsploraView> {
   List<MapEntry<String, UnitCache>> leafs;
   Widget varWidget;
   String location;
-  RefreshController _refreshController =
-      RefreshController(initialRefresh: false);
 
   _EsploraViewState(this.controller) {
     this.searched = this.controller.getLastSearched();

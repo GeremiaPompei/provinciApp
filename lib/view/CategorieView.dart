@@ -14,15 +14,14 @@ class CategoriesView extends StatefulWidget {
   CategoriesView(this._controller);
 
   @override
-  _CategoriesViewState createState() =>
-      _CategoriesViewState(this._controller);
+  _CategoriesViewState createState() => _CategoriesViewState(this._controller);
 }
 
 class _CategoriesViewState extends State<CategoriesView> {
   Controller _controller;
   Widget varWidget;
   RefreshController _refreshController =
-  RefreshController(initialRefresh: false);
+      RefreshController(initialRefresh: false);
 
   _CategoriesViewState(this._controller);
 
@@ -33,53 +32,64 @@ class _CategoriesViewState extends State<CategoriesView> {
       header: ClassicHeader(),
       controller: _refreshController,
       onRefresh: () => setState(() {
-        this._controller.initOrganizations().then((value) {
+        this._controller.getCategories().removeWhere((element) => true);
+        this._controller.initCategories().then((value) {
           (context as Element).reassemble();
           _refreshController.refreshCompleted();
         });
       }),
-      child: GridView.count(
+      child: ListView(
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
         padding: const EdgeInsets.all(8),
-        crossAxisCount: 2,
         children: List.generate(
           this._controller.getCategories().length,
-              (index) {
-            return FlatButton(
-                child: Card(
-                  elevation: 6,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: ListTile(
-                    title: Text(this._controller.getCategories()[index].name.toString()),
-                  ),
-                ),
-                onPressed: () async {
+          (index) {
+            return Card(
+              child: ListTile(
+                title: Text(
+                    this._controller.getCategories()[index].name.toString()),
+                trailing: this._controller.getCategories()[index].image != null
+                    ? Image(
+                        image: NetworkImage(
+                            this._controller.getCategories()[index].image))
+                    : null,
+                onTap: () async {
                   setState(() {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => FutureBuilder<dynamic>(
-                              future: _controller.setSearch(
-                                  this._controller.getCategories()[index].name,
-                                  this._controller.getCategories()[index].url),
-                              builder: (BuildContext context,
-                                  AsyncSnapshot<dynamic> snapshot) {
-                                if (snapshot.hasData)
-                                  varWidget = ScrollListView(
-                                      this._controller, this._controller.getCategories()[index].name);
-                                else if (snapshot.hasError)
-                                  Navigator.pushReplacementNamed(
-                                      context, '/offline');
-                                else
-                                  varWidget = LoadingView();
-                                return varWidget;
-                              },
-                            )));
+                                  future: _controller.setSearch(
+                                      this
+                                          ._controller
+                                          .getCategories()[index]
+                                          .name,
+                                      this
+                                          ._controller
+                                          .getCategories()[index]
+                                          .url),
+                                  builder: (BuildContext context,
+                                      AsyncSnapshot<dynamic> snapshot) {
+                                    if (snapshot.hasData)
+                                      varWidget = ScrollListView(
+                                          this._controller,
+                                          this
+                                              ._controller
+                                              .getCategories()[index]
+                                              .name);
+                                    else if (snapshot.hasError)
+                                      Navigator.pushReplacementNamed(
+                                          context, '/offline');
+                                    else
+                                      varWidget = LoadingView();
+                                    return varWidget;
+                                  },
+                                )));
                   });
-                });
+                },
+              ),
+            );
           },
         ),
       ),
