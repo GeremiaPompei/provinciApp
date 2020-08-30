@@ -8,27 +8,23 @@ import 'package:url_launcher/url_launcher.dart';
 import 'LoadingView.dart';
 import 'ScrollListView.dart';
 
-class GridListView extends StatefulWidget {
-  List<NodeInfo> _nodes;
-  Future<dynamic> _init;
+class OrganizationsView extends StatefulWidget {
   Controller _controller;
 
-  GridListView(this._controller, this._nodes, this._init);
+  OrganizationsView(this._controller);
 
   @override
-  _GridListViewState createState() =>
-      _GridListViewState(this._controller, this._nodes, this._init);
+  _OrganizationsViewState createState() =>
+      _OrganizationsViewState(this._controller);
 }
 
-class _GridListViewState extends State<GridListView> {
+class _OrganizationsViewState extends State<OrganizationsView> {
   Controller _controller;
-  List<NodeInfo> _nodes;
-  Future<dynamic> _init;
   Widget varWidget;
   RefreshController _refreshController =
       RefreshController(initialRefresh: false);
 
-  _GridListViewState(this._controller, this._nodes, this._init);
+  _OrganizationsViewState(this._controller);
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +33,7 @@ class _GridListViewState extends State<GridListView> {
       header: ClassicHeader(),
       controller: _refreshController,
       onRefresh: () => setState(() {
-        this._init.then((value) {
+        this._controller.initOrganizations().then((value) {
           (context as Element).reassemble();
           _refreshController.refreshCompleted();
         });
@@ -48,7 +44,7 @@ class _GridListViewState extends State<GridListView> {
         padding: const EdgeInsets.all(8),
         crossAxisCount: 2,
         children: List.generate(
-          this._nodes.length,
+          this._controller.getOrganizations().length,
           (index) {
             return FlatButton(
                 child: Card(
@@ -57,7 +53,7 @@ class _GridListViewState extends State<GridListView> {
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: ListTile(
-                    title: Text(this._nodes[index].name.toString()),
+                    title: Text(this._controller.getOrganizations()[index].name.toString()),
                   ),
                 ),
                 onPressed: () async {
@@ -67,13 +63,13 @@ class _GridListViewState extends State<GridListView> {
                         MaterialPageRoute(
                             builder: (context) => FutureBuilder<dynamic>(
                                   future: _controller.setSearch(
-                                      this._nodes[index].name,
-                                      this._nodes[index].url),
+                                      this._controller.getOrganizations()[index].name,
+                                      this._controller.getOrganizations()[index].url),
                                   builder: (BuildContext context,
                                       AsyncSnapshot<dynamic> snapshot) {
                                     if (snapshot.hasData)
                                       varWidget = ScrollListView(
-                                          this._controller, _nodes[index].name);
+                                          this._controller, this._controller.getOrganizations()[index].name);
                                     else if (snapshot.hasError)
                                       Navigator.pushReplacementNamed(
                                           context, '/offline');
@@ -83,11 +79,6 @@ class _GridListViewState extends State<GridListView> {
                                   },
                                 )));
                   });
-                  if (await canLaunch(this._nodes[index].url)) {
-                    await launch(this._nodes[index].url);
-                  } else {
-                    throw 'Could not launch ${this._nodes[index].url}';
-                  }
                 });
           },
         ),

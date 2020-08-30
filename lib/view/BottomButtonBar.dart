@@ -1,7 +1,7 @@
 import 'package:MC/controller/Controller.dart';
 import 'package:MC/utility/Colore.dart';
 import 'package:MC/view/EsploraView.dart';
-import 'package:MC/view/GridListView.dart';
+import 'package:MC/view/OrganizationsView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

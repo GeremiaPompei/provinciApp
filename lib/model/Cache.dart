@@ -10,28 +10,15 @@ class Cache {
   Map<String, UnitCache<List<NodeInfo>>> _search;
   Map<String, UnitCache<List<LeafInfo>>> _leafs;
   List<LeafInfo> _offline;
-  int _searchCount;
-  int _leafsCount;
-  String _lastSearch = 'Empty 0';
-  String _lastLeafs = 'Empty 0';
+  String _lastSearch;
+  String _lastLeafs;
 
-  Cache(int searchCount, int leafsCount) {
+  Cache() {
     this._offline = [];
     this._categories = [];
     this._organizations = [];
     this._search = {};
     this._leafs = {};
-    this._searchCount = searchCount;
-    this._leafsCount = leafsCount;
-    initMap<NodeInfo>(this._search, searchCount);
-    initMap<LeafInfo>(this._leafs, leafsCount);
-  }
-
-  void initMap<T>(Map<String, UnitCache<List<T>>> map, int num) {
-    for (int i = 0; i < num; i++) {
-      map['Empty ${i}'] =
-          new UnitCache(List<T>(), DateTime.now(), 'Empty ${i}');
-    }
   }
 
   void initOrganizations(List<NodeInfo> nodes) {
@@ -65,10 +52,6 @@ class Cache {
   String get lastLeafs => _lastLeafs;
 
   String get lastSearch => _lastSearch;
-
-  int get leafsCount => _leafsCount;
-
-  int get searchCount => _searchCount;
 
   List<LeafInfo> get offline => _offline;
 

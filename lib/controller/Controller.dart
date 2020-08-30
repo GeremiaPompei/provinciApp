@@ -21,11 +21,68 @@ class Controller {
   Controller() {
     _events = [];
     _promos = [];
-    _cache = new Cache(5, 5);
+    _cache = new Cache();
+  }
+
+  Future<dynamic> initLoadAndStore() async {
     try {
-      loadCacheLastInfo();
-    } catch (e) {}
+      await loadSavedLastInfo();
+    } catch (e) {
+    try {
+      await loadStaticLastInfo(5, 5);
+    } catch (e) {
+      print(e.toString());
+    }
+    }
+    await initOffline();
     storeCache();
+    return this._cache.lastLeafs;
+  }
+
+  Future<dynamic> loadStaticLastInfo(int countNodes, int countLeafs) async {
+    await initOrganizations();
+    if (countNodes > this.getOrganizations().length)
+      countNodes = this.getOrganizations().length;
+    for (int i = countNodes - 1; i >= 0; i--) {
+      NodeInfo node = this.getOrganizations()[i];
+      this._cache.search['Empty $i'] =
+          UnitCache(null, DateTime.now().subtract(Duration(days: 5)), 'Name');
+      await setSearch(node.name, node.url);
+      this._cache.search[node.url] =
+          UnitCache(this.getSearch(), DateTime.now(), node.name);
+    }
+    if (countLeafs > this.getSearch().length)
+      countNodes = this.getSearch().length;
+    for (int i = 0; i < countLeafs; i++) {
+      NodeInfo node = this.getSearch()[i];
+      this._cache.leafs['Empty $i'] =
+          UnitCache(null, DateTime.now().subtract(Duration(days: 5)), 'Name');
+      await setLeafInfo(node.name, node.url);
+      this._cache.leafs[node.url] =
+          UnitCache(this.getLeafs(), DateTime.now(), node.name);
+    }
+    return this._cache.lastLeafs;
+  }
+
+  Future<dynamic> loadSavedLastInfo() async {
+    Cache tmpCache =
+        DeserializeCache.deserialize(await StoreManager.load(FNCACHE));
+    loadLastInfoFrom(tmpCache);
+    return this._cache.lastLeafs;
+  }
+
+  void loadLastInfoFrom(Cache tmpCache) {
+    this._cache.search = tmpCache.search;
+    this._cache.search.forEach((key, value) async {
+      value.element = await HtmlParser.searchByWord(key);
+    });
+    this._cache.lastSearch = tmpCache.lastSearch;
+    this._cache.leafs = tmpCache.leafs;
+    this._cache.leafs.forEach((key, value) async {
+      List<LeafInfo> leafs = await HtmlParser.leafsByWord(key);
+      value.element = leafs;
+    });
+    this._cache.lastLeafs = tmpCache.lastLeafs;
   }
 
   Future<dynamic> initCategories() async {
@@ -116,8 +173,8 @@ class Controller {
     if (leafInfo.image != null) {
       leafInfo.imageFile = await StoreManager.localFile(
           leafInfo.image.substring(leafInfo.image.lastIndexOf('/') + 1));
-      StoreManager.storeBytes(await HttpRequest.getImage(leafInfo.image),
-          leafInfo.imageFile.path);
+      StoreManager.storeBytes(
+          await HttpRequest.getImage(leafInfo.image), leafInfo.imageFile.path);
     }
     storeOffline();
     return this.getOffline();
@@ -153,8 +210,12 @@ class Controller {
     return this._cache.getSearchByUrl(this._cache.lastSearch).element;
   }
 
-  List<MapEntry<String, dynamic>> getLastSearched() =>
-      this._cache.search.entries.where((e) => !e.key.contains('Empty')).toList();
+  List<MapEntry<String, dynamic>> getLastSearched() => this
+      ._cache
+      .search
+      .entries
+      .where((e) => !e.key.contains('Empty'))
+      .toList();
 
   List<MapEntry<String, dynamic>> getLastLeafs() =>
       this._cache.leafs.entries.where((e) => !e.key.contains('Empty')).toList();
@@ -164,23 +225,6 @@ class Controller {
   }
 
   List<LeafInfo> getOffline() => this._cache.offline;
-
-  Future<dynamic> loadCacheLastInfo() async {
-    Cache tmpCache =
-        DeserializeCache.deserialize(await StoreManager.load(FNCACHE));
-    this._cache.search = tmpCache.search;
-    this._cache.search.forEach((key, value) async {
-      value.element = await HtmlParser.searchByWord(key);
-    });
-    this._cache.lastSearch = tmpCache.lastSearch;
-    this._cache.leafs = tmpCache.leafs;
-    this._cache.leafs.forEach((key, value) async {
-      List<LeafInfo> leafs = await HtmlParser.leafsByWord(key);
-      value.element = leafs;
-    });
-    this._cache.lastLeafs = tmpCache.lastLeafs;
-    return this._cache.lastLeafs;
-  }
 
   Future loadCache() async {
     this._cache =

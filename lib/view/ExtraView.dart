@@ -51,7 +51,8 @@ class _ExtraViewState extends State<ExtraView> {
               });
             },
           ),
-          FlatButton(
+          RaisedButton(
+              elevation: 6,
               child: Text('Promo'),
               onPressed: () {
                 setState(() {

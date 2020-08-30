@@ -2,9 +2,10 @@ import 'package:MC/controller/Controller.dart';
 import 'package:MC/utility/Colore.dart';
 import 'package:MC/utility/Font.dart';
 import 'package:MC/view/BottomButtonBar.dart';
+import 'package:MC/view/CategorieView.dart';
 import 'package:MC/view/EsploraView.dart';
 import 'package:MC/view/ExtraView.dart';
-import 'package:MC/view/GridListView.dart';
+import 'package:MC/view/OrganizationsView.dart';
 import 'package:MC/view/LoadingView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,7 @@ class _HomeViewState extends State<HomeView> {
   Future categoriesF;
 
   _HomeViewState(this._controller) {
-    this.esploraF = this._controller.initOffline();
+    this.esploraF = this._controller.initLoadAndStore();
     this.organizationsF = this._controller.initOrganizations();
     this.categoriesF = this._controller.initCategories();
     this.title = 'Esplora';
@@ -61,20 +62,17 @@ class _HomeViewState extends State<HomeView> {
           this.title = 'Comuni';
           this.varWidget = initWidgetFuture(
               () => this.organizationsF,
-              GridListView(this._controller, this._controller.getOrganizations(),
-                  this._controller.initOrganizations()));
+              OrganizationsView(this._controller));
           break;
         case 2:
           this.title = 'Categorie';
           this.varWidget = initWidgetFuture(
               () => this.categoriesF,
-              GridListView(this._controller, this._controller.getCategories(),
-                  this._controller.initCategories()));
+              CategoriesView(this._controller));
           break;
         case 3:
           this.title = 'Extra';
-          this.varWidget = initWidgetFuture(
-              () => this.esploraF, ExtraView(this._controller));
+          this.varWidget = ExtraView(this._controller);
           break;
       }
     });

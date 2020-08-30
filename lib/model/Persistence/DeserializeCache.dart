@@ -5,8 +5,7 @@ import '../UnitCache.dart';
 class DeserializeCache {
   static Cache deserialize(String contents) {
     Map<String, dynamic> jsonMap = json.decode(contents);
-    Cache cache = Cache(
-        int.parse(jsonMap['Search Count']), int.parse(jsonMap['Leafs Count']));
+    Cache cache = Cache();
     cache.lastSearch = jsonMap['Last Search'];
     cache.lastLeafs = jsonMap['Last Leafs'];
     cache.search = deserializeMapInfo(jsonMap['Search']);

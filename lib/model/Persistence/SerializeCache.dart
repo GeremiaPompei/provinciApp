@@ -7,8 +7,6 @@ class SerializeCache {
 
   static String serialize(Cache cache) {
     Map<String, dynamic> jsonMap = {};
-    jsonMap['Search Count'] = cache.searchCount.toString();
-    jsonMap['Leafs Count'] = cache.leafsCount.toString();
     jsonMap['Last Search'] = cache.lastSearch;
     jsonMap['Last Leafs'] = cache.lastLeafs;
     jsonMap['Search'] = serializeMapInfo(cache.search);

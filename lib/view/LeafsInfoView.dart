@@ -117,9 +117,13 @@ class _ButtonInfoState extends State<ButtonInfo> {
                                   title,
                                   leafs[index],
                                   _controller,
-                                  Image(
+                                leafs[index].image ==
+                                      null
+                                      ? null
+                                      : Image(
                                       image: NetworkImage(
-                                          '${leafs[index].image.toString()}')))));
+                                          '${leafs[index].image.toString()}')),
+                                  )));
                     });
                   }));
         },

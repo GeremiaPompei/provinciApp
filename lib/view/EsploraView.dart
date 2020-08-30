@@ -56,6 +56,7 @@ class _EsploraViewState extends State<EsploraView> {
           _refreshController.refreshCompleted();
         }),
         child: ListView(shrinkWrap: true, children: <Widget>[
+          //TODO searchbar
           TextField(
             decoration: InputDecoration(
               suffixIcon: Icon(Icons.search),
