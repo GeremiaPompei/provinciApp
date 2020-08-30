@@ -21,8 +21,10 @@ class _PromoViewState extends State<PromoView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text('Promo'),
-          backgroundColor: Colore.primario(),),
+        appBar: AppBar(
+          title: Text('Promo'),
+          backgroundColor: Colore.primario(),
+        ),
         body: Flex(
           direction: Axis.vertical,
           children: <Widget>[
