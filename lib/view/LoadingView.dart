@@ -1,4 +1,4 @@
-import 'package:MC/utility/Font.dart';
+import 'package:MC/utility/style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -14,10 +14,7 @@ class LoadingView extends StatelessWidget {
             Container(height: 150,),
             Text(
               'MACERATA',
-              style: TextStyle(
-                fontSize: 30,
-                fontFamily: Font.primario(),
-              ),
+              style: TitleTextStyle
             ),
             CircularProgressIndicator(),
             Image(

@@ -1,6 +1,6 @@
 import 'package:MC/controller/Controller.dart';
 import 'package:MC/model/LeafInfo.dart';
-import 'package:MC/utility/Colore.dart';
+import 'package:MC/utility/style.dart';
 import 'package:MC/view/DetailedLeafInfoView.dart';
 import 'package:flutter/material.dart';
 import 'package:share/share.dart';
@@ -28,7 +28,7 @@ class _LeafsInfoViewState extends State<LeafsInfoView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colore.primario(),
+        backgroundColor: ThemePrimaryColor,
         title: Text(title),
         leading: new IconButton(
           icon: new Icon(Icons.arrow_back_ios),

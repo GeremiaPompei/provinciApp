@@ -1,5 +1,5 @@
 import 'package:MC/controller/Controller.dart';
-import 'package:MC/utility/Font.dart';
+import 'package:MC/utility/style.dart';
 import 'package:MC/view/CardsSizedBox.dart';
 import 'package:MC/view/LastSearchedWidget.dart';
 import 'package:MC/view/LeafsInfoView.dart';
@@ -59,72 +59,42 @@ class _EsploraViewState extends State<EsploraView> {
           });
         }),
         child: ListView(shrinkWrap: true, children: <Widget>[
-          TextField(
-            decoration: InputDecoration(
-              suffixIcon: Icon(Icons.search),
-            ),
-            onSubmitted: (String input) {
-              setState(() {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => FutureBuilder<dynamic>(
-                              future: controller.setSearch(
-                                  input, 'dataset?q=' + input),
-                              builder: (BuildContext context,
-                                  AsyncSnapshot<dynamic> snapshot) {
-                                if (snapshot.hasData)
-                                  varWidget =
-                                      ScrollListView(this.controller, input);
-                                else
-                                  varWidget = LoadingView();
-                                return varWidget;
-                              },
-                            )));
-              });
-            },
-          ),
-          FlatButton(
-            child: Row(
-              children: <Widget>[
-                Icon(Icons.location_on),
-                Text('Posizione Attuale')
-              ],
-            ),
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => FutureBuilder<dynamic>(
-                            future: findPosition(),
-                            builder: (BuildContext context,
-                                AsyncSnapshot<dynamic> snapshot) {
-                              if (snapshot.hasData)
-                                varWidget = ScrollListView(
-                                    this.controller, this.location);
-                              else
-                                varWidget = LoadingView();
-                              return varWidget;
-                            },
-                          )));
-            },
-          ),
-          SizedBox(
-            child: Center(
-              child: Text(
-                'Comuni',
-                style: TextStyle(fontSize: 20, fontFamily: Font.primario()),
+          Container(
+            margin: EdgeInsets.only(left:20,right: 20),
+            child: TextField(
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                suffixIcon: Icon(Icons.search),
               ),
+              onSubmitted: (String input) {
+                setState(() {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => FutureBuilder<dynamic>(
+                                future: controller.setSearch(
+                                    input, 'dataset?q=' + input),
+                                builder: (BuildContext context,
+                                    AsyncSnapshot<dynamic> snapshot) {
+                                  if (snapshot.hasData)
+                                    varWidget =
+                                        ScrollListView(this.controller, input);
+                                  else
+                                    varWidget = LoadingView();
+                                  return varWidget;
+                                },
+                              )));
+                });
+              },
             ),
           ),
-          CardsSizedBox(this.controller, this.controller.getOrganizations()),
-          SizedBox(
-            child: Center(
-              child: Text(
-                'Categorie',
-                style: TextStyle(fontSize: 20, fontFamily: Font.primario()),
+          Center(
+            child: Container(
+                child: Text(
+                  'Categorie',
+                  style:  TitleTextStyle_20,
+                ),
               ),
-            ),
           ),
           CardsSizedBox(this.controller, this.controller.getCategories()),
           Divider(),

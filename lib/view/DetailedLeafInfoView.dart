@@ -1,7 +1,7 @@
 import 'package:MC/controller/Controller.dart';
 import 'package:MC/model/LeafInfo.dart';
 import 'package:MC/model/Web/HttpRequest.dart';
-import 'package:MC/utility/Colore.dart';
+import 'package:MC/utility/style.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
@@ -64,7 +64,7 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
                         MaterialPageRoute(
                             builder: (context) => Scaffold(
                                 appBar: AppBar(
-                                  backgroundColor: Colore.terziario(),
+                                  backgroundColor: BackgroundColor,
                                   title: Text(this.leafInfo.name),
                                 ),
                                 body: Container(child: this.image))));
@@ -186,7 +186,7 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
     return Scaffold(
         appBar: AppBar(
           title: Text(this.leafInfo.name),
-          backgroundColor: Colore.primario(),
+          backgroundColor: ThemePrimaryColor,
           leading: new IconButton(
             icon: new Icon(Icons.arrow_back_ios),
             onPressed: () {

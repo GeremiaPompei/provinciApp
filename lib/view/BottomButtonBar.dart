@@ -1,9 +1,8 @@
 import 'package:MC/controller/Controller.dart';
-import 'package:MC/utility/Colore.dart';
-import 'package:MC/view/EsploraView.dart';
-import 'package:MC/view/EventiView.dart';
+import 'package:MC/utility/style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
 import 'HomeView.dart';
 
@@ -34,28 +33,18 @@ class _BottomButtonDownState extends State<BottomButtonDown> {
 
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      items: [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.search),
-          title: Text('Esplora'),
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.event),
-          title: Text('Eventi'),
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.free_breakfast),
-          title: Text('Promo'),
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.save_alt),
-          title: Text('Salvati'),
-        ),
+    return CurvedNavigationBar (
+      color: ThemePrimaryColor,
+      backgroundColor: BackgroundColor,
+      buttonBackgroundColor: ThemeSecondaryColor,
+      items: <Widget>[
+        Icon(Icons.home),
+        Icon(Icons.event),
+        Icon(Icons.free_breakfast),
+        Icon(Icons.file_download)
       ],
-      unselectedItemColor: Colore.terziario(),
-      currentIndex: index,
-      selectedItemColor: Colore.primario(),
+      animationDuration: Duration(milliseconds: 500),
+      animationCurve: Curves.fastOutSlowIn,
       onTap: onItemTapped,
     );
   }

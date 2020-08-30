@@ -1,5 +1,5 @@
 import 'package:MC/controller/Controller.dart';
-import 'package:MC/utility/Colore.dart';
+import 'package:MC/utility/style.dart';
 import 'package:MC/view/LeafsInfoView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -61,7 +61,7 @@ class _ScrollListViewState extends State<ScrollListView> {
     return Scaffold(
       appBar: AppBar(
         title: Text(this.title),
-        backgroundColor: Colore.primario(),
+        backgroundColor:ThemePrimaryColor,
         leading: new IconButton(
             icon: new Icon(Icons.arrow_back_ios),
             onPressed: () {setState(() {
