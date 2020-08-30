@@ -22,16 +22,20 @@ class Controller {
     _events = [];
     _promos = [];
     _cache = new Cache(5, 5);
-  }
-
-  Future<dynamic> init() async {
-    this._cache.initOrganizations(await HtmlParser.organizations());
-    this._cache.initCategories(await HtmlParser.categories());
     try {
-      await loadCacheLastInfo();
+      loadCacheLastInfo();
     } catch (e) {}
     storeCache();
+  }
+
+  Future<dynamic> initCategories() async {
+    this._cache.initCategories(await HtmlParser.categories());
     return this.getCategories();
+  }
+
+  Future<dynamic> initOrganizations() async {
+    this._cache.initOrganizations(await HtmlParser.organizations());
+    return this.getOrganizations();
   }
 
   Future<dynamic> initOffline() async {
@@ -150,10 +154,10 @@ class Controller {
   }
 
   List<MapEntry<String, dynamic>> getLastSearched() =>
-      this._cache.search.entries.toList();
+      this._cache.search.entries.where((e) => !e.key.contains('Empty')).toList();
 
   List<MapEntry<String, dynamic>> getLastLeafs() =>
-      this._cache.leafs.entries.toList();
+      this._cache.leafs.entries.where((e) => !e.key.contains('Empty')).toList();
 
   List<LeafInfo> getLeafs() {
     return this._cache.getLeafsByUrl(this._cache.lastLeafs).element;

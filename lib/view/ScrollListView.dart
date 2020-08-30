@@ -3,7 +3,6 @@ import 'package:MC/utility/Colore.dart';
 import 'package:MC/view/LeafsInfoView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:MC/model/LeafInfo.dart';
 
 import 'LoadingView.dart';
 
@@ -48,6 +47,8 @@ class _ScrollListViewState extends State<ScrollListView> {
                             this.controller.getLeafs(),
                             this.controller.getSearch()[index].name,
                             this.controller);
+                      else if (snapshot.hasError)
+                        Navigator.pushReplacementNamed(context, '/offline');
                       else
                         varWidget = LoadingView();
                       return varWidget;

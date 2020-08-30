@@ -1,7 +1,7 @@
 import 'package:MC/controller/Controller.dart';
 import 'package:MC/utility/Colore.dart';
 import 'package:MC/view/EsploraView.dart';
-import 'package:MC/view/EventiView.dart';
+import 'package:MC/view/GridListView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -41,16 +41,16 @@ class _BottomButtonDownState extends State<BottomButtonDown> {
           title: Text('Esplora'),
         ),
         BottomNavigationBarItem(
+          icon: Icon(Icons.account_balance),
+          title: Text('Comuni'),
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.category),
+          title: Text('Categorie'),
+        ),
+        BottomNavigationBarItem(
           icon: Icon(Icons.event),
-          title: Text('Eventi'),
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.free_breakfast),
-          title: Text('Promo'),
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.save_alt),
-          title: Text('Salvati'),
+          title: Text('Extra'),
         ),
       ],
       unselectedItemColor: Colore.terziario(),

@@ -2,45 +2,36 @@ import 'package:MC/controller/Controller.dart';
 import 'package:MC/utility/Colore.dart';
 import 'package:MC/utility/Font.dart';
 import 'package:MC/view/BottomButtonBar.dart';
-import 'package:MC/view/DetailedLeafInfoView.dart';
 import 'package:MC/view/EsploraView.dart';
-import 'package:MC/view/EventiView.dart';
-import 'package:MC/view/LeafsInfoView.dart';
+import 'package:MC/view/ExtraView.dart';
+import 'package:MC/view/GridListView.dart';
 import 'package:MC/view/LoadingView.dart';
-import 'package:MC/view/OfflineWidget.dart';
-import 'package:MC/view/SalvatiView.dart';
-import 'package:MC/view/ScrollListView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'PromoView.dart';
-
 class HomeView extends StatefulWidget {
-  Controller controller;
+  Controller _controller;
 
-  HomeView(this.controller);
+  HomeView(this._controller);
 
   @override
-  _HomeViewState createState() => _HomeViewState(controller);
+  _HomeViewState createState() => _HomeViewState(_controller);
 }
 
 class _HomeViewState extends State<HomeView> {
-  Controller controller;
+  Controller _controller;
   String title;
   Widget varWidget;
   Future offlineF;
-  Future esploraF;
-  Future eventiF;
-  Future promoF;
+  Future organizationsF;
+  Future categoriesF;
 
-  _HomeViewState(this.controller) {
-    this.offlineF = this.controller.initOffline();
-    this.esploraF = this.controller.init();
-    this.eventiF = this.controller.initEvents();
-    this.promoF = this.controller.initPromos();
+  _HomeViewState(this._controller) {
+    this.offlineF = this._controller.initOffline();
+    this.organizationsF = this._controller.initOrganizations();
+    this.categoriesF = this._controller.initCategories();
     this.title = 'Esplora';
-    this.varWidget =
-        initWidgetFuture(() => this.esploraF, EsploraView(this.controller));
+    this.varWidget = initWidgetFuture(() => this.offlineF, EsploraView(this._controller));
   }
 
   Widget initWidgetFuture(Future<dynamic> Function() func, Widget input) =>
@@ -51,7 +42,7 @@ class _HomeViewState extends State<HomeView> {
           if (snapshot.hasData)
             tmpWidget = input;
           else if (snapshot.hasError)
-            tmpWidget = OfflineWidget(this.controller);
+            Navigator.pushReplacementNamed(context, '/offline');
           else
             tmpWidget = LoadingView();
           return tmpWidget;
@@ -63,23 +54,27 @@ class _HomeViewState extends State<HomeView> {
       switch (index) {
         case 0:
           this.title = 'Esplora';
-          this.varWidget = initWidgetFuture(
-              () => this.esploraF, EsploraView(this.controller));
+          this.varWidget =
+              initWidgetFuture(() => this.offlineF, EsploraView(this._controller));
           break;
         case 1:
-          this.title = 'Eventi';
-          this.varWidget =
-              initWidgetFuture(() => this.eventiF, EventiView(this.controller));
+          this.title = 'Comuni';
+          this.varWidget = initWidgetFuture(
+              () => this.organizationsF,
+              GridListView(this._controller, this._controller.getOrganizations(),
+                  this._controller.initOrganizations()));
           break;
         case 2:
-          this.title = 'Promo';
-          this.varWidget =
-              initWidgetFuture(() => this.promoF, PromoView(this.controller));
+          this.title = 'Categorie';
+          this.varWidget = initWidgetFuture(
+              () => this.categoriesF,
+              GridListView(this._controller, this._controller.getCategories(),
+                  this._controller.initCategories()));
           break;
         case 3:
-          this.title = 'Salvati';
+          this.title = 'Extra';
           this.varWidget = initWidgetFuture(
-              () => this.offlineF,SalvatiView(this.title,this.controller));
+              () => this.offlineF, ExtraView(this._controller));
           break;
       }
     });
@@ -96,9 +91,19 @@ class _HomeViewState extends State<HomeView> {
             fontFamily: Font.primario(),
           ),
         ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.offline_bolt),
+            onPressed: () {
+              setState(() {
+                Navigator.pushReplacementNamed(context, '/offline');
+              });
+            },
+          ),
+        ],
       ),
       body: varWidget,
-      bottomNavigationBar: BottomButtonDown(controller, onItemTapped),
+      bottomNavigationBar: BottomButtonDown(_controller, onItemTapped),
     );
   }
 }

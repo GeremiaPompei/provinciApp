@@ -1,5 +1,6 @@
 import 'package:MC/controller/Controller.dart';
 import 'package:MC/model/NodeInfo.dart';
+import 'package:MC/model/UnitCache.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -7,30 +8,31 @@ import 'LoadingView.dart';
 import 'ScrollListView.dart';
 
 class CardsSizedBox extends StatefulWidget {
-  Controller controller;
-  List<NodeInfo> list;
+  List<MapEntry<String, UnitCache>> _list;
+  Future<dynamic> Function(String name,String url) _func;
+  Widget Function(String name) _funcWidget;
 
-  CardsSizedBox(this.controller, this.list);
+  CardsSizedBox(this._list, this._func,this._funcWidget);
 
   @override
   _CardsSizedBoxState createState() =>
-      _CardsSizedBoxState(this.controller, this.list);
+      _CardsSizedBoxState(this._list,this._func,this._funcWidget);
 }
 
 class _CardsSizedBoxState extends State<CardsSizedBox> {
-  Controller controller;
-  List<NodeInfo> list;
+  List<MapEntry<String, UnitCache>> _list;
   int _index;
-  Widget varWidget;
+  Future<dynamic> Function(String name,String url) _func;
+  Widget Function(String name) _funcWidget;
 
-  _CardsSizedBoxState(this.controller, this.list);
+  _CardsSizedBoxState(this._list,this._func,this._funcWidget);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 200,
       child: PageView.builder(
-        itemCount: this.list.length,
+        itemCount: this._list.length,
         controller: PageController(viewportFraction: 0.5),
         onPageChanged: (int index) => setState(() => _index = index),
         itemBuilder: (_, i) => Transform.scale(
@@ -42,27 +44,25 @@ class _CardsSizedBoxState extends State<CardsSizedBox> {
               ),
               child: FlatButton(
                 child: ListTile(
-                    title: Text(this.list[i].name),
-                    subtitle: this.list[i].image == null
-                        ? null
-                        : Image(image: NetworkImage(this.list[i].image))),
+                  title: Text(this._list[i].value.name),
+                ),
                 onPressed: () {
                   setState(() {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => FutureBuilder<dynamic>(
-                                  future: controller.setSearch(
-                                      this.list[i].name,
-                                      this.list[i].url),
+                                  future: _func(
+                                      this._list[i].value.name,
+                                      this._list[i].key),
                                   builder: (BuildContext context,
                                       AsyncSnapshot<dynamic> snapshot) {
+                                    Widget tmpWidget;
                                     if (snapshot.hasData)
-                                      varWidget = ScrollListView(
-                                          this.controller, list[i].name);
+                                      tmpWidget = this._funcWidget(_list[i].value.name);
                                     else
-                                      varWidget = LoadingView();
-                                    return varWidget;
+                                      tmpWidget = LoadingView();
+                                    return tmpWidget;
                                   },
                                 )));
                   });

@@ -1,7 +1,6 @@
 import 'package:MC/controller/Controller.dart';
-import 'package:MC/utility/Font.dart';
+import 'package:MC/model/UnitCache.dart';
 import 'package:MC/view/CardsSizedBox.dart';
-import 'package:MC/view/LastSearchedWidget.dart';
 import 'package:MC/view/LeafsInfoView.dart';
 import 'package:MC/view/LoadingView.dart';
 import 'package:MC/view/ScrollListView.dart';
@@ -21,8 +20,8 @@ class EsploraView extends StatefulWidget {
 
 class _EsploraViewState extends State<EsploraView> {
   Controller controller;
-  List searched;
-  List leafs;
+  List<MapEntry<String, UnitCache>> searched;
+  List<MapEntry<String, UnitCache>> leafs;
   Widget varWidget;
   String location;
   RefreshController _refreshController =
@@ -53,10 +52,8 @@ class _EsploraViewState extends State<EsploraView> {
         header: ClassicHeader(),
         controller: _refreshController,
         onRefresh: () => setState(() {
-          this.controller.init().then((value) {
-            (context as Element).reassemble();
-            _refreshController.refreshCompleted();
-          });
+          (context as Element).reassemble();
+          _refreshController.refreshCompleted();
         }),
         child: ListView(shrinkWrap: true, children: <Widget>[
           TextField(
@@ -76,6 +73,8 @@ class _EsploraViewState extends State<EsploraView> {
                                 if (snapshot.hasData)
                                   varWidget =
                                       ScrollListView(this.controller, input);
+                                else if(snapshot.hasError)
+                                  Navigator.pushReplacementNamed(context, '/offline');
                                 else
                                   varWidget = LoadingView();
                                 return varWidget;
@@ -109,42 +108,13 @@ class _EsploraViewState extends State<EsploraView> {
                           )));
             },
           ),
-          SizedBox(
-            child: Center(
-              child: Text(
-                'Comuni',
-                style: TextStyle(fontSize: 20, fontFamily: Font.primario()),
-              ),
-            ),
-          ),
-          CardsSizedBox(this.controller, this.controller.getOrganizations()),
-          SizedBox(
-            child: Center(
-              child: Text(
-                'Categorie',
-                style: TextStyle(fontSize: 20, fontFamily: Font.primario()),
-              ),
-            ),
-          ),
-          CardsSizedBox(this.controller, this.controller.getCategories()),
-          Divider(),
-          LastSearchedWidget(
-              this.controller,
-              this.searched,
-              (index) => ScrollListView(
-                  this.controller, this.searched[index].value.name),
-              (index) => controller.setSearch(
-                  this.searched[index].value.name,
-                  this.searched[index].key)),
-          Divider(),
-          LastSearchedWidget(
-              this.controller,
+          CardsSizedBox(this.searched, this.controller.setSearch,
+              (name) => ScrollListView(this.controller, name)),
+          CardsSizedBox(
               this.leafs,
-              (index) => LeafsInfoView(this.controller.getLeafs(),
-                  this.leafs[index].value.name, this.controller),
-              (index) => controller.setLeafInfo(
-                  this.leafs[index].value.name,
-                  this.leafs[index].key))
+              this.controller.setLeafInfo,
+              (name) => LeafsInfoView(
+                  this.controller.getLeafs(), name, this.controller)),
         ]),
       ),
     );
