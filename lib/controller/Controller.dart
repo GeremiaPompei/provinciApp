@@ -116,7 +116,7 @@ class Controller {
     return this._promos;
   }
 
-  Future setSearch(String name, String url) async {
+  Future<dynamic> setSearch(String name, String url) async {
     try {
       UnitCache<List<NodeInfo>> cacheUnit = this._cache.getSearchByUrl(url);
       if (cacheUnit == null) {
@@ -138,7 +138,7 @@ class Controller {
     return getSearch();
   }
 
-  Future setLeafInfo(String name, String url) async {
+  Future<List<dynamic>> setLeafInfo(String name, String url) async {
     UnitCache<List<LeafInfo>> cacheUnit = this._cache.getLeafsByUrl(url);
     if (cacheUnit == null) {
       List<LeafInfo> leafs = await HtmlParser.leafsByWord(url);

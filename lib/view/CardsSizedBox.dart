@@ -30,7 +30,7 @@ class _CardsSizedBoxState extends State<CardsSizedBox> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 200,
+      height: 100,
       child: PageView.builder(
         itemCount: this._list.length,
         controller: PageController(viewportFraction: 0.5),

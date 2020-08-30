@@ -1,9 +1,12 @@
 import 'package:MC/controller/Controller.dart';
+import 'package:MC/model/NodeInfo.dart';
 import 'package:MC/model/UnitCache.dart';
+import 'package:MC/utility/Colore.dart';
 import 'package:MC/view/CardsSizedBox.dart';
 import 'package:MC/view/LeafsInfoView.dart';
 import 'package:MC/view/LoadingView.dart';
 import 'package:MC/view/ScrollListView.dart';
+import 'package:flappy_search_bar/flappy_search_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -47,77 +50,48 @@ class _EsploraViewState extends State<EsploraView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SmartRefresher(
-        enablePullDown: true,
-        header: ClassicHeader(),
-        controller: _refreshController,
-        onRefresh: () => setState(() {
-          (context as Element).reassemble();
-          _refreshController.refreshCompleted();
-        }),
-        child: ListView(shrinkWrap: true, children: <Widget>[
-          //TODO searchbar
-          TextField(
-            decoration: InputDecoration(
-              suffixIcon: Icon(Icons.search),
-            ),
-            onSubmitted: (String input) {
-              setState(() {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => FutureBuilder<dynamic>(
-                              future: controller.setSearch(
-                                  input, 'dataset?q=' + input),
-                              builder: (BuildContext context,
-                                  AsyncSnapshot<dynamic> snapshot) {
-                                if (snapshot.hasData)
-                                  varWidget =
-                                      ScrollListView(this.controller, input);
-                                else if(snapshot.hasError)
-                                  Navigator.pushReplacementNamed(context, '/offline');
-                                else
-                                  varWidget = LoadingView();
-                                return varWidget;
-                              },
-                            )));
-              });
-            },
-          ),
-          FlatButton(
-            child: Row(
-              children: <Widget>[
-                Icon(Icons.location_on),
-                Text('Posizione Attuale')
-              ],
-            ),
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => FutureBuilder<dynamic>(
-                            future: findPosition(),
-                            builder: (BuildContext context,
-                                AsyncSnapshot<dynamic> snapshot) {
-                              if (snapshot.hasData)
-                                varWidget = ScrollListView(
-                                    this.controller, this.location);
-                              else
-                                varWidget = LoadingView();
-                              return varWidget;
-                            },
-                          )));
-            },
-          ),
-          CardsSizedBox(this.searched, this.controller.setSearch,
-              (name) => ScrollListView(this.controller, name)),
-          CardsSizedBox(
-              this.leafs,
-              this.controller.setLeafInfo,
-              (name) => LeafsInfoView(
-                  this.controller.getLeafs(), name, this.controller)),
-        ]),
-      ),
+      body: SearchBar<NodeInfo>(
+          scrollDirection: Axis.vertical,
+          shrinkWrap: true,
+          icon: Icon(Icons.search),
+          header: Column(children: [
+            CardsSizedBox(this.searched, this.controller.setSearch,
+                    (name) => ScrollListView(this.controller, name)),
+            CardsSizedBox(
+                this.leafs,
+                this.controller.setLeafInfo,
+                    (name) => LeafsInfoView(
+                    this.controller.getLeafs(), name, this.controller)),
+          ],),
+          onSearch: (input) async =>
+              await controller.setSearch(input, 'dataset?q=' + input),
+          onItemFound: (input, num) {
+            return Container(
+              child: ListTile(
+                title: Text(input.name),
+                isThreeLine: true,
+                subtitle: Text(input.description),
+                onTap: () async {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => FutureBuilder<dynamic>(
+                      future: controller.setLeafInfo(input.name, input.url),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<dynamic> snapshot) {
+                        if (snapshot.hasData)
+                          varWidget = LeafsInfoView(this.controller.getLeafs(),
+                              input.name, controller);
+                        else if (snapshot.hasError)
+                          Navigator.pushReplacementNamed(context, '/offline');
+                        else
+                          varWidget = LoadingView();
+                        return varWidget;
+                      },
+                    ),
+                  ));
+                },
+              ),
+            );
+          }),
     );
   }
 }
