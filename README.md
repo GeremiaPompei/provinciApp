@@ -4,6 +4,10 @@
 Il progetto nasce da tre semplici studenti con molta voglia di divertirsi e mettersi in gioco.
 Lo sviluppo dell'applicazione nasce dalla base dei requisiti richiesti dal concorso, arricchiti dalle nostre idee e competenze al fine di creare qualcosa di semplice ed intuibile, in grado di attrarre ogni fascia di età della nostra provincia.
   
+[**Obiettivi del concorso**](https://github.com/GeremiaPompei/mc/blob/master/README.md#obiettivi-del-concorso)
+
+ [**Introduzione all'utilizzo dell'applicazione**](https://github.com/GeremiaPompei/mc/blob/master/README.md#introduzione-allutilizzo-dellapplicazione)
+  
 ### Obiettivi del concorso  
   *L’applicazione mobile dovrà presentare le seguenti caratteristiche tecniche:*  
   ```
