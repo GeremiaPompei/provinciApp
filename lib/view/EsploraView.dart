@@ -51,7 +51,7 @@ class _EsploraViewState extends State<EsploraView> {
           scrollDirection: Axis.vertical,
           shrinkWrap: true,
           icon: Icon(Icons.search),
-          header: Column(children: [
+          placeHolder: Column(children: [
             CardsSizedBox(this.searched, this.controller.setSearch,
                     (name) => ScrollListView(this.controller, name)),
             CardsSizedBox(
