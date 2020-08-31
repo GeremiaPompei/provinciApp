@@ -5,7 +5,6 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 
 class LoadingView extends StatelessWidget {
-  //TODO widget loading
   @override
   Widget build(BuildContext context) {
     return Scaffold(

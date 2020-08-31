@@ -1,9 +1,11 @@
 import 'package:MC/controller/Controller.dart';
+import 'package:MC/utility/Style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'EventiView.dart';
 import 'LoadingView.dart';
+import 'OfflineView.dart';
 import 'PromoView.dart';
 
 class ExtraView extends StatefulWidget {
@@ -17,12 +19,18 @@ class ExtraView extends StatefulWidget {
 
 class _ExtraViewState extends State<ExtraView> {
   Controller _controller;
+  Widget _offlineW;
   Future _eventsF;
   Future _promosF;
 
   _ExtraViewState(this._controller) {
     this._eventsF = this._controller.initEvents();
     this._promosF = this._controller.initPromos();
+    this._offlineW = Scaffold(
+        appBar: AppBar(
+          backgroundColor: BackgroundColor,
+        ),
+        body: OfflineView());
   }
 
   @override
@@ -48,8 +56,7 @@ class _ExtraViewState extends State<ExtraView> {
                                 if (snapshot.hasData)
                                   varWidget = EventiView(this._controller);
                                 else if (snapshot.hasError)
-                                  Navigator.pushReplacementNamed(
-                                      context, '/offline');
+                                  varWidget = _offlineW;
                                 else
                                   varWidget = LoadingView();
                                 return varWidget;
@@ -75,8 +82,7 @@ class _ExtraViewState extends State<ExtraView> {
                                     if (snapshot.hasData)
                                       varWidget = PromoView(this._controller);
                                     else if (snapshot.hasError)
-                                      Navigator.pushReplacementNamed(
-                                          context, '/offline');
+                                      varWidget = _offlineW;
                                     else
                                       varWidget = LoadingView();
                                     return varWidget;

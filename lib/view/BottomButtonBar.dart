@@ -7,18 +7,20 @@ import 'HomeView.dart';
 
 class BottomButtonDown extends StatefulWidget {
   void Function(int) _func;
+  int _index;
 
-  BottomButtonDown(this._func);
+  BottomButtonDown(this._func,this._index);
 
   @override
   _BottomButtonDownState createState() =>
-      _BottomButtonDownState(this._func);
+      _BottomButtonDownState(this._func,this._index);
 }
 
 class _BottomButtonDownState extends State<BottomButtonDown> {
   void Function(int) _func;
+  int _index;
 
-  _BottomButtonDownState(this._func);
+  _BottomButtonDownState(this._func,this._index);
 
   void onItemTapped(index) {
     setState(() {
@@ -29,6 +31,7 @@ class _BottomButtonDownState extends State<BottomButtonDown> {
   @override
   Widget build(BuildContext context) {
     return CurvedNavigationBar(
+      index: this._index,
       color: ThemePrimaryColor,
       backgroundColor: BackgroundColor,
       buttonBackgroundColor: ThemeSecondaryColor,

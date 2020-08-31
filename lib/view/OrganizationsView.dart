@@ -1,11 +1,13 @@
 import 'package:MC/controller/Controller.dart';
 import 'package:MC/model/NodeInfo.dart';
+import 'package:MC/utility/Style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'LoadingView.dart';
+import 'OfflineView.dart';
 import 'ScrollListView.dart';
 
 class OrganizationsView extends StatefulWidget {
@@ -89,8 +91,11 @@ class _OrganizationsViewState extends State<OrganizationsView> {
                                               .getOrganizations()[index]
                                               .name);
                                     else if (snapshot.hasError)
-                                      Navigator.pushReplacementNamed(
-                                          context, '/offline');
+                                      varWidget = Scaffold(
+                                          appBar: AppBar(
+                                            backgroundColor: BackgroundColor,
+                                          ),
+                                          body: OfflineView());
                                     else
                                       varWidget = LoadingView();
                                     return varWidget;

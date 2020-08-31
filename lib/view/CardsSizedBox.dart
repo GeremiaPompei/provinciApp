@@ -1,10 +1,12 @@
 import 'package:MC/controller/Controller.dart';
 import 'package:MC/model/NodeInfo.dart';
 import 'package:MC/model/UnitCache.dart';
+import 'package:MC/utility/Style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'LoadingView.dart';
+import 'OfflineView.dart';
 import 'ScrollListView.dart';
 
 class CardsSizedBox extends StatefulWidget {
@@ -53,8 +55,11 @@ class _CardsSizedBoxState extends State<CardsSizedBox> {
                                       tmpWidget =
                                           this._funcWidget(_list[i].value.name);
                                     else if (snapshot.hasError)
-                                      Navigator.pushReplacementNamed(
-                                          context, '/offline');
+                                      tmpWidget = Scaffold(
+                                          appBar: AppBar(
+                                            backgroundColor: BackgroundColor,
+                                          ),
+                                          body: OfflineView());
                                     else
                                       tmpWidget = LoadingView();
                                     return tmpWidget;

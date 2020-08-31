@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'LoadingView.dart';
+import 'OfflineView.dart';
 
 class ScrollListView extends StatefulWidget {
   Controller _controller;
@@ -48,7 +49,11 @@ class _ScrollListViewState extends State<ScrollListView> {
                             this._controller.getSearch()[index].name,
                             this._controller);
                       else if (snapshot.hasError)
-                        Navigator.pushReplacementNamed(context, '/offline');
+                        _varWidget = Scaffold(
+                            appBar: AppBar(
+                              backgroundColor: BackgroundColor,
+                            ),
+                            body: OfflineView());
                       else
                         _varWidget = LoadingView();
                       return _varWidget;

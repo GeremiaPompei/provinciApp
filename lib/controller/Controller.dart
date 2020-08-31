@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:MC/model/Persistence/DeserializeCache.dart';
 import 'package:MC/model/Persistence/DeserializeOffline.dart';
 import 'package:MC/model/Persistence/SerializeCache.dart';
@@ -22,20 +23,24 @@ class Controller {
     _events = [];
     _promos = [];
     _cache = new Cache();
+    initOffline();
+  }
+
+  Future<bool> tryConnection() async{
+    final result = await InternetAddress.lookup('google.com');
+    return result.isNotEmpty && result[0].rawAddress.isNotEmpty;
   }
 
   Future<dynamic> initLoadAndStore() async {
     if (this._cache.lastLeafs == null) {
+      await tryConnection();
       try {
         await loadSavedLastInfo();
       } catch (e) {
         try {
           await loadStaticLastInfo(5, 5);
-        } catch (e) {
-          print(e.toString());
-        }
+        } catch (e) {}
       }
-      await initOffline();
       storeCache();
     }
     return this._cache.lastLeafs;
@@ -121,6 +126,7 @@ class Controller {
   }
 
   Future<dynamic> setSearch(String name, String url) async {
+    await tryConnection();
     try {
       UnitCache<List<NodeInfo>> cacheUnit = this._cache.getSearchByUrl(url);
       if (cacheUnit == null) {
@@ -143,6 +149,7 @@ class Controller {
   }
 
   Future<List<dynamic>> setLeafInfo(String name, String url) async {
+    await tryConnection();
     UnitCache<List<LeafInfo>> cacheUnit = this._cache.getLeafsByUrl(url);
     if (cacheUnit == null) {
       List<LeafInfo> leafs = await HtmlParser.leafsByWord(url);
