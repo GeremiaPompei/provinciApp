@@ -1,6 +1,5 @@
 import 'package:MC/controller/Controller.dart';
-import 'package:MC/utility/Colore.dart';
-import 'package:MC/utility/Font.dart';
+import 'package:MC/utility/Style.dart';
 import 'package:MC/view/BottomButtonBar.dart';
 import 'package:MC/view/CategorieView.dart';
 import 'package:MC/view/EsploraView.dart';
@@ -9,6 +8,9 @@ import 'package:MC/view/OrganizationsView.dart';
 import 'package:MC/view/LoadingView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
+
+import 'ScrollListView.dart';
 
 class HomeView extends StatefulWidget {
   Controller _controller;
@@ -21,19 +23,20 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   Controller _controller;
-  String title;
-  Widget varWidget;
-  Future esploraF;
-  Future organizationsF;
-  Future categoriesF;
+  String _title;
+  Widget _varWidget;
+  Future _esploraF;
+  Future _organizationsF;
+  Future _categoriesF;
+  String _location;
 
   _HomeViewState(this._controller) {
-    this.esploraF = this._controller.initLoadAndStore();
-    this.categoriesF = this._controller.initCategories();
-    this.organizationsF = this._controller.initOrganizations();
-    this.title = 'Esplora';
-    this.varWidget =
-        initWidgetFuture(() => this.esploraF, EsploraView(this._controller));
+    this._esploraF = this._controller.initLoadAndStore();
+    this._categoriesF = this._controller.initCategories();
+    this._organizationsF = this._controller.initOrganizations();
+    this._title = 'Esplora';
+    this._varWidget =
+        initWidgetFuture(() => this._esploraF, EsploraView(this._controller));
   }
 
   Widget initWidgetFuture(Future<dynamic> Function() func, Widget input) =>
@@ -51,27 +54,39 @@ class _HomeViewState extends State<HomeView> {
         },
       );
 
+  Future findPosition() async {
+    final Geolocator geolocator = Geolocator()..forceAndroidLocationManager;
+    Position position = await geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.best);
+    List<Placemark> placemark =
+    await geolocator.placemarkFromPosition(position);
+    this._location = placemark[0].locality;
+    return this
+        ._controller
+        .setSearch(this._location, 'dataset?q=' + this._location);
+  }
+
   void onItemTapped(index) async {
     setState(() {
       switch (index) {
         case 0:
-          this.title = 'Esplora';
-          this.varWidget = initWidgetFuture(
-              () => this.esploraF, EsploraView(this._controller));
+          this._title = 'Esplora';
+          this._varWidget = initWidgetFuture(
+              () => this._esploraF, EsploraView(this._controller));
           break;
         case 1:
-          this.title = 'Comuni';
-          this.varWidget = initWidgetFuture(
-              () => this.organizationsF, OrganizationsView(this._controller));
+          this._title = 'Comuni';
+          this._varWidget = initWidgetFuture(
+              () => this._organizationsF, OrganizationsView(this._controller));
           break;
         case 2:
-          this.title = 'Categorie';
-          this.varWidget = initWidgetFuture(
-              () => this.categoriesF, CategoriesView(this._controller));
+          this._title = 'Categorie';
+          this._varWidget = initWidgetFuture(
+              () => this._categoriesF, CategoriesView(this._controller));
           break;
         case 3:
-          this.title = 'Extra';
-          this.varWidget = initWidgetFuture(
+          this._title = 'Extra';
+          this._varWidget = initWidgetFuture(
                   () => Future(()=>0), ExtraView(this._controller));
           break;
       }
@@ -82,15 +97,38 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colore.primario,
+        backgroundColor: BackgroundColor,
         title: Text(
-          title,
-          style: TextStyle(
-            fontFamily: Font.primario,
-          ),
+          _title,
+          style: TitleTextStyle,
         ),
         actions: [
           IconButton(
+            color: ThemePrimaryColor,
+            icon: Icon(Icons.location_on),
+            onPressed: () {
+              setState(() {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => FutureBuilder<dynamic>(
+                          future: findPosition(),
+                          builder: (BuildContext context,
+                              AsyncSnapshot<dynamic> snapshot) {
+                            Widget varWidget;
+                            if (snapshot.hasData)
+                              varWidget = ScrollListView(
+                                  this._controller, this._location);
+                            else
+                              varWidget = LoadingView();
+                            return varWidget;
+                          },
+                        )));
+              });
+            },
+          ),
+          IconButton(
+            color: ThemePrimaryColor,
             icon: Icon(Icons.offline_bolt),
             onPressed: () {
               setState(() {
@@ -100,8 +138,8 @@ class _HomeViewState extends State<HomeView> {
           ),
         ],
       ),
-      body: varWidget,
-      bottomNavigationBar: BottomButtonDown(_controller, onItemTapped),
+      body: _varWidget,
+      bottomNavigationBar: BottomButtonDown(onItemTapped),
     );
   }
 }

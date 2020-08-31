@@ -44,6 +44,9 @@ dependencies:
   photo_view: ^0.10.1
   flutter_launcher_icons: ^0.7.5
   flutter_svg: ^0.18.0
+  curved_navigation_bar: ^0.3.3
+  flutter_spinkit: ^4.1.2
+  auto_size_text: ^2.1.0
 
 flutter_icons:
   image_path: "icon/logo_mc.PNG"

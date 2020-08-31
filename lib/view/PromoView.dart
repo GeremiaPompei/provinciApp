@@ -1,17 +1,17 @@
 import 'package:MC/controller/Controller.dart';
-import 'package:MC/utility/Colore.dart';
+import 'package:MC/utility/Style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class PromoView extends StatefulWidget {
-  Controller controller;
+  Controller _controller;
 
-  PromoView(this.controller);
+  PromoView(this._controller);
 
   @override
-  _PromoViewState createState() => _PromoViewState(this.controller);
+  _PromoViewState createState() => _PromoViewState(this._controller);
 }
 
 class _PromoViewState extends State<PromoView> {
@@ -26,7 +26,7 @@ class _PromoViewState extends State<PromoView> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Promo'),
-        backgroundColor: Colore.primario,
+        backgroundColor: ThemePrimaryColor,
       ),
       body: SmartRefresher(
         enablePullDown: true,

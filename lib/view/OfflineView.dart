@@ -1,5 +1,5 @@
 import 'package:MC/controller/Controller.dart';
-import 'package:MC/utility/Colore.dart';
+import 'package:MC/utility/Style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -28,7 +28,7 @@ class _OfflineWidgetState extends State<OfflineWidget> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Offline'),
-        backgroundColor: Colore.primario,
+        backgroundColor: ThemePrimaryColor,
         actions: [
           IconButton(
             icon: Icon(Icons.offline_pin),

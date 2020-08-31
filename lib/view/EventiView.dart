@@ -1,17 +1,17 @@
 import 'package:MC/controller/Controller.dart';
-import 'package:MC/utility/Colore.dart';
+import 'package:MC/utility/Style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class EventiView extends StatefulWidget {
-  Controller controller;
+  Controller _controller;
 
-  EventiView(this.controller);
+  EventiView(this._controller);
 
   @override
-  _EventiViewState createState() => _EventiViewState(this.controller);
+  _EventiViewState createState() => _EventiViewState(this._controller);
 }
 
 class _EventiViewState extends State<EventiView> {
@@ -24,7 +24,7 @@ class _EventiViewState extends State<EventiView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Eventi'), backgroundColor: Colore.primario),
+      appBar: AppBar(title: Text('Eventi'), backgroundColor: ThemePrimaryColor),
       body: SmartRefresher(
         enablePullDown: true,
         header: ClassicHeader(),

@@ -1,5 +1,5 @@
 import 'package:MC/controller/Controller.dart';
-import 'package:MC/utility/Colore.dart';
+import 'package:MC/utility/Style.dart';
 import 'package:MC/view/LeafsInfoView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,26 +7,26 @@ import 'package:flutter/material.dart';
 import 'LoadingView.dart';
 
 class ScrollListView extends StatefulWidget {
-  Controller controller;
-  String title;
+  Controller _controller;
+  String _title;
 
-  ScrollListView(this.controller, this.title);
+  ScrollListView(this._controller, this._title);
 
   @override
   _ScrollListViewState createState() =>
-      _ScrollListViewState(this.controller, this.title);
+      _ScrollListViewState(this._controller, this._title);
 }
 
 class _ScrollListViewState extends State<ScrollListView> {
-  Controller controller;
-  String title;
-  Widget varWidget;
+  Controller _controller;
+  String _title;
+  Widget _varWidget;
 
-  _ScrollListViewState(this.controller, this.title);
+  _ScrollListViewState(this._controller, this._title);
 
   int length() {
-    if (controller.getSearch() != null)
-      return controller.getSearch().length;
+    if (_controller.getSearch() != null)
+      return _controller.getSearch().length;
     else
       return 0;
   }
@@ -37,21 +37,21 @@ class _ScrollListViewState extends State<ScrollListView> {
           context,
           MaterialPageRoute(
               builder: (context) => FutureBuilder<dynamic>(
-                    future: controller.setLeafInfo(
-                        controller.getSearch()[index].name,
-                        controller.getSearch()[index].url),
+                    future: _controller.setLeafInfo(
+                        _controller.getSearch()[index].name,
+                        _controller.getSearch()[index].url),
                     builder: (BuildContext context,
                         AsyncSnapshot<dynamic> snapshot) {
                       if (snapshot.hasData)
-                        varWidget = LeafsInfoView(
-                            this.controller.getLeafs(),
-                            this.controller.getSearch()[index].name,
-                            this.controller);
+                        _varWidget = LeafsInfoView(
+                            this._controller.getLeafs(),
+                            this._controller.getSearch()[index].name,
+                            this._controller);
                       else if (snapshot.hasError)
                         Navigator.pushReplacementNamed(context, '/offline');
                       else
-                        varWidget = LoadingView();
-                      return varWidget;
+                        _varWidget = LoadingView();
+                      return _varWidget;
                     },
                   )));
     });
@@ -61,8 +61,8 @@ class _ScrollListViewState extends State<ScrollListView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(this.title),
-        backgroundColor: Colore.primario,
+        title: Text(this._title),
+        backgroundColor: ThemePrimaryColor,
         leading: new IconButton(
             icon: new Icon(Icons.arrow_back_ios),
             onPressed: () {
@@ -83,9 +83,9 @@ class _ScrollListViewState extends State<ScrollListView> {
               itemBuilder: (context, index) {
                 return ListTile(
                   title:
-                      Text('${controller.getSearch()[index].name.toString()}'),
+                      Text('${_controller.getSearch()[index].name.toString()}'),
                   subtitle: Text(
-                      '${controller.getSearch()[index].description.toString()}'),
+                      '${_controller.getSearch()[index].description.toString()}'),
                   onTap: () {
                     setLeafs(index);
                   },

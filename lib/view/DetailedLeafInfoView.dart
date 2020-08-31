@@ -1,7 +1,6 @@
 import 'package:MC/controller/Controller.dart';
 import 'package:MC/model/LeafInfo.dart';
-import 'package:MC/model/Web/HttpRequest.dart';
-import 'package:MC/utility/Colore.dart';
+import 'package:MC/utility/Style.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
@@ -10,11 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:latlong/latlong.dart';
 import 'package:map_launcher/map_launcher.dart' as mapLauncher;
 import 'package:map_launcher/map_launcher.dart';
-import 'package:photo_view/photo_view.dart';
 import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import 'LoadingView.dart';
 
 class DetailedLeafInfoView extends StatefulWidget {
   LeafInfo leafInfo;
@@ -64,7 +60,7 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
                         MaterialPageRoute(
                             builder: (context) => Scaffold(
                                 appBar: AppBar(
-                                  backgroundColor: Colore.background,
+                                  backgroundColor: BackgroundColor,
                                   title: Text(this.leafInfo.name),
                                 ),
                                 body: Container(child: this.image))));
@@ -186,7 +182,7 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
     return Scaffold(
         appBar: AppBar(
           title: Text(this.leafInfo.name),
-          backgroundColor: Colore.primario,
+          backgroundColor: ThemePrimaryColor,
           leading: new IconButton(
             icon: new Icon(Icons.arrow_back_ios),
             onPressed: () {

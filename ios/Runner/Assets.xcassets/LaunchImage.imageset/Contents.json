@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "logo_mc-1.jpg",
+      "filename" : "logo_mc.jpg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "logo_mc-2.jpg",
+      "filename" : "logo_mc-1.jpg",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "logo_mc-3.jpg",
+      "filename" : "logo_mc-2.jpg",
       "idiom" : "universal",
       "scale" : "3x"
     }

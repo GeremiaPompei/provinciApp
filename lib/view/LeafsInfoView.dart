@@ -1,41 +1,41 @@
 import 'package:MC/controller/Controller.dart';
 import 'package:MC/model/LeafInfo.dart';
-import 'package:MC/utility/Colore.dart';
+import 'package:MC/utility/Style.dart';
 import 'package:MC/view/DetailedLeafInfoView.dart';
 import 'package:flutter/material.dart';
 import 'package:share/share.dart';
 
 class LeafsInfoView extends StatefulWidget {
-  List<LeafInfo> leafs;
-  String title;
-  Controller controller;
+  List<LeafInfo> _leafs;
+  String _title;
+  Controller _controller;
 
-  LeafsInfoView(this.leafs, this.title, this.controller);
+  LeafsInfoView(this._leafs, this._title, this._controller);
 
   @override
   _LeafsInfoViewState createState() =>
-      _LeafsInfoViewState(this.leafs, this.title, this.controller);
+      _LeafsInfoViewState(this._leafs, this._title, this._controller);
 }
 
 class _LeafsInfoViewState extends State<LeafsInfoView> {
-  List<LeafInfo> leafs;
-  String title;
-  Controller controller;
+  List<LeafInfo> _leafs;
+  String _title;
+  Controller _controller;
 
-  _LeafsInfoViewState(this.leafs, this.title, this.controller);
+  _LeafsInfoViewState(this._leafs, this._title, this._controller);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colore.primario,
-        title: Text(title),
+        backgroundColor: ThemePrimaryColor,
+        title: Text(_title),
         leading: new IconButton(
           icon: new Icon(Icons.arrow_back_ios),
           onPressed: () => {Navigator.pop(context)},
         ),
       ),
-      body: ButtonInfo(leafs, title, controller),
+      body: ButtonInfo(_leafs, _title, _controller),
     );
   }
 }
