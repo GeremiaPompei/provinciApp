@@ -51,15 +51,19 @@ class _EsploraViewState extends State<EsploraView> {
           scrollDirection: Axis.vertical,
           shrinkWrap: true,
           icon: Icon(Icons.search),
-          placeHolder: Column(children: [
-            CardsSizedBox(this.searched, this.controller.setSearch,
+          placeHolder: SingleChildScrollView(
+            child: Column(
+              children: [
+                CardsSizedBox(this.searched, this.controller.setSearch,
                     (name) => ScrollListView(this.controller, name)),
-            CardsSizedBox(
-                this.leafs,
-                this.controller.setLeafInfo,
+                CardsSizedBox(
+                    this.leafs,
+                    this.controller.setLeafInfo,
                     (name) => LeafsInfoView(
-                    this.controller.getLeafs(), name, this.controller)),
-          ],),
+                        this.controller.getLeafs(), name, this.controller)),
+              ],
+            ),
+          ),
           onSearch: (input) async =>
               await controller.setSearch(input, 'dataset?q=' + input),
           onItemFound: (input, num) {

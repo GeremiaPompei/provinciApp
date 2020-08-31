@@ -25,10 +25,15 @@ class LeafInfo {
     this._description = checkRemove(parsedJson, 'Descrizione');
     this._url = checkRemove(parsedJson, 'Url');
     this._image = checkRemove(parsedJson, 'Immagine');
-    if(check(this._image)&&!this._image.startsWith('http'))
+    if (check(this._image) && !this._image.startsWith('http'))
       this._image = null;
     String cells = checkRemove(parsedJson, 'Telefono');
-    this._telefono = cells == null ? null : cells.split('-');
+    if(cells != null){
+      if(cells.contains(';'))
+        this._telefono = cells.split(';');
+      if(cells.contains('-'))
+        this._telefono = cells.split('-');
+    }
     this._email = checkRemove(parsedJson, 'E-mail');
     if (check(parsedJson['Latitudine']) && check(parsedJson['Longitudine']))
       this._position = [
@@ -60,7 +65,7 @@ class LeafInfo {
       if (parsedJson[s].toString() != 'false')
         rtn = parsedJson[s].toString().replaceAll('\\', '');
       parsedJson.remove(s);
-    }else
+    } else
       rtn = null;
     return rtn;
   }
