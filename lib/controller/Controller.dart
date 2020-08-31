@@ -203,8 +203,7 @@ class Controller {
   }
 
   List<NodeInfo> getOrganizations() {
-    return this._cache.organizations.where((e) =>
-        int.parse(e.description.replaceAll(' Dataset', '')) > 0).toList();
+    return this._cache.organizations;
   }
 
   List<NodeInfo> getCategories() {

@@ -21,7 +21,6 @@ class CardsSizedBox extends StatefulWidget {
 
 class _CardsSizedBoxState extends State<CardsSizedBox> {
   List<MapEntry<String, UnitCache>> _list;
-  int _index;
   Future<dynamic> Function(String name, String url) _func;
   Widget Function(String name) _funcWidget;
 
@@ -30,16 +29,15 @@ class _CardsSizedBoxState extends State<CardsSizedBox> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 100,
+      height: 200,
       child: PageView.builder(
         itemCount: this._list.length,
-        controller: PageController(viewportFraction: 0.5),
-        onPageChanged: (int index) => setState(() => _index = index),
         itemBuilder: (_, i) => Transform.scale(
-            scale: _index == i ? 1 : 0.9,
+            scale: 1,
             child: Card(
               child: ListTile(
                 title: Text(this._list[i].value.name),
+                subtitle: Text(this._list[i].value.date.toString()),
                 onTap: () {
                   setState(() {
                     Navigator.push(
@@ -54,6 +52,9 @@ class _CardsSizedBoxState extends State<CardsSizedBox> {
                                     if (snapshot.hasData)
                                       tmpWidget =
                                           this._funcWidget(_list[i].value.name);
+                                    else if (snapshot.hasError)
+                                      Navigator.pushReplacementNamed(
+                                          context, '/offline');
                                     else
                                       tmpWidget = LoadingView();
                                     return tmpWidget;
