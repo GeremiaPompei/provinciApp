@@ -6,6 +6,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import 'LoadingView.dart';
 import 'OfflineView.dart';
+import 'SavedView.dart';
 import 'ScrollListView.dart';
 
 class CategoriesView extends StatefulWidget {
@@ -80,11 +81,7 @@ class _CategoriesViewState extends State<CategoriesView> {
                                               .getCategories()[index]
                                               .name);
                                     else if (snapshot.hasError)
-                                      varWidget = Scaffold(
-                                          appBar: AppBar(
-                                            backgroundColor: BackgroundColor,
-                                          ),
-                                          body: OfflineView());
+                                      varWidget = SavedWidget(this._controller);
                                     else
                                       varWidget = LoadingView();
                                     return varWidget;
