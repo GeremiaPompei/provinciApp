@@ -11,6 +11,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 
+import 'SavedView.dart';
 import 'ScrollListView.dart';
 
 class HomeView extends StatefulWidget {
@@ -127,11 +128,7 @@ class _HomeViewState extends State<HomeView> {
                                   varWidget = ScrollListView(
                                       this._controller, this._location);
                                 else if (snapshot.hasError)
-                                  varWidget = Scaffold(
-                                      appBar: AppBar(
-                                        backgroundColor: BackgroundColor,
-                                      ),
-                                      body: OfflineView());
+                                  varWidget = SavedWidget(this._controller);
                                 else
                                   varWidget = LoadingView();
                                 return varWidget;

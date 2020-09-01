@@ -2,6 +2,7 @@ import 'package:MC/controller/Controller.dart';
 import 'package:MC/model/NodeInfo.dart';
 import 'package:MC/model/UnitCache.dart';
 import 'package:MC/utility/Style.dart';
+import 'package:MC/view/SavedView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -13,20 +14,22 @@ class CardsSizedBox extends StatefulWidget {
   List<MapEntry<String, UnitCache>> _list;
   Future<dynamic> Function(String name, String url) _func;
   Widget Function(String name) _funcWidget;
+  Controller _controller;
 
-  CardsSizedBox(this._list, this._func, this._funcWidget);
+  CardsSizedBox(this._list, this._func, this._funcWidget,this._controller);
 
   @override
   _CardsSizedBoxState createState() =>
-      _CardsSizedBoxState(this._list, this._func, this._funcWidget);
+      _CardsSizedBoxState(this._list, this._func, this._funcWidget,this._controller);
 }
 
 class _CardsSizedBoxState extends State<CardsSizedBox> {
   List<MapEntry<String, UnitCache>> _list;
   Future<dynamic> Function(String name, String url) _func;
   Widget Function(String name) _funcWidget;
+  Controller _controller;
 
-  _CardsSizedBoxState(this._list, this._func, this._funcWidget);
+  _CardsSizedBoxState(this._list, this._func, this._funcWidget,this._controller);
 
   @override
   Widget build(BuildContext context) {
@@ -55,11 +58,7 @@ class _CardsSizedBoxState extends State<CardsSizedBox> {
                                       tmpWidget =
                                           this._funcWidget(_list[i].value.name);
                                     else if (snapshot.hasError)
-                                      tmpWidget = Scaffold(
-                                          appBar: AppBar(
-                                            backgroundColor: BackgroundColor,
-                                          ),
-                                          body: OfflineView());
+                                      tmpWidget = SavedWidget(this._controller);
                                     else
                                       tmpWidget = LoadingView();
                                     return tmpWidget;

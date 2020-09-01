@@ -8,6 +8,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import 'LoadingView.dart';
 import 'OfflineView.dart';
+import 'SavedView.dart';
 import 'ScrollListView.dart';
 
 class OrganizationsView extends StatefulWidget {
@@ -91,11 +92,7 @@ class _OrganizationsViewState extends State<OrganizationsView> {
                                               .getOrganizations()[index]
                                               .name);
                                     else if (snapshot.hasError)
-                                      varWidget = Scaffold(
-                                          appBar: AppBar(
-                                            backgroundColor: BackgroundColor,
-                                          ),
-                                          body: OfflineView());
+                                      varWidget = SavedWidget(this._controller);
                                     else
                                       varWidget = LoadingView();
                                     return varWidget;

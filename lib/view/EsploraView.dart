@@ -24,15 +24,14 @@ class EsploraView extends StatefulWidget {
 }
 
 class _EsploraViewState extends State<EsploraView> {
-  Controller controller;
+  Controller _controller;
   List<MapEntry<String, UnitCache>> searched;
   List<MapEntry<String, UnitCache>> leafs;
-  Widget varWidget;
   String location;
 
-  _EsploraViewState(this.controller) {
-    this.searched = this.controller.getLastSearched();
-    this.leafs = this.controller.getLastLeafs();
+  _EsploraViewState(this._controller) {
+    this.searched = this._controller.getLastSearched();
+    this.leafs = this._controller.getLastLeafs();
   }
 
   @override
@@ -45,19 +44,22 @@ class _EsploraViewState extends State<EsploraView> {
           placeHolder: SingleChildScrollView(
             child: Column(
               children: [
-                CardsSizedBox(this.searched, this.controller.setSearch,
-                        (name) => ScrollListView(this.controller, name)),
+                CardsSizedBox(
+                    this.searched,
+                    this._controller.setSearch,
+                    (name) => ScrollListView(this._controller, name),
+                    this._controller),
                 CardsSizedBox(
                     this.leafs,
-                    this.controller.setLeafInfo,
-                        (name) =>
-                        LeafsInfoView(
-                            this.controller.getLeafs(), name, this.controller)),
+                    this._controller.setLeafInfo,
+                    (name) => LeafsInfoView(
+                        this._controller.getLeafs(), name, this._controller),
+                    this._controller),
               ],
             ),
           ),
           onSearch: (input) async =>
-          await controller.setSearch(input, 'dataset?q=' + input),
+              await _controller.setSearch(input, 'dataset?q=' + input),
           onItemFound: (input, num) {
             return Container(
               child: ListTile(
@@ -66,28 +68,26 @@ class _EsploraViewState extends State<EsploraView> {
                 subtitle: Text(input.description),
                 onTap: () async {
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) =>
-                        FutureBuilder<dynamic>(
-                          future: controller.setLeafInfo(input.name, input.url),
-                          builder: (BuildContext context,
-                              AsyncSnapshot<dynamic> snapshot) {
-                            if (snapshot.hasData)
-                              varWidget =
-                                  LeafsInfoView(this.controller.getLeafs(),
-                                      input.name, controller);
-                            else if (snapshot.hasError)
-                              varWidget = OfflineView();
-                            else
-                              varWidget = LoadingView();
-                            return varWidget;
-                          },
-                        ),
+                    builder: (context) => FutureBuilder<dynamic>(
+                      future: _controller.setLeafInfo(input.name, input.url),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<dynamic> snapshot) {
+                        Widget varWidget;
+                        if (snapshot.hasData)
+                          varWidget = LeafsInfoView(this._controller.getLeafs(),
+                              input.name, _controller);
+                        else if (snapshot.hasError)
+                          varWidget = OfflineView();
+                        else
+                          varWidget = LoadingView();
+                        return varWidget;
+                      },
+                    ),
                   ));
                 },
               ),
             );
-          })
-      ,
+          }),
     );
   }
 }
