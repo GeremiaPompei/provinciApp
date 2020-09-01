@@ -1,7 +1,5 @@
 import 'dart:io';
 
-import 'package:MC/model/Persistence/StoreManager.dart';
-
 class LeafInfo {
   String _name;
   String _description;

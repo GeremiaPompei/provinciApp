@@ -3,7 +3,6 @@ import 'package:MC/model/LeafInfo.dart';
 import 'package:MC/utility/Style.dart';
 import 'package:MC/view/DetailedLeafInfoView.dart';
 import 'package:flutter/material.dart';
-import 'package:share/share.dart';
 
 class LeafsInfoView extends StatefulWidget {
   List<LeafInfo> _leafs;

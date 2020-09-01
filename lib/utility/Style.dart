@@ -13,5 +13,5 @@ const TitleTextStyle_20 = TextStyle(
 );
 
 const ThemePrimaryColor = Color.fromARGB(255, 72, 179, 179);
-const ThemeSecondaryColor = Color.fromARGB(235, 179, 88, 80);
+const ThemeSecondaryColor = Color(0xFFA35034);
 const BackgroundColor = Color.fromARGB(255, 237, 249, 249);

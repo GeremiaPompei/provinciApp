@@ -3,8 +3,6 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'HomeView.dart';
-
 class BottomButtonDown extends StatefulWidget {
   void Function(int) _func;
   int _index;
@@ -33,7 +31,7 @@ class _BottomButtonDownState extends State<BottomButtonDown> {
     return CurvedNavigationBar(
       index: this._index,
       color: ThemePrimaryColor,
-      backgroundColor: BackgroundColor,
+      backgroundColor: Colors.white,
       buttonBackgroundColor: ThemeSecondaryColor,
       items: <Widget>[
         Icon(Icons.home),
@@ -41,8 +39,8 @@ class _BottomButtonDownState extends State<BottomButtonDown> {
         Icon(Icons.free_breakfast),
         Icon(Icons.file_download)
       ],
-      animationDuration: Duration(milliseconds: 500),
-      animationCurve: Curves.fastOutSlowIn,
+      animationDuration: Duration(milliseconds: 300),
+      animationCurve: Curves.easeInOutCirc,
       onTap: onItemTapped,
     );
   }

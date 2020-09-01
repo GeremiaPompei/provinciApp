@@ -1,5 +1,8 @@
-import 'dart:convert';
 import 'dart:io';
+
+import 'package:MC/model/Cache.dart';
+import 'package:MC/model/LeafInfo.dart';
+import 'package:MC/model/NodeInfo.dart';
 import 'package:MC/model/Persistence/DeserializeCache.dart';
 import 'package:MC/model/Persistence/DeserializeOffline.dart';
 import 'package:MC/model/Persistence/SerializeCache.dart';
@@ -8,9 +11,6 @@ import 'package:MC/model/Persistence/StoreManager.dart';
 import 'package:MC/model/UnitCache.dart';
 import 'package:MC/model/Web/HttpRequest.dart';
 import 'package:MC/model/web/HtmlParser.dart';
-import 'package:MC/model/LeafInfo.dart';
-import 'package:MC/model/Cache.dart';
-import 'package:MC/model/NodeInfo.dart';
 
 class Controller {
   Cache _cache;
@@ -18,7 +18,6 @@ class Controller {
   List<NodeInfo> _promos;
   static const FNCACHE = 'cache.json';
   static const FNOFFLINE = 'offline.json';
-
   Controller() {
     _events = [];
     _promos = [];
@@ -100,7 +99,10 @@ class Controller {
 
   Future<dynamic> initOrganizations() async {
     if (this.getOrganizations().isEmpty)
-      this._cache.initOrganizations(await HtmlParser.organizations());
+      this._cache.initOrganizations((await HtmlParser.organizations())
+          .where((element) =>
+              (int.parse(element.description.replaceAll('Dataset', '')) > 0))
+          .toList());
     return this.getOrganizations();
   }
 

@@ -11,24 +11,22 @@ class LoadingView extends StatelessWidget {
       backgroundColor: BackgroundColor,
       body: Center(
         child: Container(
-          child: Stack(
-            overflow: Overflow.clip,
             alignment: Alignment.center,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image(
-                image:
-                AssetImage("assets/logo_mc.PNG"),
+                image: AssetImage("assets/logo_mc.PNG"),
                 height: 200,
               ),
               SpinKitCubeGrid(
-                size: 200,
-                color: BackgroundColor,
+                color: ThemePrimaryColor,
                 duration: Duration(milliseconds: 1000),
               ),
             ],
           ),
         ),
-      ),
+        ),
     );
   }
 }

@@ -4,9 +4,9 @@ import 'package:MC/view/BottomButtonBar.dart';
 import 'package:MC/view/CategorieView.dart';
 import 'package:MC/view/EsploraView.dart';
 import 'package:MC/view/ExtraView.dart';
+import 'package:MC/view/LoadingView.dart';
 import 'package:MC/view/OfflineView.dart';
 import 'package:MC/view/OrganizationsView.dart';
-import 'package:MC/view/LoadingView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -104,6 +104,8 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        brightness: Brightness.light,
+        shadowColor: ThemePrimaryColor,
         backgroundColor: BackgroundColor,
         title: Text(
           _title,
@@ -119,24 +121,24 @@ class _HomeViewState extends State<HomeView> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => FutureBuilder<dynamic>(
-                              future: findPosition(),
-                              builder: (BuildContext context,
-                                  AsyncSnapshot<dynamic> snapshot) {
-                                Widget varWidget;
-                                if (snapshot.hasData)
-                                  varWidget = ScrollListView(
-                                      this._controller, this._location);
-                                else if (snapshot.hasError)
-                                  varWidget = Scaffold(
-                                      appBar: AppBar(
-                                        backgroundColor: BackgroundColor,
-                                      ),
-                                      body: OfflineView());
-                                else
-                                  varWidget = LoadingView();
-                                return varWidget;
-                              },
-                            )));
+                          future: findPosition(),
+                          builder: (BuildContext context,
+                              AsyncSnapshot<dynamic> snapshot) {
+                            Widget varWidget;
+                            if (snapshot.hasData)
+                              varWidget = ScrollListView(
+                                  this._controller, this._location);
+                            else if (snapshot.hasError)
+                              varWidget = Scaffold(
+                                  appBar: AppBar(
+                                    backgroundColor: BackgroundColor,
+                                  ),
+                                  body: OfflineView());
+                            else
+                              varWidget = LoadingView();
+                            return varWidget;
+                          },
+                        )));
               });
             },
           ),

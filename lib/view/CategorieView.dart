@@ -1,10 +1,8 @@
 import 'package:MC/controller/Controller.dart';
-import 'package:MC/model/NodeInfo.dart';
 import 'package:MC/utility/Style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import 'LoadingView.dart';
 import 'OfflineView.dart';
@@ -43,7 +41,7 @@ class _CategoriesViewState extends State<CategoriesView> {
       child: ListView(
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
-        padding: const EdgeInsets.all(8),
+        padding: const EdgeInsets.all(2),
         children: List.generate(
           this._controller.getCategories().length,
           (index) {
@@ -51,11 +49,12 @@ class _CategoriesViewState extends State<CategoriesView> {
               child: ListTile(
                 title: Text(
                     this._controller.getCategories()[index].name.toString()),
-                trailing: this._controller.getCategories()[index].image != null
+                leading: this._controller.getCategories()[index].image != null
                     ? Image(
                         image: NetworkImage(
-                            this._controller.getCategories()[index].image))
-                    : null,
+                            this._controller.getCategories()[index].image),
+                      )
+                    : Image(image: AssetImage('assets/empty.png')),
                 onTap: () async {
                   setState(() {
                     Navigator.push(
