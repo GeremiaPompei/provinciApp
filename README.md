@@ -69,13 +69,13 @@ In questa sezione illustreremo come utilizzare provinciApp, mostrandone le varie
 Per cominciare è bene fare una distinzione tra funzionamento online e funzionamento offline, in quanto alcune funzionalità dell'applicazione non possono essere eseguite senza una connessione ad internet. Nonostante questo, la sezione offline permette comunque di accedere ad informazioni salvate in precedenza.
 *provinciApp* | Online | Offline|
 :---|:---:|:---:|
-Informazioni |√|√|
-Ricerca |√|X|
-Mappe |√|X|
-Social |√|X|
-Url |√|X|
-Foto |√|√|
-Extra |√|X|
+[Informazioni](https://github.com/GeremiaPompei/mc/blob/master/README.md#informazioni) |√|√|
+[Ricerca](https://github.com/GeremiaPompei/mc/blob/master/README.md#ricerca) |√|X|
+[Mappe](https://github.com/GeremiaPompei/mc/blob/master/README.md#mappe) |√|X|
+[Social](https://github.com/GeremiaPompei/mc/blob/master/README.md#social-1) |√|X|
+[Url](https://github.com/GeremiaPompei/mc/blob/master/README.md#url) |√|X|
+[Foto](https://github.com/GeremiaPompei/mc/blob/master/README.md#foto) |√|√|
+[Extra](https://github.com/GeremiaPompei/mc/blob/master/README.md#extra) |√|X|
 
 
 [Torna alla Home](https://github.com/GeremiaPompei/mc/blob/master/README.md#provinciappmc)
@@ -147,31 +147,31 @@ Una volta condiviso l'evento, l'interazione sarà possibile attraverso un click 
 
 ## Informazioni
 
- [**Torna a introduzione**](https://github.com/GeremiaPompei/mc/blob/master/README.md#introduzione-allutilizzo-dellapplicazione)
+ [**Torna all'introduzione**](https://github.com/GeremiaPompei/mc/blob/master/README.md#introduzione-allutilizzo-dellapplicazione)
 
 ## Ricerca
 
- [**Torna a introduzione**](https://github.com/GeremiaPompei/mc/blob/master/README.md#introduzione-allutilizzo-dellapplicazione)
+ [**Torna all'introduzione**](https://github.com/GeremiaPompei/mc/blob/master/README.md#introduzione-allutilizzo-dellapplicazione)
  
 ## Mappe
 
- [**Torna a introduzione**](https://github.com/GeremiaPompei/mc/blob/master/README.md#introduzione-allutilizzo-dellapplicazione)
+ [**Torna all'introduzione**](https://github.com/GeremiaPompei/mc/blob/master/README.md#introduzione-allutilizzo-dellapplicazione)
 
 ## Social
 
- [**Torna a introduzione**](https://github.com/GeremiaPompei/mc/blob/master/README.md#introduzione-allutilizzo-dellapplicazione)
+ [**Torna all'introduzione**](https://github.com/GeremiaPompei/mc/blob/master/README.md#introduzione-allutilizzo-dellapplicazione)
  
 ## Url
 
- [**Torna a introduzione**](https://github.com/GeremiaPompei/mc/blob/master/README.md#introduzione-allutilizzo-dellapplicazione)
+ [**Torna all'introduzione**](https://github.com/GeremiaPompei/mc/blob/master/README.md#introduzione-allutilizzo-dellapplicazione)
  
 ## Foto
 
- [**Torna a introduzione**](https://github.com/GeremiaPompei/mc/blob/master/README.md#introduzione-allutilizzo-dellapplicazione)
+ [**Torna all'introduzione**](https://github.com/GeremiaPompei/mc/blob/master/README.md#introduzione-allutilizzo-dellapplicazione)
  
 ## Extra
 
- [**Torna a introduzione**](https://github.com/GeremiaPompei/mc/blob/master/README.md#introduzione-allutilizzo-dellapplicazione)
+ [**Torna all'introduzione**](https://github.com/GeremiaPompei/mc/blob/master/README.md#introduzione-allutilizzo-dellapplicazione)
  
 ### Authors
 - [Geremia Pompei](https://github.com/GeremiaPompei)
