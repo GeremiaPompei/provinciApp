@@ -1,3 +1,4 @@
+import 'package:MC/controller/Controller.dart';
 import 'package:MC/model/UnitCache.dart';
 import 'package:MC/utility/Style.dart';
 import 'package:MC/view/SavedView.dart';
@@ -11,23 +12,21 @@ class CardsSizedBox extends StatefulWidget {
   List<MapEntry<String, UnitCache>> _list;
   Future<dynamic> Function(String name, String url) _func;
   Widget Function(String name) _funcWidget;
-  Controller _controller;
 
-  CardsSizedBox(this._list, this._func, this._funcWidget, this._controller);
+  CardsSizedBox(this._list, this._func, this._funcWidget);
 
   @override
   _CardsSizedBoxState createState() => _CardsSizedBoxState(
-      this._list, this._func, this._funcWidget, this._controller);
+      this._list, this._func, this._funcWidget);
 }
 
 class _CardsSizedBoxState extends State<CardsSizedBox> {
   List<MapEntry<String, UnitCache>> _list;
   Future<dynamic> Function(String name, String url) _func;
   Widget Function(String name) _funcWidget;
-  Controller _controller;
 
   _CardsSizedBoxState(
-      this._list, this._func, this._funcWidget, this._controller);
+      this._list, this._func, this._funcWidget);
 
   @override
   Widget build(BuildContext context) {
