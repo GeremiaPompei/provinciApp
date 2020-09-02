@@ -4,7 +4,9 @@
 **provinciApp** è la nostra idea di applicazione per la provincia di Macerata secondo il concorso *Un'app per la provincia di Macerata*.
 Il progetto nasce da tre semplici studenti con molta voglia di divertirsi e mettersi in gioco.
 Lo sviluppo dell'applicazione nasce dalla base dei requisiti richiesti dal concorso, arricchiti dalle nostre idee e competenze al fine di creare qualcosa di semplice ed intuibile, in grado di attrarre ogni fascia di età della nostra provincia.
-  [**Obiettivi del concorso**](https://github.com/GeremiaPompei/mc/blob/master/README.md#obiettivi-del-concorso)
+
+
+ [**Obiettivi del concorso**](https://github.com/GeremiaPompei/mc/blob/master/README.md#obiettivi-del-concorso)
 
  [**Introduzione all'utilizzo dell'applicazione**](https://github.com/GeremiaPompei/mc/blob/master/README.md#introduzione-allutilizzo-dellapplicazione)
   
@@ -67,16 +69,6 @@ In seguito all'implementazione, abbiamo documento una guida all'utilizzo: [Intro
 ## Introduzione all'utilizzo dell'applicazione
 In questa sezione illustreremo come utilizzare provinciApp, mostrandone le varie funzionalità.
 Per cominciare è bene fare una distinzione tra funzionamento online e funzionamento offline, in quanto alcune funzionalità dell'applicazione non possono essere eseguite senza una connessione ad internet. Nonostante questo, la sezione offline permette comunque di accedere ad informazioni salvate in precedenza.
-*provinciApp* | Online | Offline|
-:---|:---:|:---:|
-[Esplora](https://github.com/GeremiaPompei/mc/blob/master/README.md#esplora) |√|√|
-[Ricerca](https://github.com/GeremiaPompei/mc/blob/master/README.md#ricerca) |√|X|
-[Localizzazione](https://github.com/GeremiaPompei/mc/blob/master/README.md#localizzazione) |√|X|
-[Comuni](https://github.com/GeremiaPompei/mc/blob/master/README.md#comuni) |√|X|
-[Categorie](https://github.com/GeremiaPompei/mc/blob/master/README.md#categorie) |√|X|
-[Eventi](https://github.com/GeremiaPompei/mc/blob/master/README.md#eventi) |√|√|
-[Promo](https://github.com/GeremiaPompei/mc/blob/master/README.md#promo) |√|X|
-
 
 [Torna alla Home](https://github.com/GeremiaPompei/mc/blob/master/README.md#provinciappmc)
 
@@ -142,44 +134,13 @@ Una volta condiviso l'evento, l'interazione sarà possibile attraverso un click 
 .... da completare ...
 
 [Torna ad Obiettivi](https://github.com/GeremiaPompei/mc/blob/master/README.md#obiettivi-del-concorso)
+[prova](https://github.com/GeremiaPompei/mc/commit/8ed511bc328dbb89b816e17f95ba914e1adbd117#diff-0627b8b5553e696bf9f72d1ca085d57a)
 
 
 
-## Esplora
 
- [**Torna all'introduzione**](https://github.com/GeremiaPompei/mc/blob/master/README.md#introduzione-allutilizzo-dellapplicazione)
-
-## Ricerca
-
- [**Torna all'introduzione**](https://github.com/GeremiaPompei/mc/blob/master/README.md#introduzione-allutilizzo-dellapplicazione)
- 
-## Localizzazione
-
- [**Torna all'introduzione**](https://github.com/GeremiaPompei/mc/blob/master/README.md#introduzione-allutilizzo-dellapplicazione)
-
-## Comuni
-
- [**Torna all'introduzione**](https://github.com/GeremiaPompei/mc/blob/master/README.md#introduzione-allutilizzo-dellapplicazione)
- 
-## Categorie
-
- [**Torna all'introduzione**](https://github.com/GeremiaPompei/mc/blob/master/README.md#introduzione-allutilizzo-dellapplicazione)
- 
-## Eventi
-
- [**Torna all'introduzione**](https://github.com/GeremiaPompei/mc/blob/master/README.md#introduzione-allutilizzo-dellapplicazione)
- 
-## Promo
-
- [**Torna all'introduzione**](https://github.com/GeremiaPompei/mc/blob/master/README.md#introduzione-allutilizzo-dellapplicazione)
- 
 ### Authors
 - [Geremia Pompei](https://github.com/GeremiaPompei)
 - [Alex Pop](https://github.com/axel2104)
 - [Lorenzo Longarini](https://github.com/LorenzoLongarini)
  
- 
- 
- 
-
-  
