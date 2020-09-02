@@ -81,7 +81,18 @@ class _CategoriesViewState extends State<CategoriesView> {
                                               .getCategories()[index]
                                               .name);
                                     else if (snapshot.hasError)
-                                      varWidget = SavedWidget(this._controller);
+                                      varWidget = Scaffold(
+                                          appBar: AppBar(
+                                            title: Text(
+                                              this
+                                                  ._controller
+                                                  .getCategories()[index]
+                                                  .name,
+                                              style: TitleTextStyle,
+                                            ),
+                                            backgroundColor: BackgroundColor,
+                                          ),
+                                          body: OfflineView());
                                     else
                                       varWidget = LoadingView();
                                     return varWidget;

@@ -27,14 +27,17 @@ class _SavedWidgetState extends State<SavedWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Offline'),
+        title: Text(
+          'Offline',
+          style: ReverseTitleTextStyle,
+        ),
         backgroundColor: ThemePrimaryColor,
         actions: [
           IconButton(
             icon: Icon(Icons.offline_pin),
             onPressed: () {
-              setState(() async{
-                if(await this._controller.tryConnection())
+              setState(() async {
+                if (await this._controller.tryConnection())
                   Navigator.pushReplacementNamed(context, '/online');
               });
             },

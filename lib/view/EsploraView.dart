@@ -56,6 +56,7 @@ class _EsploraViewState extends State<EsploraView> {
               ],
             ),
           ),
+          loader: LoadingView(),
           onSearch: (input) async =>
           await controller.setSearch(input, 'dataset?q=' + input),
           onItemFound: (input, num) {

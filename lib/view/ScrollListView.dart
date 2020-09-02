@@ -50,9 +50,28 @@ class _ScrollListViewState extends State<ScrollListView> {
                             this._controller.getSearch()[index].name,
                             this._controller);
                       else if (snapshot.hasError)
-                        _varWidget = SavedWidget(this._controller);
+                        _varWidget = Scaffold(
+                            appBar: AppBar(
+                              title: Text(
+                                this
+                                    ._controller
+                                    .getSearch()[index]
+                                    .name,
+                                style: TitleTextStyle,
+                              ),
+                              backgroundColor: BackgroundColor,
+                            ),
+                            body: OfflineView());
                       else
-                        _varWidget = LoadingView();
+                        _varWidget = Scaffold(
+                            appBar: AppBar(
+                              title: Text(
+                                this._controller.getSearch()[index].name,
+                                style: TitleTextStyle,
+                              ),
+                              backgroundColor: BackgroundColor,
+                            ),
+                            body: LoadingView());
                       return _varWidget;
                     },
                   )));

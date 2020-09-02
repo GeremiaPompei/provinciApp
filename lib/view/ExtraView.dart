@@ -51,7 +51,15 @@ class _ExtraViewState extends State<ExtraView> {
                                 if (snapshot.hasData)
                                   varWidget = EventiView(this._controller);
                                 else if (snapshot.hasError)
-                                  varWidget = SavedWidget(this._controller);
+                                  varWidget = Scaffold(
+                                      appBar: AppBar(
+                                        title: Text(
+                                          'Eventi',
+                                          style: TitleTextStyle,
+                                        ),
+                                        backgroundColor: BackgroundColor,
+                                      ),
+                                      body: OfflineView());
                                 else
                                   varWidget = LoadingView();
                                 return varWidget;
@@ -77,7 +85,15 @@ class _ExtraViewState extends State<ExtraView> {
                                     if (snapshot.hasData)
                                       varWidget = PromoView(this._controller);
                                     else if (snapshot.hasError)
-                                      varWidget = SavedWidget(this._controller);
+                                      varWidget = Scaffold(
+                                          appBar: AppBar(
+                                            title: Text(
+                                              'Promo',
+                                              style: TitleTextStyle,
+                                            ),
+                                            backgroundColor: BackgroundColor,
+                                          ),
+                                          body: OfflineView());
                                     else
                                       varWidget = LoadingView();
                                     return varWidget;

@@ -13,11 +13,11 @@ class CardsSizedBox extends StatefulWidget {
   Widget Function(String name) _funcWidget;
   Controller _controller;
 
-  CardsSizedBox(this._list, this._func, this._funcWidget,this._controller);
+  CardsSizedBox(this._list, this._func, this._funcWidget, this._controller);
 
   @override
-  _CardsSizedBoxState createState() =>
-      _CardsSizedBoxState(this._list, this._func, this._funcWidget,this._controller);
+  _CardsSizedBoxState createState() => _CardsSizedBoxState(
+      this._list, this._func, this._funcWidget, this._controller);
 }
 
 class _CardsSizedBoxState extends State<CardsSizedBox> {
@@ -26,7 +26,8 @@ class _CardsSizedBoxState extends State<CardsSizedBox> {
   Widget Function(String name) _funcWidget;
   Controller _controller;
 
-  _CardsSizedBoxState(this._list, this._func, this._funcWidget,this._controller);
+  _CardsSizedBoxState(
+      this._list, this._func, this._funcWidget, this._controller);
 
   @override
   Widget build(BuildContext context) {
@@ -54,9 +55,17 @@ class _CardsSizedBoxState extends State<CardsSizedBox> {
                                     if (snapshot.hasData)
                                       tmpWidget =
                                           this._funcWidget(_list[i].value.name);
-                                    else if (snapshot.hasError)
-                                      tmpWidget = SavedWidget(this._controller);
-                                    else
+                                    else if (snapshot.hasError) {
+                                      tmpWidget = Scaffold(
+                                          appBar: AppBar(
+                                            title: Text(
+                                              _list[i].value.name,
+                                              style: TitleTextStyle,
+                                            ),
+                                            backgroundColor: BackgroundColor,
+                                          ),
+                                          body: OfflineView());
+                                    } else
                                       tmpWidget = LoadingView();
                                     return tmpWidget;
                                   },
