@@ -147,7 +147,7 @@ class _HomeViewState extends State<HomeView> {
           ),
           IconButton(
             color: ThemePrimaryColor,
-            icon: Icon(Icons.offline_bolt),
+            icon: Icon(Icons.file_download),
             onPressed: () {
               setState(() {
                 Navigator.pushReplacementNamed(context, '/offline');

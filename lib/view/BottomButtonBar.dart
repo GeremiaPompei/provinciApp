@@ -34,10 +34,10 @@ class _BottomButtonDownState extends State<BottomButtonDown> {
       backgroundColor: Colors.white,
       buttonBackgroundColor: ThemeSecondaryColor,
       items: <Widget>[
-        Icon(Icons.home),
-        Icon(Icons.event),
-        Icon(Icons.free_breakfast),
-        Icon(Icons.file_download)
+        Icon(Icons.search),
+        Icon(Icons.account_balance),
+        Icon(Icons.widgets),
+        Icon(Icons.comment)
       ],
       animationDuration: Duration(milliseconds: 300),
       animationCurve: Curves.easeInOutCirc,

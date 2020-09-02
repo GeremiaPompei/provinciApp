@@ -34,7 +34,7 @@ class _SavedWidgetState extends State<SavedWidget> {
         backgroundColor: ThemePrimaryColor,
         actions: [
           IconButton(
-            icon: Icon(Icons.offline_pin),
+            icon: Icon(Icons.file_upload),
             onPressed: () {
               setState(() async {
                 if (await this._controller.tryConnection())
