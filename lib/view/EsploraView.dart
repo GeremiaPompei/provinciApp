@@ -61,14 +61,19 @@ class _EsploraViewState extends State<EsploraView> {
           onItemFound: (input, num) {
             return Container(
               child: ListTile(
-                title: Text(input.name),
                 isThreeLine: true,
+                title: Text(input.name),
                 subtitle: Text(input.description),
+                leading: Stack(alignment: Alignment.center, children: [
+                  Image.asset('assets/empty.png'),
+                  Icon(IconData(findImage(input.name),
+                      fontFamily: 'MaterialIcons'))
+                ]),
                 onTap: () async {
                   Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => FutureBuilder<dynamic>(
-                      future:
-                          controller.setLeafInfo(input.name, input.url, null),
+                      future: controller.setLeafInfo(
+                          input.name, input.url, findImage(input.name)),
                       builder: (BuildContext context,
                           AsyncSnapshot<dynamic> snapshot) {
                         if (snapshot.hasData)

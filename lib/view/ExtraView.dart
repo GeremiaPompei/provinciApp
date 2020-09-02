@@ -37,7 +37,10 @@ class _ExtraViewState extends State<ExtraView> {
           Card(
               child: ListTile(
             title: Text('Eventi'),
-            trailing: Icon(Icons.event_available),
+            leading: Stack(alignment: Alignment.center, children: [
+              Image.asset('assets/empty.png'),
+              Icon(Icons.event_available)
+            ]),
             onTap: () {
               setState(() {
                 Navigator.push(
@@ -71,7 +74,10 @@ class _ExtraViewState extends State<ExtraView> {
           Card(
             child: ListTile(
                 title: Text('Promo'),
-                trailing: Icon(Icons.monetization_on),
+                leading: Stack(alignment: Alignment.center, children: [
+                  Image.asset('assets/empty.png'),
+                  Icon(Icons.monetization_on)
+                ]),
                 onTap: () {
                   setState(() {
                     Navigator.push(

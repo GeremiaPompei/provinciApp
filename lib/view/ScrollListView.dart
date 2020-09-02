@@ -42,7 +42,7 @@ class _ScrollListViewState extends State<ScrollListView> {
                     future: _controller.setLeafInfo(
                         _controller.getSearch()[index].name,
                         _controller.getSearch()[index].url,
-                        null),
+                        findImage(_controller.getSearch()[index].name)),
                     builder: (BuildContext context,
                         AsyncSnapshot<dynamic> snapshot) {
                       if (snapshot.hasData)
@@ -105,6 +105,13 @@ class _ScrollListViewState extends State<ScrollListView> {
                       Text('${_controller.getSearch()[index].name.toString()}'),
                   subtitle: Text(
                       '${_controller.getSearch()[index].description.toString()}'),
+                  leading: Stack(alignment: Alignment.center, children: [
+                    Image.asset('assets/empty.png'),
+                    Icon(IconData(
+                        findImage(
+                            _controller.getSearch()[index].name.toString()),
+                        fontFamily: 'MaterialIcons'))
+                  ]),
                   onTap: () {
                     setLeafs(index);
                   },
