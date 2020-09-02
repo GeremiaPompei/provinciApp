@@ -69,13 +69,13 @@ In questa sezione illustreremo come utilizzare provinciApp, mostrandone le varie
 Per cominciare è bene fare una distinzione tra funzionamento online e funzionamento offline, in quanto alcune funzionalità dell'applicazione non possono essere eseguite senza una connessione ad internet. Nonostante questo, la sezione offline permette comunque di accedere ad informazioni salvate in precedenza.
 *provinciApp* | Online | Offline|
 :---|:---:|:---:|
-[Esplora](https://github.com/GeremiaPompei/mc/blob/master/README.md#informazioni) |√|√|
+[Esplora](https://github.com/GeremiaPompei/mc/blob/master/README.md#esplora) |√|√|
 [Ricerca](https://github.com/GeremiaPompei/mc/blob/master/README.md#ricerca) |√|X|
-[Localizzazione](https://github.com/GeremiaPompei/mc/blob/master/README.md#mappe) |√|X|
-[Comuni](https://github.com/GeremiaPompei/mc/blob/master/README.md#social-1) |√|X|
-[Categorie](https://github.com/GeremiaPompei/mc/blob/master/README.md#url) |√|X|
-[Eventi](https://github.com/GeremiaPompei/mc/blob/master/README.md#foto) |√|√|
-[Promo](https://github.com/GeremiaPompei/mc/blob/master/README.md#extra) |√|X|
+[Localizzazione](https://github.com/GeremiaPompei/mc/blob/master/README.md#localizzazione) |√|X|
+[Comuni](https://github.com/GeremiaPompei/mc/blob/master/README.md#comuni) |√|X|
+[Categorie](https://github.com/GeremiaPompei/mc/blob/master/README.md#categorie) |√|X|
+[Eventi](https://github.com/GeremiaPompei/mc/blob/master/README.md#eventi) |√|√|
+[Promo](https://github.com/GeremiaPompei/mc/blob/master/README.md#promo) |√|X|
 
 
 [Torna alla Home](https://github.com/GeremiaPompei/mc/blob/master/README.md#provinciappmc)
