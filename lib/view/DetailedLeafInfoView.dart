@@ -28,7 +28,7 @@ class DetailedLeafInfoView extends StatefulWidget {
 class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
   LeafInfo leafInfo;
   String title;
-  List<Widget> widgets;
+  Map<String, Widget> widgets;
   Controller _controller;
   Icon icon;
   Image image;
@@ -41,33 +41,38 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
     initWidgets();
   }
 
-  void initWidgets() => this.widgets = [
-        Text(
-          this.leafInfo.name,
-          style: TextStyle(fontSize: 20),
+  void initWidgets() => this.widgets = {
+        'Image': this.image == null
+            ? Container()
+            : Container(
+                width: 150.0,
+                height: 150.0,
+                decoration: new BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: new DecorationImage(
+                      fit: BoxFit.fill,
+                      image: this.image.image,
+                    ))),
+        'Name': Container(
+          padding: EdgeInsets.all(20.0),
+          decoration: BoxDecoration(
+              color: BackgroundColor,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20.0),
+                topRight: Radius.circular(20.0),
+                bottomLeft: Radius.circular(20.0),
+                bottomRight: Radius.circular(20.0),
+              )),
+          child: Text(
+            this.leafInfo.name,
+            style: TitleDetaileStyle,
+          ),
         ),
-        this.leafInfo.description == null
-            ? Container()
+        'Description': this.leafInfo.description == null
+            ? null
             : Text(this.leafInfo.description),
-        this.image == null
-            ? Container()
-            : FlatButton(
-                child: this.image,
-                onPressed: () {
-                  setState(() {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Scaffold(
-                                appBar: AppBar(
-                                  backgroundColor: BackgroundColor,
-                                  title: Text(this.leafInfo.name),
-                                ),
-                                body: Container(child: this.image))));
-                  });
-                }),
-        this.leafInfo.telefono == null
-            ? Container()
+        'Phone': this.leafInfo.telefono == null
+            ? null
             : ListView.builder(
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
@@ -87,111 +92,133 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
                         ],
                       ),
                     )),
-        this.leafInfo.email == null
-            ? Container()
-            : FlatButton(
-                onPressed: () async {
-                  await launch('mailto:${this.leafInfo.email}');
-                },
-                child: Row(
-                  children: <Widget>[
-                    Icon(
-                      (Icons.email),
-                    ),
-                    Text('${this.leafInfo.email}')
-                  ],
+        'Email': this.leafInfo.email == null
+            ? null
+            : CircleAvatar(
+                radius: 20,
+                backgroundColor: Colors.white,
+                child: IconButton(
+                  icon: Icon(
+                    Icons.email,
+                    color: Colors.black,
+                  ),
+                  onPressed: () async {
+                    await launch('mailto:${this.leafInfo.email}');
+                  },
                 ),
               ),
-        this.leafInfo.position == null
+        'PositionIcon': this.leafInfo.position == null
+            ? null
+            : CircleAvatar(
+                radius: 20,
+                backgroundColor: Colors.white,
+                child: IconButton(
+                  onPressed: () => openMapsSheet(context),
+                  icon: Icon(
+                    Icons.location_on,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+        'Position': this.leafInfo.position == null
             ? Container()
-            : Column(
-                children: <Widget>[
-                  Container(
-                    height: 400,
-                    alignment: Alignment.centerLeft,
-                    child: FlutterMap(
-                      options: MapOptions(
-                        center: LatLng(this.leafInfo.position[0],
-                            this.leafInfo.position[1]),
-                        zoom: 13.0,
-                      ),
-                      layers: [
-                        new TileLayerOptions(
-                            urlTemplate:
-                                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-                            subdomains: ['a', 'b', 'c']),
-                        new MarkerLayerOptions(
-                          markers: [
-                            new Marker(
-                              width: 80.0,
-                              height: 80.0,
-                              point: LatLng(this.leafInfo.position[0],
-                                  this.leafInfo.position[1]),
-                              builder: (ctx) => Container(
-                                child: Icon(
-                                  (Icons.location_on),
-                                ),
-                              ),
+            : Container(
+                height: 200,
+                alignment: Alignment.centerLeft,
+                child: FlutterMap(
+                  options: MapOptions(
+                    center: LatLng(
+                        this.leafInfo.position[0], this.leafInfo.position[1]),
+                    zoom: 13.0,
+                  ),
+                  layers: [
+                    new TileLayerOptions(
+                        urlTemplate:
+                            "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                        subdomains: ['a', 'b', 'c']),
+                    new MarkerLayerOptions(
+                      markers: [
+                        new Marker(
+                          width: 80.0,
+                          height: 80.0,
+                          point: LatLng(this.leafInfo.position[0],
+                              this.leafInfo.position[1]),
+                          builder: (ctx) => Container(
+                            child: Icon(
+                              (Icons.location_on),
                             ),
-                          ],
+                          ),
                         ),
                       ],
                     ),
-                  ),
-                  this.leafInfo.position == null
-                      ? Container()
-                      : FlatButton(
-                          onPressed: () => openMapsSheet(context),
-                          child: Text(
-                            ('Apri in Mappe'),
-                          ),
-                        ),
-                ],
+                  ],
+                ),
               ),
-        ListView.builder(
-          scrollDirection: Axis.vertical,
-          shrinkWrap: true,
-          primary: false,
-          itemCount: this.leafInfo.info.length,
-          itemBuilder: (context, index) => ListTile(
-            title: Text(this.leafInfo.info.keys.toList()[index]),
-            subtitle: Linkify(
-              text: '${this.leafInfo.info.values.toList()[index]}',
-              onOpen: (LinkableElement link) async {
-                if (await canLaunch(this.leafInfo.info.values.toList()[index]))
-                  await launch(this.leafInfo.info.values.toList()[index]);
-              },
-            ),
-          ),
-        ),
-        this.leafInfo.url == null
-            ? Container()
-            : ListTile(
-                title: Text('Url'),
-                subtitle: Linkify(
-                  text: '${this.leafInfo.url}',
-                  onOpen: (LinkableElement link) {
+        'Info': this.leafInfo.info.isEmpty
+            ? null
+            : ListView.separated(
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                primary: false,
+                itemCount: this.leafInfo.info.length,
+                itemBuilder: (context, index) => ListTile(
+                  title: Text(this.leafInfo.info.keys.toList()[index]),
+                  subtitle: Linkify(
+                    text: '${this.leafInfo.info.values.toList()[index]}',
+                    onOpen: (LinkableElement link) async {
+                      if (await canLaunch(
+                          this.leafInfo.info.values.toList()[index]))
+                        await launch(this.leafInfo.info.values.toList()[index]);
+                    },
+                  ),
+                ),
+                separatorBuilder: (BuildContext context, int index) =>
+                    const Divider(),
+              ),
+        'Url': this.leafInfo.url == null
+            ? null
+            : CircleAvatar(
+                radius: 20,
+                backgroundColor: Colors.white,
+                child: IconButton(
+                  icon: Icon(
+                    Icons.link,
+                    color: Colors.black,
+                  ),
+                  onPressed: () {
                     launch(this.leafInfo.url);
                   },
                 ),
               ),
-      ];
+      };
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> listW = [
+      this.widgets['Email'],
+      this.widgets['PositionIcon'],
+      this.widgets['Url'],
+    ];
+    listW.removeWhere((element) => element == null);
     return Scaffold(
-        appBar: AppBar(
-          title: Text(this.leafInfo.name),
-          backgroundColor: ThemePrimaryColor,
-          leading: new IconButton(
-            icon: new Icon(Icons.arrow_back_ios),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-          actions: <Widget>[
-            this.leafInfo.url != null
-                ? IconButton(
+        backgroundColor: ThemePrimaryColor,
+        body: SingleChildScrollView(
+            child: Padding(
+          padding: EdgeInsets.all(20),
+          child: Column(
+            children: [
+              AppBar(
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                leading: new IconButton(
+                  icon: new Icon(Icons.arrow_back_ios),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                actions: <Widget>[
+                  this.leafInfo.url != null
+                      ? IconButton(
                     icon: Icon(Icons.share),
                     onPressed: () {
                       setState(() {
@@ -199,44 +226,76 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
                         Share.share(this.leafInfo.url,
                             subject: this.title,
                             sharePositionOrigin:
-                                box.localToGlobal(Offset.zero) & box.size);
+                            box.localToGlobal(Offset.zero) & box.size);
                       });
                     },
                   )
-                : Container(),
-            IconButton(
-              icon: this.icon,
-              onPressed: () {
-                setState(() {
-                  if (this._controller.getOffline().contains(this.leafInfo)) {
-                    this._controller.removeOffline(leafInfo);
-                    this.icon = Icon(Icons.add_circle_outline);
-                  } else {
-                    this._controller.addOffline(leafInfo);
-                    this.icon = Icon(Icons.remove_circle_outline);
-                  }
-                });
-              },
-            )
-          ],
-        ),
-        body: Flex(direction: Axis.vertical, children: <Widget>[
-          Flexible(
-              child: Center(
-            child: ListView.separated(
-              scrollDirection: Axis.vertical,
-              shrinkWrap: true,
-              padding: const EdgeInsets.all(8),
-              itemCount: this.widgets.length,
-              itemBuilder: (context, index) {
-                return this.widgets[index];
-              },
-              separatorBuilder: (BuildContext context, int index) =>
-                  const Divider(),
-            ),
-          ))
-        ]));
+                      : Container(),
+                  IconButton(
+                    icon: this.icon,
+                    onPressed: () {
+                      setState(() {
+                        if (this._controller.getOffline().contains(this.leafInfo)) {
+                          this._controller.removeOffline(leafInfo);
+                          this.icon = Icon(Icons.add_circle_outline);
+                        } else {
+                          this._controller.addOffline(leafInfo);
+                          this.icon = Icon(Icons.remove_circle_outline);
+                        }
+                      });
+                    },
+                  )
+                ],
+              ),
+              this.widgets['Image'],
+              SizedBox(
+                height: 20,
+              ),
+              this.widgets['Name'],
+              SizedBox(
+                height: 20,
+              ),
+              containerRound(this.widgets['Description'], 'Descrizione'),
+              containerRound(this.widgets['Info'], 'Info'),
+              containerRound(this.widgets['Phone'], 'Telefono'),
+              this.widgets['Position'],
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: listW),
+              SizedBox(
+                height: 10,
+              ),
+            ],
+          ),
+        )));
   }
+
+  Widget containerRound(Widget child, String title) => child != null
+      ? Column(children: [
+          Container(
+            padding: EdgeInsets.all(20.0),
+            decoration: BoxDecoration(
+              color: BackgroundColor,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20.0),
+                topRight: Radius.circular(20.0),
+                bottomLeft: Radius.circular(20.0),
+                bottomRight: Radius.circular(20.0),
+              ),
+            ),
+            child: ListTile(
+              title: title != null ? null : Text(title),
+              subtitle: child,
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+        ])
+      : Container();
 
   openMapsSheet(context) async {
     try {
@@ -244,7 +303,6 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
           this.leafInfo.position[0], this.leafInfo.position[1]);
       final title = this.leafInfo.name;
       final availableMaps = await MapLauncher.installedMaps;
-
       showModalBottomSheet(
         context: context,
         builder: (BuildContext context) {

@@ -38,6 +38,7 @@ class _EsploraViewState extends State<EsploraView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent,
       body: SearchBar<NodeInfo>(
           scrollDirection: Axis.vertical,
           shrinkWrap: true,

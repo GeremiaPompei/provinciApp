@@ -115,10 +115,12 @@ class _SavedWidgetState extends State<SavedWidget> {
                                                 .imageFile ==
                                             null
                                         ? null
-                                        : Image.file(this
-                                            ._controller
-                                            .getOffline()[index]
-                                            .imageFile),
+                                        : Image.file(
+                                            this
+                                                ._controller
+                                                .getOffline()[index]
+                                                .imageFile,
+                                          ),
                                   )));
                     }));
           },

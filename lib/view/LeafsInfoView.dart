@@ -118,7 +118,8 @@ class _ButtonInfoState extends State<ButtonInfo> {
                                         ? null
                                         : Image(
                                             image: NetworkImage(
-                                                '${leafs[index].image.toString()}')),
+                                                '${leafs[index].image.toString()}'),
+                                          ),
                                   )));
                     });
                   }));
