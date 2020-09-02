@@ -20,7 +20,7 @@ const ReverseTitleTextStyle = TextStyle(
 const TitleDetaileStyle = TextStyle(
   fontFamily: 'Poppins',
   fontWeight: FontWeight.w600,
-  fontSize: 15,
+  fontSize: 20,
 );
 
 const ThemePrimaryColor = Color.fromARGB(255, 72, 179, 179);

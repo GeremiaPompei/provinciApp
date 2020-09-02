@@ -29,8 +29,10 @@ class LeafInfo {
     if(cells != null){
       if(cells.contains(';'))
         this._telefono = cells.split(';');
-      if(cells.contains('-'))
+      else if(cells.contains('-'))
         this._telefono = cells.split('-');
+      else
+        this._telefono = [cells];
     }
     this._email = checkRemove(parsedJson, 'E-mail');
     if (check(parsedJson['Latitudine']) && check(parsedJson['Longitudine']))

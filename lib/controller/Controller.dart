@@ -39,7 +39,7 @@ class Controller {
         await loadSavedLastInfo();
       } catch (e) {
         try {
-          await loadStaticLastInfo(5, 5);
+          await loadStaticLastInfo(4, 4);
         } catch (e) {}
       }
       storeCache();
@@ -76,22 +76,23 @@ class Controller {
   Future<dynamic> loadSavedLastInfo() async {
     Cache tmpCache =
         DeserializeCache.deserialize(await StoreManager.load(FNCACHE));
-    loadLastInfoFrom(tmpCache);
+    await loadLastInfoFrom(tmpCache);
     return this._cache.lastLeafs;
   }
 
-  void loadLastInfoFrom(Cache tmpCache) {
+  Future<dynamic> loadLastInfoFrom(Cache tmpCache) async {
     this._cache.search = tmpCache.search;
-    this._cache.search.forEach((key, value) async {
-      value.element = await HtmlParser.searchByWord(key);
-    });
+    for(MapEntry<String,dynamic> entry in this._cache.search.entries){
+      entry.value.element = await HtmlParser.searchByWord(entry.key);
+    }
     this._cache.lastSearch = tmpCache.lastSearch;
     this._cache.leafs = tmpCache.leafs;
-    this._cache.leafs.forEach((key, value) async {
-      List<LeafInfo> leafs = await HtmlParser.leafsByWord(key);
-      value.element = leafs;
-    });
+    for(MapEntry<String,dynamic> entry in this._cache.leafs.entries){
+      List<LeafInfo> leafs = await HtmlParser.leafsByWord(entry.key);
+      entry.value.element = leafs;
+    }
     this._cache.lastLeafs = tmpCache.lastLeafs;
+    return tmpCache.lastLeafs;
   }
 
   Future<dynamic> initCategories() async {

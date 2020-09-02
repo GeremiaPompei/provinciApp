@@ -80,7 +80,7 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
                 itemCount: this.leafInfo.telefono.length,
                 itemBuilder: (context, index) => FlatButton(
                       onPressed: () async {
-                        FlutterPhoneDirectCaller.callNumber(
+                        await FlutterPhoneDirectCaller.callNumber(
                             '${this.leafInfo.telefono[index]}');
                       },
                       child: Row(
@@ -210,32 +210,29 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
               AppBar(
                 backgroundColor: Colors.transparent,
                 elevation: 0,
-                leading: new IconButton(
-                  icon: new Icon(Icons.arrow_back_ios),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
+                leading: this.leafInfo.url != null
+                    ? IconButton(
+                        icon: Icon(Icons.share),
+                        onPressed: () {
+                          setState(() {
+                            final RenderBox box = context.findRenderObject();
+                            Share.share(this.leafInfo.url,
+                                subject: this.title,
+                                sharePositionOrigin:
+                                    box.localToGlobal(Offset.zero) & box.size);
+                          });
+                        },
+                      )
+                    : Container(),
                 actions: <Widget>[
-                  this.leafInfo.url != null
-                      ? IconButton(
-                    icon: Icon(Icons.share),
-                    onPressed: () {
-                      setState(() {
-                        final RenderBox box = context.findRenderObject();
-                        Share.share(this.leafInfo.url,
-                            subject: this.title,
-                            sharePositionOrigin:
-                            box.localToGlobal(Offset.zero) & box.size);
-                      });
-                    },
-                  )
-                      : Container(),
                   IconButton(
                     icon: this.icon,
                     onPressed: () {
                       setState(() {
-                        if (this._controller.getOffline().contains(this.leafInfo)) {
+                        if (this
+                            ._controller
+                            .getOffline()
+                            .contains(this.leafInfo)) {
                           this._controller.removeOffline(leafInfo);
                           this.icon = Icon(Icons.add_circle_outline);
                         } else {
@@ -255,7 +252,7 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
               SizedBox(
                 height: 20,
               ),
-              containerRound(this.widgets['Description'], 'Descrizione'),
+              containerRound(this.widgets['Description'], null),
               containerRound(this.widgets['Info'], 'Info'),
               containerRound(this.widgets['Phone'], 'Telefono'),
               this.widgets['Position'],
@@ -287,7 +284,7 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
               ),
             ),
             child: ListTile(
-              title: title != null ? null : Text(title),
+              title: title == null ? null : Text(title,style: TitleDetaileStyle,),
               subtitle: child,
             ),
           ),

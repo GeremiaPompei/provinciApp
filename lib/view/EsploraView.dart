@@ -43,11 +43,13 @@ class _EsploraViewState extends State<EsploraView> {
           scrollDirection: Axis.vertical,
           shrinkWrap: true,
           icon: Icon(Icons.search),
+          minimumChars: 1,
           placeHolder: SingleChildScrollView(
             child: Column(
               children: [
                 CardsSizedBox(this.searched, this.controller.setSearch,
                     (name) => ScrollListView(this.controller, name)),
+                SizedBox(height: 20,),
                 CardsSizedBox(
                     this.leafs,
                     this.controller.setLeafInfo,
