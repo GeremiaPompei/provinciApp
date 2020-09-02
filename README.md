@@ -4,8 +4,7 @@
 **provinciApp** è la nostra idea di applicazione per la provincia di Macerata secondo il concorso *Un'app per la provincia di Macerata*.
 Il progetto nasce da tre semplici studenti con molta voglia di divertirsi e mettersi in gioco.
 Lo sviluppo dell'applicazione nasce dalla base dei requisiti richiesti dal concorso, arricchiti dalle nostre idee e competenze al fine di creare qualcosa di semplice ed intuibile, in grado di attrarre ogni fascia di età della nostra provincia.
-
- [**Obiettivi del concorso**](https://github.com/GeremiaPompei/mc/blob/master/README.md#obiettivi-del-concorso)
+  [**Obiettivi del concorso**](https://github.com/GeremiaPompei/mc/blob/master/README.md#obiettivi-del-concorso)
 
  [**Introduzione all'utilizzo dell'applicazione**](https://github.com/GeremiaPompei/mc/blob/master/README.md#introduzione-allutilizzo-dellapplicazione)
   
@@ -70,13 +69,13 @@ In questa sezione illustreremo come utilizzare provinciApp, mostrandone le varie
 Per cominciare è bene fare una distinzione tra funzionamento online e funzionamento offline, in quanto alcune funzionalità dell'applicazione non possono essere eseguite senza una connessione ad internet. Nonostante questo, la sezione offline permette comunque di accedere ad informazioni salvate in precedenza.
 *provinciApp* | Online | Offline|
 :---|:---:|:---:|
-[Informazioni](https://github.com/GeremiaPompei/mc/blob/master/README.md#informazioni) |√|√|
+[Esplora](https://github.com/GeremiaPompei/mc/blob/master/README.md#informazioni) |√|√|
 [Ricerca](https://github.com/GeremiaPompei/mc/blob/master/README.md#ricerca) |√|X|
-[Mappe](https://github.com/GeremiaPompei/mc/blob/master/README.md#mappe) |√|X|
-[Social](https://github.com/GeremiaPompei/mc/blob/master/README.md#social-1) |√|X|
-[Url](https://github.com/GeremiaPompei/mc/blob/master/README.md#url) |√|X|
-[Foto](https://github.com/GeremiaPompei/mc/blob/master/README.md#foto) |√|√|
-[Extra](https://github.com/GeremiaPompei/mc/blob/master/README.md#extra) |√|X|
+[Localizzazione](https://github.com/GeremiaPompei/mc/blob/master/README.md#mappe) |√|X|
+[Comuni](https://github.com/GeremiaPompei/mc/blob/master/README.md#social-1) |√|X|
+[Categorie](https://github.com/GeremiaPompei/mc/blob/master/README.md#url) |√|X|
+[Eventi](https://github.com/GeremiaPompei/mc/blob/master/README.md#foto) |√|√|
+[Promo](https://github.com/GeremiaPompei/mc/blob/master/README.md#extra) |√|X|
 
 
 [Torna alla Home](https://github.com/GeremiaPompei/mc/blob/master/README.md#provinciappmc)
@@ -146,7 +145,7 @@ Una volta condiviso l'evento, l'interazione sarà possibile attraverso un click 
 
 
 
-## Informazioni
+## Esplora
 
  [**Torna all'introduzione**](https://github.com/GeremiaPompei/mc/blob/master/README.md#introduzione-allutilizzo-dellapplicazione)
 
@@ -154,23 +153,23 @@ Una volta condiviso l'evento, l'interazione sarà possibile attraverso un click 
 
  [**Torna all'introduzione**](https://github.com/GeremiaPompei/mc/blob/master/README.md#introduzione-allutilizzo-dellapplicazione)
  
-## Mappe
+## Localizzazione
 
  [**Torna all'introduzione**](https://github.com/GeremiaPompei/mc/blob/master/README.md#introduzione-allutilizzo-dellapplicazione)
 
-## Social
-
- [**Torna all'introduzione**](https://github.com/GeremiaPompei/mc/blob/master/README.md#introduzione-allutilizzo-dellapplicazione)
- 
-## Url
+## Comuni
 
  [**Torna all'introduzione**](https://github.com/GeremiaPompei/mc/blob/master/README.md#introduzione-allutilizzo-dellapplicazione)
  
-## Foto
+## Categorie
 
  [**Torna all'introduzione**](https://github.com/GeremiaPompei/mc/blob/master/README.md#introduzione-allutilizzo-dellapplicazione)
  
-## Extra
+## Eventi
+
+ [**Torna all'introduzione**](https://github.com/GeremiaPompei/mc/blob/master/README.md#introduzione-allutilizzo-dellapplicazione)
+ 
+## Promo
 
  [**Torna all'introduzione**](https://github.com/GeremiaPompei/mc/blob/master/README.md#introduzione-allutilizzo-dellapplicazione)
  
