@@ -11,6 +11,7 @@ import 'package:MC/model/web/HtmlParser.dart';
 import 'package:MC/model/LeafInfo.dart';
 import 'package:MC/model/Cache.dart';
 import 'package:MC/model/NodeInfo.dart';
+import 'package:MC/utility/Style.dart';
 
 class Controller {
   Cache _cache;
@@ -42,6 +43,7 @@ class Controller {
         } catch (e) {}
       }
       storeCache();
+      storeOffline();
     }
     return this._cache.lastLeafs;
   }
@@ -53,20 +55,20 @@ class Controller {
     for (int i = countNodes - 1; i >= 0; i--) {
       NodeInfo node = this.getOrganizations()[i];
       this._cache.search['Empty $i'] =
-          UnitCache(null, DateTime.now().subtract(Duration(days: 5)), 'Name');
-      await setSearch(node.name, node.url);
+          UnitCache(null, DateTime.now().subtract(Duration(days: 5)), 'Name',null);
+      await setSearch(node.name, node.url,null);
       this._cache.search[node.url] =
-          UnitCache(this.getSearch(), DateTime.now(), node.name);
+          UnitCache(this.getSearch(), DateTime.now(), node.name,IconComune);
     }
     if (countLeafs > this.getSearch().length)
       countNodes = this.getSearch().length;
     for (int i = 0; i < countLeafs; i++) {
       NodeInfo node = this.getSearch()[i];
       this._cache.leafs['Empty $i'] =
-          UnitCache(null, DateTime.now().subtract(Duration(days: 5)), 'Name');
-      await setLeafInfo(node.name, node.url);
+          UnitCache(null, DateTime.now().subtract(Duration(days: 5)), 'Name',null);
+      await setLeafInfo(node.name, node.url,null);
       this._cache.leafs[node.url] =
-          UnitCache(this.getLeafs(), DateTime.now(), node.name);
+          UnitCache(this.getLeafs(), DateTime.now(), node.name,null);
     }
     return this._cache.lastLeafs;
   }
@@ -128,7 +130,7 @@ class Controller {
     return this._promos;
   }
 
-  Future<dynamic> setSearch(String name, String url) async {
+  Future<dynamic> setSearch(String name, String url,int image) async {
     await tryConnection();
     try {
       UnitCache<List<NodeInfo>> cacheUnit = this._cache.getSearchByUrl(url);
@@ -139,6 +141,7 @@ class Controller {
         cacheUnit = this._cache.search[oldUrl];
         cacheUnit.name = name;
         cacheUnit.element = nodes;
+        cacheUnit.image = image;
         this._cache.changeSearch(oldUrl, url, cacheUnit);
         cacheUnit.updateDate();
         storeCache();
@@ -151,7 +154,7 @@ class Controller {
     return getSearch();
   }
 
-  Future<List<dynamic>> setLeafInfo(String name, String url) async {
+  Future<List<dynamic>> setLeafInfo(String name, String url,int image) async {
     await tryConnection();
     UnitCache<List<LeafInfo>> cacheUnit = this._cache.getLeafsByUrl(url);
     if (cacheUnit == null) {

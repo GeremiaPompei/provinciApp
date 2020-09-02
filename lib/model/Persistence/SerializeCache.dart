@@ -24,7 +24,8 @@ class SerializeCache {
         'Unit Cache': {
           'Date':
           DateFormat('yyy-MM-dd HH:mm:ss').format(mapIn[element].date),
-          'Name': mapIn[element].name
+          'Name': mapIn[element].name,
+          'Image': mapIn[element].image
         }
       };
       listRes.add(mapTmp);

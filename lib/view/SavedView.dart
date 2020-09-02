@@ -35,11 +35,9 @@ class _SavedWidgetState extends State<SavedWidget> {
         actions: [
           IconButton(
             icon: Icon(Icons.file_upload),
-            onPressed: () {
-              setState(() async {
-                if (await this._controller.tryConnection())
-                  Navigator.pushReplacementNamed(context, '/online');
-              });
+            onPressed: () async {
+              if (await this._controller.tryConnection())
+                Navigator.pushReplacementNamed(context, '/online');
             },
           ),
         ],
@@ -104,26 +102,24 @@ class _SavedWidgetState extends State<SavedWidget> {
                         : Text(
                             '${this._controller.getOffline()[index].description}'),
                     onTap: () {
-                      setState(() {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => DetailedLeafInfoView(
-                                      this._controller.getOffline()[index].name,
-                                      this._controller.getOffline()[index],
-                                      _controller,
-                                      this
-                                                  ._controller
-                                                  .getOffline()[index]
-                                                  .imageFile ==
-                                              null
-                                          ? null
-                                          : Image.file(this
-                                              ._controller
-                                              .getOffline()[index]
-                                              .imageFile),
-                                    )));
-                      });
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => DetailedLeafInfoView(
+                                    this._controller.getOffline()[index].name,
+                                    this._controller.getOffline()[index],
+                                    _controller,
+                                    this
+                                                ._controller
+                                                .getOffline()[index]
+                                                .imageFile ==
+                                            null
+                                        ? null
+                                        : Image.file(this
+                                            ._controller
+                                            .getOffline()[index]
+                                            .imageFile),
+                                  )));
                     }));
           },
           separatorBuilder: (BuildContext context, int index) =>

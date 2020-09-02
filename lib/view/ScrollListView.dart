@@ -41,7 +41,8 @@ class _ScrollListViewState extends State<ScrollListView> {
               builder: (context) => FutureBuilder<dynamic>(
                     future: _controller.setLeafInfo(
                         _controller.getSearch()[index].name,
-                        _controller.getSearch()[index].url),
+                        _controller.getSearch()[index].url,
+                        null),
                     builder: (BuildContext context,
                         AsyncSnapshot<dynamic> snapshot) {
                       if (snapshot.hasData)
@@ -53,10 +54,7 @@ class _ScrollListViewState extends State<ScrollListView> {
                         _varWidget = Scaffold(
                             appBar: AppBar(
                               title: Text(
-                                this
-                                    ._controller
-                                    .getSearch()[index]
-                                    .name,
+                                this._controller.getSearch()[index].name,
                                 style: TitleTextStyle,
                               ),
                               backgroundColor: BackgroundColor,

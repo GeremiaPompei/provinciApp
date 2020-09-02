@@ -70,7 +70,7 @@ class _CategoriesViewState extends State<CategoriesView> {
                                       this
                                           ._controller
                                           .getCategories()[index]
-                                          .url),
+                                          .url,IconCategory),
                                   builder: (BuildContext context,
                                       AsyncSnapshot<dynamic> snapshot) {
                                     if (snapshot.hasData)

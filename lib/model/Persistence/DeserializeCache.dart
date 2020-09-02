@@ -19,7 +19,7 @@ class DeserializeCache {
     listIn.forEach((element) {
       mapRes[element['Key']] = UnitCache([],
           DateTime.parse(element['Unit Cache']['Date']),
-          element['Unit Cache']['Name']);
+          element['Unit Cache']['Name'],element['Unit Cache']['Image']);
     });
     return mapRes;
   }

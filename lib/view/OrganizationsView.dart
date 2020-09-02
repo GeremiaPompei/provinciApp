@@ -81,7 +81,7 @@ class _OrganizationsViewState extends State<OrganizationsView> {
                                       this
                                           ._controller
                                           .getOrganizations()[index]
-                                          .url),
+                                          .url,IconComune),
                                   builder: (BuildContext context,
                                       AsyncSnapshot<dynamic> snapshot) {
                                     if (snapshot.hasData)

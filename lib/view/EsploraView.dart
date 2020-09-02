@@ -46,19 +46,18 @@ class _EsploraViewState extends State<EsploraView> {
             child: Column(
               children: [
                 CardsSizedBox(this.searched, this.controller.setSearch,
-                        (name) => ScrollListView(this.controller, name)),
+                    (name) => ScrollListView(this.controller, name)),
                 CardsSizedBox(
                     this.leafs,
                     this.controller.setLeafInfo,
-                        (name) =>
-                        LeafsInfoView(
-                            this.controller.getLeafs(), name, this.controller)),
+                    (name) => LeafsInfoView(
+                        this.controller.getLeafs(), name, this.controller)),
               ],
             ),
           ),
           loader: LoadingView(),
-          onSearch: (input) async =>
-          await controller.setSearch(input, 'dataset?q=' + input),
+          onSearch: (input) async => await controller.setSearch(
+              input, 'dataset?q=' + input, IconSearch),
           onItemFound: (input, num) {
             return Container(
               child: ListTile(
@@ -67,28 +66,26 @@ class _EsploraViewState extends State<EsploraView> {
                 subtitle: Text(input.description),
                 onTap: () async {
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) =>
-                        FutureBuilder<dynamic>(
-                          future: controller.setLeafInfo(input.name, input.url),
-                          builder: (BuildContext context,
-                              AsyncSnapshot<dynamic> snapshot) {
-                            if (snapshot.hasData)
-                              varWidget =
-                                  LeafsInfoView(this.controller.getLeafs(),
-                                      input.name, controller);
-                            else if (snapshot.hasError)
-                              varWidget = OfflineView();
-                            else
-                              varWidget = LoadingView();
-                            return varWidget;
-                          },
-                        ),
+                    builder: (context) => FutureBuilder<dynamic>(
+                      future:
+                          controller.setLeafInfo(input.name, input.url, null),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<dynamic> snapshot) {
+                        if (snapshot.hasData)
+                          varWidget = LeafsInfoView(this.controller.getLeafs(),
+                              input.name, controller);
+                        else if (snapshot.hasError)
+                          varWidget = OfflineView();
+                        else
+                          varWidget = LoadingView();
+                        return varWidget;
+                      },
+                    ),
                   ));
                 },
               ),
             );
-          })
-      ,
+          }),
     );
   }
 }

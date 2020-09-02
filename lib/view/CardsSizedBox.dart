@@ -10,23 +10,22 @@ import 'OfflineView.dart';
 
 class CardsSizedBox extends StatefulWidget {
   List<MapEntry<String, UnitCache>> _list;
-  Future<dynamic> Function(String name, String url) _func;
+  Future<dynamic> Function(String name, String url, int image) _func;
   Widget Function(String name) _funcWidget;
 
   CardsSizedBox(this._list, this._func, this._funcWidget);
 
   @override
-  _CardsSizedBoxState createState() => _CardsSizedBoxState(
-      this._list, this._func, this._funcWidget);
+  _CardsSizedBoxState createState() =>
+      _CardsSizedBoxState(this._list, this._func, this._funcWidget);
 }
 
 class _CardsSizedBoxState extends State<CardsSizedBox> {
   List<MapEntry<String, UnitCache>> _list;
-  Future<dynamic> Function(String name, String url) _func;
+  Future<dynamic> Function(String name, String url, int image) _func;
   Widget Function(String name) _funcWidget;
 
-  _CardsSizedBoxState(
-      this._list, this._func, this._funcWidget);
+  _CardsSizedBoxState(this._list, this._func, this._funcWidget);
 
   @override
   Widget build(BuildContext context) {
@@ -40,14 +39,23 @@ class _CardsSizedBoxState extends State<CardsSizedBox> {
               child: ListTile(
                 title: Text(this._list[i].value.name),
                 subtitle: Text(this._list[i].value.date.toString()),
+                leading: Stack(alignment: Alignment.center, children: [
+                  Image.asset('assets/empty.png'),
+                  this._list[i].value.image == null
+                      ? Image.asset('assets/empty.png')
+                      : Icon(IconData((this._list[i].value.image),
+                          fontFamily: 'MaterialIcons'))
+                ]),
                 onTap: () {
                   setState(() {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => FutureBuilder<dynamic>(
-                                  future: _func(this._list[i].value.name,
-                                      this._list[i].key),
+                                  future: _func(
+                                      this._list[i].value.name,
+                                      this._list[i].key,
+                                      this._list[i].value.image),
                                   builder: (BuildContext context,
                                       AsyncSnapshot<dynamic> snapshot) {
                                     Widget tmpWidget;

@@ -7,18 +7,18 @@ class BottomButtonDown extends StatefulWidget {
   void Function(int) _func;
   int _index;
 
-  BottomButtonDown(this._func,this._index);
+  BottomButtonDown(this._func, this._index);
 
   @override
   _BottomButtonDownState createState() =>
-      _BottomButtonDownState(this._func,this._index);
+      _BottomButtonDownState(this._func, this._index);
 }
 
 class _BottomButtonDownState extends State<BottomButtonDown> {
   void Function(int) _func;
   int _index;
 
-  _BottomButtonDownState(this._func,this._index);
+  _BottomButtonDownState(this._func, this._index);
 
   void onItemTapped(index) {
     setState(() {
@@ -34,9 +34,9 @@ class _BottomButtonDownState extends State<BottomButtonDown> {
       backgroundColor: Colors.white,
       buttonBackgroundColor: ThemeSecondaryColor,
       items: <Widget>[
-        Icon(Icons.search),
-        Icon(Icons.account_balance),
-        Icon(Icons.widgets),
+        Icon(IconData(IconSearch, fontFamily: 'MaterialIcons')),
+        Icon(IconData(IconComune, fontFamily: 'MaterialIcons')),
+        Icon(IconData(IconCategory, fontFamily: 'MaterialIcons')),
         Icon(Icons.comment)
       ],
       animationDuration: Duration(milliseconds: 300),

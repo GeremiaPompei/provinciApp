@@ -51,7 +51,7 @@ class _HomeViewState extends State<HomeView> {
     this._location = placemark[0].locality;
     return this
         ._controller
-        .setSearch(this._location, 'dataset?q=' + this._location);
+        .setSearch(this._location, 'dataset?q=' + this._location, IconPosition);
   }
 
   Widget initWidgetFuture(Future<dynamic> Function() func, Widget input) =>
@@ -113,7 +113,7 @@ class _HomeViewState extends State<HomeView> {
         actions: [
           IconButton(
             color: ThemePrimaryColor,
-            icon: Icon(Icons.location_on),
+            icon: Icon(IconData(IconPosition, fontFamily: 'MaterialIcons')),
             onPressed: () {
               setState(() {
                 Navigator.push(
@@ -149,9 +149,7 @@ class _HomeViewState extends State<HomeView> {
             color: ThemePrimaryColor,
             icon: Icon(Icons.file_download),
             onPressed: () {
-              setState(() {
-                Navigator.pushReplacementNamed(context, '/offline');
-              });
+              Navigator.pushReplacementNamed(context, '/offline');
             },
           ),
         ],
