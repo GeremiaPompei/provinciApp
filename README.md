@@ -95,7 +95,7 @@ Cliccando sul pulsante 'Offline' si accederà alla schermata offline ([qui](http
 
 
 #### Struttura Online: 
-- [Esplora](https://github.com/GeremiaPompei/mc/blob/master/README.md#eventi)
+- [Esplora](https://github.com/GeremiaPompei/mc/blob/master/README.md#esplora)
 - [Comuni](https://github.com/GeremiaPompei/mc/blob/master/README.md#comuni)
 - [Categorie](https://github.com/GeremiaPompei/mc/blob/master/README.md#categorie)
 - [Extra](https://github.com/GeremiaPompei/mc/blob/master/README.md#extra)
@@ -171,7 +171,7 @@ Una volta condiviso l'evento, l'interazione sarà possibile attraverso un click 
 [Torna ad Obiettivi](https://github.com/GeremiaPompei/mc/blob/master/README.md#obiettivi-del-concorso)
 <img src ="https://github.com/GeremiaPompei/mc/commit/8ed511bc328dbb89b816e17f95ba914e1adbd117#diff-0627b8b5553e696bf9f72d1ca085d57a" alt="pic casuale" width="600px" height="420px">
 
-## Eventi
+## Esplora
 
 
 [Struttura Online](https://github.com/GeremiaPompei/mc/blob/master/README.md#struttura-online)
