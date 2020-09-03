@@ -29,7 +29,7 @@ class _LeafsInfoViewState extends State<LeafsInfoView> {
       backgroundColor: BackgroundColor,
       appBar: AppBar(
         backgroundColor: ThemePrimaryColor,
-        title: Text(_title),
+        title: Text(_title,style: ReverseTitleTextStyle,),
         leading: new IconButton(
           icon: new Icon(Icons.arrow_back_ios),
           onPressed: () => {Navigator.pop(context)},

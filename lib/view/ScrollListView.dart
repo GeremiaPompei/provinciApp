@@ -73,7 +73,7 @@ class _ScrollListViewState extends State<ScrollListView> {
     return Scaffold(
       backgroundColor: BackgroundColor,
       appBar: AppBar(
-        title: Text(this._title),
+        title: Text(this._title,style: ReverseTitleTextStyle,),
         backgroundColor: ThemePrimaryColor,
         leading: new IconButton(
             icon: new Icon(Icons.arrow_back_ios),
