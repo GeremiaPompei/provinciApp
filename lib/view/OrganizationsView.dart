@@ -54,14 +54,7 @@ class _OrganizationsViewState extends State<OrganizationsView> {
             return Card(
               child: ListTile(
                 title: Text(
-                    this._controller.getOrganizations()[index].name.toString() +
-                        ' (' +
-                        this
-                            ._controller
-                            .getOrganizations()[index]
-                            .description
-                            .replaceAll(' Dataset', '') +
-                        ')'),
+                    this._controller.getOrganizations()[index].name.toString()),
                 subtitle: this._controller.getOrganizations()[index].image != null
                     ? Image(
                     image: NetworkImage(
