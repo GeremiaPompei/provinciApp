@@ -1,6 +1,6 @@
 import 'package:MC/controller/Controller.dart';
 import 'package:MC/utility/Style.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:MC/utility/newRow.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -46,7 +46,10 @@ class _CategoriesViewState extends State<CategoriesView> {
         children: List.generate(
           this._controller.getCategories().length,
           (index) {
-            return Card(
+
+            return newRow();
+
+            /*Card(
               child: ListTile(
                 title: Text(
                     this._controller.getCategories()[index].name.toString()),
@@ -102,6 +105,7 @@ class _CategoriesViewState extends State<CategoriesView> {
                 },
               ),
             );
+*/
           },
         ),
       ),
