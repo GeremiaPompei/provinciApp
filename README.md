@@ -82,7 +82,7 @@ Una volta consentito l'accesso per ogni altro utilizzo il consenso di utilizzo d
 
 ------>pic zona<-----
 
-Il secondo pulsante  ci permette di accedere alla schermata **offline**.  (La sezione è spiegata nello specifico [qui](https://github.com/GeremiaPompei/mc/blob/master/README.md#struttura-offline))
+Il secondo pulsante  ci permette di accedere alla schermata **offline**.  (La sezione è spiegata nello specifico [qui](https://github.com/GeremiaPompei/mc/blob/master/README.md#lista-di-elementi-scaricati))
 
 ------>pic pulsante offline<-------------
 
@@ -90,18 +90,18 @@ Se non è presente connessione ad internet sarà la stessa applicazione a forzar
 
 --------------> pic schermata offline <----------
 
-Cliccando sul pulsante 'Offline' si accederà alla schermata offline ([qui](https://github.com/GeremiaPompei/mc/blob/master/README.md#struttura-offline)). 
+Cliccando sul pulsante 'Offline' si accederà alla schermata offline ([qui](https://github.com/GeremiaPompei/mc/blob/master/README.md#lista-di-elementi-scaricati)). 
 
 
 
 #### Struttura Online: 
-- Esplora
-- Comuni
-- Categorie
-- Extra
+- [Esplora](https://github.com/GeremiaPompei/mc/blob/master/README.md#eventi)
+- [Comuni](https://github.com/GeremiaPompei/mc/blob/master/README.md#comuni)
+- [Categorie](https://github.com/GeremiaPompei/mc/blob/master/README.md#categorie)
+- [Extra](https://github.com/GeremiaPompei/mc/blob/master/README.md#extra)
 
 #### Struttura Offline:
-- lista di elementi scaricati
+- [lista di elementi scaricati](https://github.com/GeremiaPompei/mc/blob/master/README.md#lista-di-elementi-scaricati)
 
 
 
