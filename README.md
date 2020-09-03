@@ -71,16 +71,26 @@ In questa sezione illustreremo come utilizzare provinciApp, mostrandone le varie
 Per cominciare è bene fare una distinzione tra funzionamento online e funzionamento offline, in quanto alcune funzionalità dell'applicazione non possono essere eseguite senza una connessione ad internet. Nonostante questo, la sezione offline permette comunque di accedere ad informazioni salvate in precedenza.
 
 Se presente la connessione ad internet all'apertura dell'applicazione, ci ritroveremo automaticamente alla schermata online. Quest'ultima è organizzata in 4 sezioni le quali hanno in comune una toolbar in alto all'interno della quale è presente il nome della sezione singola e due ulteriori pulsanti:
+
 -------------------------------->pic schermate<--------------------------------------------
+
 Il primo pulsante è utile alla **geolocalizzazione**. Al primo utilizzo verrà richiesto di consentire all'applicazione di accedere alla posizione corrente:
+
 --->pic con richiesta geolocalizzazione
+
 Una volta consentito l'accesso per ogni altro utilizzo il consenso di utilizzo della posizione non sarà più richiesto. A questo punto l'applicazione sfruttando la posizione attuale dell'utente mostrerà i risultati relativi alle informazioni presenti nell'area trovata.
+
 ------>pic zona<-----
-Il secondo pulsante  ci permette di accedere alla schermata **offline**.  (La sezione è spiegata nello specifico qui)
+
+Il secondo pulsante  ci permette di accedere alla schermata **offline**.  (La sezione è spiegata nello specifico [qui](https://github.com/GeremiaPompei/mc/blob/master/README.md#struttura-offline))
+
 ------>pic pulsante offline<-------------
+
 Se non è presente connessione ad internet sarà la stessa applicazione a forzare l'utilizzo della modalità offline: effettuata una qualsiasi ricerca in assenza di rete comparirà la seguente schermata:
+
 --------------> pic schermata offline <----------
-Cliccando sul pulsante 'Offline' si accederà alla schermata offline (qui). 
+
+Cliccando sul pulsante 'Offline' si accederà alla schermata offline ([qui](https://github.com/GeremiaPompei/mc/blob/master/README.md#struttura-offline)). 
 
 
 
@@ -163,14 +173,28 @@ Una volta condiviso l'evento, l'interazione sarà possibile attraverso un click 
 
 ## Eventi
 
+
+[Struttura Online](https://github.com/GeremiaPompei/mc/blob/master/README.md#struttura-online)
+
 ## Comuni
+
+
+[Struttura Online](https://github.com/GeremiaPompei/mc/blob/master/README.md#struttura-online)
 
 ## Categorie
 
+
+[Struttura Online](https://github.com/GeremiaPompei/mc/blob/master/README.md#struttura-online)
+
 ## Extra
+
+
+[Struttura Online](https://github.com/GeremiaPompei/mc/blob/master/README.md#struttura-online)
 
 ## Lista di elementi scaricati
 
+
+[Struttura Offline](https://github.com/GeremiaPompei/mc/blob/master/README.md#struttura-offline)
 
 
 
