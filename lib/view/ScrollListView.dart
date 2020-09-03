@@ -61,15 +61,7 @@ class _ScrollListViewState extends State<ScrollListView> {
                             ),
                             body: OfflineView());
                       else
-                        _varWidget = Scaffold(
-                            appBar: AppBar(
-                              title: Text(
-                                this._controller.getSearch()[index].name,
-                                style: TitleTextStyle,
-                              ),
-                              backgroundColor: BackgroundColor,
-                            ),
-                            body: LoadingView());
+                        _varWidget = LoadingView();
                       return _varWidget;
                     },
                   )));

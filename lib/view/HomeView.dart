@@ -106,6 +106,7 @@ class _HomeViewState extends State<HomeView> {
     return Scaffold(
       backgroundColor: BackgroundColor,
       appBar: AppBar(
+        brightness: Brightness.light,
         backgroundColor: BackgroundColor,
         title: Text(
           _title,
