@@ -29,7 +29,10 @@ class _LeafsInfoViewState extends State<LeafsInfoView> {
       backgroundColor: BackgroundColor,
       appBar: AppBar(
         backgroundColor: ThemePrimaryColor,
-        title: Text(_title,style: ReverseTitleTextStyle,),
+        title: Text(
+          _title,
+          style: ReverseTitleTextStyle,
+        ),
         leading: new IconButton(
           icon: new Icon(Icons.arrow_back_ios),
           onPressed: () => {Navigator.pop(context)},
@@ -79,6 +82,7 @@ class _ButtonInfoState extends State<ButtonInfo> {
               ? icon = Icon(Icons.remove_circle_outline)
               : icon = Icon(Icons.add_circle_outline);
           return Card(
+              color: BackgroundColor2,
               child: ListTile(
                   trailing: IconButton(
                     icon: icon,

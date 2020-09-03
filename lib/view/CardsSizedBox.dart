@@ -40,6 +40,7 @@ class _CardsSizedBoxState extends State<CardsSizedBox> {
       children: List.generate(
           this._list.length,
           (i) => Card(
+                color: BackgroundColor2,
                 child: FlatButton(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -55,8 +56,11 @@ class _CardsSizedBoxState extends State<CardsSizedBox> {
                             ),
                             this._list[i].value.image == null
                                 ? Image.asset('assets/empty.png')
-                                : Icon(IconData((this._list[i].value.image),
-                                    fontFamily: 'MaterialIcons')),
+                                : Icon(
+                                    IconData((this._list[i].value.image),
+                                        fontFamily: 'MaterialIcons'),
+                                    color: ThemeSecondaryColor,
+                                  ),
                           ],
                         ),
                       ),
@@ -86,15 +90,8 @@ class _CardsSizedBoxState extends State<CardsSizedBox> {
                                         tmpWidget = this
                                             ._funcWidget(_list[i].value.name);
                                       else if (snapshot.hasError) {
-                                        tmpWidget = Scaffold(
-                                            appBar: AppBar(
-                                              title: Text(
-                                                _list[i].value.name,
-                                                style: TitleTextStyle,
-                                              ),
-                                              backgroundColor: BackgroundColor,
-                                            ),
-                                            body: OfflineView());
+                                        tmpWidget =
+                                            OfflineView(_list[i].value.name);
                                       } else
                                         tmpWidget = LoadingView();
                                       return tmpWidget;

@@ -62,7 +62,7 @@ class _HomeViewState extends State<HomeView> {
           if (snapshot.hasData)
             tmpWidget = input;
           else if (snapshot.hasError)
-            tmpWidget = OfflineView();
+            tmpWidget = OfflineView(null);
           else
             tmpWidget = LoadingView();
           return tmpWidget;
@@ -130,15 +130,7 @@ class _HomeViewState extends State<HomeView> {
                                   varWidget = ScrollListView(
                                       this._controller, this._location);
                                 else if (snapshot.hasError)
-                                  varWidget = Scaffold(
-                                      appBar: AppBar(
-                                        title: Text(
-                                          'Find Position',
-                                          style: TitleTextStyle,
-                                        ),
-                                        backgroundColor: BackgroundColor,
-                                      ),
-                                      body: OfflineView());
+                                  varWidget = OfflineView('Find Position');
                                 else
                                   varWidget = LoadingView();
                                 return varWidget;

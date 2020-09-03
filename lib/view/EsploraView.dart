@@ -84,7 +84,7 @@ class _EsploraViewState extends State<EsploraView> {
                           varWidget = LeafsInfoView(this.controller.getLeafs(),
                               input.name, controller);
                         else if (snapshot.hasError)
-                          varWidget = OfflineView();
+                          varWidget = OfflineView(input.name);
                         else
                           varWidget = LoadingView();
                         return varWidget;

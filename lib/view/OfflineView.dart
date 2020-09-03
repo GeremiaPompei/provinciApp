@@ -3,13 +3,20 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class OfflineView extends StatefulWidget {
+  String _name;
+
+  OfflineView(this._name);
+
   @override
-  _OfflineViewState createState() => _OfflineViewState();
+  _OfflineViewState createState() => _OfflineViewState(this._name);
 }
 
 class _OfflineViewState extends State<OfflineView> {
-  @override
-  Widget build(BuildContext context) {
+  String _name;
+
+  _OfflineViewState(this._name);
+
+  Widget getBody() {
     return Container(
         child: Center(
             child: RaisedButton(
@@ -18,9 +25,33 @@ class _OfflineViewState extends State<OfflineView> {
                 elevation: 6,
                 onPressed: () {
                   setState(() {
-                    Navigator.pushNamedAndRemoveUntil(context, '/offline',
-                        (route) => route.popped == null);
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, '/offline', (route) => route.popped == null);
                   });
                 })));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return this._name == null
+        ? getBody()
+        : Scaffold(
+            appBar: AppBar(
+              leading: IconButton(
+                icon: Icon(
+                  Icons.arrow_back_ios,
+                  color: ThemePrimaryColor,
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              title: Text(
+                this._name,
+                style: TitleTextStyle,
+              ),
+              backgroundColor: BackgroundColor,
+            ),
+            body: getBody());
   }
 }

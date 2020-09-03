@@ -24,8 +24,9 @@ const TitleDetaileStyle = TextStyle(
 );
 
 const ThemePrimaryColor = Color.fromARGB(255, 72, 179, 179);
-const ThemeSecondaryColor = Colors.white;
+const ThemeSecondaryColor = Color(0xFFA35034);
 const BackgroundColor = Color.fromARGB(255, 237, 249, 249);
+const BackgroundColor2 = Colors.white70;
 
 const IconSearch = 0xe8b6;
 const IconCategory = 0xe1bd;
@@ -52,6 +53,8 @@ int findImage(String name) {
     return 0xe8cc;
   else if (name.contains('Biblioteche'))
     return 0xe865;
-  else if (name.contains('Aree')) return 0xe531;
-  else return 0xe033;
+  else if (name.contains('Aree'))
+    return 0xe531;
+  else
+    return 0xe033;
 }

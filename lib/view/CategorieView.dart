@@ -21,7 +21,7 @@ class _CategoriesViewState extends State<CategoriesView> {
   Controller _controller;
   Widget varWidget;
   RefreshController _refreshController =
-  RefreshController(initialRefresh: false);
+      RefreshController(initialRefresh: false);
 
   _CategoriesViewState(this._controller);
 
@@ -44,7 +44,7 @@ class _CategoriesViewState extends State<CategoriesView> {
         padding: const EdgeInsets.all(2),
         children: List.generate(
           this._controller.getCategories().length,
-              (index) {
+          (index) {
             return Container(
               height: 100,
               margin: const EdgeInsets.symmetric(
@@ -60,11 +60,11 @@ class _CategoriesViewState extends State<CategoriesView> {
                       margin: new EdgeInsets.only(left: 46.0),
                       child: Center(
                           child: Text(
-                            this._controller.getCategories()[index].name.toString(),
-                            style: TitleTextStyle_20,
-                          )),
+                        this._controller.getCategories()[index].name.toString(),
+                        style: TitleTextStyle_20,
+                      )),
                       decoration: new BoxDecoration(
-                        color: ThemeSecondaryColor,
+                        color: BackgroundColor2,
                         shape: BoxShape.rectangle,
                         borderRadius: new BorderRadius.circular(8.0),
                         boxShadow: <BoxShadow>[
@@ -80,20 +80,20 @@ class _CategoriesViewState extends State<CategoriesView> {
                       margin: new EdgeInsets.symmetric(vertical: 10.0),
                       alignment: FractionalOffset.centerLeft,
                       child:
-                      this._controller.getCategories()[index].image != null
-                          ? Image(
-                        image: NetworkImage(this
-                            ._controller
-                            .getCategories()[index]
-                            .image),
-                      )
-                          : Image(
-                        image: AssetImage(
-                          'assets/empty.png',
-                        ),
-                        height: 100,
-                        width: 100,
-                      ),
+                          this._controller.getCategories()[index].image != null
+                              ? Image(
+                                  image: NetworkImage(this
+                                      ._controller
+                                      .getCategories()[index]
+                                      .image),
+                                )
+                              : Image(
+                                  image: AssetImage(
+                                    'assets/empty.png',
+                                  ),
+                                  height: 100,
+                                  width: 100,
+                                ),
                     ),
                   ],
                 ),
@@ -102,40 +102,32 @@ class _CategoriesViewState extends State<CategoriesView> {
                       context,
                       MaterialPageRoute(
                           builder: (context) => FutureBuilder<dynamic>(
-                            future: _controller.setSearch(
-                                this
-                                    ._controller
-                                    .getCategories()[index]
-                                    .name,
-                                this._controller.getCategories()[index].url,
-                                IconCategory),
-                            builder: (BuildContext context,
-                                AsyncSnapshot<dynamic> snapshot) {
-                              if (snapshot.hasData)
-                                varWidget = ScrollListView(
-                                    this._controller,
+                                future: _controller.setSearch(
                                     this
                                         ._controller
                                         .getCategories()[index]
-                                        .name);
-                              else if (snapshot.hasError)
-                                varWidget = Scaffold(
-                                    appBar: AppBar(
-                                      title: Text(
+                                        .name,
+                                    this._controller.getCategories()[index].url,
+                                    IconCategory),
+                                builder: (BuildContext context,
+                                    AsyncSnapshot<dynamic> snapshot) {
+                                  if (snapshot.hasData)
+                                    varWidget = ScrollListView(
+                                        this._controller,
                                         this
                                             ._controller
                                             .getCategories()[index]
-                                            .name,
-                                        style: TitleTextStyle,
-                                      ),
-                                      backgroundColor: BackgroundColor,
-                                    ),
-                                    body: OfflineView());
-                              else
-                                varWidget = LoadingView();
-                              return varWidget;
-                            },
-                          )));
+                                            .name);
+                                  else if (snapshot.hasError)
+                                    varWidget = OfflineView(this
+                                        ._controller
+                                        .getCategories()[index]
+                                        .name);
+                                  else
+                                    varWidget = LoadingView();
+                                  return varWidget;
+                                },
+                              )));
                 },
               ),
             );

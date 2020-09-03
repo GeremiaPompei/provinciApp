@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'OfflineView.dart';
+
 class EventiView extends StatefulWidget {
   Controller _controller;
 
@@ -24,7 +26,12 @@ class _EventiViewState extends State<EventiView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Eventi'), backgroundColor: ThemePrimaryColor),
+      appBar: AppBar(
+          title: Text(
+            'Eventi',
+            style: ReverseTitleTextStyle,
+          ),
+          backgroundColor: ThemePrimaryColor),
       body: SmartRefresher(
         enablePullDown: true,
         header: ClassicHeader(),
@@ -42,27 +49,32 @@ class _EventiViewState extends State<EventiView> {
           padding: const EdgeInsets.all(8),
           itemCount: this._controller.getEvents().length,
           itemBuilder: (context, index) {
-            return ListTile(
-                title:
-                    Text(this._controller.getEvents()[index].name.toString()),
-                subtitle: Text(
-                    this._controller.getEvents()[index].description.toString()),
-                leading: this._controller.getEvents()[index].image != null
-                    ? Image(
-                        image: NetworkImage(
-                            this._controller.getEvents()[index].image))
-                    : null,
-                onTap: () async {
-                  if (await canLaunch(
-                      this._controller.getEvents()[index].url)) {
-                    await launch(this._controller.getEvents()[index].url);
-                  } else {
-                    throw 'Could not launch ${this._controller.getEvents()[index].url}';
-                  }
-                });
+            return Container(
+                color: BackgroundColor2,
+                child: ListTile(
+                    title: Text(
+                        this._controller.getEvents()[index].name.toString()),
+                    subtitle: Text(this
+                        ._controller
+                        .getEvents()[index]
+                        .description
+                        .toString()),
+                    leading: this._controller.getEvents()[index].image != null
+                        ? Image(
+                            image: NetworkImage(
+                                this._controller.getEvents()[index].image))
+                        : null,
+                    onTap: () async {
+                      if (await canLaunch(
+                          this._controller.getEvents()[index].url)) {
+                        await launch(this._controller.getEvents()[index].url);
+                      } else {
+                        throw 'Could not launch ${this._controller.getEvents()[index].url}';
+                      }
+                    }));
           },
           separatorBuilder: (BuildContext context, int index) =>
-              const Divider(),
+              SizedBox(height: 10,),
         ),
       ),
     );

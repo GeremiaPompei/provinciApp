@@ -34,10 +34,22 @@ class _BottomButtonDownState extends State<BottomButtonDown> {
       backgroundColor: BackgroundColor,
       buttonBackgroundColor: ThemePrimaryColor,
       items: <Widget>[
-        Icon(IconData(IconSearch, fontFamily: 'MaterialIcons')),
-        Icon(IconData(IconComune, fontFamily: 'MaterialIcons')),
-        Icon(IconData(IconCategory, fontFamily: 'MaterialIcons')),
-        Icon(Icons.comment)
+        Icon(
+          IconData(IconSearch, fontFamily: 'MaterialIcons'),
+          color: ThemeSecondaryColor,
+        ),
+        Icon(
+          IconData(IconComune, fontFamily: 'MaterialIcons'),
+          color: ThemeSecondaryColor,
+        ),
+        Icon(
+          IconData(IconCategory, fontFamily: 'MaterialIcons'),
+          color: ThemeSecondaryColor,
+        ),
+        Icon(
+          Icons.comment,
+          color: ThemeSecondaryColor,
+        )
       ],
       animationDuration: Duration(milliseconds: 300),
       animationCurve: Curves.easeInOutCirc,

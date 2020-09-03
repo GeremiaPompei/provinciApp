@@ -54,6 +54,7 @@ class _OrganizationsViewState extends State<OrganizationsView> {
           children: List.generate(
               this._controller.getOrganizations().length,
               (i) => Card(
+                    color: BackgroundColor2,
                     child: FlatButton(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -72,7 +73,10 @@ class _OrganizationsViewState extends State<OrganizationsView> {
                                       )
                                     : Container(
                                         color: ThemePrimaryColor,
-                                        child: Icon(Icons.not_interested),
+                                        child: Icon(
+                                          Icons.not_interested,
+                                          color: ThemeSecondaryColor,
+                                        ),
                                       ),
                           ),
                           Center(
@@ -111,19 +115,10 @@ class _OrganizationsViewState extends State<OrganizationsView> {
                                                     .getOrganizations()[i]
                                                     .name);
                                           else if (snapshot.hasError) {
-                                            tmpWidget = Scaffold(
-                                                appBar: AppBar(
-                                                  title: Text(
-                                                    this
-                                                        ._controller
-                                                        .getOrganizations()[i]
-                                                        .name,
-                                                    style: TitleTextStyle,
-                                                  ),
-                                                  backgroundColor:
-                                                      BackgroundColor,
-                                                ),
-                                                body: OfflineView());
+                                            tmpWidget = OfflineView(this
+                                                ._controller
+                                                .getOrganizations()[i]
+                                                .name);
                                           } else
                                             tmpWidget = LoadingView();
                                           return tmpWidget;

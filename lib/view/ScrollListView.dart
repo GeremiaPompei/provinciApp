@@ -51,15 +51,8 @@ class _ScrollListViewState extends State<ScrollListView> {
                             this._controller.getSearch()[index].name,
                             this._controller);
                       else if (snapshot.hasError)
-                        _varWidget = Scaffold(
-                            appBar: AppBar(
-                              title: Text(
-                                this._controller.getSearch()[index].name,
-                                style: TitleTextStyle,
-                              ),
-                              backgroundColor: BackgroundColor,
-                            ),
-                            body: OfflineView());
+                        _varWidget = OfflineView(
+                            this._controller.getSearch()[index].name);
                       else
                         _varWidget = LoadingView();
                       return _varWidget;
@@ -73,7 +66,10 @@ class _ScrollListViewState extends State<ScrollListView> {
     return Scaffold(
       backgroundColor: BackgroundColor,
       appBar: AppBar(
-        title: Text(this._title,style: ReverseTitleTextStyle,),
+        title: Text(
+          this._title,
+          style: ReverseTitleTextStyle,
+        ),
         backgroundColor: ThemePrimaryColor,
         leading: new IconButton(
             icon: new Icon(Icons.arrow_back_ios),
@@ -100,10 +96,13 @@ class _ScrollListViewState extends State<ScrollListView> {
                       '${_controller.getSearch()[index].description.toString()}'),
                   leading: Stack(alignment: Alignment.center, children: [
                     Image.asset('assets/empty.png'),
-                    Icon(IconData(
-                        findImage(
-                            _controller.getSearch()[index].name.toString()),
-                        fontFamily: 'MaterialIcons'))
+                    Icon(
+                      IconData(
+                          findImage(
+                              _controller.getSearch()[index].name.toString()),
+                          fontFamily: 'MaterialIcons'),
+                      color: ThemeSecondaryColor,
+                    )
                   ]),
                   onTap: () {
                     setLeafs(index);

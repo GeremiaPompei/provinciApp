@@ -107,6 +107,26 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
                   },
                 ),
               ),
+        'Share': this.leafInfo.url != null
+            ? CircleAvatar(
+                radius: 20,
+                backgroundColor: Colors.white,
+                child: IconButton(
+                  icon: Icon(
+                    Icons.share,
+                    color: Colors.black,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      final RenderBox box = context.findRenderObject();
+                      Share.share(this.leafInfo.url,
+                          subject: this.title,
+                          sharePositionOrigin:
+                              box.localToGlobal(Offset.zero) & box.size);
+                    });
+                  },
+                ))
+            : null,
         'PositionIcon': this.leafInfo.position == null
             ? null
             : CircleAvatar(
@@ -198,6 +218,7 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
       this.widgets['Email'],
       this.widgets['PositionIcon'],
       this.widgets['Url'],
+      this.widgets['Share'],
     ];
     listW.removeWhere((element) => element == null);
     return Scaffold(
@@ -208,22 +229,9 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
           child: Column(
             children: [
               AppBar(
+                brightness: Brightness.light,
                 backgroundColor: Colors.transparent,
                 elevation: 0,
-                leading: this.leafInfo.url != null
-                    ? IconButton(
-                        icon: Icon(Icons.share),
-                        onPressed: () {
-                          setState(() {
-                            final RenderBox box = context.findRenderObject();
-                            Share.share(this.leafInfo.url,
-                                subject: this.title,
-                                sharePositionOrigin:
-                                    box.localToGlobal(Offset.zero) & box.size);
-                          });
-                        },
-                      )
-                    : Container(),
                 actions: <Widget>[
                   IconButton(
                     icon: this.icon,
@@ -284,7 +292,12 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
               ),
             ),
             child: ListTile(
-              title: title == null ? null : Text(title,style: TitleDetaileStyle,),
+              title: title == null
+                  ? null
+                  : Text(
+                      title,
+                      style: TitleDetaileStyle,
+                    ),
               subtitle: child,
             ),
           ),

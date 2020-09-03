@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'OfflineView.dart';
+
 class PromoView extends StatefulWidget {
   Controller _controller;
 
@@ -25,7 +27,10 @@ class _PromoViewState extends State<PromoView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Promo'),
+        title: Text(
+          'Promo',
+          style: ReverseTitleTextStyle,
+        ),
         backgroundColor: ThemePrimaryColor,
       ),
       body: SmartRefresher(
@@ -45,25 +50,29 @@ class _PromoViewState extends State<PromoView> {
           padding: const EdgeInsets.all(8),
           itemCount: this._controller.getPromos().length,
           itemBuilder: (context, index) {
-            return ListTile(
-                title: Text(this._controller.getPromos()[index].name),
-                subtitle: Text(this._controller.getPromos()[index].description),
-                leading: this._controller.getPromos()[index].image != null
-                    ? Image(
-                        image: NetworkImage(
-                            this._controller.getPromos()[index].image))
-                    : null,
-                onTap: () async {
-                  if (await canLaunch(
-                      this._controller.getPromos()[index].url)) {
-                    await launch(this._controller.getPromos()[index].url);
-                  } else {
-                    throw 'Could not launch ${this._controller.getPromos()[index].url}';
-                  }
-                });
+            return Container(
+                color: BackgroundColor2,
+                child: ListTile(
+                    title: Text(this._controller.getPromos()[index].name),
+                    subtitle:
+                        Text(this._controller.getPromos()[index].description),
+                    leading: this._controller.getPromos()[index].image != null
+                        ? Image(
+                            image: NetworkImage(
+                                this._controller.getPromos()[index].image))
+                        : null,
+                    onTap: () async {
+                      if (await canLaunch(
+                          this._controller.getPromos()[index].url)) {
+                        await launch(this._controller.getPromos()[index].url);
+                      } else {
+                        throw 'Could not launch ${this._controller.getPromos()[index].url}';
+                      }
+                    }));
           },
-          separatorBuilder: (BuildContext context, int index) =>
-              const Divider(),
+          separatorBuilder: (BuildContext context, int index) => SizedBox(
+            height: 10,
+          ),
         ),
       ),
     );

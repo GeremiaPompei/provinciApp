@@ -35,48 +35,48 @@ class _ExtraViewState extends State<ExtraView> {
           child: ListView(
         children: [
           Card(
+              color: BackgroundColor2,
               child: ListTile(
-            title: Text('Eventi'),
-            leading: Stack(alignment: Alignment.center, children: [
-              Image.asset('assets/empty.png'),
-              Icon(Icons.event_available)
-            ]),
-            onTap: () {
-              setState(() {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => FutureBuilder<dynamic>(
-                              future: this._eventsF,
-                              builder: (BuildContext context,
-                                  AsyncSnapshot<dynamic> snapshot) {
-                                Widget varWidget;
-                                if (snapshot.hasData)
-                                  varWidget = EventiView(this._controller);
-                                else if (snapshot.hasError)
-                                  varWidget = Scaffold(
-                                      appBar: AppBar(
-                                        title: Text(
-                                          'Eventi',
-                                          style: TitleTextStyle,
-                                        ),
-                                        backgroundColor: BackgroundColor,
-                                      ),
-                                      body: OfflineView());
-                                else
-                                  varWidget = LoadingView();
-                                return varWidget;
-                              },
-                            )));
-              });
-            },
-          )),
+                title: Text('Eventi'),
+                leading: Stack(alignment: Alignment.center, children: [
+                  Image.asset('assets/empty.png'),
+                  Icon(
+                    Icons.event_available,
+                    color: ThemeSecondaryColor,
+                  )
+                ]),
+                onTap: () {
+                  setState(() {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => FutureBuilder<dynamic>(
+                                  future: this._eventsF,
+                                  builder: (BuildContext context,
+                                      AsyncSnapshot<dynamic> snapshot) {
+                                    Widget varWidget;
+                                    if (snapshot.hasData)
+                                      varWidget = EventiView(this._controller);
+                                    else if (snapshot.hasError)
+                                      varWidget = OfflineView('Eventi');
+                                    else
+                                      varWidget = LoadingView();
+                                    return varWidget;
+                                  },
+                                )));
+                  });
+                },
+              )),
           Card(
+            color: BackgroundColor2,
             child: ListTile(
                 title: Text('Promo'),
                 leading: Stack(alignment: Alignment.center, children: [
                   Image.asset('assets/empty.png'),
-                  Icon(Icons.monetization_on)
+                  Icon(
+                    Icons.monetization_on,
+                    color: ThemeSecondaryColor,
+                  )
                 ]),
                 onTap: () {
                   setState(() {
@@ -91,15 +91,7 @@ class _ExtraViewState extends State<ExtraView> {
                                     if (snapshot.hasData)
                                       varWidget = PromoView(this._controller);
                                     else if (snapshot.hasError)
-                                      varWidget = Scaffold(
-                                          appBar: AppBar(
-                                            title: Text(
-                                              'Promo',
-                                              style: TitleTextStyle,
-                                            ),
-                                            backgroundColor: BackgroundColor,
-                                          ),
-                                          body: OfflineView());
+                                      varWidget = OfflineView('Promo');
                                     else
                                       varWidget = LoadingView();
                                     return varWidget;
