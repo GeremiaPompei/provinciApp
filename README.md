@@ -70,6 +70,31 @@ In seguito all'implementazione, abbiamo documento una guida all'utilizzo: [Intro
 In questa sezione illustreremo come utilizzare provinciApp, mostrandone le varie funzionalità.
 Per cominciare è bene fare una distinzione tra funzionamento online e funzionamento offline, in quanto alcune funzionalità dell'applicazione non possono essere eseguite senza una connessione ad internet. Nonostante questo, la sezione offline permette comunque di accedere ad informazioni salvate in precedenza.
 
+Se presente la connessione ad internet all'apertura dell'applicazione, ci ritroveremo automaticamente alla schermata online. Quest'ultima è organizzata in 4 sezioni le quali hanno in comune una toolbar in alto all'interno della quale è presente il nome della sezione singola e due ulteriori pulsanti:
+-------------------------------->pic schermate<--------------------------------------------
+Il primo pulsante è utile alla **geolocalizzazione**. Al primo utilizzo verrà richiesto di consentire all'applicazione di accedere alla posizione corrente:
+--->pic con richiesta geolocalizzazione
+Una volta consentito l'accesso per ogni altro utilizzo il consenso di utilizzo della posizione non sarà più richiesto. A questo punto l'applicazione sfruttando la posizione attuale dell'utente mostrerà i risultati relativi alle informazioni presenti nell'area trovata.
+------>pic zona<-----
+Il secondo pulsante  ci permette di accedere alla schermata **offline**.  (La sezione è spiegata nello specifico qui)
+------>pic pulsante offline<-------------
+Se non è presente connessione ad internet sarà la stessa applicazione a forzare l'utilizzo della modalità offline: effettuata una qualsiasi ricerca in assenza di rete comparirà la seguente schermata:
+--------------> pic schermata offline <----------
+Cliccando sul pulsante 'Offline' si accederà alla schermata offline (qui). 
+
+
+
+#### Struttura Online: 
+- Esplora
+- Comuni
+- Categorie
+- Extra
+
+#### Struttura Offline:
+- lista di elementi scaricati
+
+
+
 [Torna alla Home](https://github.com/GeremiaPompei/mc/blob/master/README.md#provinciappmc)
 
 
@@ -134,7 +159,18 @@ Una volta condiviso l'evento, l'interazione sarà possibile attraverso un click 
 .... da completare ...
 
 [Torna ad Obiettivi](https://github.com/GeremiaPompei/mc/blob/master/README.md#obiettivi-del-concorso)
-[prova](https://github.com/GeremiaPompei/mc/commit/8ed511bc328dbb89b816e17f95ba914e1adbd117#diff-0627b8b5553e696bf9f72d1ca085d57a)
+<img src ="https://github.com/GeremiaPompei/mc/commit/8ed511bc328dbb89b816e17f95ba914e1adbd117#diff-0627b8b5553e696bf9f72d1ca085d57a" alt="pic casuale" width="600px" height="420px">
+
+## Eventi
+
+## Comuni
+
+## Categorie
+
+## Extra
+
+## Lista di elementi scaricati
+
 
 
 
