@@ -45,24 +45,26 @@ class _CardsSizedBoxState extends State<CardsSizedBox> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          Image.asset(
-                            'assets/empty.png',
-                            scale: 12,
-                          ),
-                          this._list[i].value.image == null
-                              ? Image.asset('assets/empty.png')
-                              : Icon(IconData((this._list[i].value.image),
-                                  fontFamily: 'MaterialIcons')),
-                        ],
+                      Container(
+                        height: 65,
+                        child: Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            Image.asset(
+                              'assets/empty.png',
+                            ),
+                            this._list[i].value.image == null
+                                ? Image.asset('assets/empty.png')
+                                : Icon(IconData((this._list[i].value.image),
+                                    fontFamily: 'MaterialIcons')),
+                          ],
+                        ),
                       ),
                       Center(
                         child: Text(
                           this._list[i].value.name,
                           style: TitleTextStyle_20,
-                          maxLines: 30,
+                          maxLines: 3,
                         ),
                       ),
                     ],

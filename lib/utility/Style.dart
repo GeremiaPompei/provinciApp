@@ -8,8 +8,8 @@ const TitleTextStyle = TextStyle(
 );
 const TitleTextStyle_20 = TextStyle(
   fontFamily: 'Poppins',
-  fontSize: 20,
-  color: ThemePrimaryColor,
+  fontSize: 17,
+  color: Colors.black,
 );
 const ReverseTitleTextStyle = TextStyle(
   fontFamily: 'Poppins',
@@ -24,7 +24,7 @@ const TitleDetaileStyle = TextStyle(
 );
 
 const ThemePrimaryColor = Color.fromARGB(255, 72, 179, 179);
-const ThemeSecondaryColor = Color.fromARGB(255, 228, 161, 58);
+const ThemeSecondaryColor = Colors.white;
 const BackgroundColor = Color.fromARGB(255, 237, 249, 249);
 
 const IconSearch = 0xe8b6;

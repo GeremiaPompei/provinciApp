@@ -44,6 +44,7 @@ class _EsploraViewState extends State<EsploraView> {
           shrinkWrap: true,
           icon: Icon(Icons.search),
           minimumChars: 1,
+
           placeHolder: SingleChildScrollView(
             child: Column(
               children: [

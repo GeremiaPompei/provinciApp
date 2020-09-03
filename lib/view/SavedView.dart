@@ -26,6 +26,7 @@ class _SavedWidgetState extends State<SavedWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: BackgroundColor,
       appBar: AppBar(
         title: Text(
           'Offline',
@@ -52,7 +53,7 @@ class _SavedWidgetState extends State<SavedWidget> {
             _refreshController.refreshCompleted();
           });
         }),
-        child: ListView.separated(
+        child: ListView.builder(
           scrollDirection: Axis.vertical,
           shrinkWrap: true,
           padding: const EdgeInsets.all(8),
@@ -124,8 +125,6 @@ class _SavedWidgetState extends State<SavedWidget> {
                                   )));
                     }));
           },
-          separatorBuilder: (BuildContext context, int index) =>
-              const Divider(),
         ),
       ),
     );

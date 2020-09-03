@@ -26,6 +26,7 @@ class _LeafsInfoViewState extends State<LeafsInfoView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: BackgroundColor,
       appBar: AppBar(
         backgroundColor: ThemePrimaryColor,
         title: Text(_title),
@@ -67,7 +68,7 @@ class _ButtonInfoState extends State<ButtonInfo> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: ListView.separated(
+      child: ListView.builder(
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
         padding: const EdgeInsets.all(8),
@@ -124,7 +125,6 @@ class _ButtonInfoState extends State<ButtonInfo> {
                     });
                   }));
         },
-        separatorBuilder: (BuildContext context, int index) => const Divider(),
       ),
     );
   }

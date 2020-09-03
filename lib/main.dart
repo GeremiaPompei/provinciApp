@@ -1,10 +1,10 @@
 import 'package:MC/view/HomeView.dart';
 import 'package:MC/view/SavedView.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'controller/Controller.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   Controller controller = Controller();
   return runApp(MaterialApp(
       debugShowCheckedModeBanner: false,

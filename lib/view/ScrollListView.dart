@@ -71,6 +71,7 @@ class _ScrollListViewState extends State<ScrollListView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: BackgroundColor,
       appBar: AppBar(
         title: Text(this._title),
         backgroundColor: ThemePrimaryColor,
