@@ -9,17 +9,18 @@ class DeserializeCache {
     Cache cache = Cache();
     cache.lastSearch = jsonMap['Last Search'];
     cache.lastLeafs = jsonMap['Last Leafs'];
-    cache.search = deserializeMapInfo(jsonMap['Search']);
-    cache.leafs = deserializeMapInfo(jsonMap['Leafs']);
+    cache.search = _deserializeMapInfo(jsonMap['Search']);
+    cache.leafs = _deserializeMapInfo(jsonMap['Leafs']);
     return cache;
   }
 
-  static Map<String, UnitCache<List<T>>> deserializeMapInfo<T>(List listIn) {
+  static Map<String, UnitCache<List<T>>> _deserializeMapInfo<T>(List listIn) {
     Map<String, UnitCache<List<T>>> mapRes = {};
     listIn.forEach((element) {
       mapRes[element['Key']] = UnitCache([],
           DateTime.parse(element['Unit Cache']['Date']),
-          element['Unit Cache']['Name'],element['Unit Cache']['Image']);
+          element['Unit Cache']['Name'],
+          element['Unit Cache']['Icon']);
     });
     return mapRes;
   }

@@ -35,7 +35,7 @@ class HtmlParser {
         .putIfAbsent('src', () => null)
         .trim();
     return HttpRequest.getNodeInfo(
-        MCEVENTI, null, 'articolo_lista', fName, fDescription, fUrl, fImage);
+        MCEVENTI, 'articolo_lista', fName, fDescription, fUrl, fImage);
   }
 
   static Future<List<NodeInfo>> promos() async {
@@ -56,7 +56,7 @@ class HtmlParser {
         .putIfAbsent('src', () => null)
         .trim();
     return HttpRequest.getNodeInfo(
-        MCPROMO, null, 'deal-card', fName, fDescription, fUrl, fImage);
+        MCPROMO, 'deal-card', fName, fDescription, fUrl, fImage);
   }
 
   static Future<List<NodeInfo>> searchByWord(String word) async {
@@ -77,13 +77,12 @@ class HtmlParser {
             .putIfAbsent('href', () => null)
             .trim()));
     Function fImage = (html.Element el) => '';
-    if(word.contains('?'))
-      word+='&';
+    if (word.contains('?'))
+      word += '&';
     else
-      word+='?';
+      word += '?';
     return await _scrollPage((page) => HttpRequest.getNodeInfo(
-        MCDATI+word+page,
-        'dataset-list unstyled',
+        MCDATI + word + page,
         'dataset-item',
         fName,
         fDescription,
@@ -125,7 +124,6 @@ class HtmlParser {
         .trim();
     return await _scrollPage((page) => HttpRequest.getNodeInfo(
         MCDATI + 'organization?$page',
-        'media-grid',
         'media-item',
         fName,
         fDescription,
@@ -152,7 +150,6 @@ class HtmlParser {
         .trim();
     return await _scrollPage((page) => HttpRequest.getNodeInfo(
         MCDATI + 'group?$page',
-        'media-grid',
         'media-item',
         fName,
         fDescription,

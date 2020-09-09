@@ -9,12 +9,6 @@ class NodeInfo {
       this._image = null;
   }
 
-  @override
-  String toString() {
-    if (_description == null) return _name;
-    return _name + ': ' + _description;
-  }
-
   String get image => _image;
 
   String get url => _url;

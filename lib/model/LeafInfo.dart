@@ -10,71 +10,103 @@ class LeafInfo {
   String _email;
   List<double> _position;
   Map<String, String> _info;
+
   Map<String, dynamic> _json;
   String _sourceUrl;
   int _sourceIndex;
 
   LeafInfo(
       Map<String, dynamic> parsedJson, this._sourceUrl, this._sourceIndex) {
-    this._json = {};
-    parsedJson.forEach((key, value) {
-      if (check(value)) this._json[key] = value.toString();
-    });
-    this._description = checkRemove(parsedJson, 'Descrizione');
-    this._url = checkRemove(parsedJson, 'Url');
-    this._image = checkRemove(parsedJson, 'Immagine');
-    if (check(this._image) && !this._image.startsWith('http'))
-      this._image = null;
-    String cells = checkRemove(parsedJson, 'Telefono');
-    if(cells != null){
-      if(cells.contains(';'))
-        this._telefono = cells.split(';');
-      else if(cells.contains('-'))
-        this._telefono = cells.split('-');
-      else
-        this._telefono = [cells];
-    }
-    this._email = checkRemove(parsedJson, 'E-mail');
-    if (check(parsedJson['Latitudine']) && check(parsedJson['Longitudine']))
-      this._position = [
-        double.parse(checkRemove(parsedJson, 'Latitudine')),
-        double.parse(checkRemove(parsedJson, 'Longitudine'))
-      ];
-    this._name = checkRemove(parsedJson, 'Nome');
-    this._name == null ? this._name = checkRemove(parsedJson, 'Titolo') : null;
-    this._name == null
-        ? this._name = checkRemove(parsedJson, 'Tipologia')
-        : null;
-    this._name == null
-        ? this._name = checkRemove(parsedJson, 'Argomento')
-        : null;
-    this._name == null ? this._name = checkRemove(parsedJson, 'Comune') : null;
-    this._info = {};
-    parsedJson.forEach((key, value) {
-      if (check(value)) this._info[key] = value.toString();
-    });
-    if (this._name == null) {
-      this._name = this._info.values.first;
-      this._info.remove(this._info.keys.first);
-    }
+    this._json = _initMap(parsedJson);
+    this._description = _initDescription(parsedJson);
+    this._url = _checkRemove(parsedJson, 'Url');
+    this._image = _initImage(parsedJson);
+    this._telefono = _initPhone(parsedJson);
+    this._email = _checkRemove(parsedJson, 'E-mail');
+    this._position = _initPosition(parsedJson);
+    this._name = _initName(parsedJson);
+    this._info = _initMap(parsedJson);
   }
 
-  String checkRemove(Map<String, dynamic> parsedJson, String s) {
+  String _initImage(Map<String, dynamic> parsedJson) {
+    String res = _checkRemove(parsedJson, 'Immagine');
+    if (_check(res) && !res.startsWith('http')) res = null;
+    return res;
+  }
+
+  List<String> _initPhone(Map<String, dynamic> parsedJson) {
+    List<String> chars = [';', '-'];
+    String cells = _checkRemove(parsedJson, 'Telefono');
+    if (cells != null) {
+      List<String> phones = [];
+      for (int i = 0; i < chars.length; i++)
+        if (cells.contains(chars[i])) phones = cells.split(chars[i]);
+      if (phones.isEmpty) phones = [cells];
+      return phones;
+    }
+    return null;
+  }
+
+  List<double> _initPosition(Map<String, dynamic> parsedJson) {
+    if (_check(parsedJson['Latitudine']) && _check(parsedJson['Longitudine']))
+      return [
+        double.parse(_checkRemove(parsedJson, 'Latitudine')),
+        double.parse(_checkRemove(parsedJson, 'Longitudine'))
+      ];
+    return null;
+  }
+
+  Map<String, String> _initMap(Map<String, dynamic> parsedJson) {
+    Map<String, String> res = {};
+    parsedJson.forEach((key, value) {
+      if (_check(value)) res[key] = value.toString();
+    });
+    return res;
+  }
+
+  String _initDescription(Map<String, dynamic> parsedJson) {
+    List<String> params = ['Descrizione', 'Oggetto'];
+    return _findParam(parsedJson, params);
+  }
+
+  String _initName(Map<String, dynamic> parsedJson) {
+    String res;
+    List<String> params = [
+      'Nome',
+      'Titolo',
+      'Tipologia',
+      'Argomento',
+      'Comune'
+    ];
+    res = _findParam(parsedJson, params);
+    if (res == null) {
+      res = parsedJson.values.first;
+      parsedJson.remove(this._info.keys.first);
+    }
+    return res;
+  }
+
+  String _findParam(Map<String, dynamic> parsedJson, List<String> params) {
+    for (String param in params) {
+      String tmp = _checkRemove(parsedJson, param);
+      if (tmp != null) {
+        return tmp;
+      }
+    }
+    return null;
+  }
+
+  String _checkRemove(Map<String, dynamic> parsedJson, String s) {
     String rtn;
-    if (check(parsedJson[s])) {
+    if (_check(parsedJson[s])) {
       if (parsedJson[s].toString() != 'false')
         rtn = parsedJson[s].toString().replaceAll('\\', '');
       parsedJson.remove(s);
-    } else
-      rtn = null;
+    }
     return rtn;
   }
 
-  bool check(dynamic s) => (s != null && s.toString() != '');
-
-  set imageFile(File value) {
-    _imageFile = value;
-  }
+  bool _check(dynamic s) => (s != null && s.toString() != '');
 
   @override
   bool operator ==(Object other) =>
@@ -83,6 +115,10 @@ class LeafInfo {
           runtimeType == other.runtimeType &&
           _sourceUrl == other._sourceUrl &&
           _sourceIndex == other._sourceIndex;
+
+  set imageFile(File value) {
+    _imageFile = value;
+  }
 
   @override
   int get hashCode => _sourceUrl.hashCode ^ _sourceIndex.hashCode;

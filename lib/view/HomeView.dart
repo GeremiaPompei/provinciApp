@@ -10,8 +10,6 @@ import 'package:MC/view/LoadingView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-
-import 'SavedView.dart';
 import 'ScrollListView.dart';
 
 class HomeView extends StatefulWidget {

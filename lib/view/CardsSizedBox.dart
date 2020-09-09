@@ -54,10 +54,10 @@ class _CardsSizedBoxState extends State<CardsSizedBox> {
                             Image.asset(
                               'assets/empty.png',
                             ),
-                            this._list[i].value.image == null
+                            this._list[i].value.icon == null
                                 ? Image.asset('assets/empty.png')
                                 : Icon(
-                                    IconData((this._list[i].value.image),
+                                    IconData((this._list[i].value.icon),
                                         fontFamily: 'MaterialIcons'),
                                     color: ThemeSecondaryColor,
                                   ),
@@ -82,7 +82,7 @@ class _CardsSizedBoxState extends State<CardsSizedBox> {
                                     future: _func(
                                         this._list[i].value.name,
                                         this._list[i].key,
-                                        this._list[i].value.image),
+                                        this._list[i].value.icon),
                                     builder: (BuildContext context,
                                         AsyncSnapshot<dynamic> snapshot) {
                                       Widget tmpWidget;

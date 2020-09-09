@@ -3,17 +3,15 @@ class UnitCache <T> {
   T _element;
   DateTime _date;
   String _name;
-  int _image;
+  int _icon;
 
-  UnitCache(this._element, this._date, this._name,this._image);
-
-  int get image => _image;
-
-  set image(int value) {
-    _image = value;
-  }
+  UnitCache(this._element, this._date, this._name,this._icon);
 
   void updateDate() => this._date = DateTime.now();
+
+  set icon(int value) {
+    _icon = value;
+  }
 
   set name(String value) {
     _name = value;
@@ -28,4 +26,6 @@ class UnitCache <T> {
   DateTime get date => _date;
 
   T get element => _element;
+
+  int get icon => _icon;
 }

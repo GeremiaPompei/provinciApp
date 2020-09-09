@@ -9,8 +9,6 @@ import 'package:MC/view/ScrollListView.dart';
 import 'package:flappy_search_bar/flappy_search_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import 'OfflineView.dart';
 
@@ -44,13 +42,14 @@ class _EsploraViewState extends State<EsploraView> {
           shrinkWrap: true,
           icon: Icon(Icons.search),
           minimumChars: 1,
-
           placeHolder: SingleChildScrollView(
             child: Column(
               children: [
                 CardsSizedBox(this.searched, this.controller.setSearch,
                     (name) => ScrollListView(this.controller, name)),
-                SizedBox(height: 20,),
+                SizedBox(
+                  height: 20,
+                ),
                 CardsSizedBox(
                     this.leafs,
                     this.controller.setLeafInfo,

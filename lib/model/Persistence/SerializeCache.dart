@@ -10,12 +10,12 @@ class SerializeCache {
     Map<String, dynamic> jsonMap = {};
     jsonMap['Last Search'] = cache.lastSearch;
     jsonMap['Last Leafs'] = cache.lastLeafs;
-    jsonMap['Search'] = serializeMapInfo(cache.search);
-    jsonMap['Leafs'] = serializeMapInfo(cache.leafs);
+    jsonMap['Search'] = _serializeMapInfo(cache.search);
+    jsonMap['Leafs'] = _serializeMapInfo(cache.leafs);
     return json.encode(jsonMap);
   }
 
-  static List<Map> serializeMapInfo <T> (
+  static List<Map> _serializeMapInfo <T> (
       Map<String, UnitCache<List<T>>> mapIn) {
     List<Map> listRes = [];
     mapIn.keys.forEach((element) {
@@ -25,7 +25,7 @@ class SerializeCache {
           'Date':
           DateFormat('yyy-MM-dd HH:mm:ss').format(mapIn[element].date),
           'Name': mapIn[element].name,
-          'Image': mapIn[element].image
+          'Icon': mapIn[element].icon
         }
       };
       listRes.add(mapTmp);

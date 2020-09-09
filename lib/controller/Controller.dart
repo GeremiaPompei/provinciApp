@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 import 'package:MC/model/Persistence/DeserializeCache.dart';
 import 'package:MC/model/Persistence/DeserializeOffline.dart';
@@ -36,19 +35,19 @@ class Controller {
     if (this._cache.lastLeafs == null) {
       await tryConnection();
       try {
-        await loadSavedLastInfo();
+        await _loadCache();
       } catch (e) {
         try {
-          await loadStaticLastInfo(4, 4);
+          await _loadStaticLastInfo(4, 4);
         } catch (e) {}
       }
-      storeCache();
-      storeOffline();
+      _storeCache();
+      _storeOffline();
     }
     return this._cache.lastLeafs;
   }
 
-  Future<dynamic> loadStaticLastInfo(int countNodes, int countLeafs) async {
+  Future<dynamic> _loadStaticLastInfo(int countNodes, int countLeafs) async {
     await initOrganizations();
     if (countNodes > this.getOrganizations().length)
       countNodes = this.getOrganizations().length;
@@ -73,28 +72,6 @@ class Controller {
     return this._cache.lastLeafs;
   }
 
-  Future<dynamic> loadSavedLastInfo() async {
-    Cache tmpCache =
-        DeserializeCache.deserialize(await StoreManager.load(FNCACHE));
-    await loadLastInfoFrom(tmpCache);
-    return this._cache.lastLeafs;
-  }
-
-  Future<dynamic> loadLastInfoFrom(Cache tmpCache) async {
-    this._cache.search = tmpCache.search;
-    for(MapEntry<String,dynamic> entry in this._cache.search.entries){
-      entry.value.element = await HtmlParser.searchByWord(entry.key);
-    }
-    this._cache.lastSearch = tmpCache.lastSearch;
-    this._cache.leafs = tmpCache.leafs;
-    for(MapEntry<String,dynamic> entry in this._cache.leafs.entries){
-      List<LeafInfo> leafs = await HtmlParser.leafsByWord(entry.key);
-      entry.value.element = leafs;
-    }
-    this._cache.lastLeafs = tmpCache.lastLeafs;
-    return tmpCache.lastLeafs;
-  }
-
   Future<dynamic> initCategories() async {
     if (this.getCategories().isEmpty)
       this._cache.initCategories(await HtmlParser.categories());
@@ -117,7 +94,7 @@ class Controller {
         el = list[el.sourceIndex];
       }
     } catch (e) {}
-    loadOffline();
+    _loadOffline();
     return getOffline();
   }
 
@@ -132,49 +109,43 @@ class Controller {
   }
 
   Future<dynamic> setSearch(String name, String url, int image) async {
-    await tryConnection();
-    try {
-      UnitCache<List<NodeInfo>> cacheUnit = this._cache.getSearchByUrl(url);
-      if (cacheUnit == null) {
-        List<NodeInfo> nodes = await HtmlParser.searchByWord(url);
-        String oldUrl = oldestUrl(
-            this._cache.search.keys, (el) => this._cache.getSearchByUrl(el));
-        cacheUnit = this._cache.search[oldUrl];
-        cacheUnit.name = name;
-        cacheUnit.element = nodes;
-        cacheUnit.image = image;
-        this._cache.changeSearch(oldUrl, url, cacheUnit);
-        cacheUnit.updateDate();
-        storeCache();
-      } else
-        cacheUnit.updateDate();
-      this._cache.lastSearch = url;
-    } catch (e) {
-      print(e.toString());
-    }
+    UnitCache<List<NodeInfo>> cacheUnit = this._cache.getSearchByUrl(url);
+    if (cacheUnit == null) {
+      List<NodeInfo> nodes = await HtmlParser.searchByWord(url);
+      String oldUrl = _oldestUrl(
+          this._cache.search.keys, (el) => this._cache.getSearchByUrl(el));
+      cacheUnit = this._cache.search[oldUrl];
+      cacheUnit.name = name;
+      cacheUnit.element = nodes;
+      cacheUnit.icon = image;
+      this._cache.changeSearch(oldUrl, url, cacheUnit);
+      cacheUnit.updateDate();
+      _storeCache();
+    } else
+      cacheUnit.updateDate();
+    this._cache.lastSearch = url;
     return getSearch();
   }
 
   Future<List<dynamic>> setLeafInfo(String name, String url, int image) async {
-    await tryConnection();
     UnitCache<List<LeafInfo>> cacheUnit = this._cache.getLeafsByUrl(url);
     if (cacheUnit == null) {
       List<LeafInfo> leafs = await HtmlParser.leafsByWord(url);
-      String oldUrl = oldestUrl(
+      String oldUrl = _oldestUrl(
           this._cache.leafs.keys, (el) => this._cache.getLeafsByUrl(el));
       cacheUnit = this._cache.leafs[oldUrl];
       cacheUnit.name = name;
-      cacheUnit.image = image;
+      cacheUnit.icon = image;
       cacheUnit.element = leafs;
       this._cache.changeLeafs(oldUrl, url, cacheUnit);
     }
     cacheUnit.updateDate();
-    storeCache();
+    _storeCache();
     this._cache.lastLeafs = url;
     return getLeafs();
   }
 
-  String oldestUrl(Iterable<String> list, UnitCache Function(String) func) {
+  String _oldestUrl(Iterable<String> list, UnitCache Function(String) func) {
     String oldUrl;
     DateTime tmpDate;
     list.forEach((el) => {
@@ -195,7 +166,7 @@ class Controller {
       StoreManager.storeBytes(
           await HttpRequest.getImage(leafInfo.image), leafInfo.imageFile.path);
     }
-    storeOffline();
+    _storeOffline();
     return this.getOffline();
   }
 
@@ -205,7 +176,7 @@ class Controller {
           .then((value) => value.delete());
     }
     this._cache.removeOffline(leafInfo);
-    storeOffline();
+    _storeOffline();
     return this.getOffline();
   }
 
@@ -241,22 +212,39 @@ class Controller {
 
   List<LeafInfo> getOffline() => this._cache.offline;
 
-  Future loadCache() async {
-    this._cache =
-        DeserializeCache.deserialize(await StoreManager.load(FNCACHE));
+  Future<dynamic> _loadCache() async {
+    Cache tmpCache =
+    DeserializeCache.deserialize(await StoreManager.load(FNCACHE));
+    await _loadLastInfoFrom(tmpCache);
+    return this._cache.lastLeafs;
   }
 
-  Future storeCache() async {
+  Future<dynamic> _loadLastInfoFrom(Cache tmpCache) async {
+    this._cache.search = tmpCache.search;
+    for (MapEntry<String, dynamic> entry in this._cache.search.entries) {
+      entry.value.element = await HtmlParser.searchByWord(entry.key);
+    }
+    this._cache.lastSearch = tmpCache.lastSearch;
+    this._cache.leafs = tmpCache.leafs;
+    for (MapEntry<String, dynamic> entry in this._cache.leafs.entries) {
+      List<LeafInfo> leafs = await HtmlParser.leafsByWord(entry.key);
+      entry.value.element = leafs;
+    }
+    this._cache.lastLeafs = tmpCache.lastLeafs;
+    return tmpCache.lastLeafs;
+  }
+
+  Future _storeCache() async {
     return await StoreManager.store(
         SerializeCache.serialize(this._cache), FNCACHE);
   }
 
-  Future loadOffline() async {
+  Future _loadOffline() async {
     this._cache.offline =
         DeserializeOffline.deserialize(await StoreManager.load(FNOFFLINE));
   }
 
-  Future storeOffline() async {
+  Future _storeOffline() async {
     return await StoreManager.store(
         SerializeOffline.serialize(this._cache.offline), FNOFFLINE);
   }
