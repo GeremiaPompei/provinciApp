@@ -1,12 +1,8 @@
-import 'package:MC/controller/Controller.dart';
 import 'package:MC/model/UnitCache.dart';
 import 'package:MC/utility/Style.dart';
-import 'package:MC/view/SavedView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:flutter_map/flutter_map.dart';
-
 import 'LoadingView.dart';
 import 'OfflineView.dart';
 

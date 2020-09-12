@@ -1,12 +1,11 @@
 import 'package:MC/controller/Controller.dart';
+import 'package:MC/model/NodeInfo.dart';
 import 'package:MC/utility/Style.dart';
 import 'package:MC/view/LeafsInfoView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'LoadingView.dart';
 import 'OfflineView.dart';
-import 'SavedView.dart';
 
 class ScrollListView extends StatefulWidget {
   Controller _controller;
@@ -22,15 +21,10 @@ class ScrollListView extends StatefulWidget {
 class _ScrollListViewState extends State<ScrollListView> {
   Controller _controller;
   String _title;
-  Widget _varWidget;
+  List<NodeInfo> _nodes;
 
-  _ScrollListViewState(this._controller, this._title);
-
-  int length() {
-    if (_controller.getSearch() != null)
-      return _controller.getSearch().length;
-    else
-      return 0;
+  _ScrollListViewState(this._controller, this._title) {
+    this._nodes = this._controller.getSearch();
   }
 
   void setLeafs(int index) {
@@ -39,23 +33,19 @@ class _ScrollListViewState extends State<ScrollListView> {
           context,
           MaterialPageRoute(
               builder: (context) => FutureBuilder<dynamic>(
-                    future: _controller.setLeafInfo(
-                        _controller.getSearch()[index].name,
-                        _controller.getSearch()[index].url,
-                        findImage(_controller.getSearch()[index].name)),
+                    future: _controller.setLeafInfo(_nodes[index].name,
+                        _nodes[index].url, findImage(_nodes[index].name)),
                     builder: (BuildContext context,
                         AsyncSnapshot<dynamic> snapshot) {
+                      Widget tmpWidget;
                       if (snapshot.hasData)
-                        _varWidget = LeafsInfoView(
-                            this._controller.getLeafs(),
-                            this._controller.getSearch()[index].name,
-                            this._controller);
+                        tmpWidget = LeafsInfoView(
+                            this._controller, this._nodes[index].name);
                       else if (snapshot.hasError)
-                        _varWidget = OfflineView(
-                            this._controller.getSearch()[index].name);
+                        tmpWidget = OfflineView(this._nodes[index].name);
                       else
-                        _varWidget = LoadingView();
-                      return _varWidget;
+                        tmpWidget = LoadingView();
+                      return tmpWidget;
                     },
                   )));
     });
@@ -87,19 +77,15 @@ class _ScrollListViewState extends State<ScrollListView> {
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
               padding: const EdgeInsets.all(8),
-              itemCount: length(),
+              itemCount: this._nodes.length,
               itemBuilder: (context, index) {
                 return ListTile(
-                  title:
-                      Text('${_controller.getSearch()[index].name.toString()}'),
-                  subtitle: Text(
-                      '${_controller.getSearch()[index].description.toString()}'),
+                  title: Text(this._nodes[index].name),
+                  subtitle: Text(this._nodes[index].description.toString()),
                   leading: Stack(alignment: Alignment.center, children: [
                     Image.asset('assets/empty.png'),
                     Icon(
-                      IconData(
-                          findImage(
-                              _controller.getSearch()[index].name.toString()),
+                      IconData(findImage(this._nodes[index].name),
                           fontFamily: 'MaterialIcons'),
                       color: ThemeSecondaryColor,
                     )

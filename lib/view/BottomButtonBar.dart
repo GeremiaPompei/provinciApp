@@ -20,12 +20,6 @@ class _BottomButtonDownState extends State<BottomButtonDown> {
 
   _BottomButtonDownState(this._func, this._index);
 
-  void onItemTapped(index) {
-    setState(() {
-      _func(index);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return CurvedNavigationBar(
@@ -53,7 +47,7 @@ class _BottomButtonDownState extends State<BottomButtonDown> {
       ],
       animationDuration: Duration(milliseconds: 300),
       animationCurve: Curves.easeInOutCirc,
-      onTap: onItemTapped,
+      onTap: _func,
     );
   }
 }

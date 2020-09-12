@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'EmptyView.dart';
+import 'LeafsInfoView.dart';
 import 'LoadingView.dart';
 import 'OfflineView.dart';
 import 'SavedView.dart';
@@ -23,11 +25,32 @@ class OrganizationsView extends StatefulWidget {
 
 class _OrganizationsViewState extends State<OrganizationsView> {
   Controller _controller;
-  Widget varWidget;
+  List<NodeInfo> _nodes;
   RefreshController _refreshController =
       RefreshController(initialRefresh: false);
 
-  _OrganizationsViewState(this._controller);
+  _OrganizationsViewState(this._controller) {
+    this._nodes = this._controller.getOrganizations();
+  }
+
+  Widget _getImage(int index) => FutureBuilder<dynamic>(
+        future: this._controller.tryConnection(),
+        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+          Widget tmpWidget;
+          if (snapshot.hasError || this._nodes[index].image == null)
+            tmpWidget = Container(
+              child: Icon(
+                Icons.not_interested,
+                color: ThemeSecondaryColor,
+              ),
+            );
+          else if (snapshot.hasData)
+            tmpWidget = Image(image: NetworkImage(this._nodes[index].image));
+          else
+            tmpWidget = CircularProgressIndicator();
+          return tmpWidget;
+        },
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -36,10 +59,7 @@ class _OrganizationsViewState extends State<OrganizationsView> {
         header: ClassicHeader(),
         controller: _refreshController,
         onRefresh: () => setState(() {
-              this
-                  ._controller
-                  .getOrganizations()
-                  .removeWhere((element) => true);
+              this._nodes.removeWhere((element) => true);
               this._controller.initOrganizations().then((value) {
                 (context as Element).reassemble();
                 _refreshController.refreshCompleted();
@@ -52,36 +72,18 @@ class _OrganizationsViewState extends State<OrganizationsView> {
           padding: const EdgeInsets.all(8),
           crossAxisCount: 2,
           children: List.generate(
-              this._controller.getOrganizations().length,
-              (i) => Card(
+              this._nodes.length,
+              (index) => Card(
                     color: BackgroundColor2,
                     child: FlatButton(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          Container(
-                            height: 65,
-                            child:
-                                this._controller.getOrganizations()[i].image !=
-                                        null
-                                    ? Image(
-                                        image: NetworkImage(this
-                                            ._controller
-                                            .getOrganizations()[i]
-                                            .image),
-                                      )
-                                    : Container(
-                                        color: ThemePrimaryColor,
-                                        child: Icon(
-                                          Icons.not_interested,
-                                          color: ThemeSecondaryColor,
-                                        ),
-                                      ),
-                          ),
+                          Container(height: 65, child: _getImage(index)),
                           Center(
                             child: Text(
-                              this._controller.getOrganizations()[i].name,
+                              this._nodes[index].name,
                               style: TitleTextStyle_20,
                               maxLines: 3,
                             ),
@@ -95,30 +97,25 @@ class _OrganizationsViewState extends State<OrganizationsView> {
                               MaterialPageRoute(
                                   builder: (context) => FutureBuilder<dynamic>(
                                         future: this._controller.setSearch(
-                                            this
-                                                ._controller
-                                                .getOrganizations()[i]
-                                                .name,
-                                            this
-                                                ._controller
-                                                .getOrganizations()[i]
-                                                .url,
+                                            this._nodes[index].name,
+                                            this._nodes[index].url,
                                             IconComune),
                                         builder: (BuildContext context,
                                             AsyncSnapshot<dynamic> snapshot) {
                                           Widget tmpWidget;
-                                          if (snapshot.hasData)
+                                          if (snapshot.hasData) if (snapshot
+                                              .data.isNotEmpty)
                                             tmpWidget = ScrollListView(
                                                 this._controller,
-                                                this
-                                                    ._controller
-                                                    .getOrganizations()[i]
-                                                    .name);
+                                                this._nodes[index].name);
+                                          else
+                                            tmpWidget = Scaffold(
+                                              body: EmptyView(
+                                                  this._nodes[index].name),
+                                            );
                                           else if (snapshot.hasError) {
-                                            tmpWidget = OfflineView(this
-                                                ._controller
-                                                .getOrganizations()[i]
-                                                .name);
+                                            tmpWidget = OfflineView(
+                                                this._nodes[index].name);
                                           } else
                                             tmpWidget = LoadingView();
                                           return tmpWidget;

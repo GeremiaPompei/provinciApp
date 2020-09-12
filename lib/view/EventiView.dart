@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'OfflineView.dart';
-
 class EventiView extends StatefulWidget {
   Controller _controller;
 

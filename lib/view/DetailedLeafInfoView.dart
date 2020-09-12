@@ -13,36 +13,36 @@ import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DetailedLeafInfoView extends StatefulWidget {
-  LeafInfo leafInfo;
-  String title;
-  Controller controller;
-  Image image;
+  LeafInfo _leafInfo;
+  String _title;
+  Controller _controller;
+  Image _image;
 
-  DetailedLeafInfoView(this.title, this.leafInfo, this.controller, this.image);
+  DetailedLeafInfoView(this._title, this._leafInfo, this._controller, this._image);
 
   @override
   _DetailedLeafInfoViewState createState() => _DetailedLeafInfoViewState(
-      this.title, this.leafInfo, this.controller, this.image);
+      this._title, this._leafInfo, this._controller, this._image);
 }
 
 class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
-  LeafInfo leafInfo;
-  String title;
-  Map<String, Widget> widgets;
+  LeafInfo _leafInfo;
+  String _title;
+  Map<String, Widget> _widgets;
   Controller _controller;
-  Icon icon;
-  Image image;
+  Icon _icon;
+  Image _image;
 
   _DetailedLeafInfoViewState(
-      this.title, this.leafInfo, this._controller, this.image) {
-    this._controller.getOffline().contains(this.leafInfo)
-        ? this.icon = Icon(Icons.remove_circle_outline)
-        : this.icon = Icon(Icons.add_circle_outline);
+      this._title, this._leafInfo, this._controller, this._image) {
+    this._controller.getOffline().contains(this._leafInfo)
+        ? this._icon = Icon(Icons.remove_circle_outline)
+        : this._icon = Icon(Icons.add_circle_outline);
     initWidgets();
   }
 
-  void initWidgets() => this.widgets = {
-        'Image': this.image == null
+  void initWidgets() => this._widgets = {
+        'Image': this._image == null
             ? Container()
             : Container(
                 width: 150.0,
@@ -51,7 +51,7 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
                     shape: BoxShape.circle,
                     image: new DecorationImage(
                       fit: BoxFit.fill,
-                      image: this.image.image,
+                      image: this._image.image,
                     ))),
         'Name': Container(
           padding: EdgeInsets.all(20.0),
@@ -64,35 +64,35 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
                 bottomRight: Radius.circular(20.0),
               )),
           child: Text(
-            this.leafInfo.name,
+            this._leafInfo.name,
             style: TitleDetaileStyle,
           ),
         ),
-        'Description': this.leafInfo.description == null
+        'Description': this._leafInfo.description == null
             ? null
-            : Text(this.leafInfo.description),
-        'Phone': this.leafInfo.telefono == null
+            : Text(this._leafInfo.description),
+        'Phone': this._leafInfo.telefono == null
             ? null
             : ListView.builder(
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
                 primary: false,
-                itemCount: this.leafInfo.telefono.length,
+                itemCount: this._leafInfo.telefono.length,
                 itemBuilder: (context, index) => FlatButton(
                       onPressed: () async {
                         await FlutterPhoneDirectCaller.callNumber(
-                            '${this.leafInfo.telefono[index]}');
+                            '${this._leafInfo.telefono[index]}');
                       },
                       child: Row(
                         children: <Widget>[
                           Icon(
                             (Icons.call),
                           ),
-                          Text('${this.leafInfo.telefono[index]}')
+                          Text('${this._leafInfo.telefono[index]}')
                         ],
                       ),
                     )),
-        'Email': this.leafInfo.email == null
+        'Email': this._leafInfo.email == null
             ? null
             : CircleAvatar(
                 radius: 20,
@@ -103,11 +103,11 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
                     color: Colors.black,
                   ),
                   onPressed: () async {
-                    await launch('mailto:${this.leafInfo.email}');
+                    await launch('mailto:${this._leafInfo.email}');
                   },
                 ),
               ),
-        'Share': this.leafInfo.url != null
+        'Share': this._leafInfo.url != null
             ? CircleAvatar(
                 radius: 20,
                 backgroundColor: Colors.white,
@@ -119,15 +119,15 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
                   onPressed: () {
                     setState(() {
                       final RenderBox box = context.findRenderObject();
-                      Share.share(this.leafInfo.url,
-                          subject: this.title,
+                      Share.share(this._leafInfo.url,
+                          subject: this._title,
                           sharePositionOrigin:
                               box.localToGlobal(Offset.zero) & box.size);
                     });
                   },
                 ))
             : null,
-        'PositionIcon': this.leafInfo.position == null
+        'PositionIcon': this._leafInfo.position == null
             ? null
             : CircleAvatar(
                 radius: 20,
@@ -140,7 +140,7 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
                   ),
                 ),
               ),
-        'Position': this.leafInfo.position == null
+        'Position': this._leafInfo.position == null
             ? Container()
             : Container(
                 height: 200,
@@ -148,7 +148,7 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
                 child: FlutterMap(
                   options: MapOptions(
                     center: LatLng(
-                        this.leafInfo.position[0], this.leafInfo.position[1]),
+                        this._leafInfo.position[0], this._leafInfo.position[1]),
                     zoom: 13.0,
                   ),
                   layers: [
@@ -161,8 +161,8 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
                         new Marker(
                           width: 80.0,
                           height: 80.0,
-                          point: LatLng(this.leafInfo.position[0],
-                              this.leafInfo.position[1]),
+                          point: LatLng(this._leafInfo.position[0],
+                              this._leafInfo.position[1]),
                           builder: (ctx) => Container(
                             child: Icon(
                               (Icons.location_on),
@@ -174,28 +174,28 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
                   ],
                 ),
               ),
-        'Info': this.leafInfo.info.isEmpty
+        'Info': this._leafInfo.info.isEmpty
             ? null
             : ListView.separated(
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
                 primary: false,
-                itemCount: this.leafInfo.info.length,
+                itemCount: this._leafInfo.info.length,
                 itemBuilder: (context, index) => ListTile(
-                  title: Text(this.leafInfo.info.keys.toList()[index]),
+                  title: Text(this._leafInfo.info.keys.toList()[index]),
                   subtitle: Linkify(
-                    text: '${this.leafInfo.info.values.toList()[index]}',
+                    text: '${this._leafInfo.info.values.toList()[index]}',
                     onOpen: (LinkableElement link) async {
                       if (await canLaunch(
-                          this.leafInfo.info.values.toList()[index]))
-                        await launch(this.leafInfo.info.values.toList()[index]);
+                          this._leafInfo.info.values.toList()[index]))
+                        await launch(this._leafInfo.info.values.toList()[index]);
                     },
                   ),
                 ),
                 separatorBuilder: (BuildContext context, int index) =>
                     const Divider(),
               ),
-        'Url': this.leafInfo.url == null
+        'Url': this._leafInfo.url == null
             ? null
             : CircleAvatar(
                 radius: 20,
@@ -206,7 +206,7 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
                     color: Colors.black,
                   ),
                   onPressed: () {
-                    launch(this.leafInfo.url);
+                    launch(this._leafInfo.url);
                   },
                 ),
               ),
@@ -215,10 +215,10 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
   @override
   Widget build(BuildContext context) {
     List<Widget> listW = [
-      this.widgets['Email'],
-      this.widgets['PositionIcon'],
-      this.widgets['Url'],
-      this.widgets['Share'],
+      this._widgets['Email'],
+      this._widgets['PositionIcon'],
+      this._widgets['Url'],
+      this._widgets['Share'],
     ];
     listW.removeWhere((element) => element == null);
     return Scaffold(
@@ -234,36 +234,36 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
                 elevation: 0,
                 actions: <Widget>[
                   IconButton(
-                    icon: this.icon,
+                    icon: this._icon,
                     onPressed: () {
                       setState(() {
                         if (this
                             ._controller
                             .getOffline()
-                            .contains(this.leafInfo)) {
-                          this._controller.removeOffline(leafInfo);
-                          this.icon = Icon(Icons.add_circle_outline);
+                            .contains(this._leafInfo)) {
+                          this._controller.removeOffline(_leafInfo);
+                          this._icon = Icon(Icons.add_circle_outline);
                         } else {
-                          this._controller.addOffline(leafInfo);
-                          this.icon = Icon(Icons.remove_circle_outline);
+                          this._controller.addOffline(_leafInfo);
+                          this._icon = Icon(Icons.remove_circle_outline);
                         }
                       });
                     },
                   )
                 ],
               ),
-              this.widgets['Image'],
+              this._widgets['Image'],
               SizedBox(
                 height: 20,
               ),
-              this.widgets['Name'],
+              this._widgets['Name'],
               SizedBox(
                 height: 20,
               ),
-              containerRound(this.widgets['Description'], null),
-              containerRound(this.widgets['Info'], 'Info'),
-              containerRound(this.widgets['Phone'], 'Telefono'),
-              this.widgets['Position'],
+              containerRound(this._widgets['Description'], null),
+              containerRound(this._widgets['Info'], 'Info'),
+              containerRound(this._widgets['Phone'], 'Telefono'),
+              this._widgets['Position'],
               SizedBox(
                 height: 20,
               ),
@@ -310,8 +310,8 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
   openMapsSheet(context) async {
     try {
       final coords = mapLauncher.Coords(
-          this.leafInfo.position[0], this.leafInfo.position[1]);
-      final title = this.leafInfo.name;
+          this._leafInfo.position[0], this._leafInfo.position[1]);
+      final title = this._leafInfo.name;
       final availableMaps = await MapLauncher.installedMaps;
       showModalBottomSheet(
         context: context,

@@ -5,15 +5,14 @@ import 'package:MC/view/DetailedLeafInfoView.dart';
 import 'package:flutter/material.dart';
 
 class LeafsInfoView extends StatefulWidget {
-  List<LeafInfo> _leafs;
   String _title;
   Controller _controller;
 
-  LeafsInfoView(this._leafs, this._title, this._controller);
+  LeafsInfoView(this._controller, this._title);
 
   @override
   _LeafsInfoViewState createState() =>
-      _LeafsInfoViewState(this._leafs, this._title, this._controller);
+      _LeafsInfoViewState(this._controller, this._title);
 }
 
 class _LeafsInfoViewState extends State<LeafsInfoView> {
@@ -21,7 +20,9 @@ class _LeafsInfoViewState extends State<LeafsInfoView> {
   String _title;
   Controller _controller;
 
-  _LeafsInfoViewState(this._leafs, this._title, this._controller);
+  _LeafsInfoViewState(this._controller, this._title) {
+    this._leafs = this._controller.getLeafs();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,97 +39,63 @@ class _LeafsInfoViewState extends State<LeafsInfoView> {
           onPressed: () => {Navigator.pop(context)},
         ),
       ),
-      body: ButtonInfo(_leafs, _title, _controller),
-    );
-  }
-}
-
-class ButtonInfo extends StatefulWidget {
-  List<LeafInfo> leafs;
-  String title;
-  Controller controller;
-
-  ButtonInfo(this.leafs, this.title, this.controller);
-
-  @override
-  _ButtonInfoState createState() => _ButtonInfoState(leafs, title, controller);
-}
-
-class _ButtonInfoState extends State<ButtonInfo> {
-  List<LeafInfo> leafs;
-  String title;
-  Controller _controller;
-
-  _ButtonInfoState(this.leafs, this.title, this._controller);
-
-  int length() {
-    if (_controller.getLeafs() != null)
-      return _controller.getLeafs().length;
-    else
-      return 0;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: ListView.builder(
-        scrollDirection: Axis.vertical,
-        shrinkWrap: true,
-        padding: const EdgeInsets.all(8),
-        itemCount: length(),
-        itemBuilder: (context, index) {
-          Icon icon;
-          this._controller.getOffline().contains(leafs[index])
-              ? icon = Icon(Icons.remove_circle_outline)
-              : icon = Icon(Icons.add_circle_outline);
-          return Card(
-              color: BackgroundColor2,
-              child: ListTile(
-                  trailing: IconButton(
-                    icon: icon,
-                    onPressed: () {
+      body: Container(
+        child: ListView.builder(
+          scrollDirection: Axis.vertical,
+          shrinkWrap: true,
+          padding: const EdgeInsets.all(8),
+          itemCount: _leafs.length,
+          itemBuilder: (context, index) {
+            Icon icon;
+            this._controller.getOffline().contains(_leafs[index])
+                ? icon = Icon(Icons.remove_circle_outline)
+                : icon = Icon(Icons.add_circle_outline);
+            return Card(
+                color: BackgroundColor2,
+                child: ListTile(
+                    trailing: IconButton(
+                      icon: icon,
+                      onPressed: () {
+                        setState(() {
+                          if (this
+                              ._controller
+                              .getOffline()
+                              .contains(_leafs[index])) {
+                            this._controller.removeOffline(_leafs[index]);
+                            icon = Icon(Icons.add_circle_outline);
+                          } else {
+                            this._controller.addOffline(_leafs[index]);
+                            icon = Icon(Icons.remove_circle_outline);
+                          }
+                        });
+                      },
+                    ),
+                    leading: this._leafs[index].imageFile == null
+                        ? null
+                        : Image.file(this._leafs[index].imageFile),
+                    title: Text('${_leafs[index].name}'),
+                    subtitle: _leafs[index].description == null
+                        ? Text('')
+                        : Text('${_leafs[index].description}'),
+                    onTap: () {
                       setState(() {
-                        if (this
-                            ._controller
-                            .getOffline()
-                            .contains(leafs[index])) {
-                          this._controller.removeOffline(leafs[index]);
-                          icon = Icon(Icons.add_circle_outline);
-                        } else {
-                          this._controller.addOffline(leafs[index]);
-                          icon = Icon(Icons.remove_circle_outline);
-                        }
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => DetailedLeafInfoView(
+                                      _title,
+                                      _leafs[index],
+                                      _controller,
+                                      this._leafs[index].imageFile == null
+                                          ? null
+                                          : Image.file(
+                                              this._leafs[index].imageFile,
+                                            ),
+                                    )));
                       });
-                    },
-                  ),
-                  leading: leafs[index].image == null
-                      ? null
-                      : Image(
-                          image:
-                              NetworkImage('${leafs[index].image.toString()}')),
-                  title: Text('${leafs[index].name}'),
-                  subtitle: leafs[index].description == null
-                      ? Text('')
-                      : Text('${leafs[index].description}'),
-                  onTap: () {
-                    setState(() {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => DetailedLeafInfoView(
-                                    title,
-                                    leafs[index],
-                                    _controller,
-                                    leafs[index].image == null
-                                        ? null
-                                        : Image(
-                                            image: NetworkImage(
-                                                '${leafs[index].image.toString()}'),
-                                          ),
-                                  )));
-                    });
-                  }));
-        },
+                    }));
+          },
+        ),
       ),
     );
   }

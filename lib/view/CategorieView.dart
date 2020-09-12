@@ -1,11 +1,11 @@
 import 'package:MC/controller/Controller.dart';
+import 'package:MC/model/NodeInfo.dart';
 import 'package:MC/utility/Style.dart';
+import 'package:MC/view/EmptyView.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-
 import 'LoadingView.dart';
 import 'OfflineView.dart';
-import 'SavedView.dart';
 import 'ScrollListView.dart';
 
 class CategoriesView extends StatefulWidget {
@@ -19,11 +19,33 @@ class CategoriesView extends StatefulWidget {
 
 class _CategoriesViewState extends State<CategoriesView> {
   Controller _controller;
-  Widget varWidget;
+  List<NodeInfo> _nodes;
   RefreshController _refreshController =
       RefreshController(initialRefresh: false);
 
-  _CategoriesViewState(this._controller);
+  _CategoriesViewState(this._controller) {
+    this._nodes = this._controller.getCategories();
+  }
+
+  Widget _getImage(int index) => FutureBuilder<dynamic>(
+        future: this._controller.tryConnection(),
+        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+          Widget tmpWidget;
+          if (snapshot.hasError || this._nodes[index].image == null)
+            tmpWidget = Image(
+              image: AssetImage(
+                'assets/empty.png',
+              ),
+              height: 100,
+              width: 100,
+            );
+          else if (snapshot.hasData)
+            tmpWidget = Image(image: NetworkImage(this._nodes[index].image));
+          else
+            tmpWidget = CircularProgressIndicator();
+          return tmpWidget;
+        },
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +54,7 @@ class _CategoriesViewState extends State<CategoriesView> {
       header: ClassicHeader(),
       controller: _refreshController,
       onRefresh: () => setState(() {
-        this._controller.getCategories().removeWhere((element) => true);
+        this._nodes.removeWhere((element) => true);
         this._controller.initCategories().then((value) {
           (context as Element).reassemble();
           _refreshController.refreshCompleted();
@@ -43,7 +65,7 @@ class _CategoriesViewState extends State<CategoriesView> {
         shrinkWrap: true,
         padding: const EdgeInsets.all(2),
         children: List.generate(
-          this._controller.getCategories().length,
+          this._nodes.length,
           (index) {
             return Container(
               height: 100,
@@ -60,7 +82,7 @@ class _CategoriesViewState extends State<CategoriesView> {
                       margin: new EdgeInsets.only(left: 46.0),
                       child: Center(
                           child: Text(
-                        this._controller.getCategories()[index].name.toString(),
+                        this._nodes[index].name.toString(),
                         style: TitleTextStyle_20,
                       )),
                       decoration: new BoxDecoration(
@@ -77,24 +99,9 @@ class _CategoriesViewState extends State<CategoriesView> {
                       ),
                     ),
                     new Container(
-                      margin: new EdgeInsets.symmetric(vertical: 10.0),
-                      alignment: FractionalOffset.centerLeft,
-                      child:
-                          this._controller.getCategories()[index].image != null
-                              ? Image(
-                                  image: NetworkImage(this
-                                      ._controller
-                                      .getCategories()[index]
-                                      .image),
-                                )
-                              : Image(
-                                  image: AssetImage(
-                                    'assets/empty.png',
-                                  ),
-                                  height: 100,
-                                  width: 100,
-                                ),
-                    ),
+                        margin: new EdgeInsets.symmetric(vertical: 10.0),
+                        alignment: FractionalOffset.centerLeft,
+                        child: _getImage(index)),
                   ],
                 ),
                 onPressed: () {
@@ -103,29 +110,26 @@ class _CategoriesViewState extends State<CategoriesView> {
                       MaterialPageRoute(
                           builder: (context) => FutureBuilder<dynamic>(
                                 future: _controller.setSearch(
-                                    this
-                                        ._controller
-                                        .getCategories()[index]
-                                        .name,
+                                    this._nodes[index].name,
                                     this._controller.getCategories()[index].url,
                                     IconCategory),
                                 builder: (BuildContext context,
                                     AsyncSnapshot<dynamic> snapshot) {
-                                  if (snapshot.hasData)
-                                    varWidget = ScrollListView(
-                                        this._controller,
-                                        this
-                                            ._controller
-                                            .getCategories()[index]
-                                            .name);
-                                  else if (snapshot.hasError)
-                                    varWidget = OfflineView(this
-                                        ._controller
-                                        .getCategories()[index]
-                                        .name);
+                                  Widget tmpWidget;
+                                  if (snapshot.hasData) if (snapshot
+                                      .data.isNotEmpty)
+                                    tmpWidget = ScrollListView(this._controller,
+                                        this._nodes[index].name);
                                   else
-                                    varWidget = LoadingView();
-                                  return varWidget;
+                                    tmpWidget = Scaffold(
+                                      body: EmptyView(this._nodes[index].name),
+                                    );
+                                  else if (snapshot.hasError)
+                                    tmpWidget =
+                                        OfflineView(this._nodes[index].name);
+                                  else
+                                    tmpWidget = LoadingView();
+                                  return tmpWidget;
                                 },
                               )));
                 },

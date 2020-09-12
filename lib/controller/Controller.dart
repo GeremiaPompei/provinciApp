@@ -33,16 +33,25 @@ class Controller {
 
   Future<dynamic> initLoadAndStore() async {
     if (this._cache.lastLeafs == null) {
-      await tryConnection();
       try {
-        await _loadCache();
-      } catch (e) {
+        await tryConnection();
         try {
-          await _loadStaticLastInfo(4, 4);
-        } catch (e) {}
+          await _loadCache();
+        } catch (e) {
+          try {
+            await _loadStaticLastInfo(4, 4);
+          } catch (e) {}
+        }
+        _storeCache();
+        _storeOffline();
+      } catch (e) {
+        Cache tmpCache =
+            DeserializeCache.deserialize(await StoreManager.load(FNCACHE));
+        this._cache.search = tmpCache.search;
+        this._cache.lastSearch = tmpCache.lastSearch;
+        this._cache.leafs = tmpCache.leafs;
+        this._cache.lastLeafs = tmpCache.lastLeafs;
       }
-      _storeCache();
-      _storeOffline();
     }
     return this._cache.lastLeafs;
   }
@@ -73,17 +82,31 @@ class Controller {
   }
 
   Future<dynamic> initCategories() async {
-    if (this.getCategories().isEmpty)
-      this._cache.initCategories(await HtmlParser.categories());
+    if (this.getCategories().isEmpty) {
+      try {
+        this._cache.initCategories(await HtmlParser.categories());
+      } catch (e) {
+        Cache tmpCache =
+            DeserializeCache.deserialize(await StoreManager.load(FNCACHE));
+        this._cache.initCategories(tmpCache.categories);
+      }
+    }
     return this.getCategories();
   }
 
   Future<dynamic> initOrganizations() async {
-    if (this.getOrganizations().isEmpty)
-      this._cache.initOrganizations((await HtmlParser.organizations())
-          .where((element) =>
-              int.parse(element.description.replaceAll(' Dataset', '')) > 0)
-          .toList());
+    if (this.getOrganizations().isEmpty) {
+      try {
+        this._cache.initOrganizations((await HtmlParser.organizations())
+            .where((element) =>
+                int.parse(element.description.replaceAll(' Dataset', '')) > 0)
+            .toList());
+      } catch (e) {
+        Cache tmpCache =
+            DeserializeCache.deserialize(await StoreManager.load(FNCACHE));
+        this._cache.initOrganizations(tmpCache.organizations);
+      }
+    }
     return this.getOrganizations();
   }
 
@@ -112,15 +135,18 @@ class Controller {
     UnitCache<List<NodeInfo>> cacheUnit = this._cache.getSearchByUrl(url);
     if (cacheUnit == null) {
       List<NodeInfo> nodes = await HtmlParser.searchByWord(url);
-      String oldUrl = _oldestUrl(
-          this._cache.search.keys, (el) => this._cache.getSearchByUrl(el));
-      cacheUnit = this._cache.search[oldUrl];
-      cacheUnit.name = name;
-      cacheUnit.element = nodes;
-      cacheUnit.icon = image;
-      this._cache.changeSearch(oldUrl, url, cacheUnit);
-      cacheUnit.updateDate();
-      _storeCache();
+      if (nodes.isNotEmpty) {
+        String oldUrl = _oldestUrl(
+            this._cache.search.keys, (el) => this._cache.getSearchByUrl(el));
+        cacheUnit = this._cache.search[oldUrl];
+        cacheUnit.name = name;
+        cacheUnit.element = nodes;
+        cacheUnit.icon = image;
+        this._cache.changeSearch(oldUrl, url, cacheUnit);
+        cacheUnit.updateDate();
+        _storeCache();
+      } else
+        return [];
     } else
       cacheUnit.updateDate();
     this._cache.lastSearch = url;
@@ -131,13 +157,22 @@ class Controller {
     UnitCache<List<LeafInfo>> cacheUnit = this._cache.getLeafsByUrl(url);
     if (cacheUnit == null) {
       List<LeafInfo> leafs = await HtmlParser.leafsByWord(url);
-      String oldUrl = _oldestUrl(
-          this._cache.leafs.keys, (el) => this._cache.getLeafsByUrl(el));
-      cacheUnit = this._cache.leafs[oldUrl];
-      cacheUnit.name = name;
-      cacheUnit.icon = image;
-      cacheUnit.element = leafs;
-      this._cache.changeLeafs(oldUrl, url, cacheUnit);
+      if (leafs.isNotEmpty) {
+        String oldUrl = _oldestUrl(
+            this._cache.leafs.keys, (el) => this._cache.getLeafsByUrl(el));
+        cacheUnit = this._cache.leafs[oldUrl];
+        cacheUnit.name = name;
+        cacheUnit.icon = image;
+        for(LeafInfo leaf in cacheUnit.element) {
+          _removeImage(leaf);
+        }
+        cacheUnit.element = leafs;
+        for(LeafInfo leaf in leafs) {
+          await _saveImage(leaf);
+        }
+        this._cache.changeLeafs(oldUrl, url, cacheUnit);
+      } else
+        return [];
     }
     cacheUnit.updateDate();
     _storeCache();
@@ -160,24 +195,15 @@ class Controller {
 
   Future<dynamic> addOffline(LeafInfo leafInfo) async {
     this._cache.addOffline(leafInfo);
-    if (leafInfo.image != null) {
-      leafInfo.imageFile = await StoreManager.localFile(
-          leafInfo.image.substring(leafInfo.image.lastIndexOf('/') + 1));
-      StoreManager.storeBytes(
-          await HttpRequest.getImage(leafInfo.image), leafInfo.imageFile.path);
-    }
+    await _saveImage(leafInfo);
     _storeOffline();
     return this.getOffline();
   }
 
-  Future<dynamic> removeOffline(LeafInfo leafInfo) async {
-    if (leafInfo.imageFile != null) {
-      StoreManager.localFile(leafInfo.imageFile.path)
-          .then((value) => value.delete());
-    }
+  void removeOffline(LeafInfo leafInfo) {
+    _removeImage(leafInfo);
     this._cache.removeOffline(leafInfo);
     _storeOffline();
-    return this.getOffline();
   }
 
   List<NodeInfo> getEvents() {
@@ -214,7 +240,7 @@ class Controller {
 
   Future<dynamic> _loadCache() async {
     Cache tmpCache =
-    DeserializeCache.deserialize(await StoreManager.load(FNCACHE));
+        DeserializeCache.deserialize(await StoreManager.load(FNCACHE));
     await _loadLastInfoFrom(tmpCache);
     return this._cache.lastLeafs;
   }
@@ -247,5 +273,23 @@ class Controller {
   Future _storeOffline() async {
     return await StoreManager.store(
         SerializeOffline.serialize(this._cache.offline), FNOFFLINE);
+  }
+
+  Future<dynamic> _saveImage(LeafInfo leafInfo) async {
+    var byte;
+    if (leafInfo.image != null) {
+      leafInfo.imageFile = await StoreManager.localFile(
+          leafInfo.image.substring(leafInfo.image.lastIndexOf('/') + 1));
+      byte = await HttpRequest.getImage(leafInfo.image);
+      StoreManager.storeBytes(byte, leafInfo.imageFile.path);
+    }
+    return byte;
+  }
+
+  void _removeImage(LeafInfo leafInfo) {
+    if (leafInfo.imageFile != null) {
+      StoreManager.localFile(leafInfo.imageFile.path)
+          .then((value) => value.delete());
+    }
   }
 }

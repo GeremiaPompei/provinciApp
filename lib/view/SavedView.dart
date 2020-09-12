@@ -3,7 +3,6 @@ import 'package:MC/utility/Style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-
 import 'DetailedLeafInfoView.dart';
 
 class SavedWidget extends StatefulWidget {
@@ -37,8 +36,7 @@ class _SavedWidgetState extends State<SavedWidget> {
           IconButton(
             icon: Icon(Icons.file_upload),
             onPressed: () async {
-              if (await this._controller.tryConnection())
-                Navigator.pushReplacementNamed(context, '/online');
+              Navigator.pushReplacementNamed(context, '/online');
             },
           ),
         ],

@@ -3,6 +3,7 @@ import 'package:MC/model/NodeInfo.dart';
 import 'package:MC/model/UnitCache.dart';
 import 'package:MC/utility/Style.dart';
 import 'package:MC/view/CardsSizedBox.dart';
+import 'package:MC/view/EmptyView.dart';
 import 'package:MC/view/LeafsInfoView.dart';
 import 'package:MC/view/LoadingView.dart';
 import 'package:MC/view/ScrollListView.dart';
@@ -13,24 +14,22 @@ import 'package:flutter/material.dart';
 import 'OfflineView.dart';
 
 class EsploraView extends StatefulWidget {
-  Controller controller;
+  Controller _controller;
 
-  EsploraView(this.controller);
+  EsploraView(this._controller);
 
   @override
-  _EsploraViewState createState() => _EsploraViewState(this.controller);
+  _EsploraViewState createState() => _EsploraViewState(this._controller);
 }
 
 class _EsploraViewState extends State<EsploraView> {
-  Controller controller;
-  List<MapEntry<String, UnitCache>> searched;
-  List<MapEntry<String, UnitCache>> leafs;
-  Widget varWidget;
-  String location;
+  Controller _controller;
+  List<MapEntry<String, UnitCache>> _searched;
+  List<MapEntry<String, UnitCache>> _leafs;
 
-  _EsploraViewState(this.controller) {
-    this.searched = this.controller.getLastSearched();
-    this.leafs = this.controller.getLastLeafs();
+  _EsploraViewState(this._controller) {
+    this._searched = this._controller.getLastSearched();
+    this._leafs = this._controller.getLastLeafs();
   }
 
   @override
@@ -45,22 +44,20 @@ class _EsploraViewState extends State<EsploraView> {
           placeHolder: SingleChildScrollView(
             child: Column(
               children: [
-                CardsSizedBox(this.searched, this.controller.setSearch,
-                    (name) => ScrollListView(this.controller, name)),
+                CardsSizedBox(this._searched, this._controller.setSearch,
+                    (name) => ScrollListView(this._controller, name)),
                 SizedBox(
                   height: 20,
                 ),
-                CardsSizedBox(
-                    this.leafs,
-                    this.controller.setLeafInfo,
-                    (name) => LeafsInfoView(
-                        this.controller.getLeafs(), name, this.controller)),
+                CardsSizedBox(this._leafs, this._controller.setLeafInfo,
+                    (name) => LeafsInfoView(this._controller, name)),
               ],
             ),
           ),
           loader: LoadingView(),
-          onSearch: (input) async => await controller.setSearch(
+          onSearch: (input) async => await _controller.setSearch(
               input, 'dataset?q=' + input, IconSearch),
+          onError: (err) => EmptyView(null),
           onItemFound: (input, num) {
             return Container(
               child: ListTile(
@@ -75,18 +72,18 @@ class _EsploraViewState extends State<EsploraView> {
                 onTap: () async {
                   Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => FutureBuilder<dynamic>(
-                      future: controller.setLeafInfo(
+                      future: _controller.setLeafInfo(
                           input.name, input.url, findImage(input.name)),
                       builder: (BuildContext context,
                           AsyncSnapshot<dynamic> snapshot) {
+                        Widget tmpWidget;
                         if (snapshot.hasData)
-                          varWidget = LeafsInfoView(this.controller.getLeafs(),
-                              input.name, controller);
+                          tmpWidget = LeafsInfoView(_controller, input.name);
                         else if (snapshot.hasError)
-                          varWidget = OfflineView(input.name);
+                          tmpWidget = OfflineView(input.name);
                         else
-                          varWidget = LoadingView();
-                        return varWidget;
+                          tmpWidget = LoadingView();
+                        return tmpWidget;
                       },
                     ),
                   ));
