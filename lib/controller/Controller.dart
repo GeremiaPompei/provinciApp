@@ -163,7 +163,10 @@ class Controller {
         cacheUnit = this._cache.leafs[oldUrl];
         cacheUnit.name = name;
         cacheUnit.icon = image;
+        if (cacheUnit.element != null)
+          for (LeafInfo leaf in cacheUnit.element) this._removeImage(leaf);
         cacheUnit.element = leafs;
+        for (LeafInfo leaf in cacheUnit.element) await this._saveImage(leaf);
         this._cache.changeLeafs(oldUrl, url, cacheUnit);
       } else
         return [];
@@ -272,8 +275,9 @@ class Controller {
   Future<dynamic> _saveImage(LeafInfo leafInfo) async {
     var byte;
     if (leafInfo.image != null) {
-      leafInfo.imageFile = await StoreManager.localFile(
-          leafInfo.image.substring(leafInfo.image.lastIndexOf('/') + 1));
+      String path =
+          leafInfo.image.substring(leafInfo.image.lastIndexOf('/') + 1);
+      leafInfo.imageFile = await StoreManager.localFile(path);
       byte = await HttpRequest.getImage(leafInfo.image);
       StoreManager.storeBytes(byte, leafInfo.imageFile.path);
     }

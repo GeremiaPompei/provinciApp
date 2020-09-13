@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:MC/model/Persistence/StoreManager.dart';
+
 import '../Cache.dart';
 import '../LeafInfo.dart';
 import '../NodeInfo.dart';
@@ -28,11 +30,14 @@ class DeserializeCache {
     return listRes;
   }
 
-  static List<LeafInfo> _deserializeLeafListInfo(List listIn, String url) {
+  static List<LeafInfo> _deserializeLeafListInfo(
+      List listIn, String url) {
     List<LeafInfo> listRes = [];
     for (int i = 0; i < listIn.length; i++) {
       LeafInfo leaf = LeafInfo(listIn[i]['Json'], url, i);
-      leaf.imageFile = listIn[i]['Image File'];
+      if(listIn[i]['Image File']!=null)
+        StoreManager.localFile(listIn[i]['Image File'])
+          .then((value) => leaf.imageFile = value);
       listRes.add(leaf);
     }
     return listRes;

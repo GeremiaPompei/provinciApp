@@ -38,7 +38,9 @@ class SerializeCache {
     listIn.forEach((element) {
       Map<String, dynamic> mapTmp = {
         'Json': element.json,
-        'Image File': element.imageFile,
+        'Image File': element.imageFile == null
+            ? null.toString()
+            : element.imageFile.path,
       };
       listRes.add(mapTmp);
     });
