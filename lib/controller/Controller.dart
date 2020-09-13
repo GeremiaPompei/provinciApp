@@ -42,8 +42,6 @@ class Controller {
             await _loadStaticLastInfo(4, 4);
           } catch (e) {}
         }
-        _storeCache();
-        _storeOffline();
       } catch (e) {
         Cache tmpCache =
             DeserializeCache.deserialize(await StoreManager.load(FNCACHE));
@@ -52,6 +50,8 @@ class Controller {
         this._cache.leafs = tmpCache.leafs;
         this._cache.lastLeafs = tmpCache.lastLeafs;
       }
+      _storeCache();
+      _storeOffline();
     }
     return this._cache.lastLeafs;
   }
@@ -163,13 +163,7 @@ class Controller {
         cacheUnit = this._cache.leafs[oldUrl];
         cacheUnit.name = name;
         cacheUnit.icon = image;
-        for(LeafInfo leaf in cacheUnit.element) {
-          _removeImage(leaf);
-        }
         cacheUnit.element = leafs;
-        for(LeafInfo leaf in leafs) {
-          await _saveImage(leaf);
-        }
         this._cache.changeLeafs(oldUrl, url, cacheUnit);
       } else
         return [];

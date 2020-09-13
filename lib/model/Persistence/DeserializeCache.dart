@@ -13,11 +13,9 @@ class DeserializeCache {
     cache.lastSearch = jsonMap['Last Search'];
     cache.lastLeafs = jsonMap['Last Leafs'];
     cache.search = _deserializeMapInfo(
-        jsonMap['Search'], (el,s) => _deserializeNodeListInfo(el));
+        jsonMap['Search'], (el, s) => _deserializeNodeListInfo(el));
     cache.leafs = _deserializeMapInfo(
-        jsonMap['Leafs'],
-        (el,s) =>
-            _deserializeLeafListInfo(el, s));
+        jsonMap['Leafs'], (el, s) => _deserializeLeafListInfo(el, s));
     return cache;
   }
 
@@ -30,20 +28,21 @@ class DeserializeCache {
     return listRes;
   }
 
-  static List<LeafInfo> _deserializeLeafListInfo(
-      List listIn, String url) {
+  static List<LeafInfo> _deserializeLeafListInfo(List listIn, String url) {
     List<LeafInfo> listRes = [];
     for (int i = 0; i < listIn.length; i++) {
-      listRes.add(LeafInfo(listIn[i], url, i));
+      LeafInfo leaf = LeafInfo(listIn[i]['Json'], url, i);
+      leaf.imageFile = listIn[i]['Image File'];
+      listRes.add(leaf);
     }
     return listRes;
   }
 
   static Map<String, UnitCache<List<T>>> _deserializeMapInfo<T>(
-      List listIn, List<T> Function(List,String) func) {
+      List listIn, List<T> Function(List, String) func) {
     Map<String, UnitCache<List<T>>> mapRes = {};
     listIn.forEach((element) {
-      List el = func(element['Unit Cache']['Element'],element['Key']);
+      List el = func(element['Unit Cache']['Element'], element['Key']);
       mapRes[element['Key']] = UnitCache(
           el,
           DateTime.parse(element['Unit Cache']['Date']),

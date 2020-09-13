@@ -14,8 +14,8 @@ class SerializeCache {
     jsonMap['Last Leafs'] = cache.lastLeafs;
     jsonMap['Search'] =
         _serializeMapInfo(cache.search, (list) => _serializeListNodeInfo(list));
-    jsonMap['Leafs'] = _serializeMapInfo(
-        cache.leafs, (List<LeafInfo> list) => list.map((e) => e.json).toList());
+    jsonMap['Leafs'] =
+        _serializeMapInfo(cache.leafs, (list) => _serializeListLeafInfo(list));
     return json.encode(jsonMap);
   }
 
@@ -27,6 +27,18 @@ class SerializeCache {
         'Description': element.description,
         'Url': element.url,
         'Image': element.image
+      };
+      listRes.add(mapTmp);
+    });
+    return listRes;
+  }
+
+  static List<Map> _serializeListLeafInfo(List<LeafInfo> listIn) {
+    List<Map> listRes = [];
+    listIn.forEach((element) {
+      Map<String, dynamic> mapTmp = {
+        'Json': element.json,
+        'Image File': element.imageFile,
       };
       listRes.add(mapTmp);
     });
