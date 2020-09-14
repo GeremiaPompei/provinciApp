@@ -59,8 +59,12 @@ class Controller {
 
   Future<dynamic> _loadStaticLastInfo(int countNodes, int countLeafs) async {
     await initOrganizations();
-    if (countNodes > this.getOrganizations().length)
-      countNodes = this.getOrganizations().length;
+    if (countNodes > this
+        .getOrganizations()
+        .length)
+      countNodes = this
+          .getOrganizations()
+          .length;
     for (int i = countNodes - 1; i >= 0; i--) {
       NodeInfo node = this.getOrganizations()[i];
       this._cache.search['Empty $i'] = UnitCache(
@@ -69,8 +73,12 @@ class Controller {
       this._cache.search[node.url] =
           UnitCache(this.getSearch(), DateTime.now(), node.name, IconComune);
     }
-    if (countLeafs > this.getSearch().length)
-      countNodes = this.getSearch().length;
+    if (countLeafs > this
+        .getSearch()
+        .length)
+      countNodes = this
+          .getSearch()
+          .length;
     for (int i = 0; i < countLeafs; i++) {
       NodeInfo node = this.getSearch()[i];
       this._cache.leafs['Empty $i'] = UnitCache(
@@ -83,7 +91,9 @@ class Controller {
   }
 
   Future<dynamic> initCategories() async {
-    if (this.getCategories().isEmpty) {
+    if (this
+        .getCategories()
+        .isEmpty) {
       try {
         this._cache.initCategories(await HtmlParser.categories());
       } catch (e) {
@@ -96,11 +106,13 @@ class Controller {
   }
 
   Future<dynamic> initOrganizations() async {
-    if (this.getOrganizations().isEmpty) {
+    if (this
+        .getOrganizations()
+        .isEmpty) {
       try {
         this._cache.initOrganizations((await HtmlParser.organizations())
             .where((element) =>
-                int.parse(element.description.replaceAll(' Dataset', '')) > 0)
+        int.parse(element.description.replaceAll(' Dataset', '')) > 0)
             .toList());
       } catch (e) {
         Cache tmpCache = await DeserializeCache.deserialize(
@@ -168,8 +180,10 @@ class Controller {
         var tmp = cacheUnit.element;
         cacheUnit.element = leafs;
         if (tmp != null)
-          for (LeafInfo leaf in tmp) this._removeImage(leaf);
-        for (LeafInfo leaf in cacheUnit.element) await this._saveImage(leaf);
+          for (LeafInfo leaf in tmp)
+            this._removeImage(leaf);
+        for (LeafInfo leaf in cacheUnit.element)
+          await this._saveImage(leaf);
         this._cache.changeLeafs(oldUrl, url, cacheUnit);
       } else
         return [];
@@ -183,13 +197,14 @@ class Controller {
   String _oldestUrl(Iterable<String> list, UnitCache Function(String) func) {
     String oldUrl;
     DateTime tmpDate;
-    list.forEach((el) => {
-          if (tmpDate == null || tmpDate.isAfter(func(el).date))
-            {
-              tmpDate = func(el).date,
-              oldUrl = el,
-            }
-        });
+    list.forEach((el) =>
+    {
+      if (tmpDate == null || tmpDate.isAfter(func(el).date))
+        {
+          tmpDate = func(el).date,
+          oldUrl = el,
+        }
+    });
     return oldUrl;
   }
 
@@ -223,7 +238,9 @@ class Controller {
   }
 
   List<NodeInfo> getSearch() {
-    return this._cache.getSearchByUrl(this._cache.lastSearch).element;
+    return this._cache
+        .getSearchByUrl(this._cache.lastSearch)
+        .element;
   }
 
   List<MapEntry<String, dynamic>> getLastSearched() =>
@@ -233,14 +250,16 @@ class Controller {
       this._cache.leafs.entries.toList();
 
   List<LeafInfo> getLeafs() {
-    return this._cache.getLeafsByUrl(this._cache.lastLeafs).element;
+    return this._cache
+        .getLeafsByUrl(this._cache.lastLeafs)
+        .element;
   }
 
   List<LeafInfo> getOffline() => this._cache.offline;
 
   Future<dynamic> _loadCache() async {
     Cache tmpCache =
-        await DeserializeCache.deserialize(await StoreManager.load(FNCACHE));
+    await DeserializeCache.deserialize(await StoreManager.load(FNCACHE));
     await _loadLastInfoFrom(tmpCache);
     return this._cache.lastLeafs;
   }
@@ -254,7 +273,8 @@ class Controller {
     this._cache.leafs = tmpCache.leafs;
     for (MapEntry<String, dynamic> entry in this._cache.leafs.entries) {
       entry.value.element = await HtmlParser.leafsByWord(entry.key);
-      for (LeafInfo leaf in entry.value.element) await _saveImage(leaf);
+      for (LeafInfo leaf in entry.value.element)
+        await _saveImage(leaf);
     }
     this._cache.lastLeafs = tmpCache.lastLeafs;
     return tmpCache.lastLeafs;
@@ -281,7 +301,7 @@ class Controller {
     var byte;
     if (leafInfo.image != null) {
       String path =
-          leafInfo.image.substring(leafInfo.image.lastIndexOf('/') + 1);
+      leafInfo.image.substring(leafInfo.image.lastIndexOf('/') + 1);
       leafInfo.imageFile = await StoreManager.localFile(DNIMAGE + '/' + path);
       byte = await HttpRequest.getImage(leafInfo.image);
       StoreManager.storeBytes(byte, leafInfo.imageFile.path);
@@ -290,10 +310,9 @@ class Controller {
   }
 
   void _removeImage(LeafInfo leafInfo) {
-    List list =
-        this._cache.leafs.values.map((e) => e.element).reduce((value, element) {
-      value.addAll(element);
-      return value;
+    List list = [];
+    this._cache.leafs.values.map((e) => e.element).forEach((element) {
+      list.addAll(element);
     });
     list.addAll(this._cache.offline);
     if (leafInfo.imageFile != null) {
