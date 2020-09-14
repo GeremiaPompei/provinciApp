@@ -7,21 +7,22 @@ import '../NodeInfo.dart';
 import '../UnitCache.dart';
 
 class DeserializeCache {
-  static Cache deserialize(String contents) {
+  static Future<Cache> deserialize(String contents) async {
     Map<String, dynamic> jsonMap = json.decode(contents);
     Cache cache = Cache();
-    cache.initOrganizations(_deserializeNodeListInfo(jsonMap['Organizations']));
-    cache.initCategories(_deserializeNodeListInfo(jsonMap['Categories']));
+    cache.initOrganizations(
+        await _deserializeNodeListInfo(jsonMap['Organizations']));
+    cache.initCategories(await _deserializeNodeListInfo(jsonMap['Categories']));
     cache.lastSearch = jsonMap['Last Search'];
     cache.lastLeafs = jsonMap['Last Leafs'];
-    cache.search = _deserializeMapInfo(
-        jsonMap['Search'], (el, s) => _deserializeNodeListInfo(el));
-    cache.leafs = _deserializeMapInfo(
-        jsonMap['Leafs'], (el, s) => _deserializeLeafListInfo(el, s));
+    cache.search = await _deserializeMapInfo(
+        jsonMap['Search'], (el, s) async => await _deserializeNodeListInfo(el));
+    cache.leafs = await _deserializeMapInfo(jsonMap['Leafs'],
+        (el, s) async => await _deserializeLeafListInfo(el, s));
     return cache;
   }
 
-  static List<NodeInfo> _deserializeNodeListInfo(List listIn) {
+  static Future<List<NodeInfo>> _deserializeNodeListInfo(List listIn) async {
     List<NodeInfo> listRes = [];
     listIn.forEach((element) {
       listRes.add(NodeInfo(element['Name'], element['Description'],
@@ -30,30 +31,29 @@ class DeserializeCache {
     return listRes;
   }
 
-  static List<LeafInfo> _deserializeLeafListInfo(
-      List listIn, String url) {
+  static Future<List<LeafInfo>> _deserializeLeafListInfo(
+      List listIn, String url) async {
     List<LeafInfo> listRes = [];
     for (int i = 0; i < listIn.length; i++) {
       LeafInfo leaf = LeafInfo(listIn[i]['Json'], url, i);
-      if(listIn[i]['Image File']!=null)
-        StoreManager.localFile(listIn[i]['Image File'])
-          .then((value) => leaf.imageFile = value);
+      if (listIn[i]['Image File'] != null)
+        leaf.imageFile = await StoreManager.localFile(listIn[i]['Image File']);
       listRes.add(leaf);
     }
     return listRes;
   }
 
-  static Map<String, UnitCache<List<T>>> _deserializeMapInfo<T>(
-      List listIn, List<T> Function(List, String) func) {
+  static Future<Map<String, UnitCache<List<T>>>> _deserializeMapInfo<T>(
+      List listIn, Future<List<T>> Function(List, String) func) async {
     Map<String, UnitCache<List<T>>> mapRes = {};
-    listIn.forEach((element) {
-      List el = func(element['Unit Cache']['Element'], element['Key']);
+    for (dynamic element in listIn) {
+      List el = await func(element['Unit Cache']['Element'], element['Key']);
       mapRes[element['Key']] = UnitCache(
           el,
           DateTime.parse(element['Unit Cache']['Date']),
           element['Unit Cache']['Name'],
           element['Unit Cache']['Icon']);
-    });
+    }
     return mapRes;
   }
 }

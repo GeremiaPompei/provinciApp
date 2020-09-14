@@ -10,6 +10,11 @@ class StoreManager {
     return File(join(directory.path, fileName));
   }
 
+  static Future<Directory> localDir(String dirName) async {
+    Directory directory = await getApplicationDocumentsDirectory();
+    return Directory(join(directory.path, dirName));
+  }
+
   static Future<String> load(String fileName) async {
     File file = await localFile(fileName);
     return file.readAsString();
