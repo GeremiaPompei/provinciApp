@@ -51,13 +51,14 @@ class _CategoriesViewState extends State<CategoriesView> {
   Widget build(BuildContext context) {
     return SmartRefresher(
       enablePullDown: true,
-      header: ClassicHeader(),
       controller: _refreshController,
       onRefresh: () => setState(() {
         this._nodes.removeWhere((element) => true);
         this._controller.initCategories().then((value) {
-          (context as Element).reassemble();
-          _refreshController.refreshCompleted();
+          setState(() {
+            (context as Element).reassemble();
+            _refreshController.refreshCompleted();
+          });
         });
       }),
       child: ListView(

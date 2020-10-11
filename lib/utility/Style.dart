@@ -28,33 +28,33 @@ const ThemeSecondaryColor = Color(0xFFA35034);
 const BackgroundColor = Color.fromARGB(255, 237, 249, 249);
 const BackgroundColor2 = Colors.white;
 
-const IconSearch = 0xe8b6;
-const IconCategory = 0xe1bd;
-const IconComune = 0xe84f;
-const IconPosition = 0xe0c8;
+final IconSearch = Icons.search.codePoint;
+final IconCategory = Icons.widgets.codePoint;
+final IconComune = Icons.account_balance.codePoint;
+final IconPosition = Icons.comment.codePoint;
 
 int findImage(String name) {
   if (name.contains('Musei') ||
       name.contains('Monumenti') ||
       name.contains('Chiese') ||
       name.contains('Rocche'))
-    return 0xe84f;
+    return Icons.account_balance.codePoint;
   else if (name.contains('Case') ||
       name.contains('Strutture') ||
       name.contains('Teatri'))
-    return 0xe88a;
+    return Icons.home.codePoint;
   else if (name.contains('Stabilimenti'))
-    return 0xeb3e;
+    return Icons.beach_access.codePoint;
   else if (name.contains('Eventi'))
-    return 0xe878;
+    return Icons.event.codePoint;
   else if (name.contains('Concorsi') || name.contains('Bandi'))
-    return 0xe7fb;
+    return Icons.people.codePoint;
   else if (name.contains('Shopping'))
-    return 0xe8cc;
+    return Icons.shopping_cart.codePoint;
   else if (name.contains('Biblioteche'))
-    return 0xe865;
+    return Icons.book.codePoint;
   else if (name.contains('Aree'))
-    return 0xe531;
+    return Icons.car_repair.codePoint;
   else
-    return 0xe033;
+    return Icons.not_interested.codePoint;
 }

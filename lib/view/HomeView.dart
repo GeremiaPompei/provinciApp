@@ -113,7 +113,7 @@ class _HomeViewState extends State<HomeView> {
         actions: [
           IconButton(
             color: ThemePrimaryColor,
-            icon: Icon(IconData(IconPosition, fontFamily: 'MaterialIcons')),
+            icon: Icon(Icons.location_on),
             onPressed: () {
               setState(() {
                 Navigator.push(
