@@ -35,13 +35,15 @@ class _PromoViewState extends State<PromoView> {
         enablePullDown: true,
         header: ClassicHeader(),
         controller: _refreshController,
-        onRefresh: () => setState(() {
+        onRefresh: () {
           this._controller.getPromos().removeWhere((element) => true);
-          this._controller.initPromos().then((value) {
-            (context as Element).reassemble();
-            _refreshController.refreshCompleted();
+          setState(() {
+            this._controller.initPromos().then((value) {
+              (context as Element).reassemble();
+              _refreshController.refreshCompleted();
+            });
           });
-        }),
+        },
         child: ListView.separated(
           scrollDirection: Axis.vertical,
           shrinkWrap: true,

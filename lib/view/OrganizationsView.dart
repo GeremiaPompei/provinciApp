@@ -56,16 +56,18 @@ class _OrganizationsViewState extends State<OrganizationsView> {
   Widget build(BuildContext context) {
     return SmartRefresher(
         enablePullDown: true,
+        header: ClassicHeader(),
         controller: _refreshController,
-        onRefresh: () => setState(() {
-              this._nodes.removeWhere((element) => true);
-              this._controller.initOrganizations().then((value) {
-                setState(() {
-                  (context as Element).reassemble();
-                  _refreshController.refreshCompleted();
-                });
-              });
-            }),
+        onRefresh: () {
+          this._controller.getOrganizations().removeWhere((element) => true);
+          this._controller.initOrganizations().then((value) {
+            setState(() {
+              this._nodes = this._controller.getOrganizations();
+              (context as Element).reassemble();
+              _refreshController.refreshCompleted();
+            });
+          });
+        },
         child: GridView.count(
           scrollDirection: Axis.vertical,
           primary: false,

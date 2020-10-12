@@ -34,13 +34,15 @@ class _EventiViewState extends State<EventiView> {
         enablePullDown: true,
         header: ClassicHeader(),
         controller: _refreshController,
-        onRefresh: () => setState(() {
+        onRefresh: () {
           this._controller.getEvents().removeWhere((element) => true);
-          this._controller.initEvents().then((value) {
-            (context as Element).reassemble();
-            _refreshController.refreshCompleted();
+          setState(() {
+            this._controller.initEvents().then((value) {
+              (context as Element).reassemble();
+              _refreshController.refreshCompleted();
+            });
           });
-        }),
+        },
         child: ListView.separated(
           scrollDirection: Axis.vertical,
           shrinkWrap: true,
@@ -71,8 +73,9 @@ class _EventiViewState extends State<EventiView> {
                       }
                     }));
           },
-          separatorBuilder: (BuildContext context, int index) =>
-              SizedBox(height: 10,),
+          separatorBuilder: (BuildContext context, int index) => SizedBox(
+            height: 10,
+          ),
         ),
       ),
     );

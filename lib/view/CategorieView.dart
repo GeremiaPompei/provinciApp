@@ -51,16 +51,18 @@ class _CategoriesViewState extends State<CategoriesView> {
   Widget build(BuildContext context) {
     return SmartRefresher(
       enablePullDown: true,
+      header: ClassicHeader(),
       controller: _refreshController,
-      onRefresh: () => setState(() {
-        this._nodes.removeWhere((element) => true);
+      onRefresh: () {
+        this._controller.getCategories().removeWhere((element) => true);
         this._controller.initCategories().then((value) {
           setState(() {
+            this._nodes = this._controller.getCategories();
             (context as Element).reassemble();
             _refreshController.refreshCompleted();
           });
         });
-      }),
+      },
       child: ListView(
         scrollDirection: Axis.vertical,
         shrinkWrap: true,

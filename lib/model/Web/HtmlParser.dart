@@ -59,7 +59,7 @@ class HtmlParser {
     Map<String, dynamic> map = await HttpRequest.getResource(url);
     List<NodeInfo> nodes = [];
     for (Map value in map['results']) {
-      nodes.add(NodeInfo(value['title'], value['maintainer'],
+      nodes.add(NodeInfo(value['title'], value['organization']['title'],
           value['resources'][1]['url'], null));
     }
     return nodes;

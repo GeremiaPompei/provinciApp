@@ -80,8 +80,14 @@ class _ScrollListViewState extends State<ScrollListView> {
               itemCount: this._nodes.length,
               itemBuilder: (context, index) {
                 return ListTile(
-                  title: Text(this._nodes[index].name),
-                  subtitle: Text(this._nodes[index].description.toString()),
+                  title: Text(
+                    this._nodes[index].name,
+                    maxLines: 2,
+                  ),
+                  subtitle: Text(
+                    this._nodes[index].description.toString(),
+                    maxLines: 2,
+                  ),
                   leading: Stack(alignment: Alignment.center, children: [
                     Image.asset('assets/empty.png'),
                     Icon(

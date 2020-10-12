@@ -50,7 +50,10 @@ class _LeafsInfoViewState extends State<LeafsInfoView> {
             this._controller.getOffline().contains(_leafs[index])
                 ? icon = Icon(Icons.remove_circle_outline)
                 : icon = Icon(Icons.add_circle_outline);
-            return Card(
+            return Container(
+              alignment: Alignment.center,
+              height: 85,
+              child: Card(
                 color: BackgroundColor2,
                 child: ListTile(
                     trailing: IconButton(
@@ -62,38 +65,49 @@ class _LeafsInfoViewState extends State<LeafsInfoView> {
                               .getOffline()
                               .contains(_leafs[index])) {
                             this._controller.removeOffline(_leafs[index]);
-                            icon = Icon(Icons.add_circle_outline);
                           } else {
                             this._controller.addOffline(_leafs[index]);
-                            icon = Icon(Icons.remove_circle_outline);
                           }
                         });
                       },
                     ),
-                    leading: this._leafs[index].imageFile == null
-                        ? null
-                        : Image.file(this._leafs[index].imageFile),
-                    title: Text('${_leafs[index].name}'),
+                    leading: Container(
+                      height: 95,
+                      child: this._leafs[index].imageFile == null
+                          ? Icon(Icons.not_interested)
+                          : Image.file(this._leafs[index].imageFile),
+                    ),
+                    title: Text(
+                      '${_leafs[index].name}',
+                      maxLines: 2,
+                    ),
                     subtitle: _leafs[index].description == null
                         ? Text('')
-                        : Text('${_leafs[index].description}'),
+                        : Text(
+                            '${_leafs[index].description}',
+                            maxLines: 2,
+                          ),
                     onTap: () {
                       setState(() {
                         Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => DetailedLeafInfoView(
-                                      _title,
-                                      _leafs[index],
-                                      _controller,
-                                      this._leafs[index].imageFile == null
-                                          ? null
-                                          : Image.file(
-                                              this._leafs[index].imageFile,
-                                            ),
-                                    )));
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DetailedLeafInfoView(
+                              _title,
+                              _leafs[index],
+                              _controller,
+                              this._leafs[index].imageFile == null
+                                  ? null
+                                  : Image.file(
+                                      this._leafs[index].imageFile,
+                                    ),
+                            ),
+                          ),
+                        );
                       });
-                    }));
+                    }),
+              ),
+            );
           },
         ),
       ),
