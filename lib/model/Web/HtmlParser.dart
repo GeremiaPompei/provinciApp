@@ -1,13 +1,12 @@
 import 'dart:async';
-import 'dart:convert';
+import 'HttpRequest.dart';
 
 import 'package:MC/model/LeafInfo.dart';
 import 'package:MC/model/NodeInfo.dart';
-import 'package:MC/model/web/HttpRequest.dart';
 import 'package:html/dom.dart' as html;
 
 class HtmlParser {
-  static final String MCDATI = 'http://dati.provincia.mc.it/';
+  static final String MCDATI = 'http://dati.provincia.mc.it/api/3/action/';
   static final String MCEVENTI =
       'https://www.cronachemaceratesi.it/category/archivi/eventi-spettacoli/';
   static final String MCPROMO = 'https://www.groupon.it/offerte/macerata/';
@@ -59,112 +58,46 @@ class HtmlParser {
         MCPROMO, 'deal-card', fName, fDescription, fUrl, fImage);
   }
 
-  static Future<List<NodeInfo>> searchByWord(String word) async {
-    Function fName = (html.Element el) =>
-        el.getElementsByClassName('dataset-heading').single.text.trim();
-    Function fDescription = (html.Element el) => el
-        .getElementsByClassName('dataset-content')
-        .single
-        .getElementsByTagName('div')
-        .single
-        .text
-        .trim();
-    Function fUrl = (html.Element el) => (MCDATI +
-        (el
-            .getElementsByClassName('label')
-            .first
-            .attributes
-            .putIfAbsent('href', () => null)
-            .trim()));
-    Function fImage = (html.Element el) => '';
-    if (word.contains('?'))
-      word += '&';
-    else
-      word += '?';
-    return await _scrollPage((page) => HttpRequest.getNodeInfo(
-        MCDATI + word + page,
-        'dataset-item',
-        fName,
-        fDescription,
-        fUrl,
-        fImage));
+  static Future<List<NodeInfo>> searchByWord(String url) async {
+    Map<String, dynamic> map = await HttpRequest.getResource(url);
+    List<NodeInfo> nodes = [];
+    for (Map value in map['results']) {
+      nodes.add(NodeInfo(value['title'], value['maintainer'],
+          value['resources'][1]['url'], null));
+    }
+    return nodes;
   }
 
-  static Future<List<LeafInfo>> leafsByWord(String word) async {
+  static Future<List<LeafInfo>> leafsByWord(String url) async {
     List<LeafInfo> list = [];
+    dynamic body = await HttpRequest.getBody(url);
     try {
-      List<dynamic> tmp = json.decode(await HttpRequest.getJson(word));
-      for (int i = 0; i < tmp.length; i++) list.add(LeafInfo(tmp[i], word, i));
+      for (int i = 0; i < body.length; i++) list.add(LeafInfo(body[i], url, i));
     } catch (e) {
       try {
-        Map<String, dynamic> tmp = json.decode(await HttpRequest.getJson(word));
-        list.add(LeafInfo(tmp['MetaData'], word, 0));
+        list.add(LeafInfo(body['MetaData'], url, 0));
       } catch (e) {}
     }
     return list;
   }
 
-  static Future<List<NodeInfo>> organizations() async {
-    Function fName = (html.Element el) =>
-        el.getElementsByClassName('media-heading').single.text.trim();
-    Function fDescription = (html.Element el) =>
-        el.getElementsByClassName('count').single.text.trim();
-    Function fUrl = (html.Element el) => ((el
-        .getElementsByClassName('media-view')
-        .first
-        .attributes
-        .putIfAbsent('href', () => null)
-        .substring(1)
-        .trim()));
-    Function fImage = (html.Element el) => el
-        .getElementsByTagName('img')
-        .first
-        .attributes
-        .putIfAbsent('src', () => null)
-        .trim();
-    return await _scrollPage((page) => HttpRequest.getNodeInfo(
-        MCDATI + 'organization?$page',
-        'media-item',
-        fName,
-        fDescription,
-        fUrl,
-        fImage));
-  }
+  static Future<List<NodeInfo>> organizations() async => await _metaData(
+      'organization', MCDATI + 'package_search?rows=1000&q=organization:');
 
-  static Future<List<NodeInfo>> categories() async {
-    Function fName = (html.Element el) =>
-        el.getElementsByClassName('media-heading').single.text.trim();
-    Function fDescription = (html.Element el) => null;
-    Function fUrl = (html.Element el) => ((el
-        .getElementsByClassName('media-view')
-        .first
-        .attributes
-        .putIfAbsent('href', () => null)
-        .substring(1)
-        .trim()));
-    Function fImage = (html.Element el) => el
-        .getElementsByTagName('img')
-        .first
-        .attributes
-        .putIfAbsent('src', () => null)
-        .trim();
-    return await _scrollPage((page) => HttpRequest.getNodeInfo(
-        MCDATI + 'group?$page',
-        'media-item',
-        fName,
-        fDescription,
-        fUrl,
-        fImage));
-  }
+  static Future<List<NodeInfo>> categories() async =>
+      await _metaData('group', MCDATI + 'package_search?rows=1000&q=groups:');
 
-  static Future<List> _scrollPage(
-      Future<List<NodeInfo>> Function(String page) func) async {
-    List<NodeInfo> list = [];
-    for (int i = 1; i > 0; i++) {
-      List<NodeInfo> tmp = await func('page=$i');
-      list.addAll(tmp);
-      if (tmp.isEmpty) i = -1;
+  static Future<List<NodeInfo>> _metaData(String type, String prelink) async {
+    List<dynamic> list = await HttpRequest.getResource(MCDATI + type + '_list');
+    List<NodeInfo> nodes = [];
+    for (String id in list) {
+      Map<String, dynamic> map = await
+          HttpRequest.getResource(MCDATI + type + '_show?id=' + id);
+      if (map['package_count'] > 0) {
+        nodes.add(NodeInfo(map['display_name'], map['description'],
+            prelink + map['name'], map['image_display_url']));
+      }
     }
-    return list;
+    return nodes;
   }
 }

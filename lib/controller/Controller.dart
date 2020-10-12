@@ -98,10 +98,7 @@ class Controller {
   Future<dynamic> initOrganizations() async {
     if (this.getOrganizations().isEmpty) {
       try {
-        this._cache.initOrganizations((await HtmlParser.organizations())
-            .where((element) =>
-                int.parse(element.description.replaceAll(' Dataset', '')) > 0)
-            .toList());
+        this._cache.initOrganizations(await HtmlParser.organizations());
       } catch (e) {
         Cache tmpCache = await DeserializeCache.deserialize(
             await StoreManager.load(FNCACHE));

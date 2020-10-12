@@ -47,9 +47,11 @@ class _HomeViewState extends State<HomeView> {
     List<Placemark> placemark =
         await geolocator.placemarkFromPosition(position);
     this._location = placemark[0].locality;
-    return this
-        ._controller
-        .setSearch(this._location, 'dataset?q=' + this._location, IconPosition);
+    return this._controller.setSearch(
+        this._location,
+        'http://dati.provincia.mc.it/api/3/action/package_search?rows=1000&q=' +
+            this._location,
+        IconPosition);
   }
 
   Widget initWidgetFuture(Future<dynamic> Function() func, Widget input) =>

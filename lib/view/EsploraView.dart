@@ -56,7 +56,10 @@ class _EsploraViewState extends State<EsploraView> {
           ),
           loader: LoadingView(),
           onSearch: (input) async => await _controller.setSearch(
-              input, 'dataset?q=' + input, IconSearch),
+              input,
+              'http://dati.provincia.mc.it/api/3/action/package_search?rows=1000&q=' +
+                  input,
+              IconSearch),
           onError: (err) => EmptyView(null),
           onItemFound: (input, num) {
             return Container(
