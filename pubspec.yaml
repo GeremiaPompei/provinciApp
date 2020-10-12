@@ -48,7 +48,7 @@ dependencies:
   auto_size_text: ^2.1.0
 
 flutter_icons:
-  image_path: "icon/logo_mc.PNG"
+  image_path: "assets/icon/icon.PNG"
   ios: true
   android: true
 
@@ -85,7 +85,7 @@ flutter:
   fonts:
     - family: StencilArmyWWI
       fonts:
-          - asset: fonts/StencilArmyWWI.ttf
+          - asset: assets/fonts/StencilArmyWWI.ttf
 
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

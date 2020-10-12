@@ -1,4 +1,5 @@
 import 'package:MC/controller/Controller.dart';
+import 'package:MC/utility/ConstUrl.dart';
 import 'package:MC/utility/Style.dart';
 import 'package:MC/view/BottomButtonBar.dart';
 import 'package:MC/view/CategorieView.dart';
@@ -49,8 +50,7 @@ class _HomeViewState extends State<HomeView> {
     this._location = placemark[0].locality;
     return this._controller.setSearch(
         this._location,
-        'http://dati.provincia.mc.it/api/3/action/package_search?rows=1000&q=' +
-            this._location,
+        MCDATASET_SEARCH + this._location,
         IconPosition);
   }
 

@@ -1,6 +1,7 @@
 import 'package:MC/controller/Controller.dart';
 import 'package:MC/model/NodeInfo.dart';
 import 'package:MC/model/UnitCache.dart';
+import 'package:MC/utility/ConstUrl.dart';
 import 'package:MC/utility/Style.dart';
 import 'package:MC/view/CardsSizedBox.dart';
 import 'package:MC/view/EmptyView.dart';
@@ -57,7 +58,7 @@ class _EsploraViewState extends State<EsploraView> {
           loader: LoadingView(),
           onSearch: (input) async => await _controller.setSearch(
               input,
-              'http://dati.provincia.mc.it/api/3/action/package_search?rows=1000&q=' +
+              MCDATASET_SEARCH +
                   input,
               IconSearch),
           onError: (err) => EmptyView(null),

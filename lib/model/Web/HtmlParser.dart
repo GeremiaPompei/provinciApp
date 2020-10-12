@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'package:MC/utility/ConstUrl.dart';
+
 import 'HttpRequest.dart';
 
 import 'package:MC/model/LeafInfo.dart';
@@ -6,11 +8,6 @@ import 'package:MC/model/NodeInfo.dart';
 import 'package:html/dom.dart' as html;
 
 class HtmlParser {
-  static final String MCDATI = 'http://dati.provincia.mc.it/api/3/action/';
-  static final String MCEVENTI =
-      'https://www.cronachemaceratesi.it/category/archivi/eventi-spettacoli/';
-  static final String MCPROMO = 'https://www.groupon.it/offerte/macerata/';
-
   static Future<List<NodeInfo>> events() async {
     Function fName = (html.Element el) => el
         .getElementsByClassName('titolo_articolo_lista')
@@ -82,20 +79,22 @@ class HtmlParser {
   }
 
   static Future<List<NodeInfo>> organizations() async => await _metaData(
-      'organization', MCDATI + 'package_search?rows=1000&q=organization:');
+      MCDATASET_ORGANIZATION_LIST,
+      MCDATASET_ORGANIZATION_SHOW,
+      MCDATASET_SEARCH + 'organization:');
 
-  static Future<List<NodeInfo>> categories() async =>
-      await _metaData('group', MCDATI + 'package_search?rows=1000&q=groups:');
+  static Future<List<NodeInfo>> categories() async => await _metaData(
+      MCDATASET_GROUP_LIST, MCDATASET_GROUP_SHOW, MCDATASET_SEARCH + 'groups:');
 
-  static Future<List<NodeInfo>> _metaData(String type, String prelink) async {
-    List<dynamic> list = await HttpRequest.getResource(MCDATI + type + '_list');
+  static Future<List<NodeInfo>> _metaData(
+      String list, String show, String url) async {
+    List<dynamic> dataList = await HttpRequest.getResource(list);
     List<NodeInfo> nodes = [];
-    for (String id in list) {
-      Map<String, dynamic> map = await
-          HttpRequest.getResource(MCDATI + type + '_show?id=' + id);
+    for (String id in dataList) {
+      Map<String, dynamic> map = await HttpRequest.getResource(show + id);
       if (map['package_count'] > 0) {
         nodes.add(NodeInfo(map['display_name'], map['description'],
-            prelink + map['name'], map['image_display_url']));
+            url + map['name'], map['image_display_url']));
       }
     }
     return nodes;

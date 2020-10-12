@@ -9,13 +9,6 @@ class NodeInfo {
       this._image = null;
   }
 
-  NodeInfo.fromJson(Map<String, dynamic> jsonp) {
-    this._name = jsonp['display_name'];
-    this._description = jsonp['description'];
-    this._url = jsonp['name'];
-    this._image = jsonp['image_display_url'];
-  }
-
   String get image => _image;
 
   String get url => _url;
