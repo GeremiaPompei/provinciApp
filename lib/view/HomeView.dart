@@ -11,6 +11,7 @@ import 'package:MC/view/LoadingView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'EmptyView.dart';
 import 'ScrollListView.dart';
 
 class HomeView extends StatefulWidget {
@@ -40,7 +41,7 @@ class _HomeViewState extends State<HomeView> {
     init(this._index);
   }
 
-  Future findPosition() async {
+  Future _findPosition() async {
     await this._controller.tryConnection();
     final Geolocator geolocator = Geolocator()..forceAndroidLocationManager;
     Position position = await geolocator.getCurrentPosition(
@@ -49,9 +50,7 @@ class _HomeViewState extends State<HomeView> {
         await geolocator.placemarkFromPosition(position);
     this._location = placemark[0].locality;
     return this._controller.setSearch(
-        this._location,
-        MCDATASET_SEARCH + this._location,
-        IconPosition);
+        this._location, MCDATASET_SEARCH + this._location, IconPosition);
   }
 
   Widget initWidgetFuture(Future<dynamic> Function() func, Widget input) =>
@@ -122,13 +121,18 @@ class _HomeViewState extends State<HomeView> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => FutureBuilder<dynamic>(
-                              future: findPosition(),
+                              future: _findPosition(),
                               builder: (BuildContext context,
                                   AsyncSnapshot<dynamic> snapshot) {
                                 Widget varWidget;
-                                if (snapshot.hasData)
+                                if (snapshot.hasData) if (snapshot
+                                    .data.isNotEmpty)
                                   varWidget = ScrollListView(
                                       this._controller, this._location);
+                                else
+                                  varWidget = Scaffold(
+                                    body: EmptyView(this._location),
+                                  );
                                 else if (snapshot.hasError)
                                   varWidget = OfflineView('Find Position');
                                 else
