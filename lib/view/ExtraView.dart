@@ -30,78 +30,78 @@ class _ExtraViewState extends State<ExtraView> {
 
   @override
   Widget build(BuildContext context) {
-    return Flex(direction: Axis.vertical, children: <Widget>[
-      Flexible(
-          child: ListView(
-        children: [
-          Card(
-              color: BackgroundColor2,
-              child: ListTile(
-                title: Text('Eventi'),
-                leading: Stack(alignment: Alignment.center, children: [
-                  Image.asset('assets/empty.png'),
-                  Icon(
-                    Icons.event_available,
-                    color: ThemeSecondaryColor,
-                  )
-                ]),
-                onTap: () {
-                  setState(() {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => FutureBuilder<dynamic>(
-                                  future: this._eventsF,
-                                  builder: (BuildContext context,
-                                      AsyncSnapshot<dynamic> snapshot) {
-                                    Widget varWidget;
-                                    if (snapshot.hasData)
-                                      varWidget = EventiView(this._controller);
-                                    else if (snapshot.hasError)
-                                      varWidget = OfflineView('Eventi');
-                                    else
-                                      varWidget = LoadingView();
-                                    return varWidget;
-                                  },
-                                )));
-                  });
-                },
-              )),
-          Card(
-            color: BackgroundColor2,
-            child: ListTile(
-                title: Text('Promo'),
-                leading: Stack(alignment: Alignment.center, children: [
-                  Image.asset('assets/empty.png'),
-                  Icon(
-                    Icons.monetization_on,
-                    color: ThemeSecondaryColor,
-                  )
-                ]),
-                onTap: () {
-                  setState(() {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => FutureBuilder<dynamic>(
-                                  future: this._promosF,
-                                  builder: (BuildContext context,
-                                      AsyncSnapshot<dynamic> snapshot) {
-                                    Widget varWidget;
-                                    if (snapshot.hasData)
-                                      varWidget = PromoView(this._controller);
-                                    else if (snapshot.hasError)
-                                      varWidget = OfflineView('Promo');
-                                    else
-                                      varWidget = LoadingView();
-                                    return varWidget;
-                                  },
-                                )));
-                  });
-                }),
-          ),
-        ],
-      ))
-    ]);
+    return Padding(
+        padding: EdgeInsets.all(8),
+        child: Flex(direction: Axis.vertical, children: <Widget>[
+          Flexible(
+              child: ListView(
+            children: [
+              Card(
+                  color: ThemePrimaryColor,
+                  child: ListTile(
+                    title: Text('Eventi',style: ReverseTitleTextStyle),
+                    leading: Icon(
+                      Icons.event_available,
+                      color: BackgroundColor,
+                      size: 35,
+                    ),
+                    onTap: () {
+                      setState(() {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => FutureBuilder<dynamic>(
+                                      future: this._eventsF,
+                                      builder: (BuildContext context,
+                                          AsyncSnapshot<dynamic> snapshot) {
+                                        Widget varWidget;
+                                        if (snapshot.hasData)
+                                          varWidget =
+                                              EventiView(this._controller);
+                                        else if (snapshot.hasError)
+                                          varWidget = OfflineView('Eventi');
+                                        else
+                                          varWidget = LoadingView();
+                                        return varWidget;
+                                      },
+                                    )));
+                      });
+                    },
+                  )),
+              Card(
+                color: ThemePrimaryColor,
+                child: ListTile(
+                    title: Text('Promo',style: ReverseTitleTextStyle,),
+                    leading: Icon(
+                      Icons.monetization_on,
+                      color: BackgroundColor,
+                      size: 35,
+                    ),
+                    onTap: () {
+                      setState(() {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => FutureBuilder<dynamic>(
+                                      future: this._promosF,
+                                      builder: (BuildContext context,
+                                          AsyncSnapshot<dynamic> snapshot) {
+                                        Widget varWidget;
+                                        if (snapshot.hasData)
+                                          varWidget =
+                                              PromoView(this._controller);
+                                        else if (snapshot.hasError)
+                                          varWidget = OfflineView('Promo');
+                                        else
+                                          varWidget = LoadingView();
+                                        return varWidget;
+                                      },
+                                    )));
+                      });
+                    }),
+              ),
+            ],
+          ))
+        ]));
   }
 }

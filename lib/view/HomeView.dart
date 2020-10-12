@@ -106,7 +106,7 @@ class _HomeViewState extends State<HomeView> {
       backgroundColor: BackgroundColor,
       appBar: AppBar(
         brightness: Brightness.light,
-        backgroundColor: BackgroundColor,
+        backgroundColor: BackgroundColor2,
         title: Text(
           _title,
           style: TitleTextStyle,

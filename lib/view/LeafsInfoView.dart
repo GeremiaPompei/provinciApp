@@ -72,10 +72,18 @@ class _LeafsInfoViewState extends State<LeafsInfoView> {
                       },
                     ),
                     leading: Container(
-                      height: 95,
+                      height: 55,
                       child: this._leafs[index].imageFile == null
-                          ? Icon(Icons.not_interested)
-                          : Image.file(this._leafs[index].imageFile),
+                          ? Container(
+                              height: 55,
+                              width: 55,
+                              child: Image.asset('assets/logo_mc.PNG'),
+                            )
+                          : Container(
+                              height: 55,
+                              width: 55,
+                              child: Image.file(this._leafs[index].imageFile),
+                            ),
                     ),
                     title: Text(
                       '${_leafs[index].name}',

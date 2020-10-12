@@ -9,7 +9,7 @@ const TitleTextStyle = TextStyle(
 const TitleTextStyle_20 = TextStyle(
   fontFamily: 'Poppins',
   fontSize: 17,
-  color: Colors.black,
+  color: DarkColor,
 );
 const ReverseTitleTextStyle = TextStyle(
   fontFamily: 'Poppins',
@@ -24,9 +24,10 @@ const TitleDetaileStyle = TextStyle(
 );
 
 const ThemePrimaryColor = Color.fromARGB(255, 72, 179, 179);
-const ThemeSecondaryColor = Color(0xFFA35034);
+const ThemeSecondaryColor = Color.fromARGB(255, 237, 249, 249);//Color(0xFFC62828);
 const BackgroundColor = Color.fromARGB(255, 237, 249, 249);
-const BackgroundColor2 = Colors.white;
+const BackgroundColor2 = Color.fromARGB(255, 250, 255, 250);
+const DarkColor = Colors.black;
 
 final IconSearch = Icons.search.codePoint;
 final IconCategory = Icons.widgets.codePoint;

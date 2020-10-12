@@ -39,10 +39,9 @@ class _OrganizationsViewState extends State<OrganizationsView> {
           Widget tmpWidget;
           if (snapshot.hasError || this._nodes[index].image == null)
             tmpWidget = Container(
-              child: Icon(
-                Icons.not_interested,
-                color: ThemeSecondaryColor,
-              ),
+              height: 55,
+              width: 55,
+              child: Image.asset('assets/logo_mc.PNG'),
             );
           else if (snapshot.hasData)
             tmpWidget = Image(image: NetworkImage(this._nodes[index].image));
