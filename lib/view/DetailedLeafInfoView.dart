@@ -18,7 +18,8 @@ class DetailedLeafInfoView extends StatefulWidget {
   Controller _controller;
   Image _image;
 
-  DetailedLeafInfoView(this._title, this._leafInfo, this._controller, this._image);
+  DetailedLeafInfoView(
+      this._title, this._leafInfo, this._controller, this._image);
 
   @override
   _DetailedLeafInfoViewState createState() => _DetailedLeafInfoViewState(
@@ -188,7 +189,8 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
                     onOpen: (LinkableElement link) async {
                       if (await canLaunch(
                           this._leafInfo.info.values.toList()[index]))
-                        await launch(this._leafInfo.info.values.toList()[index]);
+                        await launch(
+                            this._leafInfo.info.values.toList()[index]);
                     },
                   ),
                 ),
@@ -232,6 +234,15 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
                 brightness: Brightness.light,
                 backgroundColor: Colors.transparent,
                 elevation: 0,
+                leading: IconButton(
+                  icon: Icon(
+                    Icons.arrow_back_ios,
+                    color: BackgroundColor,
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
                 actions: <Widget>[
                   IconButton(
                     icon: this._icon,

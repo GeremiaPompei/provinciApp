@@ -77,21 +77,35 @@ class _SavedWidgetState extends State<SavedWidget> {
                               .contains(this._controller.getOffline()[index])) {
                             this._controller.removeOffline(
                                 this._controller.getOffline()[index]);
-                            icon = Icon(Icons.add_circle_outline);
                           } else {
                             this._controller.addOffline(
                                 this._controller.getOffline()[index]);
-                            icon = Icon(Icons.remove_circle_outline);
                           }
                         });
                       },
                     ),
-                    leading:
-                        this._controller.getOffline()[index].imageFile == null
-                            ? null
-                            : Image.file(
-                                this._controller.getOffline()[index].imageFile),
-                    title: Text('${this._controller.getOffline()[index].name}'),
+                    leading: Container(
+                      height: 55,
+                      child:
+                          this._controller.getOffline()[index].imageFile == null
+                              ? Container(
+                                  height: 55,
+                                  width: 55,
+                                  child: Image.asset('assets/logo_mc.PNG'),
+                                )
+                              : Container(
+                                  height: 55,
+                                  width: 55,
+                                  child: Image.file(this
+                                      ._controller
+                                      .getOffline()[index]
+                                      .imageFile),
+                                ),
+                    ),
+                    title: Text(
+                      '${this._controller.getOffline()[index].name}',
+                      maxLines: 2,
+                    ),
                     subtitle: this
                                 ._controller
                                 .getOffline()
@@ -100,7 +114,9 @@ class _SavedWidgetState extends State<SavedWidget> {
                             null
                         ? Text('')
                         : Text(
-                            '${this._controller.getOffline()[index].description}'),
+                            '${this._controller.getOffline()[index].description}',
+                            maxLines: 2,
+                          ),
                     onTap: () {
                       Navigator.push(
                           context,
@@ -121,7 +137,11 @@ class _SavedWidgetState extends State<SavedWidget> {
                                                 .getOffline()[index]
                                                 .imageFile,
                                           ),
-                                  )));
+                                  ))).then((value) {
+                        setState(() {
+                          (context as Element).reassemble();
+                        });
+                      });
                     }));
           },
         ),

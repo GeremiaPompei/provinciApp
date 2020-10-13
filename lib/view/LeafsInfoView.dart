@@ -111,7 +111,11 @@ class _LeafsInfoViewState extends State<LeafsInfoView> {
                                     ),
                             ),
                           ),
-                        );
+                        ).then((value) {
+                          setState(() {
+                            (context as Element).reassemble();
+                          });
+                        });
                       });
                     }),
               ),
