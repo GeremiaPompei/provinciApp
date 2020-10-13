@@ -184,9 +184,10 @@ class _HomeViewState extends State<HomeView> {
         ],
       ),
       body: _varWidget,
-      bottomNavigationBar: BottomAppBar(
-        color: BackgroundColor,
-        child: Padding(
+      bottomNavigationBar: Material(
+        elevation: 8.0,
+        child: Container(
+          color: BackgroundColor,
           padding: EdgeInsets.only(top: 10),
           child: BottomButtonDown(onItemTapped, this._index),
         ),
