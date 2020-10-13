@@ -54,9 +54,9 @@ class _CategoriesViewState extends State<CategoriesView> {
       header: ClassicHeader(),
       controller: _refreshController,
       onRefresh: () {
-        this._controller.getCategories().removeWhere((element) => true);
-        this._controller.initCategories().then((value) {
-          setState(() {
+        setState(() {
+          this._controller.getCategories().removeWhere((element) => true);
+          this._controller.initCategories().then((value) {
             this._nodes = this._controller.getCategories();
             (context as Element).reassemble();
             _refreshController.refreshCompleted();
@@ -66,7 +66,7 @@ class _CategoriesViewState extends State<CategoriesView> {
       child: ListView(
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
-        padding: const EdgeInsets.all(2),
+        padding: EdgeInsets.all(15),
         children: List.generate(
           this._nodes.length,
           (index) {
@@ -74,68 +74,69 @@ class _CategoriesViewState extends State<CategoriesView> {
               height: 100,
               margin: const EdgeInsets.symmetric(
                 vertical: 10.0,
-                horizontal: 20.0,
               ),
-              child: FlatButton(
-                child: new Stack(
-                  children: <Widget>[
-                    new Container(
-                      height: 124.0,
-                      width: MediaQuery.of(context).size.width,
-                      margin: new EdgeInsets.only(left: 46.0),
-                      child: Center(
-                          child: Text(
-                        this._nodes[index].name.toString(),
-                        style: TitleTextStyle_20,
-                      )),
-                      decoration: new BoxDecoration(
-                        color: BackgroundColor2,
-                        shape: BoxShape.rectangle,
-                        borderRadius: new BorderRadius.circular(8.0),
-                        boxShadow: <BoxShadow>[
-                          new BoxShadow(
-                            color: Colors.black12,
-                            blurRadius: 10.0,
-                            offset: new Offset(0.0, 10.0),
-                          ),
-                        ],
-                      ),
+              child: new Stack(
+                children: <Widget>[
+                  new Container(
+                    height: 124.0,
+                    width: MediaQuery.of(context).size.width,
+                    margin: new EdgeInsets.only(left: 46.0),
+                    child: Center(
+                        child: Text(
+                      this._nodes[index].name.toString(),
+                      style: TitleTextStyle_20,
+                    )),
+                    decoration: new BoxDecoration(
+                      color: BackgroundColor2,
+                      shape: BoxShape.rectangle,
+                      borderRadius: new BorderRadius.circular(8.0),
+                      boxShadow: <BoxShadow>[
+                        new BoxShadow(
+                          color: Colors.black12,
+                          blurRadius: 10.0,
+                          offset: new Offset(0.0, 10.0),
+                        ),
+                      ],
                     ),
-                    new Container(
-                        margin: new EdgeInsets.symmetric(vertical: 10.0),
-                        alignment: FractionalOffset.centerLeft,
-                        child: _getImage(index)),
-                  ],
-                ),
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => FutureBuilder<dynamic>(
-                                future: _controller.setSearch(
-                                    this._nodes[index].name,
-                                    this._controller.getCategories()[index].url,
-                                    IconCategory),
-                                builder: (BuildContext context,
-                                    AsyncSnapshot<dynamic> snapshot) {
-                                  Widget tmpWidget;
-                                  if (snapshot.hasData) if (snapshot
-                                      .data.isNotEmpty)
-                                    tmpWidget = ScrollListView(this._controller,
-                                        this._nodes[index].name);
-                                  else
-                                    tmpWidget = Scaffold(
-                                      body: EmptyView(this._nodes[index].name),
-                                    );
-                                  else if (snapshot.hasError)
-                                    tmpWidget =
-                                        OfflineView(this._nodes[index].name);
-                                  else
-                                    tmpWidget = LoadingView();
-                                  return tmpWidget;
-                                },
-                              )));
-                },
+                  ),
+                  new Container(
+                      margin: new EdgeInsets.symmetric(vertical: 10.0),
+                      alignment: FractionalOffset.centerLeft,
+                      child: _getImage(index)),
+                  FlatButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => FutureBuilder<dynamic>(
+                              future: _controller.setSearch(
+                                  this._nodes[index].name,
+                                  this._controller.getCategories()[index].url,
+                                  IconCategory),
+                              builder: (BuildContext context,
+                                  AsyncSnapshot<dynamic> snapshot) {
+                                Widget tmpWidget;
+                                if (snapshot.hasData) if (snapshot
+                                    .data.isNotEmpty)
+                                  tmpWidget = ScrollListView(this._controller,
+                                      this._nodes[index].name);
+                                else
+                                  tmpWidget = Scaffold(
+                                    body: EmptyView(this._nodes[index].name),
+                                  );
+                                else if (snapshot.hasError)
+                                  tmpWidget =
+                                      OfflineView(this._nodes[index].name);
+                                else
+                                  tmpWidget = LoadingView();
+                                return tmpWidget;
+                              },
+                            ),
+                          ),
+                        );
+                      },
+                      child: Container())
+                ],
               ),
             );
           },

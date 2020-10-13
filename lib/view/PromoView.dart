@@ -53,14 +53,14 @@ class _PromoViewState extends State<PromoView> {
             return Container(
                 color: BackgroundColor2,
                 child: ListTile(
-                    title: Text(this._controller.getPromos()[index].name),
-                    subtitle:
-                        Text(this._controller.getPromos()[index].description),
-                    leading: this._controller.getPromos()[index].image != null
-                        ? Image(
-                            image: NetworkImage(
-                                this._controller.getPromos()[index].image))
-                        : null,
+                    title: Text(
+                      this._controller.getPromos()[index].name,
+                      maxLines: 2,
+                    ),
+                    subtitle: Text(
+                      this._controller.getPromos()[index].description,
+                      maxLines: 2,
+                    ),
                     onTap: () async {
                       if (await canLaunch(
                           this._controller.getPromos()[index].url)) {

@@ -93,7 +93,7 @@ class _ScrollListViewState extends State<ScrollListView> {
                     Icon(
                       IconData(findImage(this._nodes[index].name),
                           fontFamily: 'MaterialIcons'),
-                      color: ThemeSecondaryColor,
+                      color: BackgroundColor,
                     )
                   ]),
                   onTap: () {

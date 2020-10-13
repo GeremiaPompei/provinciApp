@@ -87,7 +87,8 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
                       child: Row(
                         children: <Widget>[
                           Icon(
-                            (Icons.call),
+                            Icons.call,
+                            color: DarkColor,
                           ),
                           Text('${this._leafInfo.telefono[index]}')
                         ],
@@ -97,11 +98,11 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
             ? null
             : CircleAvatar(
                 radius: 20,
-                backgroundColor: Colors.white,
+                backgroundColor: BackgroundColor,
                 child: IconButton(
                   icon: Icon(
                     Icons.email,
-                    color: Colors.black,
+                    color: DarkColor,
                   ),
                   onPressed: () async {
                     await launch('mailto:${this._leafInfo.email}');
@@ -111,11 +112,11 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
         'Share': this._leafInfo.url != null
             ? CircleAvatar(
                 radius: 20,
-                backgroundColor: Colors.white,
+                backgroundColor: BackgroundColor,
                 child: IconButton(
                   icon: Icon(
                     Icons.share,
-                    color: Colors.black,
+                    color: DarkColor,
                   ),
                   onPressed: () {
                     setState(() {
@@ -132,12 +133,12 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
             ? null
             : CircleAvatar(
                 radius: 20,
-                backgroundColor: Colors.white,
+                backgroundColor: BackgroundColor,
                 child: IconButton(
                   onPressed: () => openMapsSheet(context),
                   icon: Icon(
                     Icons.location_on,
-                    color: Colors.black,
+                    color: DarkColor,
                   ),
                 ),
               ),
@@ -166,7 +167,8 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
                               this._leafInfo.position[1]),
                           builder: (ctx) => Container(
                             child: Icon(
-                              (Icons.location_on),
+                              Icons.location_on,
+                              color: DarkColor,
                             ),
                           ),
                         ),
@@ -201,11 +203,11 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
             ? null
             : CircleAvatar(
                 radius: 20,
-                backgroundColor: Colors.white,
+                backgroundColor: BackgroundColor,
                 child: IconButton(
                   icon: Icon(
                     Icons.link,
-                    color: Colors.black,
+                    color: DarkColor,
                   ),
                   onPressed: () {
                     launch(this._leafInfo.url);
@@ -225,13 +227,14 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
     listW.removeWhere((element) => element == null);
     return Scaffold(
         backgroundColor: ThemePrimaryColor,
-        body: SingleChildScrollView(
-            child: Padding(
-          padding: EdgeInsets.all(20),
+        body: Padding(
+          padding: EdgeInsets.fromLTRB(0, 22, 0, 0),
+            child: SingleChildScrollView(
+                child: Padding(
+          padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
           child: Column(
             children: [
               AppBar(
-                brightness: Brightness.light,
                 backgroundColor: Colors.transparent,
                 elevation: 0,
                 leading: IconButton(
@@ -286,7 +289,7 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
               ),
             ],
           ),
-        )));
+        ))));
   }
 
   Widget containerRound(Widget child, String title) => child != null

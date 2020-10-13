@@ -58,9 +58,9 @@ class _OrganizationsViewState extends State<OrganizationsView> {
         header: ClassicHeader(),
         controller: _refreshController,
         onRefresh: () {
-          this._controller.getOrganizations().removeWhere((element) => true);
+          setState(() {
+            this._controller.getOrganizations().removeWhere((element) => true);
           this._controller.initOrganizations().then((value) {
-            setState(() {
               this._nodes = this._controller.getOrganizations();
               (context as Element).reassemble();
               _refreshController.refreshCompleted();
@@ -71,7 +71,7 @@ class _OrganizationsViewState extends State<OrganizationsView> {
           scrollDirection: Axis.vertical,
           primary: false,
           shrinkWrap: true,
-          padding: const EdgeInsets.all(8),
+          padding: const EdgeInsets.all(10),
           crossAxisCount: 2,
           children: List.generate(
               this._nodes.length,

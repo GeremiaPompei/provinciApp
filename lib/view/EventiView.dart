@@ -53,12 +53,17 @@ class _EventiViewState extends State<EventiView> {
                 color: BackgroundColor2,
                 child: ListTile(
                     title: Text(
-                        this._controller.getEvents()[index].name.toString()),
-                    subtitle: Text(this
-                        ._controller
-                        .getEvents()[index]
-                        .description
-                        .toString()),
+                      this._controller.getEvents()[index].name.toString(),
+                      maxLines: 2,
+                    ),
+                    subtitle: Text(
+                      this
+                          ._controller
+                          .getEvents()[index]
+                          .description
+                          .toString(),
+                      maxLines: 2,
+                    ),
                     leading: this._controller.getEvents()[index].image != null
                         ? Image(
                             image: NetworkImage(

@@ -25,25 +25,21 @@ class _BottomButtonDownState extends State<BottomButtonDown> {
     return CurvedNavigationBar(
       index: this._index,
       color: ThemePrimaryColor,
-      backgroundColor: BackgroundColor,
+      backgroundColor: BackgroundColor2,
       buttonBackgroundColor: ThemePrimaryColor,
       items: <Widget>[
         Icon(
-          IconData(IconSearch, fontFamily: 'MaterialIcons'),
-          color: ThemeSecondaryColor,
+          IconData(IconComune, fontFamily: 'MaterialIcons'),
+          color: BackgroundColor,
         ),
         Icon(
-          IconData(IconComune, fontFamily: 'MaterialIcons'),
-          color: ThemeSecondaryColor,
+          IconData(IconSearch, fontFamily: 'MaterialIcons'),
+          color: BackgroundColor,
         ),
         Icon(
           IconData(IconCategory, fontFamily: 'MaterialIcons'),
-          color: ThemeSecondaryColor,
+          color: BackgroundColor,
         ),
-        Icon(
-          Icons.comment,
-          color: ThemeSecondaryColor,
-        )
       ],
       animationDuration: Duration(milliseconds: 300),
       animationCurve: Curves.easeInOutCirc,

@@ -10,10 +10,10 @@ void main() {
       debugShowCheckedModeBanner: false,
       home: HomeView(
         controller,
-        0,
+        1,
       ),
       routes: {
-        '/online': (context) => HomeView(controller, 0),
+        '/online': (context) => HomeView(controller, 1),
         '/offline': (context) => SavedWidget(controller),
       }));
 }

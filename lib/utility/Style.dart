@@ -21,10 +21,11 @@ const TitleDetaileStyle = TextStyle(
   fontFamily: 'Poppins',
   fontWeight: FontWeight.w600,
   fontSize: 20,
+  color: ThemePrimaryColor,
 );
 
 const ThemePrimaryColor = Color.fromARGB(255, 72, 179, 179);
-const ThemeSecondaryColor = Color.fromARGB(255, 237, 249, 249);//Color(0xFFC62828);
+const ThemeSecondaryColor = Color(0xFFC62828);
 const BackgroundColor = Color.fromARGB(255, 237, 249, 249);
 const BackgroundColor2 = Color.fromARGB(255, 250, 255, 250);
 const DarkColor = Colors.black;
@@ -32,7 +33,7 @@ const DarkColor = Colors.black;
 final IconSearch = Icons.search.codePoint;
 final IconCategory = Icons.widgets.codePoint;
 final IconComune = Icons.account_balance.codePoint;
-final IconPosition = Icons.comment.codePoint;
+final IconPosition = Icons.location_on.codePoint;
 
 int findImage(String name) {
   if (name.contains('Musei') ||

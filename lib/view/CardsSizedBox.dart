@@ -55,7 +55,7 @@ class _CardsSizedBoxState extends State<CardsSizedBox> {
                                 : Icon(
                                     IconData((this._list[i].value.icon),
                                         fontFamily: 'MaterialIcons'),
-                                    color: ThemeSecondaryColor,
+                                    color: BackgroundColor,
                                   ),
                           ],
                         ),

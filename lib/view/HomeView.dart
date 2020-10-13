@@ -72,24 +72,19 @@ class _HomeViewState extends State<HomeView> {
     this._index = index;
     switch (index) {
       case 0:
-        this._title = 'Esplora';
-        this._varWidget = initWidgetFuture(
-            () => this._esploraF, EsploraView(this._controller));
-        break;
-      case 1:
         this._title = 'Comuni';
         this._varWidget = initWidgetFuture(
             () => this._organizationsF, OrganizationsView(this._controller));
+        break;
+      case 1:
+        this._title = 'Esplora';
+        this._varWidget = initWidgetFuture(
+            () => this._esploraF, EsploraView(this._controller));
         break;
       case 2:
         this._title = 'Categorie';
         this._varWidget = initWidgetFuture(
             () => this._categoriesF, CategoriesView(this._controller));
-        break;
-      case 3:
-        this._title = 'Extra';
-        this._varWidget = initWidgetFuture(
-            () => Future(() => 0), ExtraView(this._controller));
         break;
     }
   }
@@ -113,33 +108,69 @@ class _HomeViewState extends State<HomeView> {
         ),
         actions: [
           IconButton(
+              icon: Icon(
+                Icons.extension_rounded,
+                color: ThemePrimaryColor,
+              ),
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    backgroundColor: BackgroundColor,
+                    content: Container(
+                      height: MediaQuery.of(context).size.width,
+                      width: MediaQuery.of(context).size.width,
+                      child: ExtraView(this._controller),
+                    ),
+                    actions: [
+                      FlatButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: Text(
+                            'Indietro',
+                            style: TitleDetaileStyle,
+                          ))
+                    ],
+                  ),
+                );
+              }),
+          IconButton(
             color: ThemePrimaryColor,
-            icon: Icon(Icons.location_on),
+            icon: Icon(
+              IconData(IconPosition, fontFamily: 'MaterialIcons'),
+              color: ThemePrimaryColor,
+            ),
             onPressed: () {
               setState(() {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => FutureBuilder<dynamic>(
-                              future: _findPosition(),
-                              builder: (BuildContext context,
-                                  AsyncSnapshot<dynamic> snapshot) {
-                                Widget varWidget;
-                                if (snapshot.hasData) if (snapshot
-                                    .data.isNotEmpty)
-                                  varWidget = ScrollListView(
-                                      this._controller, this._location);
-                                else
-                                  varWidget = Scaffold(
-                                    body: EmptyView(this._location),
-                                  );
-                                else if (snapshot.hasError)
-                                  varWidget = OfflineView('Find Position');
-                                else
-                                  varWidget = LoadingView();
-                                return varWidget;
-                              },
-                            )));
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => FutureBuilder<dynamic>(
+                      future: _findPosition(),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<dynamic> snapshot) {
+                        Widget varWidget;
+                        if (snapshot.hasData) if (snapshot.data.isNotEmpty)
+                          varWidget =
+                              ScrollListView(this._controller, this._location);
+                        else
+                          varWidget = Scaffold(
+                            body: EmptyView(this._location),
+                          );
+                        else if (snapshot.hasError)
+                          varWidget = OfflineView('Find Position');
+                        else
+                          varWidget = LoadingView();
+                        return varWidget;
+                      },
+                    ),
+                  ),
+                ).then((value) {
+                  setState(() {
+                    (context as Element).reassemble();
+                  });
+                });
               });
             },
           ),
@@ -153,7 +184,13 @@ class _HomeViewState extends State<HomeView> {
         ],
       ),
       body: _varWidget,
-      bottomNavigationBar: BottomButtonDown(onItemTapped, this._index),
+      bottomNavigationBar: BottomAppBar(
+        color: BackgroundColor2,
+        child: Padding(
+          padding: EdgeInsets.only(top: 10),
+          child: BottomButtonDown(onItemTapped, this._index),
+        ),
+      ),
     );
   }
 }
