@@ -76,7 +76,7 @@ class _OrganizationsViewState extends State<OrganizationsView> {
           children: List.generate(
               this._nodes.length,
               (index) => Card(
-                    color: BackgroundColor2,
+                    color: BackgroundColor,
                     child: FlatButton(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -87,7 +87,7 @@ class _OrganizationsViewState extends State<OrganizationsView> {
                             child: Text(
                               this._nodes[index].name,
                               style: TitleTextStyle_20,
-                              maxLines: 3,
+                              maxLines: 2,
                             ),
                           ),
                         ],

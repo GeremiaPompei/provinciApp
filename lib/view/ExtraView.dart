@@ -37,7 +37,7 @@ class _ExtraViewState extends State<ExtraView> {
               child: ListView(
             children: [
               Card(
-                  color: ThemePrimaryColor,
+                  color: PrimaryColor,
                   child: ListTile(
                     title: Text('Eventi',style: ReverseTitleTextStyle),
                     leading: Icon(
@@ -69,7 +69,7 @@ class _ExtraViewState extends State<ExtraView> {
                     },
                   )),
               Card(
-                color: ThemePrimaryColor,
+                color: PrimaryColor,
                 child: ListTile(
                     title: Text('Promo',style: ReverseTitleTextStyle,),
                     leading: Icon(

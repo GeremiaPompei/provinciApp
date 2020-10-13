@@ -226,7 +226,7 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
     ];
     listW.removeWhere((element) => element == null);
     return Scaffold(
-        backgroundColor: ThemePrimaryColor,
+        backgroundColor: PrimaryColor,
         body: Padding(
           padding: EdgeInsets.fromLTRB(0, 22, 0, 0),
             child: SingleChildScrollView(

@@ -7,7 +7,7 @@ class LoadingView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: BackgroundColor,
+      backgroundColor: BackgroundColor2,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -25,7 +25,7 @@ class LoadingView extends StatelessWidget {
                 height: 200,
               ),
               SpinKitCubeGrid(
-                color: ThemePrimaryColor,
+                color: PrimaryColor,
                 duration: Duration(milliseconds: 1000),
               ),
             ],

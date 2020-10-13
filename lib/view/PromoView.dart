@@ -29,7 +29,7 @@ class _PromoViewState extends State<PromoView> {
           'Promo',
           style: ReverseTitleTextStyle,
         ),
-        backgroundColor: ThemePrimaryColor,
+        backgroundColor: PrimaryColor,
       ),
       body: SmartRefresher(
         enablePullDown: true,
@@ -51,7 +51,6 @@ class _PromoViewState extends State<PromoView> {
           itemCount: this._controller.getPromos().length,
           itemBuilder: (context, index) {
             return Container(
-                color: BackgroundColor2,
                 child: ListTile(
                     title: Text(
                       this._controller.getPromos()[index].name,

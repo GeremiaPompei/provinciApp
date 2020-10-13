@@ -40,7 +40,7 @@ class _OfflineViewState extends State<OfflineView> {
               leading: IconButton(
                 icon: Icon(
                   Icons.arrow_back_ios,
-                  color: ThemePrimaryColor,
+                  color: PrimaryColor,
                 ),
                 onPressed: () {
                   Navigator.pop(context);

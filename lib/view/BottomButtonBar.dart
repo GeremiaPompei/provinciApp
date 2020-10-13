@@ -24,9 +24,9 @@ class _BottomButtonDownState extends State<BottomButtonDown> {
   Widget build(BuildContext context) {
     return CurvedNavigationBar(
       index: this._index,
-      color: ThemePrimaryColor,
-      backgroundColor: BackgroundColor2,
-      buttonBackgroundColor: ThemePrimaryColor,
+      color: PrimaryColor,
+      backgroundColor: BackgroundColor,
+      buttonBackgroundColor: PrimaryColor,
       items: <Widget>[
         Icon(
           IconData(IconComune, fontFamily: 'MaterialIcons'),

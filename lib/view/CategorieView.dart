@@ -87,7 +87,7 @@ class _CategoriesViewState extends State<CategoriesView> {
                       style: TitleTextStyle_20,
                     )),
                     decoration: new BoxDecoration(
-                      color: BackgroundColor2,
+                      color: BackgroundColor,
                       shape: BoxShape.rectangle,
                       borderRadius: new BorderRadius.circular(8.0),
                       boxShadow: <BoxShadow>[

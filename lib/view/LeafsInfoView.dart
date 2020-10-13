@@ -27,9 +27,9 @@ class _LeafsInfoViewState extends State<LeafsInfoView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: BackgroundColor,
+      backgroundColor: BackgroundColor2,
       appBar: AppBar(
-        backgroundColor: ThemePrimaryColor,
+        backgroundColor: PrimaryColor,
         title: Text(
           _title,
           style: ReverseTitleTextStyle,
@@ -54,7 +54,7 @@ class _LeafsInfoViewState extends State<LeafsInfoView> {
               alignment: Alignment.center,
               height: 85,
               child: Card(
-                color: BackgroundColor2,
+                color: BackgroundColor,
                 child: ListTile(
                     trailing: IconButton(
                       icon: icon,

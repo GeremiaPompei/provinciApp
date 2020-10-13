@@ -25,13 +25,13 @@ class _SavedWidgetState extends State<SavedWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: BackgroundColor,
+      backgroundColor: BackgroundColor2,
       appBar: AppBar(
         title: Text(
           'Offline',
           style: ReverseTitleTextStyle,
         ),
-        backgroundColor: ThemePrimaryColor,
+        backgroundColor: PrimaryColor,
         actions: [
           IconButton(
             icon: Icon(Icons.file_upload),
@@ -65,7 +65,7 @@ class _SavedWidgetState extends State<SavedWidget> {
                 ? icon = Icon(Icons.remove_circle_outline)
                 : icon = Icon(Icons.add_circle_outline);
             return Card(
-                color: BackgroundColor2,
+                color: BackgroundColor,
                 child: ListTile(
                     trailing: IconButton(
                       icon: icon,

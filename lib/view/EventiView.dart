@@ -29,7 +29,7 @@ class _EventiViewState extends State<EventiView> {
             'Eventi',
             style: ReverseTitleTextStyle,
           ),
-          backgroundColor: ThemePrimaryColor),
+          backgroundColor: PrimaryColor),
       body: SmartRefresher(
         enablePullDown: true,
         header: ClassicHeader(),
@@ -50,7 +50,6 @@ class _EventiViewState extends State<EventiView> {
           itemCount: this._controller.getEvents().length,
           itemBuilder: (context, index) {
             return Container(
-                color: BackgroundColor2,
                 child: ListTile(
                     title: Text(
                       this._controller.getEvents()[index].name.toString(),

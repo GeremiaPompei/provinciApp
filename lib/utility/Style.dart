@@ -4,10 +4,11 @@ const TitleTextStyle = TextStyle(
   fontFamily: 'Poppins',
   fontWeight: FontWeight.w900,
   fontSize: 35,
-  color: ThemePrimaryColor,
+  color: PrimaryColor,
 );
 const TitleTextStyle_20 = TextStyle(
   fontFamily: 'Poppins',
+  fontWeight: FontWeight.w400,
   fontSize: 17,
   color: DarkColor,
 );
@@ -21,14 +22,13 @@ const TitleDetaileStyle = TextStyle(
   fontFamily: 'Poppins',
   fontWeight: FontWeight.w600,
   fontSize: 20,
-  color: ThemePrimaryColor,
+  color: PrimaryColor,
 );
 
-const ThemePrimaryColor = Color.fromARGB(255, 72, 179, 179);
-const ThemeSecondaryColor = Color(0xFFC62828);
-const BackgroundColor = Color.fromARGB(255, 237, 249, 249);
-const BackgroundColor2 = Color.fromARGB(255, 250, 255, 250);
-const DarkColor = Colors.black;
+const PrimaryColor = Color.fromARGB(255, 72, 179, 179);
+const BackgroundColor = Color.fromARGB(255, 250, 255, 250);
+const BackgroundColor2 = Color.fromARGB(255, 217, 239, 239);
+const DarkColor = Color.fromARGB(255, 20, 20, 20);
 
 final IconSearch = Icons.search.codePoint;
 final IconCategory = Icons.widgets.codePoint;

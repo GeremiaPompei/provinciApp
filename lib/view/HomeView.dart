@@ -98,10 +98,10 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: BackgroundColor,
+      backgroundColor: BackgroundColor2,
       appBar: AppBar(
         brightness: Brightness.light,
-        backgroundColor: BackgroundColor2,
+        backgroundColor: BackgroundColor,
         title: Text(
           _title,
           style: TitleTextStyle,
@@ -110,7 +110,7 @@ class _HomeViewState extends State<HomeView> {
           IconButton(
               icon: Icon(
                 Icons.extension_rounded,
-                color: ThemePrimaryColor,
+                color: PrimaryColor,
               ),
               onPressed: () {
                 showDialog(
@@ -136,10 +136,10 @@ class _HomeViewState extends State<HomeView> {
                 );
               }),
           IconButton(
-            color: ThemePrimaryColor,
+            color: PrimaryColor,
             icon: Icon(
               IconData(IconPosition, fontFamily: 'MaterialIcons'),
-              color: ThemePrimaryColor,
+              color: PrimaryColor,
             ),
             onPressed: () {
               setState(() {
@@ -175,7 +175,7 @@ class _HomeViewState extends State<HomeView> {
             },
           ),
           IconButton(
-            color: ThemePrimaryColor,
+            color: PrimaryColor,
             icon: Icon(Icons.file_download),
             onPressed: () {
               Navigator.pushReplacementNamed(context, '/offline');
@@ -185,7 +185,7 @@ class _HomeViewState extends State<HomeView> {
       ),
       body: _varWidget,
       bottomNavigationBar: BottomAppBar(
-        color: BackgroundColor2,
+        color: BackgroundColor,
         child: Padding(
           padding: EdgeInsets.only(top: 10),
           child: BottomButtonDown(onItemTapped, this._index),

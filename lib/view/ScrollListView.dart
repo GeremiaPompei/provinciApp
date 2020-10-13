@@ -60,7 +60,7 @@ class _ScrollListViewState extends State<ScrollListView> {
           this._title,
           style: ReverseTitleTextStyle,
         ),
-        backgroundColor: ThemePrimaryColor,
+        backgroundColor: PrimaryColor,
         leading: new IconButton(
             icon: new Icon(Icons.arrow_back_ios),
             onPressed: () {

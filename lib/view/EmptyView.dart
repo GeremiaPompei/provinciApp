@@ -33,7 +33,7 @@ class _EmptyViewState extends State<EmptyView> {
                 _title,
                 style: ReverseTitleTextStyle,
               ),
-              backgroundColor: ThemePrimaryColor,
+              backgroundColor: PrimaryColor,
               leading: IconButton(
                 icon: Icon(
                   Icons.arrow_back_ios,
