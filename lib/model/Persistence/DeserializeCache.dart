@@ -40,7 +40,7 @@ class DeserializeCache {
     List<LeafInfo> listRes = [];
     for (int i = 0; i < listIn.length; i++) {
       LeafInfo leaf = LeafInfo(listIn[i]['Json'], url, i);
-      if (listIn[i]['Image File'] != null)
+      if (listIn[i]['Image File'] != 'null')
         leaf.imageFile = await StoreManager.localFile(listIn[i]['Image File']);
       listRes.add(leaf);
     }

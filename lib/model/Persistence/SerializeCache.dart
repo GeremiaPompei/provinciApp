@@ -42,7 +42,7 @@ class SerializeCache {
       Map<String, dynamic> mapTmp = {
         'Json': element.json,
         'Image File': element.imageFile == null
-            ? null.toString()
+            ? 'null'
             : element.imageFile.path,
       };
       listRes.add(mapTmp);

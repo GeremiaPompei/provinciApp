@@ -99,6 +99,7 @@ class Controller {
         this._cache.initCategories(tmpCache.categories);
       }
     }
+    _storeCache();
     return this.getCategories();
   }
 
@@ -113,6 +114,7 @@ class Controller {
         this._cache.initOrganizations(tmpCache.organizations);
       }
     }
+    _storeCache();
     return this.getOrganizations();
   }
 
