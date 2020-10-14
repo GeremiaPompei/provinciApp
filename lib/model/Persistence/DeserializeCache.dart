@@ -11,8 +11,12 @@ class DeserializeCache {
     Map<String, dynamic> jsonMap = json.decode(contents);
     Cache cache = Cache();
     cache.initOrganizations(
-        await _deserializeNodeListInfo(jsonMap['Organizations']));
-    cache.initCategories(await _deserializeNodeListInfo(jsonMap['Categories']));
+        (await _deserializeNodeListInfo(jsonMap['Organizations']))
+            .map((e) async => e)
+            .toList());
+    cache.initCategories((await _deserializeNodeListInfo(jsonMap['Categories']))
+        .map((e) async => e)
+        .toList());
     cache.lastSearch = jsonMap['Last Search'];
     cache.lastLeafs = jsonMap['Last Leafs'];
     cache.search = await _deserializeMapInfo(

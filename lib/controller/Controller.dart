@@ -1,14 +1,14 @@
 import 'dart:io';
+import 'package:MC/model/Cache.dart';
 import 'package:MC/model/Persistence/DeserializeCache.dart';
 import 'package:MC/model/Persistence/DeserializeOffline.dart';
 import 'package:MC/model/Persistence/SerializeCache.dart';
 import 'package:MC/model/Persistence/SerializeOffline.dart';
 import 'package:MC/model/Persistence/StoreManager.dart';
 import 'package:MC/model/UnitCache.dart';
+import 'package:MC/model/Web/HtmlParser.dart';
 import 'package:MC/model/Web/HttpRequest.dart';
-import 'package:MC/model/web/HtmlParser.dart';
 import 'package:MC/model/LeafInfo.dart';
-import 'package:MC/model/Cache.dart';
 import 'package:MC/model/NodeInfo.dart';
 import 'package:MC/utility/Style.dart';
 
@@ -62,7 +62,7 @@ class Controller {
     if (countNodes > this.getOrganizations().length)
       countNodes = this.getOrganizations().length;
     for (int i = countNodes - 1; i >= 0; i--) {
-      NodeInfo node = this.getOrganizations()[i];
+      NodeInfo node = await this.getOrganizations()[i];
       this._cache.search['Empty $i'] = UnitCache(
           null, DateTime.now().subtract(Duration(days: 5)), 'Name', null);
       await setSearch(node.name, node.url, null);
@@ -85,7 +85,8 @@ class Controller {
   Future<dynamic> initCategories() async {
     if (this.getCategories().isEmpty) {
       try {
-        this._cache.initCategories(await HtmlParser.categories());
+        List<Future> list = await HtmlParser.categories();
+        this._cache.initCategories(list);
       } catch (e) {
         Cache tmpCache = await DeserializeCache.deserialize(
             await StoreManager.load(FNCACHE));
@@ -98,7 +99,8 @@ class Controller {
   Future<dynamic> initOrganizations() async {
     if (this.getOrganizations().isEmpty) {
       try {
-        this._cache.initOrganizations(await HtmlParser.organizations());
+      List<Future> list = await HtmlParser.organizations();
+      this._cache.initOrganizations(list);
       } catch (e) {
         Cache tmpCache = await DeserializeCache.deserialize(
             await StoreManager.load(FNCACHE));
@@ -210,11 +212,11 @@ class Controller {
     return this._promos;
   }
 
-  List<NodeInfo> getOrganizations() {
+  List<Future<NodeInfo>> getOrganizations() {
     return this._cache.organizations;
   }
 
-  List<NodeInfo> getCategories() {
+  List<Future<NodeInfo>> getCategories() {
     return this._cache.categories;
   }
 

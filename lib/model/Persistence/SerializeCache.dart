@@ -19,16 +19,18 @@ class SerializeCache {
     return json.encode(jsonMap);
   }
 
-  static List<Map> _serializeListNodeInfo(List<NodeInfo> listIn) {
+  static List<Map> _serializeListNodeInfo(List<Future<NodeInfo>> listIn) {
     List<Map> listRes = [];
     listIn.forEach((element) {
-      Map<String, dynamic> mapTmp = {
-        'Name': element.name,
-        'Description': element.description,
-        'Url': element.url,
-        'Image': element.image
-      };
-      listRes.add(mapTmp);
+      element.then((element) {
+        Map<String, dynamic> mapTmp = {
+          'Name': element.name,
+          'Description': element.description,
+          'Url': element.url,
+          'Image': element.image
+        };
+        listRes.add(mapTmp);
+      });
     });
     return listRes;
   }

@@ -78,25 +78,22 @@ class HtmlParser {
     return list;
   }
 
-  static Future<List<NodeInfo>> organizations() async => await _metaData(
-      MCDATASET_ORGANIZATION_LIST,
-      MCDATASET_ORGANIZATION_SHOW,
-      MCDATASET_SEARCH + 'organization:');
+  static Future<List<Future<NodeInfo>>> organizations() async =>
+      await _metaData(MCDATASET_ORGANIZATION_LIST, MCDATASET_ORGANIZATION_SHOW,
+          MCDATASET_SEARCH + 'organization:');
 
-  static Future<List<NodeInfo>> categories() async => await _metaData(
+  static Future<List<Future<NodeInfo>>> categories() async => await _metaData(
       MCDATASET_GROUP_LIST, MCDATASET_GROUP_SHOW, MCDATASET_SEARCH + 'groups:');
 
-  static Future<List<NodeInfo>> _metaData(
+  static Future<List<Future<NodeInfo>>> _metaData(
       String list, String show, String url) async {
     List<dynamic> dataList = await HttpRequest.getResource(list);
-    List<NodeInfo> nodes = [];
-    for (String id in dataList) {
-      Map<String, dynamic> map = await HttpRequest.getResource(show + id);
-      if (map['package_count'] > 0) {
-        nodes.add(NodeInfo(map['display_name'], map['description'],
-            url + map['name'], map['image_display_url']));
-      }
-    }
+    List<Future<NodeInfo>> nodes = dataList.map((id) async {
+      var map = await HttpRequest.getResource(show + id);
+      if (map['package_count'] > 0)
+        return NodeInfo(map['display_name'], map['description'],
+            url + map['name'], map['image_display_url']);
+    }).toList();
     return nodes;
   }
 }

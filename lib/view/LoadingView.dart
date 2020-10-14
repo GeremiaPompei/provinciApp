@@ -4,6 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class LoadingView extends StatelessWidget {
+  bool _image;
+
+  LoadingView({bool image}) {
+    this._image = image == null ? true : false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,10 +26,12 @@ class LoadingView extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image(
-                image: AssetImage("assets/logo_mc.PNG"),
-                height: 200,
-              ),
+              this._image
+                  ? Image(
+                      image: AssetImage("assets/logo_mc.PNG"),
+                      height: 180,
+                    )
+                  : Container(),
               SpinKitCubeGrid(
                 color: PrimaryColor,
                 duration: Duration(milliseconds: 1000),

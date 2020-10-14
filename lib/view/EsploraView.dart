@@ -122,28 +122,37 @@ class _EsploraViewState extends State<EsploraView> {
             shrinkWrap: true,
             icon: Icon(Icons.search),
             minimumChars: 1,
-            placeHolder: SingleChildScrollView(
-              child: Column(
-                children: [
-                  _cardsSizedBox(
-                      this._controller.getLastSearched(),
-                      this._controller.setSearch,
-                      (name) => ScrollListView(this._controller, name),
-                      context),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  _cardsSizedBox(
-                      this._controller.getLastLeafs(),
-                      this._controller.setLeafInfo,
-                      (name) => LeafsInfoView(this._controller, name),
-                      context),
-                  SizedBox(
-                    height: 10,
-                  ),
-                ],
-              ),
-            ),
+            placeHolder: FutureBuilder(
+                future: this._controller.initLoadAndStore(),
+                builder: (context, snapshot) {
+                  Widget tmpWidget;
+                  if (snapshot.hasData) {
+                    tmpWidget = SingleChildScrollView(
+                        child: Column(
+                      children: [
+                        _cardsSizedBox(
+                            this._controller.getLastSearched(),
+                            this._controller.setSearch,
+                            (name) => ScrollListView(this._controller, name),
+                            context),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        _cardsSizedBox(
+                            this._controller.getLastLeafs(),
+                            this._controller.setLeafInfo,
+                            (name) => LeafsInfoView(this._controller, name),
+                            context),
+                        SizedBox(
+                          height: 10,
+                        ),
+                      ],
+                    ));
+                  } else {
+                    tmpWidget = LoadingView();
+                  }
+                  return tmpWidget;
+                }),
             loader: LoadingView(),
             onSearch: (input) async => await _controller.setSearch(
                 input, MCDATASET_SEARCH + input, IconSearch),
