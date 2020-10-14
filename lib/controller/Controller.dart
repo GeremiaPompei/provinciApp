@@ -36,13 +36,11 @@ class Controller {
     if (this._cache.lastLeafs == null) {
       try {
         await tryConnection();
-        try {
+        if (!(await StoreManager.localFile(FNCACHE)).existsSync())
+          _loadStaticLastInfo(4, 4);
+        else {
           await _loadCacheOffline();
           _loadCache();
-        } catch (e) {
-          try {
-            await _loadStaticLastInfo(4, 4);
-          } catch (e) {}
         }
       } catch (e) {
         await _loadCacheOffline();
@@ -54,8 +52,8 @@ class Controller {
   }
 
   Future<dynamic> _loadCacheOffline() async {
-    Cache tmpCache = await DeserializeCache.deserialize(
-        await StoreManager.load(FNCACHE));
+    Cache tmpCache =
+        await DeserializeCache.deserialize(await StoreManager.load(FNCACHE));
     this._cache.search = tmpCache.search;
     this._cache.lastSearch = tmpCache.lastSearch;
     this._cache.leafs = tmpCache.leafs;
@@ -63,29 +61,13 @@ class Controller {
     return this._cache;
   }
 
-  Future<dynamic> _loadStaticLastInfo(int countNodes, int countLeafs) async {
-    await initOrganizations();
-    if (countNodes > this.getOrganizations().length)
-      countNodes = this.getOrganizations().length;
-    for (int i = countNodes - 1; i >= 0; i--) {
-      NodeInfo node = await this.getOrganizations()[i];
+  void _loadStaticLastInfo(int countNodes, int countLeafs) {
+    for (int i = countNodes - 1; i >= 0; i--)
       this._cache.search['Empty $i'] = UnitCache(
           null, DateTime.now().subtract(Duration(days: 5)), 'Name', null);
-      await setSearch(node.name, node.url, null);
-      this._cache.search[node.url] =
-          UnitCache(this.getSearch(), DateTime.now(), node.name, IconComune);
-    }
-    if (countLeafs > this.getSearch().length)
-      countNodes = this.getSearch().length;
-    for (int i = 0; i < countLeafs; i++) {
-      NodeInfo node = this.getSearch()[i];
+    for (int i = 0; i < countLeafs; i++)
       this._cache.leafs['Empty $i'] = UnitCache(
           null, DateTime.now().subtract(Duration(days: 5)), 'Name', null);
-      await setLeafInfo(node.name, node.url, null);
-      this._cache.leafs[node.url] = UnitCache(
-          this.getLeafs(), DateTime.now(), node.name, findImage(node.name));
-    }
-    return this._cache.lastLeafs;
   }
 
   Future<dynamic> initCategories() async {
