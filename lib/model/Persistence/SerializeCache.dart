@@ -6,38 +6,39 @@ import 'package:MC/model/UnitCache.dart';
 import '../LeafInfo.dart';
 
 class SerializeCache {
-  static String serialize(Cache cache) {
+
+  static Future<String> serialize(Cache cache) async {
     Map<String, dynamic> jsonMap = {};
-    jsonMap['Organizations'] = _serializeListNodeInfo(cache.organizations);
-    jsonMap['Categories'] = _serializeListNodeInfo(cache.categories);
+    jsonMap['Organizations'] =
+        await _serializeListNodeInfo(cache.organizations);
+    jsonMap['Categories'] = await _serializeListNodeInfo(cache.categories);
     jsonMap['Last Search'] = cache.lastSearch;
     jsonMap['Last Leafs'] = cache.lastLeafs;
     jsonMap['Search'] =
-        _serializeMapInfo(cache.search, (list) => _serializeListNodeInfo(list));
+        await _serializeMapInfo(cache.search, _serializeListNodeInfo);
     jsonMap['Leafs'] =
-        _serializeMapInfo(cache.leafs, (list) => _serializeListLeafInfo(list));
+        await _serializeMapInfo(cache.leafs, _serializeListLeafInfo);
     return json.encode(jsonMap);
   }
 
-  static List<Map> _serializeListNodeInfo(List<Future<NodeInfo>> listIn) {
+  static Future<dynamic> _serializeListNodeInfo(dynamic listIn) async {
     List<Map> listRes = [];
-    listIn.forEach((element) {
-      element.then((element) {
-        Map<String, dynamic> mapTmp = {
-          'Name': element.name,
-          'Description': element.description,
-          'Url': element.url,
-          'Image': element.image
-        };
-        listRes.add(mapTmp);
-      });
-    });
+    for (var e in listIn) {
+      var element = await e;
+      Map<String, dynamic> mapTmp = {
+        'Name': element.name,
+        'Description': element.description,
+        'Url': element.url,
+        'Image': element.image
+      };
+      listRes.add(mapTmp);
+    }
     return listRes;
   }
 
-  static List<Map> _serializeListLeafInfo(List<LeafInfo> listIn) {
+  static Future<dynamic> _serializeListLeafInfo(dynamic listIn) async {
     List<Map> listRes = [];
-    listIn.forEach((element) {
+    for (var element in listIn) {
       Map<String, dynamic> mapTmp = {
         'Json': element.json,
         'Image File': element.imageFile == null
@@ -45,25 +46,25 @@ class SerializeCache {
             : element.imageFile.path,
       };
       listRes.add(mapTmp);
-    });
+    }
     return listRes;
   }
 
-  static List<Map> _serializeMapInfo<T>(
-      Map<String, UnitCache<List<T>>> mapIn, List<Map> Function(List<T>) func) {
+  static Future<dynamic> _serializeMapInfo(
+      Map mapIn, Function(dynamic) func) async {
     List<Map> listRes = [];
-    mapIn.keys.forEach((element) {
+    for (var element in mapIn.keys.toList()) {
       Map<String, dynamic> mapTmp = {
         'Key': element,
         'Unit Cache': {
           'Date': DateFormat('yyy-MM-dd HH:mm:ss').format(mapIn[element].date),
           'Name': mapIn[element].name,
-          'Icon': mapIn[element].icon,
-          'Element': func(mapIn[element].element)
+          'Icon': mapIn[element].icon.toString(),
+          'Element': await func(mapIn[element].element)
         }
       };
       listRes.add(mapTmp);
-    });
+    }
     return listRes;
   }
 }

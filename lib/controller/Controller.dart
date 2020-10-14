@@ -37,24 +37,30 @@ class Controller {
       try {
         await tryConnection();
         try {
-          await _loadCache();
+          await _loadCacheOffline();
+          _loadCache();
         } catch (e) {
           try {
             await _loadStaticLastInfo(4, 4);
           } catch (e) {}
         }
       } catch (e) {
-        Cache tmpCache = await DeserializeCache.deserialize(
-            await StoreManager.load(FNCACHE));
-        this._cache.search = tmpCache.search;
-        this._cache.lastSearch = tmpCache.lastSearch;
-        this._cache.leafs = tmpCache.leafs;
-        this._cache.lastLeafs = tmpCache.lastLeafs;
+        await _loadCacheOffline();
       }
       _storeCache();
       _storeOffline();
     }
     return this._cache.lastLeafs;
+  }
+
+  Future<dynamic> _loadCacheOffline() async {
+    Cache tmpCache = await DeserializeCache.deserialize(
+        await StoreManager.load(FNCACHE));
+    this._cache.search = tmpCache.search;
+    this._cache.lastSearch = tmpCache.lastSearch;
+    this._cache.leafs = tmpCache.leafs;
+    this._cache.lastLeafs = tmpCache.lastLeafs;
+    return this._cache;
   }
 
   Future<dynamic> _loadStaticLastInfo(int countNodes, int countLeafs) async {
@@ -99,8 +105,8 @@ class Controller {
   Future<dynamic> initOrganizations() async {
     if (this.getOrganizations().isEmpty) {
       try {
-      List<Future> list = await HtmlParser.organizations();
-      this._cache.initOrganizations(list);
+        List<Future> list = await HtmlParser.organizations();
+        this._cache.initOrganizations(list);
       } catch (e) {
         Cache tmpCache = await DeserializeCache.deserialize(
             await StoreManager.load(FNCACHE));
@@ -259,8 +265,8 @@ class Controller {
   }
 
   Future _storeCache() async {
-    return await StoreManager.store(
-        SerializeCache.serialize(this._cache), FNCACHE);
+    return StoreManager.store(
+        await SerializeCache.serialize(this._cache), FNCACHE);
   }
 
   Future _loadOffline() async {
@@ -287,7 +293,7 @@ class Controller {
         byte = await HttpRequest.getImage(leafInfo.image);
         StoreManager.storeBytes(byte, leafInfo.imageFile.path);
       }
-    }catch (e) {}
+    } catch (e) {}
     return byte;
   }
 

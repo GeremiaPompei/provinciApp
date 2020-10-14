@@ -77,7 +77,7 @@ class _CategoriesViewState extends State<CategoriesView> {
                   if (snapshot.hasData) {
                     NodeInfo node = snapshot.data;
                     tmpWidget = Container(
-                      height: 100,
+                      height: 110,
                       margin: const EdgeInsets.symmetric(
                         vertical: 10.0,
                       ),
@@ -146,7 +146,13 @@ class _CategoriesViewState extends State<CategoriesView> {
                   } else if (snapshot.hasError) {
                     tmpWidget = Container();
                   } else {
-                    tmpWidget = Container();
+                    tmpWidget = Container(
+                      height: 110,
+                      margin: const EdgeInsets.symmetric(
+                        vertical: 10.0,
+                      ),
+                      child: LoadingView(image: false,),
+                    );
                   }
                   return tmpWidget;
                 });

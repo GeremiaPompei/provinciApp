@@ -73,18 +73,15 @@ class _HomeViewState extends State<HomeView> {
     switch (index) {
       case 0:
         this._title = 'Comuni';
-        this._varWidget = initWidgetFuture(
-            () => this._organizationsF, OrganizationsView(this._controller));
+        this._varWidget = OrganizationsView(this._controller);
         break;
       case 1:
         this._title = 'Esplora';
-        this._varWidget = initWidgetFuture(
-            () => this._esploraF, EsploraView(this._controller));
+        this._varWidget = EsploraView(this._controller);
         break;
       case 2:
         this._title = 'Categorie';
-        this._varWidget = initWidgetFuture(
-            () => this._categoriesF, CategoriesView(this._controller));
+        this._varWidget = CategoriesView(this._controller);
         break;
     }
   }

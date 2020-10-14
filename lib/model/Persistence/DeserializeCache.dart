@@ -56,7 +56,7 @@ class DeserializeCache {
           el,
           DateTime.parse(element['Unit Cache']['Date']),
           element['Unit Cache']['Name'],
-          element['Unit Cache']['Icon']);
+          int.parse(element['Unit Cache']['Icon']));
     }
     return mapRes;
   }
