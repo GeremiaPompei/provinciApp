@@ -18,6 +18,7 @@ class _OfflineViewState extends State<OfflineView> {
 
   Widget getBody() {
     return Container(
+        color: BackgroundColor2,
         child: Center(
             child: RaisedButton(
                 child: Text('Offline', style: TitleTextStyle_20),
@@ -37,6 +38,7 @@ class _OfflineViewState extends State<OfflineView> {
         ? getBody()
         : Scaffold(
             appBar: AppBar(
+              brightness: Brightness.light,
               leading: IconButton(
                 icon: Icon(
                   Icons.arrow_back_ios,

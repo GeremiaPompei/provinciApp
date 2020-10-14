@@ -156,8 +156,11 @@ class _EsploraViewState extends State<EsploraView> {
                   subtitle: Text(input.description),
                   leading: Stack(alignment: Alignment.center, children: [
                     Image.asset('assets/empty.png'),
-                    Icon(IconData(findImage(input.name),
-                        fontFamily: 'MaterialIcons'))
+                    Icon(
+                      IconData(findImage(input.name),
+                          fontFamily: 'MaterialIcons'),
+                      color: BackgroundColor,
+                    ),
                   ]),
                   onTap: () async {
                     Navigator.of(context)

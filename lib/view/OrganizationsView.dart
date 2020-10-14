@@ -87,7 +87,7 @@ class _OrganizationsViewState extends State<OrganizationsView> {
                             child: Text(
                               this._nodes[index].name,
                               style: TitleTextStyle_20,
-                              maxLines: 2,
+                              maxLines: 3,
                             ),
                           ),
                         ],

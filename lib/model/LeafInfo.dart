@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:MC/utility/PhoneNumberParser.dart';
+
 class LeafInfo {
   String _name;
   String _description;
@@ -35,16 +37,18 @@ class LeafInfo {
   }
 
   List<String> _initPhone(Map<String, dynamic> parsedJson) {
-    List<String> chars = [';', '-'];
+    List<String> chars = [';', '-', '/', '+'];
     String cells = _checkRemove(parsedJson, 'Telefono');
-    if (cells != null) {
-      List<String> phones = [];
-      for (int i = 0; i < chars.length; i++)
-        if (cells.contains(chars[i])) phones = cells.split(chars[i]);
-      if (phones.isEmpty) phones = [cells];
-      return phones;
+    if (cells == null) return null;
+    List<String> phones = [];
+    for (int i = 0; i < chars.length; i++) {
+      if (cells.contains(chars[i])) phones = cells.split(chars[i]);
     }
-    return null;
+    return phones
+        .map((e) => PhoneNumberParser.parse(e))
+        .toList()
+        .where((e) => e.length >= 9)
+        .toList();
   }
 
   List<double> _initPosition(Map<String, dynamic> parsedJson) {
