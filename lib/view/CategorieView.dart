@@ -110,36 +110,40 @@ class _CategoriesViewState extends State<CategoriesView> {
                               alignment: FractionalOffset.centerLeft,
                               child: _getImage(node.image)),
                           FlatButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        FutureBuilder<dynamic>(
-                                      future: _controller.setSearch(
-                                          node.name, node.url, IconCategory),
-                                      builder: (BuildContext context,
-                                          AsyncSnapshot<dynamic> snapshot) {
-                                        Widget tmpWidget;
-                                        if (snapshot.hasData) if (snapshot
-                                            .data.isNotEmpty)
-                                          tmpWidget = ScrollListView(
-                                              this._controller, node.name);
-                                        else
-                                          tmpWidget = Scaffold(
-                                            body: EmptyView(node.name),
-                                          );
-                                        else if (snapshot.hasError)
-                                          tmpWidget = OfflineView(node.name);
-                                        else
-                                          tmpWidget = LoadingView();
-                                        return tmpWidget;
-                                      },
-                                    ),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => FutureBuilder<dynamic>(
+                                    future: _controller.setSearch(
+                                        node.name, node.url, IconCategory),
+                                    builder: (BuildContext context,
+                                        AsyncSnapshot<dynamic> snapshot) {
+                                      Widget tmpWidget;
+                                      if (snapshot.hasData) if (snapshot
+                                          .data.isNotEmpty)
+                                        tmpWidget = ScrollListView(
+                                            this._controller, node.name);
+                                      else
+                                        tmpWidget = Scaffold(
+                                          body: EmptyView(node.name),
+                                        );
+                                      else if (snapshot.hasError)
+                                        tmpWidget = OfflineView(node.name);
+                                      else
+                                        tmpWidget = LoadingView();
+                                      return tmpWidget;
+                                    },
                                   ),
-                                );
-                              },
-                              child: Container())
+                                ),
+                              );
+                            },
+                            child: Container(),
+                          ),
+                          if (node.isEmpty)
+                            Container(
+                              color: Colors.white60,
+                            ),
                         ],
                       ),
                     );
@@ -151,7 +155,9 @@ class _CategoriesViewState extends State<CategoriesView> {
                       margin: const EdgeInsets.symmetric(
                         vertical: 10.0,
                       ),
-                      child: LoadingView(image: false,),
+                      child: LoadingView(
+                        image: false,
+                      ),
                     );
                   }
                   return tmpWidget;

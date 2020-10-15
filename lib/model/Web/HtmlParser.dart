@@ -89,9 +89,10 @@ class HtmlParser {
       String list, String show, String url) async {
     List<dynamic> dataList = await HttpRequest.getResource(list);
     List<Future<NodeInfo>> nodes = dataList.map((id) async {
-      var map = await HttpRequest.getResource(show + id);
+      Map map = await HttpRequest.getResource(show + id);
       return NodeInfo(map['display_name'], map['description'],
-          url + map['name'], map['image_display_url']);
+          url + map['name'], map['image_display_url'],
+          isEmpty: map['package_count'] == 0);
     }).toList();
     return nodes;
   }

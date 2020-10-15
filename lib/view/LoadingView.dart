@@ -7,7 +7,7 @@ class LoadingView extends StatelessWidget {
   bool _image;
 
   LoadingView({bool image}) {
-    this._image = image == null ? true : false;
+    this._image = image == null ? true : image;
   }
 
   @override

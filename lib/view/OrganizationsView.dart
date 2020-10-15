@@ -83,57 +83,70 @@ class _OrganizationsViewState extends State<OrganizationsView> {
                     NodeInfo node = snapshot.data;
                     tmpWidget = Card(
                       color: BackgroundColor,
-                      child: FlatButton(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Container(height: 65, child: _getImage(node.image)),
-                            Center(
-                              child: Text(
-                                node.name,
-                                style: TitleTextStyle_20,
-                                maxLines: 3,
+                      child: Stack(children: [
+                        FlatButton(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Container(
+                                  height: 65, child: _getImage(node.image)),
+                              Center(
+                                child: Text(
+                                  node.name,
+                                  style: TitleTextStyle_20,
+                                  maxLines: 3,
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          FutureBuilder<dynamic>(
+                                            future: this._controller.setSearch(
+                                                node.name,
+                                                node.url,
+                                                IconComune),
+                                            builder: (BuildContext context,
+                                                AsyncSnapshot<dynamic>
+                                                    snapshot) {
+                                              Widget tmpWidget;
+                                              if (snapshot.hasData) if (snapshot
+                                                  .data.isNotEmpty)
+                                                tmpWidget = ScrollListView(
+                                                    this._controller,
+                                                    node.name);
+                                              else
+                                                tmpWidget = Scaffold(
+                                                  body: EmptyView(node.name),
+                                                );
+                                              else if (snapshot.hasError) {
+                                                tmpWidget =
+                                                    OfflineView(node.name);
+                                              } else
+                                                tmpWidget = LoadingView();
+                                              return tmpWidget;
+                                            },
+                                          )));
+                            });
+                          },
                         ),
-                        onPressed: () {
-                          setState(() {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        FutureBuilder<dynamic>(
-                                          future: this._controller.setSearch(
-                                              node.name, node.url, IconComune),
-                                          builder: (BuildContext context,
-                                              AsyncSnapshot<dynamic> snapshot) {
-                                            Widget tmpWidget;
-                                            if (snapshot.hasData) if (snapshot
-                                                .data.isNotEmpty)
-                                              tmpWidget = ScrollListView(
-                                                  this._controller, node.name);
-                                            else
-                                              tmpWidget = Scaffold(
-                                                body: EmptyView(node.name),
-                                              );
-                                            else if (snapshot.hasError) {
-                                              tmpWidget =
-                                                  OfflineView(node.name);
-                                            } else
-                                              tmpWidget = LoadingView();
-                                            return tmpWidget;
-                                          },
-                                        )));
-                          });
-                        },
-                      ),
+                        if (node.isEmpty)
+                          Container(
+                            color: Colors.white60,
+                          ),
+                      ]),
                     );
                   } else if (snapshot.hasError) {
                     tmpWidget = Container();
                   } else {
-                    tmpWidget = LoadingView(image: false,);
+                    tmpWidget = LoadingView(
+                      image: false,
+                    );
                   }
                   return tmpWidget;
                 }),
