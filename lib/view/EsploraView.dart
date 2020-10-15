@@ -33,79 +33,83 @@ class _EsploraViewState extends State<EsploraView> {
           Future<dynamic> Function(String name, String url, int image) _func,
           Widget Function(String name) _funcWidget,
           BuildContext context) =>
-      GridView.count(
-        scrollDirection: Axis.vertical,
-        primary: false,
-        shrinkWrap: true,
-        padding: const EdgeInsets.all(8),
-        crossAxisCount: 2,
-        children: List.generate(
-            _list.length,
-            (i) => Card(
-                  color: BackgroundColor,
-                  child: FlatButton(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Container(
-                          height: 65,
-                          child: Stack(
-                            alignment: Alignment.center,
+      _list.isEmpty
+          ? Container()
+          : GridView.count(
+              scrollDirection: Axis.vertical,
+              primary: false,
+              shrinkWrap: true,
+              padding: const EdgeInsets.all(8),
+              crossAxisCount: 2,
+              children: List.generate(
+                  _list.length,
+                  (i) => Card(
+                        color: BackgroundColor,
+                        child: FlatButton(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
-                              Image.asset(
-                                'assets/empty.png',
-                              ),
-                              _list[i].value.icon == null
-                                  ? Image.asset('assets/empty.png')
-                                  : Icon(
-                                      IconData((_list[i].value.icon),
-                                          fontFamily: 'MaterialIcons'),
-                                      color: BackgroundColor,
+                              Container(
+                                height: 65,
+                                child: Stack(
+                                  alignment: Alignment.center,
+                                  children: [
+                                    Image.asset(
+                                      'assets/empty.png',
                                     ),
+                                    _list[i].value.icon == null
+                                        ? Image.asset('assets/empty.png')
+                                        : Icon(
+                                            IconData((_list[i].value.icon),
+                                                fontFamily: 'MaterialIcons'),
+                                            color: BackgroundColor,
+                                          ),
+                                  ],
+                                ),
+                              ),
+                              Center(
+                                child: Text(
+                                  _list[i].value.name,
+                                  style: TitleTextStyle_20,
+                                  maxLines: 2,
+                                ),
+                              ),
                             ],
                           ),
+                          onPressed: () {
+                            setState(() {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => FutureBuilder<dynamic>(
+                                    future: _func(_list[i].value.name,
+                                        _list[i].key, _list[i].value.icon),
+                                    builder: (BuildContext context,
+                                        AsyncSnapshot<dynamic> snapshot) {
+                                      Widget tmpWidget;
+                                      if (snapshot.hasData)
+                                        tmpWidget =
+                                            _funcWidget(_list[i].value.name);
+                                      else if (snapshot.hasError) {
+                                        tmpWidget =
+                                            OfflineView(_list[i].value.name);
+                                      } else
+                                        tmpWidget = LoadingView();
+                                      return tmpWidget;
+                                    },
+                                  ),
+                                ),
+                              ).then((value) {
+                                setState(() {
+                                  (context as Element).reassemble();
+                                });
+                              });
+                            });
+                          },
                         ),
-                        Center(
-                          child: Text(
-                            _list[i].value.name,
-                            style: TitleTextStyle_20,
-                            maxLines: 2,
-                          ),
-                        ),
-                      ],
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => FutureBuilder<dynamic>(
-                              future: _func(_list[i].value.name, _list[i].key,
-                                  _list[i].value.icon),
-                              builder: (BuildContext context,
-                                  AsyncSnapshot<dynamic> snapshot) {
-                                Widget tmpWidget;
-                                if (snapshot.hasData)
-                                  tmpWidget = _funcWidget(_list[i].value.name);
-                                else if (snapshot.hasError) {
-                                  tmpWidget = OfflineView(_list[i].value.name);
-                                } else
-                                  tmpWidget = LoadingView();
-                                return tmpWidget;
-                              },
-                            ),
-                          ),
-                        ).then((value) {
-                          setState(() {
-                            (context as Element).reassemble();
-                          });
-                        });
-                      });
-                    },
-                  ),
-                )),
-      );
+                      )),
+            );
 
   @override
   Widget build(BuildContext context) {
@@ -122,37 +126,35 @@ class _EsploraViewState extends State<EsploraView> {
             shrinkWrap: true,
             icon: Icon(Icons.search),
             minimumChars: 1,
-            placeHolder: FutureBuilder(
-                future: this._controller.initLoadAndStore(),
-                builder: (context, snapshot) {
-                  Widget tmpWidget;
-                  if (snapshot.hasData) {
-                    tmpWidget = SingleChildScrollView(
-                        child: Column(
-                      children: [
-                        _cardsSizedBox(
-                            this._controller.getLastSearched(),
-                            this._controller.setSearch,
-                            (name) => ScrollListView(this._controller, name),
-                            context),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        _cardsSizedBox(
-                            this._controller.getLastLeafs(),
-                            this._controller.setLeafInfo,
-                            (name) => LeafsInfoView(this._controller, name),
-                            context),
-                        SizedBox(
-                          height: 10,
-                        ),
-                      ],
-                    ));
-                  } else {
-                    tmpWidget = LoadingView();
-                  }
-                  return tmpWidget;
-                }),
+            placeHolder: SingleChildScrollView(
+                child: Column(
+              children: [
+                _cardsSizedBox(
+                    this
+                        ._controller
+                        .getLastSearched()
+                        .where((element) => !element.key.contains('Empty'))
+                        .toList(),
+                    this._controller.setSearch,
+                    (name) => ScrollListView(this._controller, name),
+                    context),
+                SizedBox(
+                  height: 20,
+                ),
+                _cardsSizedBox(
+                    this
+                        ._controller
+                        .getLastLeafs()
+                        .where((element) => !element.key.contains('Empty'))
+                        .toList(),
+                    this._controller.setLeafInfo,
+                    (name) => LeafsInfoView(this._controller, name),
+                    context),
+                SizedBox(
+                  height: 10,
+                ),
+              ],
+            )),
             loader: LoadingView(),
             onSearch: (input) async => await _controller.setSearch(
                 input, MCDATASET_SEARCH + input, IconSearch),

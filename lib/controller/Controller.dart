@@ -10,7 +10,6 @@ import 'package:MC/model/Web/HtmlParser.dart';
 import 'package:MC/model/Web/HttpRequest.dart';
 import 'package:MC/model/LeafInfo.dart';
 import 'package:MC/model/NodeInfo.dart';
-import 'package:MC/utility/Style.dart';
 
 class Controller {
   Cache _cache;
@@ -227,8 +226,8 @@ class Controller {
   List<LeafInfo> getOffline() => this._cache.offline;
 
   Future<dynamic> _loadCache() async {
-    Cache tmpCache =
-        await DeserializeCache.deserialize(await StoreManager.load(FNCACHE));
+    var loaded = await StoreManager.load(FNCACHE);
+    Cache tmpCache = await DeserializeCache.deserialize(loaded);
     await _loadLastInfoFrom(tmpCache);
     return this._cache.lastLeafs;
   }
@@ -236,13 +235,16 @@ class Controller {
   Future<dynamic> _loadLastInfoFrom(Cache tmpCache) async {
     this._cache.search = tmpCache.search;
     for (MapEntry<String, dynamic> entry in this._cache.search.entries) {
-      entry.value.element = await HtmlParser.searchByWord(entry.key);
+      if(!entry.key.contains('Empty'))
+        entry.value.element = await HtmlParser.searchByWord(entry.key);
     }
     this._cache.lastSearch = tmpCache.lastSearch;
     this._cache.leafs = tmpCache.leafs;
     for (MapEntry<String, dynamic> entry in this._cache.leafs.entries) {
-      entry.value.element = await HtmlParser.leafsByWord(entry.key);
-      for (LeafInfo leaf in entry.value.element) await _saveImage(leaf);
+      if(!entry.key.contains('Empty')) {
+        entry.value.element = await HtmlParser.leafsByWord(entry.key);
+        for (LeafInfo leaf in entry.value.element) await _saveImage(leaf);
+      }
     }
     this._cache.lastLeafs = tmpCache.lastLeafs;
     return tmpCache.lastLeafs;

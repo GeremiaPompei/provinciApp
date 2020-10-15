@@ -51,12 +51,17 @@ class DeserializeCache {
       List listIn, Future<List<T>> Function(List, String) func) async {
     Map<String, UnitCache<List<T>>> mapRes = {};
     for (dynamic element in listIn) {
-      List el = await func(element['Unit Cache']['Element'], element['Key']);
+      List el = element['Unit Cache']['Element'] == 'null'
+          ? null
+          : await func(element['Unit Cache']['Element'], element['Key']);
+      int icon = element['Unit Cache']['Icon'] == 'null'
+          ? null
+          : int.parse(element['Unit Cache']['Icon']);
       mapRes[element['Key']] = UnitCache(
           el,
           DateTime.parse(element['Unit Cache']['Date']),
           element['Unit Cache']['Name'],
-          int.parse(element['Unit Cache']['Icon']));
+          icon);
     }
     return mapRes;
   }

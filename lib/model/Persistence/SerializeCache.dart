@@ -6,7 +6,6 @@ import 'package:MC/model/UnitCache.dart';
 import '../LeafInfo.dart';
 
 class SerializeCache {
-
   static Future<String> serialize(Cache cache) async {
     Map<String, dynamic> jsonMap = {};
     jsonMap['Organizations'] =
@@ -41,9 +40,8 @@ class SerializeCache {
     for (var element in listIn) {
       Map<String, dynamic> mapTmp = {
         'Json': element.json,
-        'Image File': element.imageFile == null
-            ? 'null'
-            : element.imageFile.path,
+        'Image File':
+            element.imageFile == null ? 'null' : element.imageFile.path,
       };
       listRes.add(mapTmp);
     }
@@ -60,7 +58,9 @@ class SerializeCache {
           'Date': DateFormat('yyy-MM-dd HH:mm:ss').format(mapIn[element].date),
           'Name': mapIn[element].name,
           'Icon': mapIn[element].icon.toString(),
-          'Element': await func(mapIn[element].element)
+          'Element': mapIn[element].element == null
+              ? 'null'
+              : await func(mapIn[element].element)
         }
       };
       listRes.add(mapTmp);
