@@ -146,7 +146,8 @@ class Controller {
         cacheUnit.icon = image;
         var tmp = cacheUnit.element;
         cacheUnit.element = leafs;
-        if (tmp != null) for (LeafInfo leaf in tmp) this._removeImage(leaf);
+        if (tmp != null)
+          for (LeafInfo leaf in tmp) await this._removeImage(leaf);
         for (LeafInfo leaf in cacheUnit.element) await this._saveImage(leaf);
         this._cache.changeLeafs(oldUrl, url, cacheUnit);
       } else
@@ -178,9 +179,9 @@ class Controller {
     return this.getOffline();
   }
 
-  void removeOffline(LeafInfo leafInfo) {
+  void removeOffline(LeafInfo leafInfo) async {
     this._cache.removeOffline(leafInfo);
-    _removeImage(leafInfo);
+    await _removeImage(leafInfo);
     _storeOffline();
   }
 
@@ -249,17 +250,17 @@ class Controller {
     return byte;
   }
 
-  void _removeImage(LeafInfo leafInfo) {
+  Future<dynamic> _removeImage(LeafInfo leafInfo) async {
     List list = [];
-    this._cache.leafs.values.map((e) => e.element).forEach((element) {
-      list.addAll(element);
-    });
     list.addAll(this._cache.offline);
+    this._cache.leafs.values.map((e) => e.element).forEach((element) {
+      if (element != null) list.addAll(element);
+    });
     if (leafInfo.imageFile != null) {
-      StoreManager.localFile(leafInfo.imageFile.path).then((value) {
-        if (!list.map((e) => e.imageFile).contains(leafInfo.imageFile))
-          value.delete();
-      });
+      var file = await StoreManager.localFile(leafInfo.imageFile.path);
+      if (!list.map((e) => e.imageFile).contains(leafInfo.imageFile))
+        file.deleteSync();
     }
+    return list;
   }
 }

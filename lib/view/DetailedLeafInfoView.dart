@@ -264,8 +264,9 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
                               this._controller.removeOffline(_leafInfo);
                               this._icon = Icon(Icons.add_circle_outline);
                             } else {
-                              this._controller.addOffline(_leafInfo);
-                              this._icon = Icon(Icons.remove_circle_outline);
+                              this._controller.addOffline(_leafInfo).then(
+                                  (value) => this._icon =
+                                      Icon(Icons.remove_circle_outline));
                             }
                           });
                         },
