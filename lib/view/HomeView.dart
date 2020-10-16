@@ -28,16 +28,10 @@ class _HomeViewState extends State<HomeView> {
   Controller _controller;
   String _title;
   Widget _varWidget;
-  Future _esploraF;
-  Future _organizationsF;
-  Future _categoriesF;
   String _location;
   int _index;
 
   _HomeViewState(this._controller, this._index) {
-    this._esploraF = this._controller.initLoadAndStore();
-    this._categoriesF = this._controller.initCategories();
-    this._organizationsF = this._controller.initOrganizations();
     init(this._index);
   }
 

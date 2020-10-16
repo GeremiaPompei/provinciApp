@@ -1,12 +1,14 @@
-import 'package:MC/utility/PhoneNumberParser.dart';
 import 'package:MC/view/HomeView.dart';
 import 'package:MC/view/SavedView.dart';
 import 'package:flutter/material.dart';
 import 'controller/Controller.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Controller controller = Controller();
+  await controller.initLoadAndStore();
+  await controller.initCategories();
+  await controller.initOrganizations();
   return runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
       home: HomeView(

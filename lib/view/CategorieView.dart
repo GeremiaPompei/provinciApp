@@ -36,8 +36,8 @@ class _CategoriesViewState extends State<CategoriesView> {
               image: AssetImage(
                 'assets/empty.png',
               ),
-              height: 100,
-              width: 100,
+              height: 87,
+              width: 87,
             );
           else if (snapshot.hasData)
             tmpWidget = Image(image: NetworkImage(image));
@@ -87,11 +87,43 @@ class _CategoriesViewState extends State<CategoriesView> {
                             height: 124.0,
                             width: MediaQuery.of(context).size.width,
                             margin: new EdgeInsets.only(left: 46.0),
-                            child: Center(
+                            child: FlatButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        FutureBuilder<dynamic>(
+                                      future: _controller.setSearch(
+                                          node.name, node.url, IconCategory),
+                                      builder: (BuildContext context,
+                                          AsyncSnapshot<dynamic> snapshot) {
+                                        Widget tmpWidget;
+                                        if (snapshot.hasData) if (snapshot
+                                            .data.isNotEmpty)
+                                          tmpWidget = ScrollListView(
+                                              this._controller, node.name);
+                                        else
+                                          tmpWidget = Scaffold(
+                                            body: EmptyView(node.name),
+                                          );
+                                        else if (snapshot.hasError)
+                                          tmpWidget = OfflineView(node.name);
+                                        else
+                                          tmpWidget = LoadingView();
+                                        return tmpWidget;
+                                      },
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: Center(
                                 child: Text(
-                              node.name.toString(),
-                              style: TitleTextStyle_20,
-                            )),
+                                  node.name.toString(),
+                                  style: TitleTextStyle_20,
+                                ),
+                              ),
+                            ),
                             decoration: new BoxDecoration(
                               color: BackgroundColor,
                               shape: BoxShape.rectangle,
@@ -109,41 +141,6 @@ class _CategoriesViewState extends State<CategoriesView> {
                               margin: new EdgeInsets.symmetric(vertical: 10.0),
                               alignment: FractionalOffset.centerLeft,
                               child: _getImage(node.image)),
-                          FlatButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => FutureBuilder<dynamic>(
-                                    future: _controller.setSearch(
-                                        node.name, node.url, IconCategory),
-                                    builder: (BuildContext context,
-                                        AsyncSnapshot<dynamic> snapshot) {
-                                      Widget tmpWidget;
-                                      if (snapshot.hasData) if (snapshot
-                                          .data.isNotEmpty)
-                                        tmpWidget = ScrollListView(
-                                            this._controller, node.name);
-                                      else
-                                        tmpWidget = Scaffold(
-                                          body: EmptyView(node.name),
-                                        );
-                                      else if (snapshot.hasError)
-                                        tmpWidget = OfflineView(node.name);
-                                      else
-                                        tmpWidget = LoadingView();
-                                      return tmpWidget;
-                                    },
-                                  ),
-                                ),
-                              );
-                            },
-                            child: Container(),
-                          ),
-                          if (node.isEmpty)
-                            Container(
-                              color: Colors.white60,
-                            ),
                         ],
                       ),
                     );
@@ -155,8 +152,37 @@ class _CategoriesViewState extends State<CategoriesView> {
                       margin: const EdgeInsets.symmetric(
                         vertical: 10.0,
                       ),
-                      child: LoadingView(
-                        image: false,
+                      child: new Stack(
+                        children: <Widget>[
+                          new Container(
+                            height: 124.0,
+                            width: MediaQuery.of(context).size.width,
+                            margin: new EdgeInsets.only(left: 46.0),
+                            decoration: new BoxDecoration(
+                              color: BackgroundColor,
+                              shape: BoxShape.rectangle,
+                              borderRadius: new BorderRadius.circular(8.0),
+                              boxShadow: <BoxShadow>[
+                                new BoxShadow(
+                                  color: Colors.black12,
+                                  blurRadius: 10.0,
+                                  offset: new Offset(0.0, 10.0),
+                                ),
+                              ],
+                            ),
+                          ),
+                          new Container(
+                            margin: new EdgeInsets.symmetric(vertical: 10.0),
+                            alignment: FractionalOffset.centerLeft,
+                            child: Image(
+                              image: AssetImage(
+                                'assets/empty.png',
+                              ),
+                              height: 100,
+                              width: 100,
+                            ),
+                          ),
+                        ],
                       ),
                     );
                   }

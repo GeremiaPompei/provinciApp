@@ -67,11 +67,15 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
           child: Text(
             this._leafInfo.name,
             style: TitleDetaileStyle,
+            textAlign: TextAlign.center,
           ),
         ),
         'Description': this._leafInfo.description == null
             ? null
-            : Text(this._leafInfo.description),
+            : Text(
+                this._leafInfo.description,
+                textAlign: TextAlign.center,
+              ),
         'Phone': this._leafInfo.telefono == null
             ? null
             : ListView.builder(
@@ -185,7 +189,9 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
                 primary: false,
                 itemCount: this._leafInfo.info.length,
                 itemBuilder: (context, index) => ListTile(
-                  title: Text(this._leafInfo.info.keys.toList()[index]),
+                  title: Text(
+                    this._leafInfo.info.keys.toList()[index],
+                  ),
                   subtitle: Linkify(
                     text: '${this._leafInfo.info.values.toList()[index]}',
                     onOpen: (LinkableElement link) async {
@@ -228,68 +234,68 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
     return Scaffold(
         backgroundColor: PrimaryColor,
         body: Padding(
-          padding: EdgeInsets.fromLTRB(0, 22, 0, 0),
+            padding: EdgeInsets.fromLTRB(0, 22, 0, 0),
             child: SingleChildScrollView(
                 child: Padding(
-          padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
-          child: Column(
-            children: [
-              AppBar(
-                backgroundColor: Colors.transparent,
-                elevation: 0,
-                leading: IconButton(
-                  icon: Icon(
-                    Icons.arrow_back_ios,
-                    color: BackgroundColor,
+              padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
+              child: Column(
+                children: [
+                  AppBar(
+                    backgroundColor: Colors.transparent,
+                    elevation: 0,
+                    leading: IconButton(
+                      icon: Icon(
+                        Icons.arrow_back_ios,
+                        color: BackgroundColor,
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                    actions: <Widget>[
+                      IconButton(
+                        icon: this._icon,
+                        onPressed: () {
+                          setState(() {
+                            if (this
+                                ._controller
+                                .getOffline()
+                                .contains(this._leafInfo)) {
+                              this._controller.removeOffline(_leafInfo);
+                              this._icon = Icon(Icons.add_circle_outline);
+                            } else {
+                              this._controller.addOffline(_leafInfo);
+                              this._icon = Icon(Icons.remove_circle_outline);
+                            }
+                          });
+                        },
+                      )
+                    ],
                   ),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-                actions: <Widget>[
-                  IconButton(
-                    icon: this._icon,
-                    onPressed: () {
-                      setState(() {
-                        if (this
-                            ._controller
-                            .getOffline()
-                            .contains(this._leafInfo)) {
-                          this._controller.removeOffline(_leafInfo);
-                          this._icon = Icon(Icons.add_circle_outline);
-                        } else {
-                          this._controller.addOffline(_leafInfo);
-                          this._icon = Icon(Icons.remove_circle_outline);
-                        }
-                      });
-                    },
-                  )
+                  this._widgets['Image'],
+                  SizedBox(
+                    height: 20,
+                  ),
+                  this._widgets['Name'],
+                  SizedBox(
+                    height: 20,
+                  ),
+                  containerRound(this._widgets['Description'], null),
+                  containerRound(this._widgets['Info'], 'Info'),
+                  containerRound(this._widgets['Phone'], 'Telefono'),
+                  this._widgets['Position'],
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: listW),
+                  SizedBox(
+                    height: 10,
+                  ),
                 ],
               ),
-              this._widgets['Image'],
-              SizedBox(
-                height: 20,
-              ),
-              this._widgets['Name'],
-              SizedBox(
-                height: 20,
-              ),
-              containerRound(this._widgets['Description'], null),
-              containerRound(this._widgets['Info'], 'Info'),
-              containerRound(this._widgets['Phone'], 'Telefono'),
-              this._widgets['Position'],
-              SizedBox(
-                height: 20,
-              ),
-              Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: listW),
-              SizedBox(
-                height: 10,
-              ),
-            ],
-          ),
-        ))));
+            ))));
   }
 
   Widget containerRound(Widget child, String title) => child != null

@@ -135,17 +135,13 @@ class _OrganizationsViewState extends State<OrganizationsView> {
                             });
                           },
                         ),
-                        if (node.isEmpty)
-                          Container(
-                            color: Colors.white60,
-                          ),
                       ]),
                     );
                   } else if (snapshot.hasError) {
                     tmpWidget = Container();
                   } else {
-                    tmpWidget = LoadingView(
-                      image: false,
+                    tmpWidget = Card(
+                      color: BackgroundColor,
                     );
                   }
                   return tmpWidget;
