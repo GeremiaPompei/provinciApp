@@ -23,7 +23,6 @@ class Controller {
     _events = [];
     _promos = [];
     _cache = new Cache();
-    initOffline();
   }
 
   Future<bool> tryConnection() async {
@@ -33,14 +32,17 @@ class Controller {
 
   Future<dynamic> initLoadAndStore() async {
     if (this._cache.lastLeafs == null) {
-      if (!(await StoreManager.localFile(FNCACHE)).existsSync())
+      if (!(await StoreManager.localFile(FNCACHE)).existsSync()) {
         _loadStaticLastInfo(4, 4);
-      else
+        this._cache.initOrganizations(await HtmlParser.organizations());
+        this._cache.initCategories(await HtmlParser.categories());
+      } else
         await _loadCacheOffline();
+      await initOffline();
       _storeCache();
       _storeOffline();
     }
-    return this._cache.lastLeafs;
+    return this._cache;
   }
 
   Future<dynamic> _loadCacheOffline() async {
@@ -214,34 +216,14 @@ class Controller {
 
   List<LeafInfo> getOffline() => this._cache.offline;
 
-  Future<dynamic> _loadCache() async {
-    var loaded = await StoreManager.load(FNCACHE);
-    Cache tmpCache = await DeserializeCache.deserialize(loaded);
-    await _loadLastInfoFrom(tmpCache);
-    return this._cache.lastLeafs;
-  }
-
-  Future<dynamic> _loadLastInfoFrom(Cache tmpCache) async {
-    this._cache.search = tmpCache.search;
-    for (MapEntry<String, dynamic> entry in this._cache.search.entries) {
-      if (!entry.key.contains('Empty'))
-        entry.value.element = await HtmlParser.searchByWord(entry.key);
-    }
-    this._cache.lastSearch = tmpCache.lastSearch;
-    this._cache.leafs = tmpCache.leafs;
-    for (MapEntry<String, dynamic> entry in this._cache.leafs.entries) {
-      if (!entry.key.contains('Empty')) {
-        entry.value.element = await HtmlParser.leafsByWord(entry.key);
-        for (LeafInfo leaf in entry.value.element) await _saveImage(leaf);
-      }
-    }
-    this._cache.lastLeafs = tmpCache.lastLeafs;
-    return tmpCache.lastLeafs;
-  }
-
   Future _storeCache() async {
     return StoreManager.store(
         await SerializeCache.serialize(this._cache), FNCACHE);
+  }
+
+  Future _storeOffline() async {
+    return await StoreManager.store(
+        SerializeOffline.serialize(this._cache.offline), FNOFFLINE);
   }
 
   Future _loadOffline() async {
@@ -249,11 +231,6 @@ class Controller {
       this._cache.offline =
           DeserializeOffline.deserialize(await StoreManager.load(FNOFFLINE));
     } catch (e) {}
-  }
-
-  Future _storeOffline() async {
-    return await StoreManager.store(
-        SerializeOffline.serialize(this._cache.offline), FNOFFLINE);
   }
 
   Future<dynamic> _saveImage(LeafInfo leafInfo) async {
