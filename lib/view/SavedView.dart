@@ -65,7 +65,10 @@ class _SavedWidgetState extends State<SavedWidget> {
                 ? icon = Icon(Icons.remove_circle_outline)
                 : icon = Icon(Icons.add_circle_outline);
             return Card(
-                color: BackgroundColor,
+              color: BackgroundColor,
+              child: Container(
+                height: 80,
+                alignment: Alignment.center,
                 child: ListTile(
                     trailing: IconButton(
                       icon: icon,
@@ -142,7 +145,9 @@ class _SavedWidgetState extends State<SavedWidget> {
                           (context as Element).reassemble();
                         });
                       });
-                    }));
+                    }),
+              ),
+            );
           },
         ),
       ),

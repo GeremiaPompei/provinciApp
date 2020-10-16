@@ -55,69 +55,73 @@ class _LeafsInfoViewState extends State<LeafsInfoView> {
               height: 85,
               child: Card(
                 color: BackgroundColor,
-                child: ListTile(
-                    trailing: IconButton(
-                      icon: icon,
-                      onPressed: () {
-                        setState(() {
-                          if (this
-                              ._controller
-                              .getOffline()
-                              .contains(_leafs[index])) {
-                            this._controller.removeOffline(_leafs[index]);
-                          } else {
-                            this._controller.addOffline(_leafs[index]);
-                          }
-                        });
-                      },
-                    ),
-                    leading: Container(
-                      height: 55,
-                      child: this._leafs[index].imageFile == null
-                          ? Container(
-                              height: 55,
-                              width: 55,
-                              child: Image.asset('assets/logo_mc.PNG'),
-                            )
-                          : Container(
-                              height: 55,
-                              width: 55,
-                              child: Image.file(this._leafs[index].imageFile),
-                            ),
-                    ),
-                    title: Text(
-                      '${_leafs[index].name}',
-                      maxLines: 2,
-                    ),
-                    subtitle: _leafs[index].description == null
-                        ? Text('')
-                        : Text(
-                            '${_leafs[index].description}',
-                            maxLines: 2,
-                          ),
-                    onTap: () {
-                      setState(() {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => DetailedLeafInfoView(
-                              _title,
-                              _leafs[index],
-                              _controller,
-                              this._leafs[index].imageFile == null
-                                  ? null
-                                  : Image.file(
-                                      this._leafs[index].imageFile,
-                                    ),
-                            ),
-                          ),
-                        ).then((value) {
+                child: Container(
+                  height: 80,
+                  alignment: Alignment.center,
+                  child: ListTile(
+                      trailing: IconButton(
+                        icon: icon,
+                        onPressed: () {
                           setState(() {
-                            (context as Element).reassemble();
+                            if (this
+                                ._controller
+                                .getOffline()
+                                .contains(_leafs[index])) {
+                              this._controller.removeOffline(_leafs[index]);
+                            } else {
+                              this._controller.addOffline(_leafs[index]);
+                            }
+                          });
+                        },
+                      ),
+                      leading: Container(
+                        height: 55,
+                        child: this._leafs[index].imageFile == null
+                            ? Container(
+                                height: 55,
+                                width: 55,
+                                child: Image.asset('assets/logo_mc.PNG'),
+                              )
+                            : Container(
+                                height: 55,
+                                width: 55,
+                                child: Image.file(this._leafs[index].imageFile),
+                              ),
+                      ),
+                      title: Text(
+                        '${_leafs[index].name}',
+                        maxLines: 2,
+                      ),
+                      subtitle: _leafs[index].description == null
+                          ? Text('')
+                          : Text(
+                              '${_leafs[index].description}',
+                              maxLines: 2,
+                            ),
+                      onTap: () {
+                        setState(() {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DetailedLeafInfoView(
+                                _title,
+                                _leafs[index],
+                                _controller,
+                                this._leafs[index].imageFile == null
+                                    ? null
+                                    : Image.file(
+                                        this._leafs[index].imageFile,
+                                      ),
+                              ),
+                            ),
+                          ).then((value) {
+                            setState(() {
+                              (context as Element).reassemble();
+                            });
                           });
                         });
-                      });
-                    }),
+                      }),
+                ),
               ),
             );
           },

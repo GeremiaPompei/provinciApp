@@ -146,13 +146,29 @@ class _HomeViewState extends State<HomeView> {
                           varWidget =
                               ScrollListView(this._controller, this._location);
                         else
-                          varWidget = Scaffold(
-                            body: EmptyView(this._location),
-                          );
+                          varWidget = EmptyView(this._location);
                         else if (snapshot.hasError)
                           varWidget = OfflineView('Find Position');
                         else
-                          varWidget = LoadingView();
+                          varWidget = Scaffold(
+                            appBar: AppBar(
+                              title: Text(
+                                'Find Location',
+                                style: ReverseTitleTextStyle,
+                              ),
+                              backgroundColor: PrimaryColor,
+                              leading: IconButton(
+                                icon: Icon(
+                                  Icons.arrow_back_ios,
+                                  color: BackgroundColor,
+                                ),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                              ),
+                            ),
+                            body: LoadingView(),
+                          );
                         return varWidget;
                       },
                     ),
