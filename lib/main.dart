@@ -1,19 +1,27 @@
 import 'package:MC/view/HomeView.dart';
+import 'package:MC/view/LoadingView.dart';
 import 'package:MC/view/SavedView.dart';
 import 'package:flutter/material.dart';
 import 'controller/Controller.dart';
 
-void main() async {
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
   Controller controller = Controller();
-  await controller.initLoadAndStore();
-  await controller.initCategories();
-  await controller.initOrganizations();
   return runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomeView(
-        controller,
-        1,
+      home: FutureBuilder(
+        future: controller.initLoadAndStore(),
+        builder: (context, snapshot) {
+          Widget tmpWidget;
+          if (snapshot.hasData)
+            tmpWidget = HomeView(
+              controller,
+              1,
+            );
+          else
+            tmpWidget = LoadingView();
+          return tmpWidget;
+        },
       ),
       routes: {
         '/online': (context) => HomeView(controller, 1),

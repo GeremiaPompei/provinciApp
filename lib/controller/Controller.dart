@@ -37,10 +37,10 @@ class Controller {
         await tryConnection();
         if (!(await StoreManager.localFile(FNCACHE)).existsSync())
           _loadStaticLastInfo(4, 4);
-        else {
-          await _loadCacheOffline();
-          _loadCache();
-        }
+        else
+          await _loadCache();
+        this._cache.initOrganizations(await HtmlParser.organizations());
+        this._cache.initCategories(await HtmlParser.categories());
       } catch (e) {
         await _loadCacheOffline();
       }
@@ -51,12 +51,8 @@ class Controller {
   }
 
   Future<dynamic> _loadCacheOffline() async {
-    Cache tmpCache =
+    this._cache =
         await DeserializeCache.deserialize(await StoreManager.load(FNCACHE));
-    this._cache.search = tmpCache.search;
-    this._cache.lastSearch = tmpCache.lastSearch;
-    this._cache.leafs = tmpCache.leafs;
-    this._cache.lastLeafs = tmpCache.lastLeafs;
     return this._cache;
   }
 
@@ -235,13 +231,13 @@ class Controller {
   Future<dynamic> _loadLastInfoFrom(Cache tmpCache) async {
     this._cache.search = tmpCache.search;
     for (MapEntry<String, dynamic> entry in this._cache.search.entries) {
-      if(!entry.key.contains('Empty'))
+      if (!entry.key.contains('Empty'))
         entry.value.element = await HtmlParser.searchByWord(entry.key);
     }
     this._cache.lastSearch = tmpCache.lastSearch;
     this._cache.leafs = tmpCache.leafs;
     for (MapEntry<String, dynamic> entry in this._cache.leafs.entries) {
-      if(!entry.key.contains('Empty')) {
+      if (!entry.key.contains('Empty')) {
         entry.value.element = await HtmlParser.leafsByWord(entry.key);
         for (LeafInfo leaf in entry.value.element) await _saveImage(leaf);
       }
