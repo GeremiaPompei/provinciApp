@@ -152,37 +152,22 @@ class _CategoriesViewState extends State<CategoriesView> {
                       margin: const EdgeInsets.symmetric(
                         vertical: 10.0,
                       ),
-                      child: new Stack(
-                        children: <Widget>[
-                          new Container(
-                            height: 124.0,
-                            width: MediaQuery.of(context).size.width,
-                            margin: new EdgeInsets.only(left: 46.0),
-                            decoration: new BoxDecoration(
-                              color: BackgroundColor,
-                              shape: BoxShape.rectangle,
-                              borderRadius: new BorderRadius.circular(8.0),
-                              boxShadow: <BoxShadow>[
-                                new BoxShadow(
-                                  color: Colors.black12,
-                                  blurRadius: 10.0,
-                                  offset: new Offset(0.0, 10.0),
-                                ),
-                              ],
+                      child: new Container(
+                        height: 124.0,
+                        width: MediaQuery.of(context).size.width,
+                        margin: new EdgeInsets.only(left: 46.0),
+                        decoration: new BoxDecoration(
+                          color: BackgroundColor,
+                          shape: BoxShape.rectangle,
+                          borderRadius: new BorderRadius.circular(8.0),
+                          boxShadow: <BoxShadow>[
+                            new BoxShadow(
+                              color: Colors.black12,
+                              blurRadius: 10.0,
+                              offset: new Offset(0.0, 10.0),
                             ),
-                          ),
-                          new Container(
-                            margin: new EdgeInsets.symmetric(vertical: 10.0),
-                            alignment: FractionalOffset.centerLeft,
-                            child: Image(
-                              image: AssetImage(
-                                'assets/empty.png',
-                              ),
-                              height: 100,
-                              width: 100,
-                            ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     );
                   }
