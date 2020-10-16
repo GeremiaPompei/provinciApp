@@ -33,17 +33,10 @@ class Controller {
 
   Future<dynamic> initLoadAndStore() async {
     if (this._cache.lastLeafs == null) {
-      try {
-        await tryConnection();
-        if (!(await StoreManager.localFile(FNCACHE)).existsSync())
-          _loadStaticLastInfo(4, 4);
-        else
-          await _loadCache();
-        this._cache.initOrganizations(await HtmlParser.organizations());
-        this._cache.initCategories(await HtmlParser.categories());
-      } catch (e) {
+      if (!(await StoreManager.localFile(FNCACHE)).existsSync())
+        _loadStaticLastInfo(4, 4);
+      else
         await _loadCacheOffline();
-      }
       _storeCache();
       _storeOffline();
     }
