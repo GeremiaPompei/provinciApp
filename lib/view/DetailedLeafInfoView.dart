@@ -232,71 +232,75 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
     ];
     listW.removeWhere((element) => element == null);
     return Scaffold(
-        backgroundColor: PrimaryColor,
-        body: Padding(
-            padding: EdgeInsets.fromLTRB(0, 22, 0, 0),
-            child: SingleChildScrollView(
-                child: Padding(
-              padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
-              child: Column(
-                children: [
-                  AppBar(
-                    backgroundColor: Colors.transparent,
-                    elevation: 0,
-                    leading: IconButton(
-                      icon: Icon(
-                        Icons.arrow_back_ios,
-                        color: BackgroundColor,
-                      ),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
+      backgroundColor: PrimaryColor,
+      body: Padding(
+        padding:
+            EdgeInsets.fromLTRB(0, MediaQuery.of(context).padding.top, 0, 0),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
+            child: Column(
+              children: [
+                AppBar(
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                  leading: IconButton(
+                    icon: Icon(
+                      Icons.arrow_back_ios,
+                      color: BackgroundColor,
                     ),
-                    actions: <Widget>[
-                      IconButton(
-                        icon: this._icon,
-                        onPressed: () {
-                          setState(() {
-                            if (this
-                                ._controller
-                                .getOffline()
-                                .contains(this._leafInfo)) {
-                              this._controller.removeOffline(_leafInfo);
-                              this._icon = Icon(Icons.add_circle_outline);
-                            } else {
-                              this._controller.addOffline(_leafInfo).then(
-                                  (value) => this._icon =
-                                      Icon(Icons.remove_circle_outline));
-                            }
-                          });
-                        },
-                      )
-                    ],
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
                   ),
-                  this._widgets['Image'],
-                  SizedBox(
-                    height: 20,
-                  ),
-                  this._widgets['Name'],
-                  SizedBox(
-                    height: 20,
-                  ),
-                  containerRound(this._widgets['Description'], null),
-                  containerRound(this._widgets['Info'], 'Info'),
-                  containerRound(this._widgets['Phone'], 'Telefono'),
-                  this._widgets['Position'],
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: listW),
-                  SizedBox(
-                    height: 10,
-                  ),
-                ],
-              ),
-            ))));
+                  actions: <Widget>[
+                    IconButton(
+                      icon: this._icon,
+                      onPressed: () {
+                        setState(() {
+                          if (this
+                              ._controller
+                              .getOffline()
+                              .contains(this._leafInfo)) {
+                            this._controller.removeOffline(_leafInfo);
+                            this._icon = Icon(Icons.add_circle_outline);
+                          } else {
+                            this._controller.addOffline(_leafInfo).then(
+                                (value) => this._icon =
+                                    Icon(Icons.remove_circle_outline));
+                          }
+                        });
+                      },
+                    )
+                  ],
+                ),
+                this._widgets['Image'],
+                SizedBox(
+                  height: 20,
+                ),
+                this._widgets['Name'],
+                SizedBox(
+                  height: 20,
+                ),
+                containerRound(this._widgets['Description'], null),
+                containerRound(this._widgets['Info'], 'Info'),
+                containerRound(this._widgets['Phone'], 'Telefono'),
+                this._widgets['Position'],
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: listW),
+                SizedBox(
+                  height: 10,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   Widget containerRound(Widget child, String title) => child != null

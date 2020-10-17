@@ -6,19 +6,20 @@ import 'package:MC/model/Persistence/StoreManager.dart';
 import 'package:MC/model/Web/HttpRequest.dart';
 
 class DeserializeOffline {
-  static List<LeafInfo> deserialize(String contents) {
+  static Future<List<LeafInfo>> deserialize(String contents) async {
     List<LeafInfo> listRes = [];
     List<dynamic> listIn = json.decode(contents);
-    listIn.forEach((element) {
+    for (var element in listIn) {
       LeafInfo leaf = LeafInfo(element['List Element'], element['Source Url'],
           int.parse(element['Source Index']));
-      _deserializeImage(element, leaf);
+      await _deserializeImage(element, leaf);
       listRes.add(leaf);
-    });
+    }
     return listRes;
   }
 
-  static void _deserializeImage(dynamic element, LeafInfo leaf) async {
+  static Future<dynamic> _deserializeImage(
+      dynamic element, LeafInfo leaf) async {
     if (element['Image Path'] != '') {
       try {
         List<int> content = await HttpRequest.getImage(leaf.image);
@@ -27,10 +28,11 @@ class DeserializeOffline {
         StoreManager.storeBytes(content, file.path);
         leaf.imageFile = file;
       } catch (e) {
-        StoreManager.localFile(element['Image Path'])
-            .then((value) => leaf.imageFile = value);
+        File value = await StoreManager.localFile(element['Image Path']);
+        leaf.imageFile = value;
       }
     } else
       leaf.imageFile = null;
+    return leaf.imageFile;
   }
 }

@@ -36,13 +36,42 @@ class Controller {
         _loadStaticLastInfo(4, 4);
         this._cache.initOrganizations(await HtmlParser.organizations());
         this._cache.initCategories(await HtmlParser.categories());
-      } else
+      } else {
         await _loadCacheOffline();
+        _loadCache();
+      }
       await initOffline();
       _storeCache();
       _storeOffline();
     }
     return this._cache;
+  }
+
+  Future<dynamic> _loadCache() async {
+    try {
+      var loaded = await StoreManager.load(FNCACHE);
+      Cache tmpCache = await DeserializeCache.deserialize(loaded);
+      await _loadLastInfoFrom(tmpCache);
+    } catch (e) {}
+    return this._cache;
+  }
+
+  Future<dynamic> _loadLastInfoFrom(Cache tmpCache) async {
+    this._cache.search = tmpCache.search;
+    for (MapEntry<String, dynamic> entry in this._cache.search.entries) {
+      if (!entry.key.contains('Empty'))
+        entry.value.element = await HtmlParser.searchByWord(entry.key);
+    }
+    this._cache.lastSearch = tmpCache.lastSearch;
+    this._cache.leafs = tmpCache.leafs;
+    for (MapEntry<String, dynamic> entry in this._cache.leafs.entries) {
+      if (!entry.key.contains('Empty')) {
+        entry.value.element = await HtmlParser.leafsByWord(entry.key);
+        for (LeafInfo leaf in entry.value.element) await _saveImage(leaf);
+      }
+    }
+    this._cache.lastLeafs = tmpCache.lastLeafs;
+    return tmpCache.lastLeafs;
   }
 
   Future<dynamic> _loadCacheOffline() async {
@@ -91,6 +120,7 @@ class Controller {
   }
 
   Future<dynamic> initOffline() async {
+    await _loadOffline();
     try {
       for (var el in this._cache.offline) {
         List<LeafInfo> list = await HtmlParser.leafsByWord(el.sourceUrl);
@@ -98,7 +128,6 @@ class Controller {
         el = list[el.sourceIndex];
       }
     } catch (e) {}
-    await _loadOffline();
     return getOffline();
   }
 
@@ -229,8 +258,8 @@ class Controller {
 
   Future _loadOffline() async {
     try {
-      this._cache.offline =
-          DeserializeOffline.deserialize(await StoreManager.load(FNOFFLINE));
+      this._cache.offline = await DeserializeOffline.deserialize(
+          await StoreManager.load(FNOFFLINE));
     } catch (e) {}
   }
 
