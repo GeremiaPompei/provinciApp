@@ -1,14 +1,31 @@
 
 # provinciAppMc
-  
+<p align="center">
+  <img width="460" height="300" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/IMG_E0052%5B1%5D.JPG">
+</p>
+
 **provinciApp** è la nostra idea di applicazione per la provincia di Macerata secondo il concorso *Un'app per la provincia di Macerata*.
-Il progetto nasce da tre semplici studenti con molta voglia di divertirsi e mettersi in gioco.
-Lo sviluppo dell'applicazione nasce dalla base dei requisiti richiesti dal concorso, arricchiti dalle nostre idee e competenze al fine di creare qualcosa di semplice ed intuibile, in grado di attrarre ogni fascia di età della nostra provincia.
+Il progetto nasce da tre giovani studenti con molta voglia di impegnarsi e mettersi in gioco.
+Lo sviluppo dell'applicazione nasce dalla base dei requisiti richiesti dal concorso, arricchiti dalle nostre idee e competenze al fine di creare qualcosa di articolato ma intuitivo, tale da essere fruibile da ogni fascia di età.
 
-
- [**Obiettivi del concorso**](https://github.com/GeremiaPompei/mc/blob/master/README.md#obiettivi-del-concorso)
-
- [**Introduzione all'utilizzo dell'applicazione**](https://github.com/GeremiaPompei/mc/blob/master/README.md#introduzione-allutilizzo-dellapplicazione)
+<form 
+method="get" action="https://github.com/GeremiaPompei/mc/blob/master/README.md#obiettivi-del-concorso">
+<input type="submit" value="Obiettivi del concorso" 
+style="background-color: #1c99ce; 
+width: 10em;
+padding: .5em;
+color: #ffffff;
+text-shadow: 1px 1px 1px #000;
+font: 16px Arial, Helvetica, sans-serif;
+border: solid thin #882d13;
+-webkit-border-radius: .7em;
+-moz-border-radius: .7em;
+border-radius: .7em;
+background-image: -webkit-gradient(linear, left top, left bottom,
+from(#e9ede8), to(#ce401c),color-stop(0.4, #8c1b0b));">
+</form>   
+[**Utilizzo**](https://github.com/GeremiaPompei/mc/blob/master/README.md#introduzione-allutilizzo-dellapplicazione)
+                                                                                                                                                         
   
 ### Obiettivi del concorso  
   *L’applicazione mobile dovrà presentare le seguenti caratteristiche tecniche:*  
