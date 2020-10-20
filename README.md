@@ -1,12 +1,14 @@
 
 # provinciAppMc
 <p align="center">
-  <img width="460" height="300" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/IMG_E0052%5B1%5D.JPG">
+  <img width="260" height="400" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/IMG_E0052%5B1%5D.JPG">
 </p>
 
 **provinciApp** è la nostra idea di applicazione per la provincia di Macerata secondo il concorso *Un'app per la provincia di Macerata*.
 Il progetto nasce da tre giovani studenti con molta voglia di impegnarsi e mettersi in gioco.
 Lo sviluppo dell'applicazione nasce dalla base dei requisiti richiesti dal concorso, arricchiti dalle nostre idee e competenze al fine di creare qualcosa di articolato ma intuitivo, tale da essere fruibile da ogni fascia di età.
+
+
 
 <form 
 method="get" action="https://github.com/GeremiaPompei/mc/blob/master/README.md#obiettivi-del-concorso">
@@ -24,8 +26,8 @@ border-radius: .7em;
 background-image: -webkit-gradient(linear, left top, left bottom,
 from(#e9ede8), to(#ce401c),color-stop(0.4, #8c1b0b));">
 </form>   
-[**Utilizzo**](https://github.com/GeremiaPompei/mc/blob/master/README.md#introduzione-allutilizzo-dellapplicazione)
-                                                                                                                                                         
+
+[Introduzione all'utilizzo](https://github.com/GeremiaPompei/mc/blob/master/README.md#introduzione-allutilizzo-dellapplicazione)                                                                                                                                                       
   
 ### Obiettivi del concorso  
   *L’applicazione mobile dovrà presentare le seguenti caratteristiche tecniche:*  
