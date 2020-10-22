@@ -1,4 +1,4 @@
-import 'package:MC/utility/Style.dart';
+import 'package:provinciApp/utility/Style.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

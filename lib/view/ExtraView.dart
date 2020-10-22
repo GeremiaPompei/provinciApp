@@ -1,6 +1,6 @@
-import 'package:MC/controller/Controller.dart';
-import 'package:MC/utility/Style.dart';
-import 'package:MC/view/SavedView.dart';
+import 'package:provinciApp/controller/Controller.dart';
+import 'package:provinciApp/utility/Style.dart';
+import 'package:provinciApp/view/SavedView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

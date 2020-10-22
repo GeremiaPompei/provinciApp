@@ -1,7 +1,7 @@
-import 'package:MC/controller/Controller.dart';
-import 'package:MC/model/NodeInfo.dart';
-import 'package:MC/utility/Style.dart';
-import 'package:MC/view/EmptyView.dart';
+import 'package:provinciApp/controller/Controller.dart';
+import 'package:provinciApp/model/pacchetto.dart';
+import 'package:provinciApp/utility/Style.dart';
+import 'package:provinciApp/view/EmptyView.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'LoadingView.dart';
@@ -19,7 +19,7 @@ class CategoriesView extends StatefulWidget {
 
 class _CategoriesViewState extends State<CategoriesView> {
   Controller _controller;
-  List<Future<NodeInfo>> _nodes;
+  List<Future<Pacchetto>> _nodes;
   RefreshController _refreshController =
       RefreshController(initialRefresh: false);
 
@@ -75,7 +75,7 @@ class _CategoriesViewState extends State<CategoriesView> {
                 builder: (context, snapshot) {
                   Widget tmpWidget;
                   if (snapshot.hasData) {
-                    NodeInfo node = snapshot.data;
+                    Pacchetto node = snapshot.data;
                     tmpWidget = Container(
                       height: 110,
                       margin: const EdgeInsets.symmetric(
@@ -95,20 +95,20 @@ class _CategoriesViewState extends State<CategoriesView> {
                                     builder: (context) =>
                                         FutureBuilder<dynamic>(
                                       future: _controller.setSearch(
-                                          node.name, node.url, IconCategory),
+                                          node.nome, node.url, IconCategory),
                                       builder: (BuildContext context,
                                           AsyncSnapshot<dynamic> snapshot) {
                                         Widget tmpWidget;
                                         if (snapshot.hasData) if (snapshot
                                             .data.isNotEmpty)
                                           tmpWidget = ScrollListView(
-                                              this._controller, node.name);
+                                              this._controller, node.nome);
                                         else
                                           tmpWidget = Scaffold(
-                                            body: EmptyView(node.name),
+                                            body: EmptyView(node.nome),
                                           );
                                         else if (snapshot.hasError)
-                                          tmpWidget = OfflineView(node.name);
+                                          tmpWidget = OfflineView(node.nome);
                                         else
                                           tmpWidget = LoadingView();
                                         return tmpWidget;
@@ -119,7 +119,7 @@ class _CategoriesViewState extends State<CategoriesView> {
                               },
                               child: Center(
                                 child: Text(
-                                  node.name.toString(),
+                                  node.nome.toString(),
                                   style: TitleTextStyle_20,
                                 ),
                               ),
@@ -140,7 +140,7 @@ class _CategoriesViewState extends State<CategoriesView> {
                           new Container(
                               margin: new EdgeInsets.symmetric(vertical: 10.0),
                               alignment: FractionalOffset.centerLeft,
-                              child: _getImage(node.image)),
+                              child: _getImage(node.immagineUrl)),
                         ],
                       ),
                     );

@@ -1,12 +1,12 @@
-import 'package:MC/controller/Controller.dart';
-import 'package:MC/model/NodeInfo.dart';
-import 'package:MC/model/UnitCache.dart';
-import 'package:MC/utility/ConstUrl.dart';
-import 'package:MC/utility/Style.dart';
-import 'package:MC/view/EmptyView.dart';
-import 'package:MC/view/LeafsInfoView.dart';
-import 'package:MC/view/LoadingView.dart';
-import 'package:MC/view/ScrollListView.dart';
+import 'package:provinciApp/controller/Controller.dart';
+import 'package:provinciApp/model/pacchetto.dart';
+import 'package:provinciApp/model/unit_cache.dart';
+import 'package:provinciApp/utility/ConstUrl.dart';
+import 'package:provinciApp/utility/Style.dart';
+import 'package:provinciApp/view/EmptyView.dart';
+import 'package:provinciApp/view/LeafsInfoView.dart';
+import 'package:provinciApp/view/LoadingView.dart';
+import 'package:provinciApp/view/ScrollListView.dart';
 import 'package:flappy_search_bar/flappy_search_bar.dart';
 import 'package:flappy_search_bar/search_bar_style.dart';
 import 'package:flutter/cupertino.dart';
@@ -58,10 +58,10 @@ class _EsploraViewState extends State<EsploraView> {
                                     Image.asset(
                                       'assets/empty.png',
                                     ),
-                                    _list[i].value.icon == null
+                                    _list[i].value.icona == null
                                         ? Image.asset('assets/empty.png')
                                         : Icon(
-                                            IconData((_list[i].value.icon),
+                                            IconData((_list[i].value.icona),
                                                 fontFamily: 'MaterialIcons'),
                                             color: BackgroundColor,
                                           ),
@@ -70,7 +70,7 @@ class _EsploraViewState extends State<EsploraView> {
                               ),
                               Center(
                                 child: Text(
-                                  _list[i].value.name,
+                                  _list[i].value.nome,
                                   style: TitleTextStyle_20,
                                   maxLines: 2,
                                 ),
@@ -83,17 +83,17 @@ class _EsploraViewState extends State<EsploraView> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => FutureBuilder<dynamic>(
-                                    future: _func(_list[i].value.name,
-                                        _list[i].key, _list[i].value.icon),
+                                    future: _func(_list[i].value.nome,
+                                        _list[i].key, _list[i].value.icona),
                                     builder: (BuildContext context,
                                         AsyncSnapshot<dynamic> snapshot) {
                                       Widget tmpWidget;
                                       if (snapshot.hasData)
                                         tmpWidget =
-                                            _funcWidget(_list[i].value.name);
+                                            _funcWidget(_list[i].value.nome);
                                       else if (snapshot.hasError) {
                                         tmpWidget =
-                                            OfflineView(_list[i].value.name);
+                                            OfflineView(_list[i].value.nome);
                                       } else
                                         tmpWidget = LoadingView();
                                       return tmpWidget;
@@ -117,7 +117,7 @@ class _EsploraViewState extends State<EsploraView> {
       backgroundColor: Colors.transparent,
       body: Padding(
         padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
-        child: SearchBar<NodeInfo>(
+        child: SearchBar<Pacchetto>(
             searchBarStyle: SearchBarStyle(
               backgroundColor: BackgroundColor,
               padding: EdgeInsets.all(6),
@@ -163,12 +163,12 @@ class _EsploraViewState extends State<EsploraView> {
               return Container(
                 child: ListTile(
                   isThreeLine: true,
-                  title: Text(input.name),
-                  subtitle: Text(input.description),
+                  title: Text(input.nome),
+                  subtitle: Text(input.descrizione),
                   leading: Stack(alignment: Alignment.center, children: [
                     Image.asset('assets/empty.png'),
                     Icon(
-                      IconData(findImage(input.name),
+                      IconData(findImage(input.nome),
                           fontFamily: 'MaterialIcons'),
                       color: BackgroundColor,
                     ),
@@ -179,15 +179,15 @@ class _EsploraViewState extends State<EsploraView> {
                       MaterialPageRoute(
                         builder: (context) => FutureBuilder<dynamic>(
                           future: _controller.setLeafInfo(
-                              input.name, input.url, findImage(input.name)),
+                              input.nome, input.url, findImage(input.nome)),
                           builder: (BuildContext context,
                               AsyncSnapshot<dynamic> snapshot) {
                             Widget tmpWidget;
                             if (snapshot.hasData)
                               tmpWidget =
-                                  LeafsInfoView(_controller, input.name);
+                                  LeafsInfoView(_controller, input.nome);
                             else if (snapshot.hasError)
-                              tmpWidget = OfflineView(input.name);
+                              tmpWidget = OfflineView(input.nome);
                             else
                               tmpWidget = LoadingView();
                             return tmpWidget;

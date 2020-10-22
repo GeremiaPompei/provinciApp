@@ -1,5 +1,5 @@
-import 'package:MC/controller/Controller.dart';
-import 'package:MC/utility/Style.dart';
+import 'package:provinciApp/controller/Controller.dart';
+import 'package:provinciApp/utility/Style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -53,11 +53,11 @@ class _PromoViewState extends State<PromoView> {
             return Container(
                 child: ListTile(
                     title: Text(
-                      this._controller.getPromos()[index].name,
+                      this._controller.getPromos()[index].nome,
                       maxLines: 2,
                     ),
                     subtitle: Text(
-                      this._controller.getPromos()[index].description,
+                      this._controller.getPromos()[index].descrizione,
                       maxLines: 2,
                     ),
                     onTap: () async {

@@ -1,5 +1,5 @@
-name: MC
-description: A new Flutter project.
+name: provinciApp
+description: App per la provincia di Macerata.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
@@ -82,10 +82,10 @@ flutter:
     # "family" key with the font family name, and a "fonts" key with a
     # list giving the asset and other descriptors for the font. For
     # example:
-  fonts:
-    - family: StencilArmyWWI
-      fonts:
-          - asset: assets/fonts/StencilArmyWWI.ttf
+  #fonts:
+  #  - family: family
+  #    fonts:
+  #        - asset: font
 
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

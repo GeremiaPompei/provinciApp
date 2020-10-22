@@ -1,6 +1,6 @@
-import 'package:MC/controller/Controller.dart';
-import 'package:MC/model/LeafInfo.dart';
-import 'package:MC/utility/Style.dart';
+import 'package:provinciApp/controller/Controller.dart';
+import 'package:provinciApp/model/risorsa.dart';
+import 'package:provinciApp/utility/Style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
@@ -13,7 +13,7 @@ import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DetailedLeafInfoView extends StatefulWidget {
-  LeafInfo _leafInfo;
+  Risorsa _leafInfo;
   String _title;
   Controller _controller;
   Image _image;
@@ -27,7 +27,7 @@ class DetailedLeafInfoView extends StatefulWidget {
 }
 
 class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
-  LeafInfo _leafInfo;
+  Risorsa _leafInfo;
   String _title;
   Map<String, Widget> _widgets;
   Controller _controller;
@@ -65,28 +65,28 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
                 bottomRight: Radius.circular(20.0),
               )),
           child: Text(
-            this._leafInfo.name,
+            this._leafInfo.nome,
             style: TitleDetaileStyle,
             textAlign: TextAlign.center,
           ),
         ),
-        'Description': this._leafInfo.description == null
+        'Description': this._leafInfo.descrizione == null
             ? null
             : Text(
-                this._leafInfo.description,
+                this._leafInfo.descrizione,
                 textAlign: TextAlign.center,
               ),
-        'Phone': this._leafInfo.telefono == null
+        'Phone': this._leafInfo.telefoni == null
             ? null
             : ListView.builder(
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
                 primary: false,
-                itemCount: this._leafInfo.telefono.length,
+                itemCount: this._leafInfo.telefoni.length,
                 itemBuilder: (context, index) => FlatButton(
                       onPressed: () async {
                         await FlutterPhoneDirectCaller.callNumber(
-                            '${this._leafInfo.telefono[index]}');
+                            '${this._leafInfo.telefoni[index]}');
                       },
                       child: Row(
                         children: <Widget>[
@@ -94,7 +94,7 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
                             Icons.call,
                             color: DarkColor,
                           ),
-                          Text('${this._leafInfo.telefono[index]}')
+                          Text('${this._leafInfo.telefoni[index]}')
                         ],
                       ),
                     )),
@@ -133,7 +133,7 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
                   },
                 ))
             : null,
-        'PositionIcon': this._leafInfo.position == null
+        'PositionIcon': this._leafInfo.posizione == null
             ? null
             : CircleAvatar(
                 radius: 20,
@@ -146,7 +146,7 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
                   ),
                 ),
               ),
-        'Position': this._leafInfo.position == null
+        'Position': this._leafInfo.posizione == null
             ? Container()
             : Container(
                 height: 200,
@@ -154,7 +154,7 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
                 child: FlutterMap(
                   options: MapOptions(
                     center: LatLng(
-                        this._leafInfo.position[0], this._leafInfo.position[1]),
+                        this._leafInfo.posizione[0], this._leafInfo.posizione[1]),
                     zoom: 13.0,
                   ),
                   layers: [
@@ -167,8 +167,8 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
                         new Marker(
                           width: 80.0,
                           height: 80.0,
-                          point: LatLng(this._leafInfo.position[0],
-                              this._leafInfo.position[1]),
+                          point: LatLng(this._leafInfo.posizione[0],
+                              this._leafInfo.posizione[1]),
                           builder: (ctx) => Container(
                             child: Icon(
                               Icons.location_on,
@@ -335,8 +335,8 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
   openMapsSheet(context) async {
     try {
       final coords = mapLauncher.Coords(
-          this._leafInfo.position[0], this._leafInfo.position[1]);
-      final title = this._leafInfo.name;
+          this._leafInfo.posizione[0], this._leafInfo.posizione[1]);
+      final title = this._leafInfo.nome;
       final availableMaps = await MapLauncher.installedMaps;
       showModalBottomSheet(
         context: context,

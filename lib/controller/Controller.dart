@@ -1,20 +1,20 @@
 import 'dart:io';
-import 'package:MC/model/Cache.dart';
-import 'package:MC/model/Persistence/DeserializeCache.dart';
-import 'package:MC/model/Persistence/DeserializeOffline.dart';
-import 'package:MC/model/Persistence/SerializeCache.dart';
-import 'package:MC/model/Persistence/SerializeOffline.dart';
-import 'package:MC/model/Persistence/StoreManager.dart';
-import 'package:MC/model/UnitCache.dart';
-import 'package:MC/model/Web/HtmlParser.dart';
-import 'package:MC/model/Web/HttpRequest.dart';
-import 'package:MC/model/LeafInfo.dart';
-import 'package:MC/model/NodeInfo.dart';
+import 'package:provinciApp/model/cache.dart';
+import 'package:provinciApp/model/Persistence/DeserializeCache.dart';
+import 'package:provinciApp/model/Persistence/DeserializeOffline.dart';
+import 'package:provinciApp/model/Persistence/SerializeCache.dart';
+import 'package:provinciApp/model/Persistence/SerializeOffline.dart';
+import 'package:provinciApp/model/Persistence/StoreManager.dart';
+import 'package:provinciApp/model/unit_cache.dart';
+import 'package:provinciApp/model/Web/HtmlParser.dart';
+import 'package:provinciApp/model/Web/HttpRequest.dart';
+import 'package:provinciApp/model/risorsa.dart';
+import 'package:provinciApp/model/pacchetto.dart';
 
 class Controller {
   Cache _cache;
-  List<NodeInfo> _events;
-  List<NodeInfo> _promos;
+  List<Pacchetto> _events;
+  List<Pacchetto> _promos;
   static const FNCACHE = 'cache.json';
   static const FNOFFLINE = 'offline.json';
   static const DNIMAGE = 'Image';
@@ -31,11 +31,12 @@ class Controller {
   }
 
   Future<dynamic> initLoadAndStore() async {
-    if (this._cache.lastLeafs == null) {
+    if (this._cache.keyUltimeRisorse == null) {
+      //(await StoreManager.localFile(FNCACHE)).deleteSync();
       if (!(await StoreManager.localFile(FNCACHE)).existsSync()) {
         _loadStaticLastInfo(4, 4);
-        this._cache.initOrganizations(await HtmlParser.organizations());
-        this._cache.initCategories(await HtmlParser.categories());
+        this._cache.initComuni(await HtmlParser.organizations());
+        this._cache.initCategorie(await HtmlParser.categories());
       } else {
         await _loadCacheOffline();
         _loadCache();
@@ -57,21 +58,21 @@ class Controller {
   }
 
   Future<dynamic> _loadLastInfoFrom(Cache tmpCache) async {
-    this._cache.search = tmpCache.search;
-    for (MapEntry<String, dynamic> entry in this._cache.search.entries) {
+    this._cache.pacchetti = tmpCache.pacchetti;
+    for (MapEntry<String, dynamic> entry in this._cache.pacchetti.entries) {
       if (!entry.key.contains('Empty'))
-        entry.value.element = await HtmlParser.searchByWord(entry.key);
+        entry.value.elemento = await HtmlParser.searchByWord(entry.key);
     }
-    this._cache.lastSearch = tmpCache.lastSearch;
-    this._cache.leafs = tmpCache.leafs;
-    for (MapEntry<String, dynamic> entry in this._cache.leafs.entries) {
+    this._cache.keyUltimiPacchetti = tmpCache.keyUltimiPacchetti;
+    this._cache.risorse = tmpCache.risorse;
+    for (MapEntry<String, dynamic> entry in this._cache.risorse.entries) {
       if (!entry.key.contains('Empty')) {
-        entry.value.element = await HtmlParser.leafsByWord(entry.key);
-        for (LeafInfo leaf in entry.value.element) await _saveImage(leaf);
+        entry.value.elemento = await HtmlParser.leafsByWord(entry.key);
+        for (Risorsa leaf in entry.value.elemento) await _saveImage(leaf);
       }
     }
-    this._cache.lastLeafs = tmpCache.lastLeafs;
-    return tmpCache.lastLeafs;
+    this._cache.keyUltimeRisorse = tmpCache.keyUltimeRisorse;
+    return tmpCache.keyUltimeRisorse;
   }
 
   Future<dynamic> _loadCacheOffline() async {
@@ -82,10 +83,10 @@ class Controller {
 
   void _loadStaticLastInfo(int countNodes, int countLeafs) {
     for (int i = countNodes - 1; i >= 0; i--)
-      this._cache.search['Empty $i'] = UnitCache(
+      this._cache.pacchetti['Empty $i'] = UnitCache(
           null, DateTime.now().subtract(Duration(days: 5)), 'Name', null);
     for (int i = 0; i < countLeafs; i++)
-      this._cache.leafs['Empty $i'] = UnitCache(
+      this._cache.risorse['Empty $i'] = UnitCache(
           null, DateTime.now().subtract(Duration(days: 5)), 'Name', null);
   }
 
@@ -93,11 +94,11 @@ class Controller {
     if (this.getCategories().isEmpty) {
       try {
         List<Future> list = await HtmlParser.categories();
-        this._cache.initCategories(list);
+        this._cache.initCategorie(list);
       } catch (e) {
         Cache tmpCache = await DeserializeCache.deserialize(
             await StoreManager.load(FNCACHE));
-        this._cache.initCategories(tmpCache.categories);
+        this._cache.initCategorie(tmpCache.categories);
       }
     }
     _storeCache();
@@ -108,11 +109,11 @@ class Controller {
     if (this.getOrganizations().isEmpty) {
       try {
         List<Future> list = await HtmlParser.organizations();
-        this._cache.initOrganizations(list);
+        this._cache.initComuni(list);
       } catch (e) {
         Cache tmpCache = await DeserializeCache.deserialize(
             await StoreManager.load(FNCACHE));
-        this._cache.initOrganizations(tmpCache.organizations);
+        this._cache.initComuni(tmpCache.organizations);
       }
     }
     _storeCache();
@@ -123,9 +124,9 @@ class Controller {
     await _loadOffline();
     try {
       for (var el in this._cache.offline) {
-        List<LeafInfo> list = await HtmlParser.leafsByWord(el.sourceUrl);
-        await _saveImage(list[el.sourceIndex]);
-        el = list[el.sourceIndex];
+        List<Risorsa> list = await HtmlParser.leafsByWord(el.idUrl);
+        await _saveImage(list[el.idIndice]);
+        el = list[el.idIndice];
       }
     } catch (e) {}
     return getOffline();
@@ -142,49 +143,49 @@ class Controller {
   }
 
   Future<dynamic> setSearch(String name, String url, int image) async {
-    UnitCache<List<NodeInfo>> cacheUnit = this._cache.getSearchByUrl(url);
+    UnitCache<List<Pacchetto>> cacheUnit = this._cache.getPacchettiByKey(url);
     if (cacheUnit == null) {
-      List<NodeInfo> nodes = await HtmlParser.searchByWord(url);
+      List<Pacchetto> nodes = await HtmlParser.searchByWord(url);
       if (nodes.isNotEmpty) {
         String oldUrl = _oldestUrl(
-            this._cache.search.keys, (el) => this._cache.getSearchByUrl(el));
-        cacheUnit = this._cache.search[oldUrl];
-        cacheUnit.name = name;
-        cacheUnit.element = nodes;
-        cacheUnit.icon = image;
-        this._cache.changeSearch(oldUrl, url, cacheUnit);
+            this._cache.pacchetti.keys, (el) => this._cache.getPacchettiByKey(el));
+        cacheUnit = this._cache.pacchetti[oldUrl];
+        cacheUnit.nome = name;
+        cacheUnit.elemento = nodes;
+        cacheUnit.icona = image;
+        this._cache.switchPacchetti(oldUrl, url, cacheUnit);
         cacheUnit.updateDate();
         _storeCache();
       } else
         return [];
     } else
       cacheUnit.updateDate();
-    this._cache.lastSearch = url;
+    this._cache.keyUltimiPacchetti = url;
     return getSearch();
   }
 
   Future<List<dynamic>> setLeafInfo(String name, String url, int image) async {
-    UnitCache<List<LeafInfo>> cacheUnit = this._cache.getLeafsByUrl(url);
+    UnitCache<List<Risorsa>> cacheUnit = this._cache.getRisorseByKey(url);
     if (cacheUnit == null) {
-      List<LeafInfo> leafs = await HtmlParser.leafsByWord(url);
+      List<Risorsa> leafs = await HtmlParser.leafsByWord(url);
       if (leafs.isNotEmpty) {
         String oldUrl = _oldestUrl(
-            this._cache.leafs.keys, (el) => this._cache.getLeafsByUrl(el));
-        cacheUnit = this._cache.leafs[oldUrl];
-        cacheUnit.name = name;
-        cacheUnit.icon = image;
-        var tmp = cacheUnit.element;
-        cacheUnit.element = leafs;
+            this._cache.risorse.keys, (el) => this._cache.getRisorseByKey(el));
+        cacheUnit = this._cache.risorse[oldUrl];
+        cacheUnit.nome = name;
+        cacheUnit.icona = image;
+        var tmp = cacheUnit.elemento;
+        cacheUnit.elemento = leafs;
         if (tmp != null)
-          for (LeafInfo leaf in tmp) await this._removeImage(leaf);
-        for (LeafInfo leaf in cacheUnit.element) await this._saveImage(leaf);
-        this._cache.changeLeafs(oldUrl, url, cacheUnit);
+          for (Risorsa leaf in tmp) await this._removeImage(leaf);
+        for (Risorsa leaf in cacheUnit.elemento) await this._saveImage(leaf);
+        this._cache.switchRisorse(oldUrl, url, cacheUnit);
       } else
         return [];
     }
     cacheUnit.updateDate();
     _storeCache();
-    this._cache.lastLeafs = url;
+    this._cache.keyUltimeRisorse = url;
     return getLeafs();
   }
 
@@ -192,59 +193,59 @@ class Controller {
     String oldUrl;
     DateTime tmpDate;
     list.forEach((el) => {
-          if (tmpDate == null || tmpDate.isAfter(func(el).date))
+          if (tmpDate == null || tmpDate.isAfter(func(el).data))
             {
-              tmpDate = func(el).date,
+              tmpDate = func(el).data,
               oldUrl = el,
             }
         });
     return oldUrl;
   }
 
-  Future<dynamic> addOffline(LeafInfo leafInfo) async {
+  Future<dynamic> addOffline(Risorsa leafInfo) async {
     this._cache.addOffline(leafInfo);
     await _saveImage(leafInfo);
     _storeOffline();
     return this.getOffline();
   }
 
-  void removeOffline(LeafInfo leafInfo) async {
+  void removeOffline(Risorsa leafInfo) async {
     this._cache.removeOffline(leafInfo);
     await _removeImage(leafInfo);
     _storeOffline();
   }
 
-  List<NodeInfo> getEvents() {
+  List<Pacchetto> getEvents() {
     return this._events;
   }
 
-  List<NodeInfo> getPromos() {
+  List<Pacchetto> getPromos() {
     return this._promos;
   }
 
-  List<Future<NodeInfo>> getOrganizations() {
+  List<Future<Pacchetto>> getOrganizations() {
     return this._cache.organizations;
   }
 
-  List<Future<NodeInfo>> getCategories() {
+  List<Future<Pacchetto>> getCategories() {
     return this._cache.categories;
   }
 
-  List<NodeInfo> getSearch() {
-    return this._cache.getSearchByUrl(this._cache.lastSearch).element;
+  List<Pacchetto> getSearch() {
+    return this._cache.getPacchettiByKey(this._cache.keyUltimiPacchetti).elemento;
   }
 
   List<MapEntry<String, dynamic>> getLastSearched() =>
-      this._cache.search.entries.toList();
+      this._cache.pacchetti.entries.toList();
 
   List<MapEntry<String, dynamic>> getLastLeafs() =>
-      this._cache.leafs.entries.toList();
+      this._cache.risorse.entries.toList();
 
-  List<LeafInfo> getLeafs() {
-    return this._cache.getLeafsByUrl(this._cache.lastLeafs).element;
+  List<Risorsa> getLeafs() {
+    return this._cache.getRisorseByKey(this._cache.keyUltimeRisorse).elemento;
   }
 
-  List<LeafInfo> getOffline() => this._cache.offline;
+  List<Risorsa> getOffline() => this._cache.offline;
 
   Future _storeCache() async {
     return StoreManager.store(
@@ -263,31 +264,31 @@ class Controller {
     } catch (e) {}
   }
 
-  Future<dynamic> _saveImage(LeafInfo leafInfo) async {
+  Future<dynamic> _saveImage(Risorsa leafInfo) async {
     if (!(await StoreManager.localDir(DNIMAGE)).existsSync())
       (await StoreManager.localDir(DNIMAGE)).createSync();
     var byte;
     try {
-      if (leafInfo.image != null) {
+      if (leafInfo.immagineUrl != null) {
         String path =
-            leafInfo.image.substring(leafInfo.image.lastIndexOf('/') + 1);
-        leafInfo.imageFile = await StoreManager.localFile(DNIMAGE + '/' + path);
-        byte = await HttpRequest.getImage(leafInfo.image);
-        StoreManager.storeBytes(byte, leafInfo.imageFile.path);
+            leafInfo.immagineUrl.substring(leafInfo.immagineUrl.lastIndexOf('/') + 1);
+        leafInfo.immagineFile = await StoreManager.localFile(DNIMAGE + '/' + path);
+        byte = await HttpRequest.getImage(leafInfo.immagineUrl);
+        StoreManager.storeBytes(byte, leafInfo.immagineFile.path);
       }
     } catch (e) {}
     return byte;
   }
 
-  Future<dynamic> _removeImage(LeafInfo leafInfo) async {
+  Future<dynamic> _removeImage(Risorsa leafInfo) async {
     List list = [];
     list.addAll(this._cache.offline);
-    this._cache.leafs.values.map((e) => e.element).forEach((element) {
+    this._cache.risorse.values.map((e) => e.elemento).forEach((element) {
       if (element != null) list.addAll(element);
     });
-    if (leafInfo.imageFile != null) {
-      var file = await StoreManager.localFile(leafInfo.imageFile.path);
-      if (!list.map((e) => e.imageFile).contains(leafInfo.imageFile))
+    if (leafInfo.immagineFile != null) {
+      var file = await StoreManager.localFile(leafInfo.immagineFile.path);
+      if (!list.map((e) => e.immagineFile).contains(leafInfo.immagineFile))
         file.deleteSync();
     }
     return list;

@@ -1,7 +1,7 @@
-import 'package:MC/controller/Controller.dart';
-import 'package:MC/model/LeafInfo.dart';
-import 'package:MC/utility/Style.dart';
-import 'package:MC/view/DetailedLeafInfoView.dart';
+import 'package:provinciApp/controller/Controller.dart';
+import 'package:provinciApp/model/risorsa.dart';
+import 'package:provinciApp/utility/Style.dart';
+import 'package:provinciApp/view/DetailedLeafInfoView.dart';
 import 'package:flutter/material.dart';
 
 class LeafsInfoView extends StatefulWidget {
@@ -16,7 +16,7 @@ class LeafsInfoView extends StatefulWidget {
 }
 
 class _LeafsInfoViewState extends State<LeafsInfoView> {
-  List<LeafInfo> _leafs;
+  List<Risorsa> _leafs;
   String _title;
   Controller _controller;
 
@@ -76,7 +76,7 @@ class _LeafsInfoViewState extends State<LeafsInfoView> {
                       ),
                       leading: Container(
                         height: 55,
-                        child: this._leafs[index].imageFile == null
+                        child: this._leafs[index].immagineFile == null
                             ? Container(
                                 height: 55,
                                 width: 55,
@@ -85,17 +85,17 @@ class _LeafsInfoViewState extends State<LeafsInfoView> {
                             : Container(
                                 height: 55,
                                 width: 55,
-                                child: Image.file(this._leafs[index].imageFile),
+                                child: Image.file(this._leafs[index].immagineFile),
                               ),
                       ),
                       title: Text(
-                        '${_leafs[index].name}',
+                        '${_leafs[index].nome}',
                         maxLines: 2,
                       ),
-                      subtitle: _leafs[index].description == null
+                      subtitle: _leafs[index].descrizione == null
                           ? Text('')
                           : Text(
-                              '${_leafs[index].description}',
+                              '${_leafs[index].descrizione}',
                               maxLines: 2,
                             ),
                       onTap: () {
@@ -107,10 +107,10 @@ class _LeafsInfoViewState extends State<LeafsInfoView> {
                                 _title,
                                 _leafs[index],
                                 _controller,
-                                this._leafs[index].imageFile == null
+                                this._leafs[index].immagineFile == null
                                     ? null
                                     : Image.file(
-                                        this._leafs[index].imageFile,
+                                        this._leafs[index].immagineFile,
                                       ),
                               ),
                             ),

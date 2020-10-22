@@ -1,7 +1,7 @@
-import 'package:MC/controller/Controller.dart';
-import 'package:MC/model/NodeInfo.dart';
-import 'package:MC/utility/Style.dart';
-import 'package:MC/view/LeafsInfoView.dart';
+import 'package:provinciApp/controller/Controller.dart';
+import 'package:provinciApp/model/pacchetto.dart';
+import 'package:provinciApp/utility/Style.dart';
+import 'package:provinciApp/view/LeafsInfoView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'LoadingView.dart';
@@ -21,7 +21,7 @@ class ScrollListView extends StatefulWidget {
 class _ScrollListViewState extends State<ScrollListView> {
   Controller _controller;
   String _title;
-  List<NodeInfo> _nodes;
+  List<Pacchetto> _nodes;
 
   _ScrollListViewState(this._controller, this._title) {
     this._nodes = this._controller.getSearch();
@@ -33,16 +33,16 @@ class _ScrollListViewState extends State<ScrollListView> {
           context,
           MaterialPageRoute(
               builder: (context) => FutureBuilder<dynamic>(
-                    future: _controller.setLeafInfo(_nodes[index].name,
-                        _nodes[index].url, findImage(_nodes[index].name)),
+                    future: _controller.setLeafInfo(_nodes[index].nome,
+                        _nodes[index].url, findImage(_nodes[index].nome)),
                     builder: (BuildContext context,
                         AsyncSnapshot<dynamic> snapshot) {
                       Widget tmpWidget;
                       if (snapshot.hasData)
                         tmpWidget = LeafsInfoView(
-                            this._controller, this._nodes[index].name);
+                            this._controller, this._nodes[index].nome);
                       else if (snapshot.hasError)
-                        tmpWidget = OfflineView(this._nodes[index].name);
+                        tmpWidget = OfflineView(this._nodes[index].nome);
                       else
                         tmpWidget = LoadingView();
                       return tmpWidget;
@@ -81,17 +81,17 @@ class _ScrollListViewState extends State<ScrollListView> {
               itemBuilder: (context, index) {
                 return ListTile(
                   title: Text(
-                    this._nodes[index].name,
+                    this._nodes[index].nome,
                     maxLines: 2,
                   ),
                   subtitle: Text(
-                    this._nodes[index].description.toString(),
+                    this._nodes[index].descrizione.toString(),
                     maxLines: 2,
                   ),
                   leading: Stack(alignment: Alignment.center, children: [
                     Image.asset('assets/empty.png'),
                     Icon(
-                      IconData(findImage(this._nodes[index].name),
+                      IconData(findImage(this._nodes[index].nome),
                           fontFamily: 'MaterialIcons'),
                       color: BackgroundColor,
                     )

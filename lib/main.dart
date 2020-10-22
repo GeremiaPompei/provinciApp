@@ -1,13 +1,14 @@
-import 'package:MC/view/HomeView.dart';
-import 'package:MC/view/LoadingView.dart';
-import 'package:MC/view/SavedView.dart';
+import 'package:provinciApp/view/HomeView.dart';
+import 'package:provinciApp/view/LoadingView.dart';
+import 'package:provinciApp/view/SavedView.dart';
 import 'package:flutter/material.dart';
 import 'controller/Controller.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   Controller controller = Controller();
-  return runApp(MaterialApp(
+  return runApp(
+    MaterialApp(
       debugShowCheckedModeBanner: false,
       home: FutureBuilder(
         future: controller.initLoadAndStore(),
@@ -26,5 +27,7 @@ void main() {
       routes: {
         '/online': (context) => HomeView(controller, 1),
         '/offline': (context) => SavedWidget(controller),
-      }));
+      },
+    ),
+  );
 }

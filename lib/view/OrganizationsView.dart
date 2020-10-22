@@ -1,6 +1,6 @@
-import 'package:MC/controller/Controller.dart';
-import 'package:MC/model/NodeInfo.dart';
-import 'package:MC/utility/Style.dart';
+import 'package:provinciApp/controller/Controller.dart';
+import 'package:provinciApp/model/pacchetto.dart';
+import 'package:provinciApp/utility/Style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -25,7 +25,7 @@ class OrganizationsView extends StatefulWidget {
 
 class _OrganizationsViewState extends State<OrganizationsView> {
   Controller _controller;
-  List<Future<NodeInfo>> _nodes;
+  List<Future<Pacchetto>> _nodes;
   RefreshController _refreshController =
       RefreshController(initialRefresh: false);
 
@@ -80,7 +80,7 @@ class _OrganizationsViewState extends State<OrganizationsView> {
                 builder: (context, snapshot) {
                   Widget tmpWidget;
                   if (snapshot.hasData) {
-                    NodeInfo node = snapshot.data;
+                    Pacchetto node = snapshot.data;
                     tmpWidget = Card(
                       color: BackgroundColor,
                       child: Stack(children: [
@@ -90,10 +90,10 @@ class _OrganizationsViewState extends State<OrganizationsView> {
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
                               Container(
-                                  height: 65, child: _getImage(node.image)),
+                                  height: 65, child: _getImage(node.immagineUrl)),
                               Center(
                                 child: Text(
-                                  node.name,
+                                  node.nome,
                                   style: TitleTextStyle_20,
                                   maxLines: 3,
                                 ),
@@ -108,7 +108,7 @@ class _OrganizationsViewState extends State<OrganizationsView> {
                                       builder: (context) =>
                                           FutureBuilder<dynamic>(
                                             future: this._controller.setSearch(
-                                                node.name,
+                                                node.nome,
                                                 node.url,
                                                 IconComune),
                                             builder: (BuildContext context,
@@ -119,14 +119,14 @@ class _OrganizationsViewState extends State<OrganizationsView> {
                                                   .data.isNotEmpty)
                                                 tmpWidget = ScrollListView(
                                                     this._controller,
-                                                    node.name);
+                                                    node.nome);
                                               else
                                                 tmpWidget = Scaffold(
-                                                  body: EmptyView(node.name),
+                                                  body: EmptyView(node.nome),
                                                 );
                                               else if (snapshot.hasError) {
                                                 tmpWidget =
-                                                    OfflineView(node.name);
+                                                    OfflineView(node.nome);
                                               } else
                                                 tmpWidget = LoadingView();
                                               return tmpWidget;

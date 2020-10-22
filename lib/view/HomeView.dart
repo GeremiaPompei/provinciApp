@@ -1,13 +1,13 @@
-import 'package:MC/controller/Controller.dart';
-import 'package:MC/utility/ConstUrl.dart';
-import 'package:MC/utility/Style.dart';
-import 'package:MC/view/BottomButtonBar.dart';
-import 'package:MC/view/CategorieView.dart';
-import 'package:MC/view/EsploraView.dart';
-import 'package:MC/view/ExtraView.dart';
-import 'package:MC/view/OfflineView.dart';
-import 'package:MC/view/OrganizationsView.dart';
-import 'package:MC/view/LoadingView.dart';
+import 'package:provinciApp/controller/Controller.dart';
+import 'package:provinciApp/utility/ConstUrl.dart';
+import 'package:provinciApp/utility/Style.dart';
+import 'package:provinciApp/view/BottomButtonBar.dart';
+import 'package:provinciApp/view/CategorieView.dart';
+import 'package:provinciApp/view/EsploraView.dart';
+import 'package:provinciApp/view/ExtraView.dart';
+import 'package:provinciApp/view/OfflineView.dart';
+import 'package:provinciApp/view/OrganizationsView.dart';
+import 'package:provinciApp/view/LoadingView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -153,7 +153,7 @@ class _HomeViewState extends State<HomeView> {
                           varWidget = Scaffold(
                             appBar: AppBar(
                               title: Text(
-                                'Find Location',
+                                'Posizione',
                                 style: ReverseTitleTextStyle,
                               ),
                               backgroundColor: PrimaryColor,

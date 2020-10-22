@@ -1,5 +1,5 @@
-import 'package:MC/controller/Controller.dart';
-import 'package:MC/utility/Style.dart';
+import 'package:provinciApp/controller/Controller.dart';
+import 'package:provinciApp/utility/Style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -90,7 +90,7 @@ class _SavedWidgetState extends State<SavedWidget> {
                     leading: Container(
                       height: 55,
                       child:
-                          this._controller.getOffline()[index].imageFile == null
+                          this._controller.getOffline()[index].immagineFile == null
                               ? Container(
                                   height: 55,
                                   width: 55,
@@ -102,22 +102,22 @@ class _SavedWidgetState extends State<SavedWidget> {
                                   child: Image.file(this
                                       ._controller
                                       .getOffline()[index]
-                                      .imageFile),
+                                      .immagineFile),
                                 ),
                     ),
                     title: Text(
-                      '${this._controller.getOffline()[index].name}',
+                      '${this._controller.getOffline()[index].nome}',
                       maxLines: 2,
                     ),
                     subtitle: this
                                 ._controller
                                 .getOffline()
                                 .toList()[index]
-                                .description ==
+                                .descrizione ==
                             null
                         ? Text('')
                         : Text(
-                            '${this._controller.getOffline()[index].description}',
+                            '${this._controller.getOffline()[index].descrizione}',
                             maxLines: 2,
                           ),
                     onTap: () {
@@ -125,20 +125,20 @@ class _SavedWidgetState extends State<SavedWidget> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => DetailedLeafInfoView(
-                                    this._controller.getOffline()[index].name,
+                                    this._controller.getOffline()[index].nome,
                                     this._controller.getOffline()[index],
                                     _controller,
                                     this
                                                 ._controller
                                                 .getOffline()[index]
-                                                .imageFile ==
+                                                .immagineFile ==
                                             null
                                         ? null
                                         : Image.file(
                                             this
                                                 ._controller
                                                 .getOffline()[index]
-                                                .imageFile,
+                                                .immagineFile,
                                           ),
                                   ))).then((value) {
                         setState(() {

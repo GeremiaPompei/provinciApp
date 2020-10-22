@@ -1,5 +1,5 @@
-import 'package:MC/controller/Controller.dart';
-import 'package:MC/utility/Style.dart';
+import 'package:provinciApp/controller/Controller.dart';
+import 'package:provinciApp/utility/Style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -52,21 +52,21 @@ class _EventiViewState extends State<EventiView> {
             return Container(
                 child: ListTile(
                     title: Text(
-                      this._controller.getEvents()[index].name.toString(),
+                      this._controller.getEvents()[index].nome.toString(),
                       maxLines: 2,
                     ),
                     subtitle: Text(
                       this
                           ._controller
                           .getEvents()[index]
-                          .description
+                          .descrizione
                           .toString(),
                       maxLines: 2,
                     ),
-                    leading: this._controller.getEvents()[index].image != null
+                    leading: this._controller.getEvents()[index].immagineUrl != null
                         ? Image(
                             image: NetworkImage(
-                                this._controller.getEvents()[index].image))
+                                this._controller.getEvents()[index].immagineUrl))
                         : null,
                     onTap: () async {
                       if (await canLaunch(
