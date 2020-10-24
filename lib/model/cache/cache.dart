@@ -55,13 +55,11 @@ class Cache {
   /// Aggiunta risorsa alla lista delle risorse offline.
   void addOffline(Risorsa risorse) {
     this._offline.add(risorse);
-    _log('Aggiunta risorsa alla lista delle risorse offline');
   }
 
   /// Rimossa risorsa dalla lista delle risorse offline.
   void removeOffline(Risorsa risorsa) {
     this._offline.remove(risorsa);
-    _log('Rimossa risorsa dalla lista delle risorse offline');
   }
 
   /// Metodo per la sostituzione degli ultimi pacchetti con i nuovi.
@@ -89,50 +87,36 @@ class Cache {
   /// chiave nella mappa che corrisponde all'url per la loro ricerca.
   UnitCache<List<Risorsa>> getRisorseByKey(String url) => this._risorse[url];
 
-  /// Get della lista della chiave corrispondente alle ultime risorse visitate.
   String get keyUltimeRisorse => _keyUltimeRisorse;
 
-  /// Get della lista della chiave corrispondente agli ultimi pacchetti visitati.
   String get keyUltimiPacchetti => _keyUltimiPacchetti;
 
-  /// Get della lista delle risorse offline.
   List<Risorsa> get offline => _offline;
 
-  /// Get della mappa delle ultime risorse ricercate.
   Map<String, UnitCache<List<Risorsa>>> get risorse => _risorse;
 
-  /// Get della mappa degli ultimi pacchetti ricercati.
   Map<String, UnitCache<List<Pacchetto>>> get pacchetti => _pacchetti;
 
-  /// Get della lista delle organizzazioni.
-  List<Future<Pacchetto>> get organizations => _comuni;
+  List<Future<Pacchetto>> get comuni => _comuni;
 
-  /// Get dela lista delle categorie.
-  List<Future<Pacchetto>> get categories => _categorie;
+  List<Future<Pacchetto>> get categorie => _categorie;
 
-  /// Set della mappa degli ultimi pacchetti visitati.
   set pacchetti(Map<String, UnitCache<List<Pacchetto>>> value) {
     _pacchetti = value;
   }
 
-  /// Set della mappa delle ultime risorse visitate.
   set risorse(Map<String, UnitCache<List<Risorsa>>> value) {
     _risorse = value;
   }
 
-  /// Set della chiave corrispondente agli ultimi pacchetti visitati nella
-  /// mappa dei pacchetti.
   set keyUltimiPacchetti(String value) {
     _keyUltimiPacchetti = value;
   }
 
-  /// Set della chiave corrispondente aglle ultime risorse visitate nella
-  /// mappa delle risorse.
   set keyUltimeRisorse(String value) {
     _keyUltimeRisorse = value;
   }
 
-  /// Set corrispondente alla lista delle risorse offline.
   set offline(List<Risorsa> value) {
     _offline = value;
   }

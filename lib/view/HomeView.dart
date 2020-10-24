@@ -4,7 +4,6 @@ import 'package:provinciApp/utility/Style.dart';
 import 'package:provinciApp/view/BottomButtonBar.dart';
 import 'package:provinciApp/view/CategorieView.dart';
 import 'package:provinciApp/view/EsploraView.dart';
-import 'package:provinciApp/view/ExtraView.dart';
 import 'package:provinciApp/view/OfflineView.dart';
 import 'package:provinciApp/view/OrganizationsView.dart';
 import 'package:provinciApp/view/LoadingView.dart';
@@ -111,7 +110,8 @@ class _HomeViewState extends State<HomeView> {
                     content: Container(
                       height: MediaQuery.of(context).size.width,
                       width: MediaQuery.of(context).size.width,
-                      child: ExtraView(this._controller),
+                      child: Text(
+                          'Aggiungere nuovi extra.'), //ExtraView(this._controller),
                     ),
                     actions: [
                       FlatButton(
