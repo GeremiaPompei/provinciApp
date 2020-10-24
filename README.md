@@ -2,8 +2,18 @@
 <h1 align="center">provinciApp</h1>
 <p align="center">
   <img width="260" height="400" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/IMG_E0052%5B1%5D.JPG">
+
+<p align="center">
+<a href="#introduzione">Introduzione</a>&nbsp•
+<a href="#struttura">Struttura</a>&nbsp•
+<a href="#utilizzo">Utilizzo</a>&nbsp•
+<a href="#specifiche">Specifiche</a>&nbsp•
+<a href="#utori">Autori</a>
 </p>
-<h4 align="center">Introduzione • Struttura • Utilizzo • Specifiche • Autori
+<br>
+<br>
+</div>
+
 
 
 ## Introduzione
