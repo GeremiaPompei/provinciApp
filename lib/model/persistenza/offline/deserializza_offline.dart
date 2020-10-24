@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:provinciApp/model/persistence/offline/costanti_offline.dart';
+import 'package:provinciApp/model/persistenza/offline/costanti_offline.dart';
 import 'package:provinciApp/model/risorsa.dart';
-import 'package:provinciApp/model/persistence/store_manager.dart';
+import 'package:provinciApp/model/persistenza/store_manager.dart';
 import 'package:provinciApp/model/web/http_request.dart';
 
 /// DeserializzaOffline permette tramite un metodo pubblico di deserializzare

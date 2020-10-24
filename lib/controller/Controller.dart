@@ -1,10 +1,10 @@
 import 'dart:io';
 import 'package:provinciApp/model/cache/cache.dart';
-import 'package:provinciApp/model/persistence/cache/deserializza_cache.dart';
-import 'package:provinciApp/model/persistence/cache/serializza_cache.dart';
-import 'package:provinciApp/model/persistence/offline/deserializza_offline.dart';
-import 'package:provinciApp/model/persistence/offline/serializza_offline.dart';
-import 'package:provinciApp/model/persistence/store_manager.dart';
+import 'package:provinciApp/model/persistenza/cache/deserializza_cache.dart';
+import 'package:provinciApp/model/persistenza/cache/serializza_cache.dart';
+import 'package:provinciApp/model/persistenza/offline/deserializza_offline.dart';
+import 'package:provinciApp/model/persistenza/offline/serializza_offline.dart';
+import 'package:provinciApp/model/persistenza/store_manager.dart';
 import 'package:provinciApp/model/cache/unit_cache.dart';
 import 'package:provinciApp/model/risorsa.dart';
 import 'package:provinciApp/model/pacchetto.dart';

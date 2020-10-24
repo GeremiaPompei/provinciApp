@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'package:intl/intl.dart';
 import 'package:provinciApp/model/cache/cache.dart';
-import 'package:provinciApp/model/persistence/cache/costanti_cache.dart';
-import 'package:provinciApp/model/persistence/cache/costanti_pacchetto.dart';
-import 'package:provinciApp/model/persistence/cache/costanti_risorsa.dart';
-import 'package:provinciApp/model/persistence/cache/costanti_unit_cache.dart';
+import 'package:provinciApp/model/persistenza/cache/costanti_cache.dart';
+import 'package:provinciApp/model/persistenza/cache/costanti_pacchetto.dart';
+import 'package:provinciApp/model/persistenza/cache/costanti_risorsa.dart';
+import 'package:provinciApp/model/persistenza/cache/costanti_unit_cache.dart';
 
 /// SerializzaCache permette tramite un metodo pubblico di serializzare una
 /// cache in una stringa.

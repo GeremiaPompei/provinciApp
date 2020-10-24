@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:provinciApp/model/persistence/store_manager.dart';
+import 'package:provinciApp/model/persistenza/store_manager.dart';
 import '../../cache/cache.dart';
 import '../../risorsa.dart';
 import '../../pacchetto.dart';
