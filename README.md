@@ -93,11 +93,12 @@ appassionati;
 
 [Struttura Online](https://github.com/GeremiaPompei/mc/blob/master/README.md#struttura-online)
 
-[<img src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Home.png" width="25" height="25" align="left" Hspace="15" Vspace="0" 
+[<img src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/FrecciaBack.png" width="25" height="25" align="left" Hspace="10" Vspace="0" 
+Border="0">](https://github.com/GeremiaPompei/provinciApp#provinciapp)
+
+[<img src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Home.png" width="25" height="25" align="center" Hspace="5" Vspace="0" 
 Border="0">](https://github.com/GeremiaPompei/provinciApp#struttura-online)
 
-[<img src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/FrecciaBack.png" width="25" height="25" align="center" Hspace="10" Vspace="0" 
-Border="0">](https://github.com/GeremiaPompei/provinciApp#struttura-online)
   
   
 
