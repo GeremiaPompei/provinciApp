@@ -1,21 +1,21 @@
 /// Classe contenente le costanti utili per la serializzazione e
 /// deserializzazione della cache.
 class CostantiCache {
-  /// Comuni della cache.
+  /// Stringa utile per ricavare i comuni della cache.
   static const comuni = 'Comuni';
 
-  /// Categorie della  ache.
+  /// Stringa utile per ricavare le categorie della cache.
   static const categorie = 'Categorie';
 
-  /// Ultimi pacchetti cercati.
+  /// Stringa utile per ricavare gli ultimi pacchetti cercati.
   static const pacchetti = 'Pacchetti';
 
-  /// Ultime risorse cercate.
+  /// Stringa utile per ricavare le ultime risorse cercate.
   static const risorse = 'Risorse';
 
-  /// Chiave dell'ultimo pacchetto cercato
+  /// Stringa utile per ricavare le chiave dell'ultimo pacchetto cercato
   static const keyUltimiPacchetti = 'Key Ultimi Pacchetti';
 
-  /// Chiave dell'ultima risorsa cercata.
+  /// Stringa utile per ricavare le chiave dell'ultima risorsa cercata.
   static const keyUltimeRisorse = 'Key Ultime Risorse';
 }

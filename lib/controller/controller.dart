@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:provinciApp/utility/costanti/costanti_nomefile.dart';
 import 'package:provinciApp/model/cache/cache.dart';
 import 'package:provinciApp/model/persistenza/cache/deserializza_cache.dart';
 import 'package:provinciApp/model/persistenza/cache/serializza_cache.dart';
@@ -8,25 +9,37 @@ import 'package:provinciApp/model/persistenza/store_manager.dart';
 import 'package:provinciApp/model/cache/unit_cache.dart';
 import 'package:provinciApp/model/risorsa.dart';
 import 'package:provinciApp/model/pacchetto.dart';
+import 'package:provinciApp/utility/costanti/costanti_web.dart';
 import 'package:provinciApp/model/web/http_request.dart';
 
+/// Un Controller non è altro che il controller dell'MVC che sei occupa di
+/// fornire alla view le funzioni per accedere al backend e reperire le
+/// informazioni necessarie.
 class Controller {
+  /// Cache del controller, essa è l'elemento che memorizza i vari dati.
   Cache _cache;
-  List<Pacchetto> _events;
-  List<Pacchetto> _promos;
-  HttpRequest _httpRequest;
-  StoreManager _storeManager;
-  SerializzzaCache _serializeCache;
-  DeserializzaCache _deserializeCache;
-  SerializzaOffline _serializeOffline;
-  DeserializzaOffline _deserializeOffline;
-  static const FNCACHE = 'cache.json';
-  static const FNOFFLINE = 'offline.json';
-  static const DNIMAGE = 'Image';
 
+  /// Attributo che permette di fare chiamate rest tramite la rete.
+  HttpRequest _httpRequest;
+
+  /// Attributo che permette di accedere e manipolare il filesystem leggendo e
+  /// scrivendo.
+  StoreManager _storeManager;
+
+  /// Attributo che permette di serializzare la cache in stringa.
+  SerializzzaCache _serializeCache;
+
+  /// Attributo che permette di deserializzare una stringa in cache.
+  DeserializzaCache _deserializeCache;
+
+  /// Attributo che permette di serializzare una lista di risorse in stringa.
+  SerializzaOffline _serializeOffline;
+
+  /// Attributo che permette di deserializzare una stringa in lista di risorse.
+  DeserializzaOffline _deserializeOffline;
+
+  /// Costruttore del controller che inizializza le varie variabili.
   Controller() {
-    _events = [];
-    _promos = [];
     _cache = new Cache();
     _httpRequest = new HttpRequest();
     _storeManager = new StoreManager();
@@ -36,6 +49,7 @@ class Controller {
     _deserializeOffline = new DeserializzaOffline();
   }
 
+  ///
   Future<bool> tryConnection() async {
     final result = await InternetAddress.lookup('google.com');
     return result.isNotEmpty && result[0].rawAddress.isNotEmpty;
@@ -43,8 +57,9 @@ class Controller {
 
   Future<dynamic> initLoadAndStore() async {
     if (this._cache.keyUltimeRisorse == null) {
-      //(await _storeManager.getFile(FNCACHE)).deleteSync();
-      if (!(await _storeManager.getFile(FNCACHE)).existsSync()) {
+      //(await _storeManager.getFile(CostantiNomeFile.offline)).deleteSync();
+      //(await _storeManager.getFile(CostantiNomeFile.cache)).deleteSync();
+      if (!(await _storeManager.getFile(CostantiNomeFile.cache)).existsSync()) {
         _loadStaticLastInfo(4, 4);
         this._cache.initComuni(await _httpRequest.cercaComuni());
         this._cache.initCategorie(await _httpRequest.cercaCategorie());
@@ -61,7 +76,7 @@ class Controller {
 
   Future<dynamic> _loadCache() async {
     try {
-      var loaded = await _storeManager.leggiFile(FNCACHE);
+      var loaded = await _storeManager.leggiFile(CostantiNomeFile.cache);
       Cache tmpCache = await _deserializeCache.deserializza(loaded);
       await _loadLastInfoFrom(tmpCache);
     } catch (e) {}
@@ -87,8 +102,8 @@ class Controller {
   }
 
   Future<dynamic> _loadCacheOffline() async {
-    this._cache =
-        await _deserializeCache.deserializza(await _storeManager.leggiFile(FNCACHE));
+    this._cache = await _deserializeCache
+        .deserializza(await _storeManager.leggiFile(CostantiNomeFile.cache));
     return this._cache;
   }
 
@@ -108,7 +123,7 @@ class Controller {
         this._cache.initCategorie(list);
       } catch (e) {
         Cache tmpCache = await _deserializeCache.deserializza(
-            await _storeManager.leggiFile(FNCACHE));
+            await _storeManager.leggiFile(CostantiNomeFile.cache));
         this._cache.initCategorie(tmpCache.categorie);
       }
     }
@@ -123,7 +138,7 @@ class Controller {
         this._cache.initComuni(list);
       } catch (e) {
         Cache tmpCache = await _deserializeCache.deserializza(
-            await _storeManager.leggiFile(FNCACHE));
+            await _storeManager.leggiFile(CostantiNomeFile.cache));
         this._cache.initComuni(tmpCache.comuni);
       }
     }
@@ -143,13 +158,16 @@ class Controller {
     return getOffline();
   }
 
+  Future<dynamic> setSearchPlus(String name, String url, int image) async =>
+      setSearch(name, CostantiWeb.urlProvinciaSearch + url, image);
+
   Future<dynamic> setSearch(String name, String url, int image) async {
     UnitCache<List<Pacchetto>> cacheUnit = this._cache.getPacchettiByKey(url);
     if (cacheUnit == null) {
       List<Pacchetto> nodes = await _httpRequest.cercaPacchetto(url);
       if (nodes.isNotEmpty) {
-        String oldUrl = _oldestUrl(
-            this._cache.pacchetti.keys, (el) => this._cache.getPacchettiByKey(el));
+        String oldUrl = _oldestUrl(this._cache.pacchetti.keys,
+            (el) => this._cache.getPacchettiByKey(el));
         cacheUnit = this._cache.pacchetti[oldUrl];
         cacheUnit.nome = name;
         cacheUnit.elemento = nodes;
@@ -216,14 +234,6 @@ class Controller {
     _storeOffline();
   }
 
-  List<Pacchetto> getEvents() {
-    return this._events;
-  }
-
-  List<Pacchetto> getPromos() {
-    return this._promos;
-  }
-
   List<Future<Pacchetto>> getOrganizations() {
     return this._cache.comuni;
   }
@@ -233,7 +243,10 @@ class Controller {
   }
 
   List<Pacchetto> getSearch() {
-    return this._cache.getPacchettiByKey(this._cache.keyUltimiPacchetti).elemento;
+    return this
+        ._cache
+        .getPacchettiByKey(this._cache.keyUltimiPacchetti)
+        .elemento;
   }
 
   List<MapEntry<String, dynamic>> getLastSearched() =>
@@ -250,30 +263,34 @@ class Controller {
 
   Future _storeCache() async {
     return _storeManager.scriviFile(
-        await _serializeCache.serializza(this._cache), FNCACHE);
+        await _serializeCache.serializza(this._cache), CostantiNomeFile.cache);
   }
 
   Future _storeOffline() async {
     return await _storeManager.scriviFile(
-        _serializeOffline.serializza(this._cache.offline), FNOFFLINE);
+        _serializeOffline.serializza(this._cache.offline),
+        CostantiNomeFile.offline);
   }
 
   Future _loadOffline() async {
     try {
       this._cache.offline = await _deserializeOffline.deserializza(
-          await _storeManager.leggiFile(FNOFFLINE));
+          await _storeManager.leggiFile(CostantiNomeFile.offline));
     } catch (e) {}
   }
 
   Future<dynamic> _saveImage(Risorsa leafInfo) async {
-    if (!(await _storeManager.getDirectory(DNIMAGE)).existsSync())
-      (await _storeManager.getDirectory(DNIMAGE)).createSync();
+    if (!(await _storeManager.getDirectory(CostantiNomeFile.immagini))
+        .existsSync())
+      (await _storeManager.getDirectory(CostantiNomeFile.immagini))
+          .createSync();
     var byte;
     try {
       if (leafInfo.immagineUrl != null) {
-        String path =
-            leafInfo.immagineUrl.substring(leafInfo.immagineUrl.lastIndexOf('/') + 1);
-        leafInfo.immagineFile = await _storeManager.getFile(DNIMAGE + '/' + path);
+        String path = leafInfo.immagineUrl
+            .substring(leafInfo.immagineUrl.lastIndexOf('/') + 1);
+        leafInfo.immagineFile =
+            await _storeManager.getFile(CostantiNomeFile.immagini + '/' + path);
         byte = await _httpRequest.cercaImmagine(leafInfo.immagineUrl);
         _storeManager.scriviBytes(byte, leafInfo.immagineFile.path);
       }

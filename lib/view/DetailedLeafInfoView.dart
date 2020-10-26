@@ -1,4 +1,4 @@
-import 'package:provinciApp/controller/Controller.dart';
+import 'package:provinciApp/controller/controller.dart';
 import 'package:provinciApp/model/risorsa.dart';
 import 'package:provinciApp/utility/Style.dart';
 import 'package:flutter/cupertino.dart';
@@ -153,8 +153,8 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
                 alignment: Alignment.centerLeft,
                 child: FlutterMap(
                   options: MapOptions(
-                    center: LatLng(
-                        this._leafInfo.posizione[0], this._leafInfo.posizione[1]),
+                    center: LatLng(this._leafInfo.posizione[0],
+                        this._leafInfo.posizione[1]),
                     zoom: 13.0,
                   ),
                   layers: [
@@ -265,9 +265,8 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
                             this._controller.removeOffline(_leafInfo);
                             this._icon = Icon(Icons.add_circle_outline);
                           } else {
-                            this._controller.addOffline(_leafInfo).then(
-                                (value) => this._icon =
-                                    Icon(Icons.remove_circle_outline));
+                            this._controller.addOffline(_leafInfo);
+                            this._icon = Icon(Icons.remove_circle_outline);
                           }
                         });
                       },

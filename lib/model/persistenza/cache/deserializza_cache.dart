@@ -1,13 +1,13 @@
 import 'dart:convert';
 import 'package:provinciApp/model/persistenza/store_manager.dart';
 import '../../cache/cache.dart';
+import '../../../utility/costanti/costanti_risorsa.dart';
 import '../../risorsa.dart';
 import '../../pacchetto.dart';
 import '../../cache/unit_cache.dart';
-import 'costanti_cache.dart';
-import 'costanti_pacchetto.dart';
-import 'costanti_risorsa.dart';
-import 'costanti_unit_cache.dart';
+import '../../../utility/costanti/costanti_cache.dart';
+import '../../../utility/costanti/costanti_pacchetto.dart';
+import '../../../utility/costanti/costanti_unitcache.dart';
 
 /// DeserializzaCache permette tramite un metodo pubblico di deserializzare una
 /// stringa in una cache.
@@ -29,8 +29,8 @@ class DeserializzaCache {
     cache.pacchetti = await _deserializzaUnitCache(
         jsonMap[CostantiCache.pacchetti],
         (el, s) async => await _deserializzaListaPacchetti(el));
-    cache.risorse = await _deserializzaUnitCache(jsonMap[CostantiCache.risorse],
-        (el, s) async => await _deserializzaListaRisorse(el, s));
+    cache.risorse = await _deserializzaUnitCache(
+        jsonMap[CostantiCache.risorse], _deserializzaListaRisorse);
     return cache;
   }
 
@@ -54,7 +54,7 @@ class DeserializzaCache {
     StoreManager _storeManager = new StoreManager();
     List<Risorsa> listRes = [];
     for (int i = 0; i < listIn.length; i++) {
-      Risorsa risorsa = Risorsa(listIn[i][CostantiRisorsa.json], url, i);
+      Risorsa risorsa = Risorsa(listIn[i], url, i);
       if (listIn[i][CostantiRisorsa.pathImmagine] != 'null')
         risorsa.immagineFile = await _storeManager
             .getFile(listIn[i][CostantiRisorsa.pathImmagine]);
@@ -69,24 +69,17 @@ class DeserializzaCache {
       List listIn, Future<List<T>> Function(List, String) func) async {
     Map<String, UnitCache<List<T>>> mapRes = {};
     for (dynamic element in listIn) {
-      List el = element[CostantiUnitCache.unitCache]
-                  [CostantiUnitCache.elemento] ==
-              'null'
+      List el = element[CostantiUnitCache.elemento] == 'null'
           ? null
-          : await func(
-              element[CostantiUnitCache.unitCache][CostantiUnitCache.elemento],
-              element[CostantiUnitCache.chiave]);
-      int icon = element[CostantiUnitCache.unitCache]
-                  [CostantiUnitCache.icona] ==
-              'null'
+          : await func(element[CostantiUnitCache.elemento],
+              element[CostantiUnitCache.id]);
+      int icon = element[CostantiUnitCache.icona] == 'null'
           ? null
-          : int.parse(
-              element[CostantiUnitCache.unitCache][CostantiUnitCache.icona]);
-      mapRes[element[CostantiUnitCache.chiave]] = UnitCache(
+          : int.parse(element[CostantiUnitCache.icona]);
+      mapRes[element[CostantiUnitCache.id]] = UnitCache(
           el,
-          DateTime.parse(
-              element[CostantiUnitCache.unitCache][CostantiUnitCache.data]),
-          element[CostantiUnitCache.unitCache][CostantiUnitCache.nome],
+          DateTime.parse(element[CostantiUnitCache.data]),
+          element[CostantiUnitCache.nome],
           icon);
     }
     return mapRes;

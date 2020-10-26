@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:provinciApp/model/persistenza/offline/costanti_offline.dart';
+import 'package:provinciApp/utility/costanti/costanti_offline.dart';
 
 import '../../risorsa.dart';
 

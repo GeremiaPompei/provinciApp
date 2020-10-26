@@ -1,10 +1,11 @@
 import 'dart:convert';
 import 'package:intl/intl.dart';
 import 'package:provinciApp/model/cache/cache.dart';
-import 'package:provinciApp/model/persistenza/cache/costanti_cache.dart';
-import 'package:provinciApp/model/persistenza/cache/costanti_pacchetto.dart';
-import 'package:provinciApp/model/persistenza/cache/costanti_risorsa.dart';
-import 'package:provinciApp/model/persistenza/cache/costanti_unit_cache.dart';
+import 'package:provinciApp/utility/costanti/costanti_cache.dart';
+import 'package:provinciApp/utility/costanti/costanti_pacchetto.dart';
+import 'package:provinciApp/utility/costanti/costanti_unitcache.dart';
+
+import '../../../utility/costanti/costanti_risorsa.dart';
 
 /// SerializzaCache permette tramite un metodo pubblico di serializzare una
 /// cache in una stringa.
@@ -45,12 +46,9 @@ class SerializzzaCache {
   Future<dynamic> _serializzaListaRisorse(dynamic listIn) async {
     List<Map> listRes = [];
     for (var element in listIn) {
-      Map<String, dynamic> mapTmp = {
-        CostantiRisorsa.json: element.json,
-        CostantiRisorsa.pathImmagine:
-            element.immagineFile == null ? 'null' : element.immagineFile.path,
-      };
-      listRes.add(mapTmp);
+      element.json[CostantiRisorsa.pathImmagine] =
+          element.immagineFile == null ? 'null' : element.immagineFile.path;
+      listRes.add(element.json);
     }
     return listRes;
   }
@@ -61,16 +59,14 @@ class SerializzzaCache {
     List<Map> listRes = [];
     for (var element in mapIn.entries) {
       Map<String, dynamic> mapTmp = {
-        CostantiUnitCache.chiave: element.key,
-        CostantiUnitCache.unitCache: {
-          CostantiUnitCache.data:
-              DateFormat('yyy-MM-dd HH:mm:ss').format(element.value.data),
-          CostantiUnitCache.nome: element.value.nome,
-          CostantiUnitCache.icona: element.value.icona.toString(),
-          CostantiUnitCache.elemento: element.value.elemento == null
-              ? 'null'
-              : await func(element.value.elemento)
-        }
+        CostantiUnitCache.data:
+            DateFormat('yyy-MM-dd HH:mm:ss').format(element.value.data),
+        CostantiUnitCache.nome: element.value.nome,
+        CostantiUnitCache.icona: element.value.icona.toString(),
+        CostantiUnitCache.elemento: element.value.elemento == null
+            ? 'null'
+            : await func(element.value.elemento),
+        CostantiUnitCache.id: element.key,
       };
       listRes.add(mapTmp);
     }

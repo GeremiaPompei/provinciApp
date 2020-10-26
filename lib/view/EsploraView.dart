@@ -1,4 +1,4 @@
-import 'package:provinciApp/controller/Controller.dart';
+import 'package:provinciApp/controller/controller.dart';
 import 'package:provinciApp/model/pacchetto.dart';
 import 'package:provinciApp/model/cache/unit_cache.dart';
 import 'package:provinciApp/utility/ConstUrl.dart';
@@ -156,8 +156,8 @@ class _EsploraViewState extends State<EsploraView> {
               ],
             )),
             loader: LoadingView(),
-            onSearch: (input) async => await _controller.setSearch(
-                input, MCDATASET_SEARCH + input, IconSearch),
+            onSearch: (input) async => await _controller.setSearchPlus(
+                input, input, IconSearch),
             onError: (err) => EmptyView(null),
             onItemFound: (input, num) {
               return Container(

@@ -2,7 +2,7 @@ import 'package:provinciApp/view/HomeView.dart';
 import 'package:provinciApp/view/LoadingView.dart';
 import 'package:provinciApp/view/SavedView.dart';
 import 'package:flutter/material.dart';
-import 'controller/Controller.dart';
+import 'controller/controller.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

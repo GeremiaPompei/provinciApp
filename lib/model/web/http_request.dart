@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:provinciApp/model/pacchetto.dart';
 import 'package:http/http.dart' as http;
 import 'package:provinciApp/model/risorsa.dart';
-import 'package:provinciApp/utility/ConstUrl.dart';
+import 'package:provinciApp/utility/costanti/costanti_web.dart';
 
 /// Un HttpRequest ha la responsibilità di fornire metodi per fare le varie
 /// richieste rest per prelevare i dati dal server.
@@ -46,14 +46,16 @@ class HttpRequest {
 
   /// Metodo capace di fornire grazie ad una chiamata asincrona i comuni.
   Future<List<Future<Pacchetto>>> cercaComuni() async => await _metaPacchetto(
-      MCDATASET_ORGANIZATION_LIST,
-      MCDATASET_ORGANIZATION_SHOW,
-      MCDATASET_SEARCH + 'organization:');
+      CostantiWeb.urlProvinciaComuniList,
+      CostantiWeb.urlProvinciaComuniShow,
+      CostantiWeb.urlProvinciaSearch + 'organization:');
 
   /// Metodo capace di fornire grazie ad una chiamata asincrona le categorie.
   Future<List<Future<Pacchetto>>> cercaCategorie() async =>
-      await _metaPacchetto(MCDATASET_GROUP_LIST, MCDATASET_GROUP_SHOW,
-          MCDATASET_SEARCH + 'groups:');
+      await _metaPacchetto(
+          CostantiWeb.urlProvinciaCategorieList,
+          CostantiWeb.urlProvinciaCategorieShow,
+          CostantiWeb.urlProvinciaSearch + 'groups:');
 
   /// Metodo privato capace di fornire tramite una chiamata asincrona una lista
   /// di pacchetti dati tre url che indicano dove e come cercare il determinato

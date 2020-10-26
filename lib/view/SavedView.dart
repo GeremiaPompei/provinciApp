@@ -1,4 +1,4 @@
-import 'package:provinciApp/controller/Controller.dart';
+import 'package:provinciApp/controller/controller.dart';
 import 'package:provinciApp/utility/Style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

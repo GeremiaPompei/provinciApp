@@ -1,4 +1,4 @@
-import 'package:provinciApp/controller/Controller.dart';
+import 'package:provinciApp/controller/controller.dart';
 import 'package:provinciApp/utility/ConstUrl.dart';
 import 'package:provinciApp/utility/Style.dart';
 import 'package:provinciApp/view/BottomButtonBar.dart';
@@ -42,8 +42,8 @@ class _HomeViewState extends State<HomeView> {
     List<Placemark> placemark =
         await geolocator.placemarkFromPosition(position);
     this._location = placemark[0].locality;
-    return this._controller.setSearch(
-        this._location, MCDATASET_SEARCH + this._location, IconPosition);
+    return this._controller.setSearchPlus(
+        this._location, this._location, IconPosition);
   }
 
   Widget initWidgetFuture(Future<dynamic> Function() func, Widget input) =>
