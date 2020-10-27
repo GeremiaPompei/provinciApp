@@ -15,7 +15,7 @@ const TitleTextStyle_20 = TextStyle(
 const ReverseTitleTextStyle = TextStyle(
   fontFamily: 'Poppins',
   fontWeight: FontWeight.w900,
-  fontSize: 35,
+  fontSize: 25,
   color: BackgroundColor,
 );
 const TitleDetaileStyle = TextStyle(

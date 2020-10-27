@@ -231,48 +231,46 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
       this._widgets['Share'],
     ];
     listW.removeWhere((element) => element == null);
-    return Scaffold(
-      backgroundColor: PrimaryColor,
-      body: Padding(
-        padding:
-            EdgeInsets.fromLTRB(0, MediaQuery.of(context).padding.top, 0, 0),
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
-            child: Column(
-              children: [
-                AppBar(
-                  backgroundColor: Colors.transparent,
-                  elevation: 0,
-                  leading: IconButton(
-                    icon: Icon(
-                      Icons.arrow_back_ios,
-                      color: BackgroundColor,
-                    ),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                  actions: <Widget>[
-                    IconButton(
-                      icon: this._icon,
-                      onPressed: () {
-                        setState(() {
-                          if (this
-                              ._controller
-                              .offline
-                              .contains(this._leafInfo)) {
-                            this._controller.removeOffline(_leafInfo);
-                            this._icon = Icon(Icons.add_circle_outline);
-                          } else {
-                            this._controller.addOffline(_leafInfo);
-                            this._icon = Icon(Icons.remove_circle_outline);
-                          }
-                        });
-                      },
-                    )
-                  ],
+    return Container(
+      color: PrimaryColor,
+      padding:
+          EdgeInsets.fromLTRB(20, MediaQuery.of(context).padding.top, 20, 0),
+      child: Scaffold(
+        backgroundColor: PrimaryColor,
+        body: CustomScrollView(
+          slivers: <Widget>[
+            SliverAppBar(
+              floating: true,
+              backgroundColor: PrimaryColor,
+              elevation: 0,
+              leading: IconButton(
+                icon: Icon(
+                  Icons.arrow_back_ios,
+                  color: BackgroundColor,
                 ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              actions: <Widget>[
+                IconButton(
+                  icon: this._icon,
+                  onPressed: () {
+                    setState(() {
+                      if (this._controller.offline.contains(this._leafInfo)) {
+                        this._controller.removeOffline(_leafInfo);
+                        this._icon = Icon(Icons.add_circle_outline);
+                      } else {
+                        this._controller.addOffline(_leafInfo);
+                        this._icon = Icon(Icons.remove_circle_outline);
+                      }
+                    });
+                  },
+                )
+              ],
+            ),
+            SliverList(
+              delegate: SliverChildListDelegate.fixed([
                 this._widgets['Image'],
                 SizedBox(
                   height: 20,
@@ -292,11 +290,11 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: listW),
                 SizedBox(
-                  height: 10,
+                  height: 30,
                 ),
-              ],
+              ]),
             ),
-          ),
+          ],
         ),
       ),
     );
