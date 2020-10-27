@@ -55,13 +55,10 @@ class _SavedWidgetState extends State<SavedWidget> {
           scrollDirection: Axis.vertical,
           shrinkWrap: true,
           padding: const EdgeInsets.all(8),
-          itemCount: this._controller.getOffline().length,
+          itemCount: this._controller.offline.length,
           itemBuilder: (context, index) {
             Icon icon;
-            this
-                    ._controller
-                    .getOffline()
-                    .contains(this._controller.getOffline()[index])
+            this._controller.offline.contains(this._controller.offline[index])
                 ? icon = Icon(Icons.remove_circle_outline)
                 : icon = Icon(Icons.add_circle_outline);
             return Card(
@@ -76,68 +73,65 @@ class _SavedWidgetState extends State<SavedWidget> {
                         setState(() {
                           if (this
                               ._controller
-                              .getOffline()
-                              .contains(this._controller.getOffline()[index])) {
-                            this._controller.removeOffline(
-                                this._controller.getOffline()[index]);
+                              .offline
+                              .contains(this._controller.offline[index])) {
+                            this
+                                ._controller
+                                .removeOffline(this._controller.offline[index]);
                           } else {
-                            this._controller.addOffline(
-                                this._controller.getOffline()[index]);
+                            this
+                                ._controller
+                                .addOffline(this._controller.offline[index]);
                           }
                         });
                       },
                     ),
                     leading: Container(
                       height: 55,
-                      child:
-                          this._controller.getOffline()[index].immagineFile == null
-                              ? Container(
-                                  height: 55,
-                                  width: 55,
-                                  child: Image.asset('assets/logo_mc.PNG'),
-                                )
-                              : Container(
-                                  height: 55,
-                                  width: 55,
-                                  child: Image.file(this
-                                      ._controller
-                                      .getOffline()[index]
-                                      .immagineFile),
-                                ),
+                      child: this._controller.offline[index].immagineFile ==
+                              null
+                          ? Container(
+                              height: 55,
+                              width: 55,
+                              child: Image.asset('assets/logo_mc.PNG'),
+                            )
+                          : Container(
+                              height: 55,
+                              width: 55,
+                              child: Image.file(
+                                  this._controller.offline[index].immagineFile),
+                            ),
                     ),
                     title: Text(
-                      '${this._controller.getOffline()[index].nome}',
+                      '${this._controller.offline[index].nome}',
                       maxLines: 2,
                     ),
-                    subtitle: this
-                                ._controller
-                                .getOffline()
-                                .toList()[index]
-                                .descrizione ==
-                            null
-                        ? Text('')
-                        : Text(
-                            '${this._controller.getOffline()[index].descrizione}',
-                            maxLines: 2,
-                          ),
+                    subtitle:
+                        this._controller.offline.toList()[index].descrizione ==
+                                null
+                            ? Text('')
+                            : Text(
+                                '${this._controller.offline[index].descrizione}',
+                                maxLines: 2,
+                              ),
                     onTap: () {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => DetailedLeafInfoView(
-                                    this._controller.getOffline()[index].nome,
-                                    this._controller.getOffline()[index],
+                                    this._controller.offline[index].nome,
+                                    this._controller.offline[index],
                                     _controller,
                                     this
                                                 ._controller
-                                                .getOffline()[index]
+                                                .offline[index]
                                                 .immagineFile ==
                                             null
                                         ? null
                                         : Image.file(
                                             this
                                                 ._controller
-                                                .getOffline()[index]
+                                                .offline[index]
                                                 .immagineFile,
                                           ),
                                   ))).then((value) {

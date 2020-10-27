@@ -27,23 +27,10 @@ class _HomeViewState extends State<HomeView> {
   Controller _controller;
   String _title;
   Widget _varWidget;
-  String _location;
   int _index;
 
   _HomeViewState(this._controller, this._index) {
     init(this._index);
-  }
-
-  Future _findPosition() async {
-    await this._controller.tryConnection();
-    final Geolocator geolocator = Geolocator()..forceAndroidLocationManager;
-    Position position = await geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.best);
-    List<Placemark> placemark =
-        await geolocator.placemarkFromPosition(position);
-    this._location = placemark[0].locality;
-    return this._controller.setSearchPlus(
-        this._location, this._location, IconPosition);
   }
 
   Widget initWidgetFuture(Future<dynamic> Function() func, Widget input) =>
@@ -138,15 +125,15 @@ class _HomeViewState extends State<HomeView> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => FutureBuilder<dynamic>(
-                      future: _findPosition(),
+                      future: this._controller.cercaFromPosizione(),
                       builder: (BuildContext context,
                           AsyncSnapshot<dynamic> snapshot) {
                         Widget varWidget;
                         if (snapshot.hasData) if (snapshot.data.isNotEmpty)
                           varWidget =
-                              ScrollListView(this._controller, this._location);
+                              ScrollListView(this._controller, snapshot.data);
                         else
-                          varWidget = EmptyView(this._location);
+                          varWidget = EmptyView(snapshot.data);
                         else if (snapshot.hasError)
                           varWidget = OfflineView('Find Position');
                         else

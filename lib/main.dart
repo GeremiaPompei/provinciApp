@@ -11,7 +11,7 @@ void main() {
     MaterialApp(
       debugShowCheckedModeBanner: false,
       home: FutureBuilder(
-        future: controller.initLoadAndStore(),
+        future: controller.initController(),
         builder: (context, snapshot) {
           Widget tmpWidget;
           if (snapshot.hasData)

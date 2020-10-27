@@ -24,28 +24,18 @@ class _CategoriesViewState extends State<CategoriesView> {
       RefreshController(initialRefresh: false);
 
   _CategoriesViewState(this._controller) {
-    this._nodes = this._controller.getCategories();
+    this._nodes = this._controller.categorie;
   }
 
-  Widget _getImage(dynamic image) => FutureBuilder<dynamic>(
-        future: this._controller.tryConnection(),
-        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-          Widget tmpWidget;
-          if (snapshot.hasError || image == null)
-            tmpWidget = Image(
-              image: AssetImage(
-                'assets/empty.png',
-              ),
-              height: 87,
-              width: 87,
-            );
-          else if (snapshot.hasData)
-            tmpWidget = Image(image: NetworkImage(image));
-          else
-            tmpWidget = CircularProgressIndicator();
-          return tmpWidget;
-        },
-      );
+  Widget _getImage(dynamic image) => image == null
+      ? Image(
+          image: AssetImage(
+            'assets/empty.png',
+          ),
+          height: 87,
+          width: 87,
+        )
+      : Image(image: NetworkImage(image));
 
   @override
   Widget build(BuildContext context) {
@@ -55,9 +45,9 @@ class _CategoriesViewState extends State<CategoriesView> {
       controller: _refreshController,
       onRefresh: () {
         setState(() {
-          this._controller.getCategories().removeWhere((element) => true);
-          this._controller.initCategories().then((value) {
-            this._nodes = this._controller.getCategories();
+          this._controller.categorie.removeWhere((element) => true);
+          this._controller.initCategorie().then((value) {
+            this._nodes = this._controller.categorie;
             (context as Element).reassemble();
             _refreshController.refreshCompleted();
           });
@@ -94,7 +84,7 @@ class _CategoriesViewState extends State<CategoriesView> {
                                   MaterialPageRoute(
                                     builder: (context) =>
                                         FutureBuilder<dynamic>(
-                                      future: _controller.setSearch(
+                                      future: _controller.cercaFromUrl(
                                           node.nome, node.url, IconCategory),
                                       builder: (BuildContext context,
                                           AsyncSnapshot<dynamic> snapshot) {

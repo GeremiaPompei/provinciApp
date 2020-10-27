@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:geolocator/geolocator.dart';
+import 'package:provinciApp/utility/Style.dart';
 import 'package:provinciApp/utility/costanti/costanti_nomefile.dart';
 import 'package:provinciApp/model/cache/cache.dart';
 import 'package:provinciApp/model/persistenza/cache/deserializza_cache.dart';
@@ -49,41 +51,34 @@ class Controller {
     _deserializeOffline = new DeserializzaOffline();
   }
 
-  ///
-  Future<bool> tryConnection() async {
-    final result = await InternetAddress.lookup('google.com');
-    return result.isNotEmpty && result[0].rawAddress.isNotEmpty;
-  }
-
-  Future<dynamic> initLoadAndStore() async {
+  /// Metodo utile per inizializzare il controller caricando i dati iniziali.
+  Future<dynamic> initController() async {
     if (this._cache.keyUltimeRisorse == null) {
-      //(await _storeManager.getFile(CostantiNomeFile.offline)).deleteSync();
-      //(await _storeManager.getFile(CostantiNomeFile.cache)).deleteSync();
       if (!(await _storeManager.getFile(CostantiNomeFile.cache)).existsSync()) {
-        _loadStaticLastInfo(4, 4);
+        _initUnitCache(4, 4);
         this._cache.initComuni(await _httpRequest.cercaComuni());
         this._cache.initCategorie(await _httpRequest.cercaCategorie());
       } else {
-        await _loadCacheOffline();
-        _loadCache();
+        this._cache = await _leggiCacheDaFile();
       }
       await initOffline();
-      _storeCache();
-      _storeOffline();
+      _scriviCache();
+      _scriviOffline();
     }
     return this._cache;
   }
 
-  Future<dynamic> _loadCache() async {
-    try {
-      var loaded = await _storeManager.leggiFile(CostantiNomeFile.cache);
-      Cache tmpCache = await _deserializeCache.deserializza(loaded);
-      await _loadLastInfoFrom(tmpCache);
-    } catch (e) {}
-    return this._cache;
+  /// Metodo utile per caricare gli ultimi dati elaborati in cache da un file
+  /// locale.
+  Future<dynamic> _leggiCacheDaFile() async {
+    String loaded = await _storeManager.leggiFile(CostantiNomeFile.cache);
+    Cache tmpCache = await _deserializeCache.deserializza(loaded);
+    _aggiornaCacheLettaDaFile(tmpCache).catchError((e) => null);
+    return tmpCache;
   }
 
-  Future<dynamic> _loadLastInfoFrom(Cache tmpCache) async {
+  /// Metodo utile per aggiornare i dati della cache caricati localmente.
+  Future<dynamic> _aggiornaCacheLettaDaFile(Cache tmpCache) async {
     this._cache.pacchetti = tmpCache.pacchetti;
     for (MapEntry<String, dynamic> entry in this._cache.pacchetti.entries) {
       if (!entry.key.contains('Empty'))
@@ -94,20 +89,16 @@ class Controller {
     for (MapEntry<String, dynamic> entry in this._cache.risorse.entries) {
       if (!entry.key.contains('Empty')) {
         entry.value.elemento = await _httpRequest.cercaRisorsa(entry.key);
-        for (Risorsa leaf in entry.value.elemento) await _saveImage(leaf);
+        for (Risorsa leaf in entry.value.elemento) await _salvaImmagine(leaf);
       }
     }
     this._cache.keyUltimeRisorse = tmpCache.keyUltimeRisorse;
     return tmpCache.keyUltimeRisorse;
   }
 
-  Future<dynamic> _loadCacheOffline() async {
-    this._cache = await _deserializeCache
-        .deserializza(await _storeManager.leggiFile(CostantiNomeFile.cache));
-    return this._cache;
-  }
-
-  void _loadStaticLastInfo(int countNodes, int countLeafs) {
+  /// Metodo utile per inizializzare le unità di cache della cache con dati
+  /// vuoti immessi per la sostituzione.
+  void _initUnitCache(int countNodes, int countLeafs) {
     for (int i = countNodes - 1; i >= 0; i--)
       this._cache.pacchetti['Empty $i'] = UnitCache(
           null, DateTime.now().subtract(Duration(days: 5)), 'Name', null);
@@ -116,23 +107,9 @@ class Controller {
           null, DateTime.now().subtract(Duration(days: 5)), 'Name', null);
   }
 
-  Future<dynamic> initCategories() async {
-    if (this.getCategories().isEmpty) {
-      try {
-        List<Future> list = await _httpRequest.cercaCategorie();
-        this._cache.initCategorie(list);
-      } catch (e) {
-        Cache tmpCache = await _deserializeCache.deserializza(
-            await _storeManager.leggiFile(CostantiNomeFile.cache));
-        this._cache.initCategorie(tmpCache.categorie);
-      }
-    }
-    _storeCache();
-    return this.getCategories();
-  }
-
-  Future<dynamic> initOrganizations() async {
-    if (this.getOrganizations().isEmpty) {
+  /// Metodo utile per inizializzare i comuni.
+  Future<dynamic> initComuni() async {
+    if (this.comuni.isEmpty) {
       try {
         List<Future> list = await _httpRequest.cercaComuni();
         this._cache.initComuni(list);
@@ -142,72 +119,107 @@ class Controller {
         this._cache.initComuni(tmpCache.comuni);
       }
     }
-    _storeCache();
-    return this.getOrganizations();
+    _scriviCache();
+    return this.comuni;
   }
 
+  /// Metodo utile per inizializzare le categorie.
+  Future<dynamic> initCategorie() async {
+    if (this.categorie.isEmpty) {
+      try {
+        List<Future> list = await _httpRequest.cercaCategorie();
+        this._cache.initCategorie(list);
+      } catch (e) {
+        Cache tmpCache = await _deserializeCache.deserializza(
+            await _storeManager.leggiFile(CostantiNomeFile.cache));
+        this._cache.initCategorie(tmpCache.categorie);
+      }
+    }
+    _scriviCache();
+    return this.categorie;
+  }
+
+  /// Metodo utile per inizializzare le risorse scaricate offline.
   Future<dynamic> initOffline() async {
-    await _loadOffline();
+    await _leggiOffline();
     try {
       for (var el in this._cache.offline) {
         List<Risorsa> list = await _httpRequest.cercaRisorsa(el.idUrl);
-        await _saveImage(list[el.idIndice]);
+        await _salvaImmagine(list[el.idIndice]);
         el = list[el.idIndice];
       }
     } catch (e) {}
-    return getOffline();
+    return offline;
   }
 
-  Future<dynamic> setSearchPlus(String name, String url, int image) async =>
-      setSearch(name, CostantiWeb.urlProvinciaSearch + url, image);
+  /// Metodo utile per cercare pacchetti in base ad una parola chiave.
+  Future<dynamic> cercaFromParola(String name, String url, int image) async =>
+      cercaFromUrl(name, CostantiWeb.urlProvinciaSearch + url, image);
 
-  Future<dynamic> setSearch(String name, String url, int image) async {
+  /// Metodo utile per cercare pacchetti in base ad un url.
+  Future<dynamic> cercaFromUrl(String name, String url, int image) async {
     UnitCache<List<Pacchetto>> cacheUnit = this._cache.getPacchettiByKey(url);
     if (cacheUnit == null) {
-      List<Pacchetto> nodes = await _httpRequest.cercaPacchetto(url);
-      if (nodes.isNotEmpty) {
-        String oldUrl = _oldestUrl(this._cache.pacchetti.keys,
-            (el) => this._cache.getPacchettiByKey(el));
+      List<Pacchetto> pacchetti = await _httpRequest.cercaPacchetto(url);
+      if (pacchetti.isNotEmpty) {
+        String oldUrl = _oldestUrl(
+            this._cache.pacchetti.keys, this._cache.getPacchettiByKey);
         cacheUnit = this._cache.pacchetti[oldUrl];
         cacheUnit.nome = name;
-        cacheUnit.elemento = nodes;
+        cacheUnit.elemento = pacchetti;
         cacheUnit.icona = image;
         this._cache.switchPacchetti(oldUrl, url, cacheUnit);
         cacheUnit.updateDate();
-        _storeCache();
+        _scriviCache();
       } else
         return [];
     } else
       cacheUnit.updateDate();
     this._cache.keyUltimiPacchetti = url;
-    return getSearch();
+    return ultimiPacchetti;
   }
 
-  Future<List<dynamic>> setLeafInfo(String name, String url, int image) async {
+  /// Metodo utile per cercare pacchetti in base alla posizione locale.
+  Future<String> cercaFromPosizione() async {
+    final Geolocator geolocator = Geolocator()..forceAndroidLocationManager;
+    Position position = await geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.best);
+    List<Placemark> placemark =
+        await geolocator.placemarkFromPosition(position);
+    String location = placemark[0].locality;
+    cercaFromParola(location, location, IconPosition);
+    return location;
+  }
+
+  /// Metodo utile per cercare risorse in base ad un url.
+  Future<List<dynamic>> cercaRisorse(String name, String url, int image) async {
     UnitCache<List<Risorsa>> cacheUnit = this._cache.getRisorseByKey(url);
     if (cacheUnit == null) {
-      List<Risorsa> leafs = await _httpRequest.cercaRisorsa(url);
-      if (leafs.isNotEmpty) {
-        String oldUrl = _oldestUrl(
-            this._cache.risorse.keys, (el) => this._cache.getRisorseByKey(el));
+      List<Risorsa> risorse = await _httpRequest.cercaRisorsa(url);
+      if (risorse.isNotEmpty) {
+        String oldUrl =
+            _oldestUrl(this._cache.risorse.keys, this._cache.getRisorseByKey);
         cacheUnit = this._cache.risorse[oldUrl];
         cacheUnit.nome = name;
         cacheUnit.icona = image;
         var tmp = cacheUnit.elemento;
-        cacheUnit.elemento = leafs;
+        cacheUnit.elemento = risorse;
         if (tmp != null)
-          for (Risorsa leaf in tmp) await this._removeImage(leaf);
-        for (Risorsa leaf in cacheUnit.elemento) await this._saveImage(leaf);
+          for (Risorsa risorsa in tmp) await this._rimuoviImmagine(risorsa);
+        for (Risorsa risorsa in cacheUnit.elemento)
+          await this._salvaImmagine(risorsa);
         this._cache.switchRisorse(oldUrl, url, cacheUnit);
       } else
         return [];
     }
     cacheUnit.updateDate();
-    _storeCache();
+    _scriviCache();
     this._cache.keyUltimeRisorse = url;
-    return getLeafs();
+    return ultimeRisorse;
   }
 
+  /// Metodo privato utile a cercare in una lista l'elemento memorizzato più in
+  /// la nel tempo.
   String _oldestUrl(Iterable<String> list, UnitCache Function(String) func) {
     String oldUrl;
     DateTime tmpDate;
@@ -221,94 +233,93 @@ class Controller {
     return oldUrl;
   }
 
-  Future<dynamic> addOffline(Risorsa leafInfo) async {
-    this._cache.addOffline(leafInfo);
-    await _saveImage(leafInfo);
-    _storeOffline();
-    return this.getOffline();
+  /// Metodo utile a scaricare una risorsa offline.
+  Future<dynamic> addOffline(Risorsa risorsa) async {
+    this._cache.addOffline(risorsa);
+    await _salvaImmagine(risorsa);
+    _scriviOffline();
+    return this.offline;
   }
 
-  void removeOffline(Risorsa leafInfo) async {
-    this._cache.removeOffline(leafInfo);
-    await _removeImage(leafInfo);
-    _storeOffline();
+  /// Metodo utile a rimuovere una risorsa gia scaricata offline.
+  void removeOffline(Risorsa risorsa) async {
+    this._cache.removeOffline(risorsa);
+    await _rimuoviImmagine(risorsa);
+    _scriviOffline();
   }
 
-  List<Future<Pacchetto>> getOrganizations() {
-    return this._cache.comuni;
-  }
+  /// Metodo privato utile per salvare la cache del controller su file locale.
+  Future _scriviCache() async => _storeManager.scriviFile(
+      await _serializeCache.serializza(this._cache), CostantiNomeFile.cache);
 
-  List<Future<Pacchetto>> getCategories() {
-    return this._cache.categorie;
-  }
-
-  List<Pacchetto> getSearch() {
-    return this
-        ._cache
-        .getPacchettiByKey(this._cache.keyUltimiPacchetti)
-        .elemento;
-  }
-
-  List<MapEntry<String, dynamic>> getLastSearched() =>
-      this._cache.pacchetti.entries.toList();
-
-  List<MapEntry<String, dynamic>> getLastLeafs() =>
-      this._cache.risorse.entries.toList();
-
-  List<Risorsa> getLeafs() {
-    return this._cache.getRisorseByKey(this._cache.keyUltimeRisorse).elemento;
-  }
-
-  List<Risorsa> getOffline() => this._cache.offline;
-
-  Future _storeCache() async {
-    return _storeManager.scriviFile(
-        await _serializeCache.serializza(this._cache), CostantiNomeFile.cache);
-  }
-
-  Future _storeOffline() async {
+  /// Metodo privato utile per salvare la lista di risorse scaricate offline
+  /// del controller su file locale.
+  Future _scriviOffline() async {
     return await _storeManager.scriviFile(
         _serializeOffline.serializza(this._cache.offline),
         CostantiNomeFile.offline);
   }
 
-  Future _loadOffline() async {
+  /// Metodo privato utile per leggere la lista delle risorse scaricate offline
+  /// del controller da file locale.
+  Future _leggiOffline() async {
     try {
       this._cache.offline = await _deserializeOffline.deserializza(
           await _storeManager.leggiFile(CostantiNomeFile.offline));
     } catch (e) {}
   }
 
-  Future<dynamic> _saveImage(Risorsa leafInfo) async {
+  /// Metodo privato utile a salvare l'immagine della risorsa data in locale.
+  Future<dynamic> _salvaImmagine(Risorsa risorsa) async {
     if (!(await _storeManager.getDirectory(CostantiNomeFile.immagini))
         .existsSync())
       (await _storeManager.getDirectory(CostantiNomeFile.immagini))
           .createSync();
     var byte;
     try {
-      if (leafInfo.immagineUrl != null) {
-        String path = leafInfo.immagineUrl
-            .substring(leafInfo.immagineUrl.lastIndexOf('/') + 1);
-        leafInfo.immagineFile =
+      if (risorsa.immagineUrl != null) {
+        String path = risorsa.immagineUrl
+            .substring(risorsa.immagineUrl.lastIndexOf('/') + 1);
+        risorsa.immagineFile =
             await _storeManager.getFile(CostantiNomeFile.immagini + '/' + path);
-        byte = await _httpRequest.cercaImmagine(leafInfo.immagineUrl);
-        _storeManager.scriviBytes(byte, leafInfo.immagineFile.path);
+        byte = await _httpRequest.cercaImmagine(risorsa.immagineUrl);
+        _storeManager.scriviBytes(byte, risorsa.immagineFile.path);
       }
     } catch (e) {}
     return byte;
   }
 
-  Future<dynamic> _removeImage(Risorsa leafInfo) async {
+  /// Metodo privato utile a rimuovere l'immagine della risorsa data dalle
+  /// immagini salvate in locale.
+  Future<dynamic> _rimuoviImmagine(Risorsa risorsa) async {
     List list = [];
     list.addAll(this._cache.offline);
     this._cache.risorse.values.map((e) => e.elemento).forEach((element) {
       if (element != null) list.addAll(element);
     });
-    if (leafInfo.immagineFile != null) {
-      var file = await _storeManager.getFile(leafInfo.immagineFile.path);
-      if (!list.map((e) => e.immagineFile).contains(leafInfo.immagineFile))
+    if (risorsa.immagineFile != null) {
+      var file = await _storeManager.getFile(risorsa.immagineFile.path);
+      if (!list.map((e) => e.immagineFile).contains(risorsa.immagineFile))
         file.deleteSync();
     }
     return list;
   }
+
+  List<Future<Pacchetto>> get comuni => this._cache.comuni;
+
+  List<Future<Pacchetto>> get categorie => this._cache.categorie;
+
+  List<Pacchetto> get ultimiPacchetti =>
+      this._cache.getPacchettiByKey(this._cache.keyUltimiPacchetti).elemento;
+
+  List<Risorsa> get ultimeRisorse =>
+      this._cache.getRisorseByKey(this._cache.keyUltimeRisorse).elemento;
+
+  List<MapEntry<String, dynamic>> get pacchetti =>
+      this._cache.pacchetti.entries.toList();
+
+  List<MapEntry<String, dynamic>> get risorse =>
+      this._cache.risorse.entries.toList();
+
+  List<Risorsa> get offline => this._cache.offline;
 }

@@ -21,7 +21,7 @@ class _LeafsInfoViewState extends State<LeafsInfoView> {
   Controller _controller;
 
   _LeafsInfoViewState(this._controller, this._title) {
-    this._leafs = this._controller.getLeafs();
+    this._leafs = this._controller.ultimeRisorse;
   }
 
   @override
@@ -47,7 +47,7 @@ class _LeafsInfoViewState extends State<LeafsInfoView> {
           itemCount: _leafs.length,
           itemBuilder: (context, index) {
             Icon icon;
-            this._controller.getOffline().contains(_leafs[index])
+            this._controller.offline.contains(_leafs[index])
                 ? icon = Icon(Icons.remove_circle_outline)
                 : icon = Icon(Icons.add_circle_outline);
             return Container(
@@ -65,7 +65,7 @@ class _LeafsInfoViewState extends State<LeafsInfoView> {
                           setState(() {
                             if (this
                                 ._controller
-                                .getOffline()
+                                .offline
                                 .contains(_leafs[index])) {
                               this._controller.removeOffline(_leafs[index]);
                             } else {
@@ -85,7 +85,8 @@ class _LeafsInfoViewState extends State<LeafsInfoView> {
                             : Container(
                                 height: 55,
                                 width: 55,
-                                child: Image.file(this._leafs[index].immagineFile),
+                                child:
+                                    Image.file(this._leafs[index].immagineFile),
                               ),
                       ),
                       title: Text(

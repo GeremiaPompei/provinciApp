@@ -30,26 +30,16 @@ class _OrganizationsViewState extends State<OrganizationsView> {
       RefreshController(initialRefresh: false);
 
   _OrganizationsViewState(this._controller) {
-    this._nodes = this._controller.getOrganizations();
+    this._nodes = this._controller.comuni;
   }
 
-  Widget _getImage(dynamic image) => FutureBuilder<dynamic>(
-        future: this._controller.tryConnection(),
-        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-          Widget tmpWidget;
-          if (snapshot.hasError || image == null)
-            tmpWidget = Container(
-              height: 55,
-              width: 55,
-              child: Image.asset('assets/logo_mc.PNG'),
-            );
-          else if (snapshot.hasData)
-            tmpWidget = Image(image: NetworkImage(image));
-          else
-            tmpWidget = CircularProgressIndicator();
-          return tmpWidget;
-        },
-      );
+  Widget _getImage(dynamic image) => image == null
+      ? Container(
+          height: 55,
+          width: 55,
+          child: Image.asset('assets/logo_mc.PNG'),
+        )
+      : Image(image: NetworkImage(image));
 
   @override
   Widget build(BuildContext context) {
@@ -59,9 +49,9 @@ class _OrganizationsViewState extends State<OrganizationsView> {
         controller: _refreshController,
         onRefresh: () {
           setState(() {
-            this._controller.getOrganizations().removeWhere((element) => true);
-            this._controller.initOrganizations().then((value) {
-              this._nodes = this._controller.getOrganizations();
+            this._controller.comuni.removeWhere((element) => true);
+            this._controller.initComuni().then((value) {
+              this._nodes = this._controller.comuni;
               (context as Element).reassemble();
               _refreshController.refreshCompleted();
             });
@@ -90,7 +80,8 @@ class _OrganizationsViewState extends State<OrganizationsView> {
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
                               Container(
-                                  height: 65, child: _getImage(node.immagineUrl)),
+                                  height: 65,
+                                  child: _getImage(node.immagineUrl)),
                               Center(
                                 child: Text(
                                   node.nome,
@@ -107,10 +98,10 @@ class _OrganizationsViewState extends State<OrganizationsView> {
                                   MaterialPageRoute(
                                       builder: (context) =>
                                           FutureBuilder<dynamic>(
-                                            future: this._controller.setSearch(
-                                                node.nome,
-                                                node.url,
-                                                IconComune),
+                                            future: this
+                                                ._controller
+                                                .cercaFromUrl(node.nome,
+                                                    node.url, IconComune),
                                             builder: (BuildContext context,
                                                 AsyncSnapshot<dynamic>
                                                     snapshot) {

@@ -24,7 +24,7 @@ class _ScrollListViewState extends State<ScrollListView> {
   List<Pacchetto> _nodes;
 
   _ScrollListViewState(this._controller, this._title) {
-    this._nodes = this._controller.getSearch();
+    this._nodes = this._controller.ultimiPacchetti;
   }
 
   void setLeafs(int index) {
@@ -33,7 +33,7 @@ class _ScrollListViewState extends State<ScrollListView> {
           context,
           MaterialPageRoute(
               builder: (context) => FutureBuilder<dynamic>(
-                    future: _controller.setLeafInfo(_nodes[index].nome,
+                    future: _controller.cercaRisorse(_nodes[index].nome,
                         _nodes[index].url, findImage(_nodes[index].nome)),
                     builder: (BuildContext context,
                         AsyncSnapshot<dynamic> snapshot) {

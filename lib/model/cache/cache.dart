@@ -1,7 +1,6 @@
 import 'package:provinciApp/model/risorsa.dart';
 import 'package:provinciApp/model/pacchetto.dart';
 import 'unit_cache.dart';
-import 'dart:developer';
 
 /// Una Cache ha la responsabilità tener traccia e gestire la lista delle categorie,
 /// la lista dei comuni, la lista delle risorse offline e le ultime ricerche sia
@@ -37,19 +36,16 @@ class Cache {
     this._comuni = [];
     this._pacchetti = {};
     this._risorse = {};
-    _log('Costruita Cache.');
   }
 
   /// Metodo che inizializza la lista dei comuni.
   void initComuni(List<Future<Pacchetto>> pacchetti) {
     this._comuni = pacchetti;
-    _log('Inizializzati comuni.');
   }
 
   /// Metodo che inizializza la lista delle categorie.
   void initCategorie(List<Future<Pacchetto>> pacchetti) {
     this._categorie = pacchetti;
-    _log('Inizializzate categorie.');
   }
 
   /// Aggiunta risorsa alla lista delle risorse offline.
@@ -67,7 +63,6 @@ class Cache {
       String oldUrl, String newUrl, UnitCache<List<Pacchetto>> pacchetti) {
     this._pacchetti.remove(oldUrl);
     this._pacchetti[newUrl] = pacchetti;
-    _log('Scambiati pacchetti.');
   }
 
   /// Metodo per la sostituzione delle ultime risorse con le nuove.
@@ -75,7 +70,6 @@ class Cache {
       String oldUrl, String newUrl, UnitCache<List<dynamic>> leafs) async {
     this._risorse.remove(oldUrl);
     this._risorse[newUrl] = leafs;
-    _log('Scambiate risorse.');
   }
 
   /// Metodo che ritorna i pacchetti contenuti nell'unità di cache in base alla
@@ -119,10 +113,5 @@ class Cache {
 
   set offline(List<Risorsa> value) {
     _offline = value;
-  }
-
-  /// Metodo privato utilizzato per la stampa dei messaggi di log.
-  void _log(String messaggio) {
-    log('[Cache] [' + DateTime.now().toString() + '] : ' + messaggio);
   }
 }

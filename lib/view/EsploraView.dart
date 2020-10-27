@@ -1,7 +1,6 @@
 import 'package:provinciApp/controller/controller.dart';
 import 'package:provinciApp/model/pacchetto.dart';
 import 'package:provinciApp/model/cache/unit_cache.dart';
-import 'package:provinciApp/utility/ConstUrl.dart';
 import 'package:provinciApp/utility/Style.dart';
 import 'package:provinciApp/view/EmptyView.dart';
 import 'package:provinciApp/view/LeafsInfoView.dart';
@@ -132,10 +131,10 @@ class _EsploraViewState extends State<EsploraView> {
                 _cardsSizedBox(
                     this
                         ._controller
-                        .getLastSearched()
+                        .pacchetti
                         .where((element) => !element.key.contains('Empty'))
                         .toList(),
-                    this._controller.setSearch,
+                    this._controller.cercaFromUrl,
                     (name) => ScrollListView(this._controller, name),
                     context),
                 SizedBox(
@@ -144,10 +143,10 @@ class _EsploraViewState extends State<EsploraView> {
                 _cardsSizedBox(
                     this
                         ._controller
-                        .getLastLeafs()
+                        .risorse
                         .where((element) => !element.key.contains('Empty'))
                         .toList(),
-                    this._controller.setLeafInfo,
+                    this._controller.cercaRisorse,
                     (name) => LeafsInfoView(this._controller, name),
                     context),
                 SizedBox(
@@ -156,8 +155,8 @@ class _EsploraViewState extends State<EsploraView> {
               ],
             )),
             loader: LoadingView(),
-            onSearch: (input) async => await _controller.setSearchPlus(
-                input, input, IconSearch),
+            onSearch: (input) async =>
+                await _controller.cercaFromParola(input, input, IconSearch),
             onError: (err) => EmptyView(null),
             onItemFound: (input, num) {
               return Container(
@@ -178,7 +177,7 @@ class _EsploraViewState extends State<EsploraView> {
                         .push(
                       MaterialPageRoute(
                         builder: (context) => FutureBuilder<dynamic>(
-                          future: _controller.setLeafInfo(
+                          future: _controller.cercaRisorse(
                               input.nome, input.url, findImage(input.nome)),
                           builder: (BuildContext context,
                               AsyncSnapshot<dynamic> snapshot) {

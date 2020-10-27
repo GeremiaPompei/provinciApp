@@ -36,7 +36,7 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
 
   _DetailedLeafInfoViewState(
       this._title, this._leafInfo, this._controller, this._image) {
-    this._controller.getOffline().contains(this._leafInfo)
+    this._controller.offline.contains(this._leafInfo)
         ? this._icon = Icon(Icons.remove_circle_outline)
         : this._icon = Icon(Icons.add_circle_outline);
     initWidgets();
@@ -260,7 +260,7 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
                         setState(() {
                           if (this
                               ._controller
-                              .getOffline()
+                              .offline
                               .contains(this._leafInfo)) {
                             this._controller.removeOffline(_leafInfo);
                             this._icon = Icon(Icons.add_circle_outline);
