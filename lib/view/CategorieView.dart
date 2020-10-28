@@ -1,6 +1,8 @@
 import 'package:provinciApp/controller/controller.dart';
 import 'package:provinciApp/model/pacchetto.dart';
-import 'package:provinciApp/utility/Style.dart';
+import 'package:provinciApp/utility/stile/colore.dart';
+import 'package:provinciApp/utility/stile/icona.dart';
+import 'package:provinciApp/utility/stile/stiletesto.dart';
 import 'package:provinciApp/view/EmptyView.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -85,7 +87,7 @@ class _CategoriesViewState extends State<CategoriesView> {
                                     builder: (context) =>
                                         FutureBuilder<dynamic>(
                                       future: _controller.cercaFromUrl(
-                                          node.nome, node.url, IconCategory),
+                                          node.nome, node.url, Icona.categorie),
                                       builder: (BuildContext context,
                                           AsyncSnapshot<dynamic> snapshot) {
                                         Widget tmpWidget;
@@ -110,12 +112,12 @@ class _CategoriesViewState extends State<CategoriesView> {
                               child: Center(
                                 child: Text(
                                   node.nome.toString(),
-                                  style: TitleTextStyle_20,
+                                  style: StileTesto.sottotitolo,
                                 ),
                               ),
                             ),
                             decoration: new BoxDecoration(
-                              color: BackgroundColor,
+                              color: Colore.chiaro,
                               shape: BoxShape.rectangle,
                               borderRadius: new BorderRadius.circular(8.0),
                               boxShadow: <BoxShadow>[
@@ -147,7 +149,7 @@ class _CategoriesViewState extends State<CategoriesView> {
                         width: MediaQuery.of(context).size.width,
                         margin: new EdgeInsets.only(left: 46.0),
                         decoration: new BoxDecoration(
-                          color: BackgroundColor,
+                          color: Colore.chiaro,
                           shape: BoxShape.rectangle,
                           borderRadius: new BorderRadius.circular(8.0),
                           boxShadow: <BoxShadow>[

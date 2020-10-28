@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:provinciApp/utility/costanti/costanti_offline.dart';
-
 import '../../risorsa.dart';
 
 /// SerializzaOffline permette tramite un metodo pubblico di serializzare una

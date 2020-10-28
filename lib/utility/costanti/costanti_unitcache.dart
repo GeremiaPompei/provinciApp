@@ -15,4 +15,10 @@ class CostantiUnitCache {
 
   /// Elemento contenuto nell'unità di cache.
   static const elemento = 'Elemento';
+
+  /// Id di una UnitCache vuota.
+  static const idVuoto = 'Vuoto';
+
+  /// Nome di una UnitCache vuota.
+  static const nomeVuoto = 'Nome';
 }

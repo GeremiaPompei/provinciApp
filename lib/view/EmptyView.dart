@@ -1,6 +1,7 @@
-import 'package:provinciApp/utility/Style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provinciApp/utility/stile/colore.dart';
+import 'package:provinciApp/utility/stile/stiletesto.dart';
 
 class EmptyView extends StatefulWidget {
   String _title;
@@ -16,7 +17,7 @@ class _EmptyViewState extends State<EmptyView> {
   Widget _body = Center(
     child: Text(
       'Vuoto',
-      style: TitleTextStyle,
+      style: StileTesto.titoloPrimario,
       textAlign: TextAlign.center,
     ),
   );
@@ -31,13 +32,13 @@ class _EmptyViewState extends State<EmptyView> {
             appBar: AppBar(
               title: Text(
                 _title,
-                style: ReverseTitleTextStyle,
+                style: StileTesto.titoloChiaro,
               ),
-              backgroundColor: PrimaryColor,
+              backgroundColor: Colore.primario,
               leading: IconButton(
                 icon: Icon(
                   Icons.arrow_back_ios,
-                  color: BackgroundColor,
+                  color: Colore.chiaro,
                 ),
                 onPressed: () {
                   Navigator.pop(context);

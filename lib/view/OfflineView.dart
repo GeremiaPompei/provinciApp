@@ -1,6 +1,7 @@
-import 'package:provinciApp/utility/Style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provinciApp/utility/stile/colore.dart';
+import 'package:provinciApp/utility/stile/stiletesto.dart';
 
 class OfflineView extends StatefulWidget {
   String _name;
@@ -18,11 +19,11 @@ class _OfflineViewState extends State<OfflineView> {
 
   Widget getBody() {
     return Container(
-        color: BackgroundColor2,
+        color: Colore.sfondo,
         child: Center(
             child: RaisedButton(
-                child: Text('Offline', style: TitleTextStyle_20),
-                color: BackgroundColor,
+                child: Text('Offline', style: StileTesto.sottotitolo),
+                color: Colore.chiaro,
                 elevation: 6,
                 onPressed: () {
                   setState(() {
@@ -42,7 +43,7 @@ class _OfflineViewState extends State<OfflineView> {
               leading: IconButton(
                 icon: Icon(
                   Icons.arrow_back_ios,
-                  color: PrimaryColor,
+                  color: Colore.primario,
                 ),
                 onPressed: () {
                   Navigator.pop(context);
@@ -50,9 +51,9 @@ class _OfflineViewState extends State<OfflineView> {
               ),
               title: Text(
                 this._name,
-                style: TitleTextStyle,
+                style: StileTesto.titoloPrimario,
               ),
-              backgroundColor: BackgroundColor,
+              backgroundColor: Colore.chiaro,
             ),
             body: getBody());
   }

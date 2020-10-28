@@ -1,7 +1,7 @@
-import 'package:provinciApp/utility/Style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:provinciApp/utility/stile/colore.dart';
 
 class LoadingView extends StatelessWidget {
   bool _image;
@@ -13,7 +13,7 @@ class LoadingView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: BackgroundColor2,
+      backgroundColor: Colore.sfondo,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -33,7 +33,7 @@ class LoadingView extends StatelessWidget {
                     )
                   : Container(),
               SpinKitCubeGrid(
-                color: PrimaryColor,
+                color: Colore.primario,
                 duration: Duration(milliseconds: 1000),
               ),
             ],

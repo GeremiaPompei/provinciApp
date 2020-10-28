@@ -1,6 +1,8 @@
 import 'package:provinciApp/controller/controller.dart';
 import 'package:provinciApp/model/pacchetto.dart';
-import 'package:provinciApp/utility/Style.dart';
+import 'package:provinciApp/utility/stile/colore.dart';
+import 'package:provinciApp/utility/stile/icona.dart';
+import 'package:provinciApp/utility/stile/stiletesto.dart';
 import 'package:provinciApp/view/LeafsInfoView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -33,8 +35,10 @@ class _ScrollListViewState extends State<ScrollListView> {
           context,
           MaterialPageRoute(
               builder: (context) => FutureBuilder<dynamic>(
-                    future: _controller.cercaRisorse(_nodes[index].nome,
-                        _nodes[index].url, findImage(_nodes[index].nome)),
+                    future: _controller.cercaRisorse(
+                        _nodes[index].nome,
+                        _nodes[index].url,
+                        Icona.trovaIcona(_nodes[index].nome)),
                     builder: (BuildContext context,
                         AsyncSnapshot<dynamic> snapshot) {
                       Widget tmpWidget;
@@ -54,13 +58,13 @@ class _ScrollListViewState extends State<ScrollListView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: BackgroundColor,
+      backgroundColor: Colore.chiaro,
       appBar: AppBar(
         title: Text(
           this._title,
-          style: ReverseTitleTextStyle,
+          style: StileTesto.titoloChiaro,
         ),
-        backgroundColor: PrimaryColor,
+        backgroundColor: Colore.primario,
         leading: new IconButton(
             icon: new Icon(Icons.arrow_back_ios),
             onPressed: () {
@@ -91,9 +95,9 @@ class _ScrollListViewState extends State<ScrollListView> {
                   leading: Stack(alignment: Alignment.center, children: [
                     Image.asset('assets/empty.png'),
                     Icon(
-                      IconData(findImage(this._nodes[index].nome),
+                      IconData(Icona.trovaIcona(this._nodes[index].nome),
                           fontFamily: 'MaterialIcons'),
-                      color: BackgroundColor,
+                      color: Colore.chiaro,
                     )
                   ]),
                   onTap: () {

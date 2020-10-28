@@ -1,7 +1,8 @@
 import 'package:provinciApp/controller/controller.dart';
-import 'package:provinciApp/utility/Style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provinciApp/utility/stile/colore.dart';
+import 'package:provinciApp/utility/stile/stiletesto.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'DetailedLeafInfoView.dart';
 
@@ -25,13 +26,13 @@ class _SavedWidgetState extends State<SavedWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: BackgroundColor2,
+      backgroundColor: Colore.sfondo,
       appBar: AppBar(
         title: Text(
           'Offline',
-          style: ReverseTitleTextStyle,
+          style: StileTesto.titoloChiaro,
         ),
-        backgroundColor: PrimaryColor,
+        backgroundColor: Colore.primario,
         actions: [
           IconButton(
             icon: Icon(Icons.file_upload),
@@ -62,7 +63,7 @@ class _SavedWidgetState extends State<SavedWidget> {
                 ? icon = Icon(Icons.remove_circle_outline)
                 : icon = Icon(Icons.add_circle_outline);
             return Card(
-              color: BackgroundColor,
+              color: Colore.chiaro,
               child: Container(
                 height: 80,
                 alignment: Alignment.center,

@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:geolocator/geolocator.dart';
-import 'package:provinciApp/utility/Style.dart';
 import 'package:provinciApp/utility/costanti/costanti_nomefile.dart';
 import 'package:provinciApp/model/cache/cache.dart';
 import 'package:provinciApp/model/persistenza/cache/deserializza_cache.dart';
@@ -11,8 +10,10 @@ import 'package:provinciApp/model/persistenza/store_manager.dart';
 import 'package:provinciApp/model/cache/unit_cache.dart';
 import 'package:provinciApp/model/risorsa.dart';
 import 'package:provinciApp/model/pacchetto.dart';
+import 'package:provinciApp/utility/costanti/costanti_unitcache.dart';
 import 'package:provinciApp/utility/costanti/costanti_web.dart';
 import 'package:provinciApp/model/web/http_request.dart';
+import 'package:provinciApp/utility/stile/icona.dart';
 
 /// Un Controller non è altro che il controller dell'MVC che sei occupa di
 /// fornire alla view le funzioni per accedere al backend e reperire le
@@ -81,13 +82,13 @@ class Controller {
   Future<dynamic> _aggiornaCacheLettaDaFile(Cache tmpCache) async {
     this._cache.pacchetti = tmpCache.pacchetti;
     for (MapEntry<String, dynamic> entry in this._cache.pacchetti.entries) {
-      if (!entry.key.contains('Empty'))
+      if (!entry.key.contains(CostantiUnitCache.idVuoto))
         entry.value.elemento = await _httpRequest.cercaPacchetto(entry.key);
     }
     this._cache.keyUltimiPacchetti = tmpCache.keyUltimiPacchetti;
     this._cache.risorse = tmpCache.risorse;
     for (MapEntry<String, dynamic> entry in this._cache.risorse.entries) {
-      if (!entry.key.contains('Empty')) {
+      if (!entry.key.contains(CostantiUnitCache.idVuoto)) {
         entry.value.elemento = await _httpRequest.cercaRisorsa(entry.key);
         for (Risorsa leaf in entry.value.elemento) await _salvaImmagine(leaf);
       }
@@ -100,11 +101,17 @@ class Controller {
   /// vuoti immessi per la sostituzione.
   void _initUnitCache(int countNodes, int countLeafs) {
     for (int i = countNodes - 1; i >= 0; i--)
-      this._cache.pacchetti['Empty $i'] = UnitCache(
-          null, DateTime.now().subtract(Duration(days: 5)), 'Name', null);
+      this._cache.pacchetti[CostantiUnitCache.idVuoto + ' $i'] = UnitCache(
+          null,
+          DateTime.now().subtract(Duration(days: 5)),
+          CostantiUnitCache.nomeVuoto,
+          null);
     for (int i = 0; i < countLeafs; i++)
-      this._cache.risorse['Empty $i'] = UnitCache(
-          null, DateTime.now().subtract(Duration(days: 5)), 'Name', null);
+      this._cache.risorse[CostantiUnitCache.idVuoto + ' $i'] = UnitCache(
+          null,
+          DateTime.now().subtract(Duration(days: 5)),
+          CostantiUnitCache.nomeVuoto,
+          null);
   }
 
   /// Metodo utile per inizializzare i comuni.
@@ -187,7 +194,7 @@ class Controller {
     List<Placemark> placemark =
         await geolocator.placemarkFromPosition(position);
     String location = placemark[0].locality;
-    cercaFromParola(location, location, IconPosition);
+    cercaFromParola(location, location, Icona.posizione);
     return location;
   }
 

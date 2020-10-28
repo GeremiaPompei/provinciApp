@@ -1,16 +1,14 @@
 import 'package:provinciApp/controller/controller.dart';
 import 'package:provinciApp/model/pacchetto.dart';
-import 'package:provinciApp/utility/Style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provinciApp/utility/stile/colore.dart';
+import 'package:provinciApp/utility/stile/icona.dart';
+import 'package:provinciApp/utility/stile/stiletesto.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:url_launcher/url_launcher.dart';
-
 import 'EmptyView.dart';
-import 'LeafsInfoView.dart';
 import 'LoadingView.dart';
 import 'OfflineView.dart';
-import 'SavedView.dart';
 import 'ScrollListView.dart';
 
 class OrganizationsView extends StatefulWidget {
@@ -72,7 +70,7 @@ class _OrganizationsViewState extends State<OrganizationsView> {
                   if (snapshot.hasData) {
                     Pacchetto node = snapshot.data;
                     tmpWidget = Card(
-                      color: BackgroundColor,
+                      color: Colore.chiaro,
                       child: Stack(children: [
                         FlatButton(
                           child: Column(
@@ -85,7 +83,7 @@ class _OrganizationsViewState extends State<OrganizationsView> {
                               Center(
                                 child: Text(
                                   node.nome,
-                                  style: TitleTextStyle_20,
+                                  style: StileTesto.sottotitolo,
                                   maxLines: 3,
                                 ),
                               ),
@@ -101,7 +99,7 @@ class _OrganizationsViewState extends State<OrganizationsView> {
                                             future: this
                                                 ._controller
                                                 .cercaFromUrl(node.nome,
-                                                    node.url, IconComune),
+                                                    node.url, Icona.comuni),
                                             builder: (BuildContext context,
                                                 AsyncSnapshot<dynamic>
                                                     snapshot) {
@@ -132,7 +130,7 @@ class _OrganizationsViewState extends State<OrganizationsView> {
                     tmpWidget = Container();
                   } else {
                     tmpWidget = Card(
-                      color: BackgroundColor,
+                      color: Colore.chiaro,
                     );
                   }
                   return tmpWidget;

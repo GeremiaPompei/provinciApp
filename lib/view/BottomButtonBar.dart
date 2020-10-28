@@ -1,7 +1,8 @@
-import 'package:provinciApp/utility/Style.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provinciApp/utility/stile/colore.dart';
+import 'package:provinciApp/utility/stile/icona.dart';
 
 class BottomButtonDown extends StatefulWidget {
   void Function(int) _func;
@@ -24,21 +25,21 @@ class _BottomButtonDownState extends State<BottomButtonDown> {
   Widget build(BuildContext context) {
     return CurvedNavigationBar(
       index: this._index,
-      color: PrimaryColor,
-      backgroundColor: BackgroundColor,
-      buttonBackgroundColor: PrimaryColor,
+      color: Colore.primario,
+      backgroundColor: Colore.chiaro,
+      buttonBackgroundColor: Colore.primario,
       items: <Widget>[
         Icon(
-          IconData(IconComune, fontFamily: 'MaterialIcons'),
-          color: BackgroundColor,
+          IconData(Icona.comuni, fontFamily: 'MaterialIcons'),
+          color: Colore.chiaro,
         ),
         Icon(
-          IconData(IconSearch, fontFamily: 'MaterialIcons'),
-          color: BackgroundColor,
+          IconData(Icona.cerca, fontFamily: 'MaterialIcons'),
+          color: Colore.chiaro,
         ),
         Icon(
-          IconData(IconCategory, fontFamily: 'MaterialIcons'),
-          color: BackgroundColor,
+          IconData(Icona.categorie, fontFamily: 'MaterialIcons'),
+          color: Colore.chiaro,
         ),
       ],
       animationDuration: Duration(milliseconds: 300),

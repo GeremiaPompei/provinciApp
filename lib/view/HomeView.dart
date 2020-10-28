@@ -1,15 +1,16 @@
 import 'package:provinciApp/controller/controller.dart';
-import 'package:provinciApp/utility/ConstUrl.dart';
-import 'package:provinciApp/utility/Style.dart';
+import 'package:provinciApp/utility/stile/colore.dart';
+import 'package:provinciApp/utility/stile/icona.dart';
+import 'package:provinciApp/utility/stile/stiletesto.dart';
 import 'package:provinciApp/view/BottomButtonBar.dart';
 import 'package:provinciApp/view/CategorieView.dart';
 import 'package:provinciApp/view/EsploraView.dart';
+import 'package:provinciApp/view/ExtraView.dart';
 import 'package:provinciApp/view/OfflineView.dart';
 import 'package:provinciApp/view/OrganizationsView.dart';
 import 'package:provinciApp/view/LoadingView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'EmptyView.dart';
 import 'ScrollListView.dart';
 
@@ -75,30 +76,29 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: BackgroundColor2,
+      backgroundColor: Colore.sfondo,
       appBar: AppBar(
         brightness: Brightness.light,
-        backgroundColor: BackgroundColor,
+        backgroundColor: Colore.chiaro,
         title: Text(
           _title,
-          style: TitleTextStyle,
+          style: StileTesto.titoloPrimario,
         ),
         actions: [
           IconButton(
               icon: Icon(
                 Icons.extension_rounded,
-                color: PrimaryColor,
+                color: Colore.primario,
               ),
               onPressed: () {
                 showDialog(
                   context: context,
                   builder: (context) => AlertDialog(
-                    backgroundColor: BackgroundColor,
+                    backgroundColor: Colore.chiaro,
                     content: Container(
                       height: MediaQuery.of(context).size.width,
                       width: MediaQuery.of(context).size.width,
-                      child: Text(
-                          'Aggiungere nuovi extra.'), //ExtraView(this._controller),
+                      child: ExtraView(),
                     ),
                     actions: [
                       FlatButton(
@@ -107,17 +107,17 @@ class _HomeViewState extends State<HomeView> {
                           },
                           child: Text(
                             'Indietro',
-                            style: TitleDetaileStyle,
+                            style: StileTesto.corpo,
                           ))
                     ],
                   ),
                 );
               }),
           IconButton(
-            color: PrimaryColor,
+            color: Colore.primario,
             icon: Icon(
-              IconData(IconPosition, fontFamily: 'MaterialIcons'),
-              color: PrimaryColor,
+              IconData(Icona.posizione, fontFamily: 'MaterialIcons'),
+              color: Colore.primario,
             ),
             onPressed: () {
               setState(() {
@@ -135,19 +135,19 @@ class _HomeViewState extends State<HomeView> {
                         else
                           varWidget = EmptyView(snapshot.data);
                         else if (snapshot.hasError)
-                          varWidget = OfflineView('Find Position');
+                          varWidget = OfflineView('Posizione');
                         else
                           varWidget = Scaffold(
                             appBar: AppBar(
                               title: Text(
                                 'Posizione',
-                                style: ReverseTitleTextStyle,
+                                style: StileTesto.titoloChiaro,
                               ),
-                              backgroundColor: PrimaryColor,
+                              backgroundColor: Colore.primario,
                               leading: IconButton(
                                 icon: Icon(
                                   Icons.arrow_back_ios,
-                                  color: BackgroundColor,
+                                  color: Colore.chiaro,
                                 ),
                                 onPressed: () {
                                   Navigator.pop(context);
@@ -169,7 +169,7 @@ class _HomeViewState extends State<HomeView> {
             },
           ),
           IconButton(
-            color: PrimaryColor,
+            color: Colore.primario,
             icon: Icon(Icons.file_download),
             onPressed: () {
               Navigator.pushReplacementNamed(context, '/offline');
@@ -181,7 +181,7 @@ class _HomeViewState extends State<HomeView> {
       bottomNavigationBar: Material(
         elevation: 8.0,
         child: Container(
-          color: BackgroundColor,
+          color: Colore.chiaro,
           padding: EdgeInsets.only(top: 10),
           child: BottomButtonDown(onItemTapped, this._index),
         ),

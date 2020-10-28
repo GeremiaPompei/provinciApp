@@ -1,7 +1,10 @@
 import 'package:provinciApp/controller/controller.dart';
 import 'package:provinciApp/model/pacchetto.dart';
 import 'package:provinciApp/model/cache/unit_cache.dart';
-import 'package:provinciApp/utility/Style.dart';
+import 'package:provinciApp/utility/costanti/costanti_unitcache.dart';
+import 'package:provinciApp/utility/stile/colore.dart';
+import 'package:provinciApp/utility/stile/icona.dart';
+import 'package:provinciApp/utility/stile/stiletesto.dart';
 import 'package:provinciApp/view/EmptyView.dart';
 import 'package:provinciApp/view/LeafsInfoView.dart';
 import 'package:provinciApp/view/LoadingView.dart';
@@ -43,7 +46,7 @@ class _EsploraViewState extends State<EsploraView> {
               children: List.generate(
                   _list.length,
                   (i) => Card(
-                        color: BackgroundColor,
+                        color: Colore.chiaro,
                         child: FlatButton(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -62,7 +65,7 @@ class _EsploraViewState extends State<EsploraView> {
                                         : Icon(
                                             IconData((_list[i].value.icona),
                                                 fontFamily: 'MaterialIcons'),
-                                            color: BackgroundColor,
+                                            color: Colore.chiaro,
                                           ),
                                   ],
                                 ),
@@ -70,7 +73,7 @@ class _EsploraViewState extends State<EsploraView> {
                               Center(
                                 child: Text(
                                   _list[i].value.nome,
-                                  style: TitleTextStyle_20,
+                                  style: StileTesto.sottotitolo,
                                   maxLines: 2,
                                 ),
                               ),
@@ -118,7 +121,7 @@ class _EsploraViewState extends State<EsploraView> {
         padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
         child: SearchBar<Pacchetto>(
             searchBarStyle: SearchBarStyle(
-              backgroundColor: BackgroundColor,
+              backgroundColor: Colore.chiaro,
               padding: EdgeInsets.all(6),
             ),
             scrollDirection: Axis.vertical,
@@ -132,7 +135,8 @@ class _EsploraViewState extends State<EsploraView> {
                     this
                         ._controller
                         .pacchetti
-                        .where((element) => !element.key.contains('Empty'))
+                        .where((element) =>
+                            !element.key.contains(CostantiUnitCache.idVuoto))
                         .toList(),
                     this._controller.cercaFromUrl,
                     (name) => ScrollListView(this._controller, name),
@@ -144,7 +148,8 @@ class _EsploraViewState extends State<EsploraView> {
                     this
                         ._controller
                         .risorse
-                        .where((element) => !element.key.contains('Empty'))
+                        .where((element) =>
+                            !element.key.contains(CostantiUnitCache.idVuoto))
                         .toList(),
                     this._controller.cercaRisorse,
                     (name) => LeafsInfoView(this._controller, name),
@@ -156,7 +161,7 @@ class _EsploraViewState extends State<EsploraView> {
             )),
             loader: LoadingView(),
             onSearch: (input) async =>
-                await _controller.cercaFromParola(input, input, IconSearch),
+                await _controller.cercaFromParola(input, input, Icona.cerca),
             onError: (err) => EmptyView(null),
             onItemFound: (input, num) {
               return Container(
@@ -167,9 +172,9 @@ class _EsploraViewState extends State<EsploraView> {
                   leading: Stack(alignment: Alignment.center, children: [
                     Image.asset('assets/empty.png'),
                     Icon(
-                      IconData(findImage(input.nome),
+                      IconData(Icona.trovaIcona(input.nome),
                           fontFamily: 'MaterialIcons'),
-                      color: BackgroundColor,
+                      color: Colore.chiaro,
                     ),
                   ]),
                   onTap: () async {
@@ -177,8 +182,8 @@ class _EsploraViewState extends State<EsploraView> {
                         .push(
                       MaterialPageRoute(
                         builder: (context) => FutureBuilder<dynamic>(
-                          future: _controller.cercaRisorse(
-                              input.nome, input.url, findImage(input.nome)),
+                          future: _controller.cercaRisorse(input.nome,
+                              input.url, Icona.trovaIcona(input.nome)),
                           builder: (BuildContext context,
                               AsyncSnapshot<dynamic> snapshot) {
                             Widget tmpWidget;

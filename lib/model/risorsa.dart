@@ -1,7 +1,5 @@
 import 'dart:io';
 import 'dart:developer';
-
-import 'package:provinciApp/utility/costanti/costanti_risorsa.dart';
 import 'package:provinciApp/model/utility_risorsa.dart';
 
 /// Una Risorsa è un elemento del sistema identificato univocamente da un url e

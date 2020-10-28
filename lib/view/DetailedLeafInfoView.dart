@@ -1,6 +1,5 @@
 import 'package:provinciApp/controller/controller.dart';
 import 'package:provinciApp/model/risorsa.dart';
-import 'package:provinciApp/utility/Style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
@@ -9,6 +8,8 @@ import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:latlong/latlong.dart';
 import 'package:map_launcher/map_launcher.dart' as mapLauncher;
 import 'package:map_launcher/map_launcher.dart';
+import 'package:provinciApp/utility/stile/colore.dart';
+import 'package:provinciApp/utility/stile/stiletesto.dart';
 import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -57,7 +58,7 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
         'Name': Container(
           padding: EdgeInsets.all(20.0),
           decoration: BoxDecoration(
-              color: BackgroundColor,
+              color: Colore.chiaro,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(20.0),
                 topRight: Radius.circular(20.0),
@@ -66,7 +67,7 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
               )),
           child: Text(
             this._leafInfo.nome,
-            style: TitleDetaileStyle,
+            style: StileTesto.corpo,
             textAlign: TextAlign.center,
           ),
         ),
@@ -92,7 +93,7 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
                         children: <Widget>[
                           Icon(
                             Icons.call,
-                            color: DarkColor,
+                            color: Colore.scuro,
                           ),
                           Text('${this._leafInfo.telefoni[index]}')
                         ],
@@ -102,11 +103,11 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
             ? null
             : CircleAvatar(
                 radius: 20,
-                backgroundColor: BackgroundColor,
+                backgroundColor: Colore.chiaro,
                 child: IconButton(
                   icon: Icon(
                     Icons.email,
-                    color: DarkColor,
+                    color: Colore.scuro,
                   ),
                   onPressed: () async {
                     await launch('mailto:${this._leafInfo.email}');
@@ -116,11 +117,11 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
         'Share': this._leafInfo.url != null
             ? CircleAvatar(
                 radius: 20,
-                backgroundColor: BackgroundColor,
+                backgroundColor: Colore.chiaro,
                 child: IconButton(
                   icon: Icon(
                     Icons.share,
-                    color: DarkColor,
+                    color: Colore.scuro,
                   ),
                   onPressed: () {
                     setState(() {
@@ -137,12 +138,12 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
             ? null
             : CircleAvatar(
                 radius: 20,
-                backgroundColor: BackgroundColor,
+                backgroundColor: Colore.chiaro,
                 child: IconButton(
                   onPressed: () => openMapsSheet(context),
                   icon: Icon(
                     Icons.location_on,
-                    color: DarkColor,
+                    color: Colore.scuro,
                   ),
                 ),
               ),
@@ -172,7 +173,7 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
                           builder: (ctx) => Container(
                             child: Icon(
                               Icons.location_on,
-                              color: DarkColor,
+                              color: Colore.scuro,
                             ),
                           ),
                         ),
@@ -209,11 +210,11 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
             ? null
             : CircleAvatar(
                 radius: 20,
-                backgroundColor: BackgroundColor,
+                backgroundColor: Colore.chiaro,
                 child: IconButton(
                   icon: Icon(
                     Icons.link,
-                    color: DarkColor,
+                    color: Colore.scuro,
                   ),
                   onPressed: () {
                     launch(this._leafInfo.url);
@@ -232,21 +233,21 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
     ];
     listW.removeWhere((element) => element == null);
     return Container(
-      color: PrimaryColor,
+      color: Colore.primario,
       padding:
           EdgeInsets.fromLTRB(20, MediaQuery.of(context).padding.top, 20, 0),
       child: Scaffold(
-        backgroundColor: PrimaryColor,
+        backgroundColor: Colore.primario,
         body: CustomScrollView(
           slivers: <Widget>[
             SliverAppBar(
               floating: true,
-              backgroundColor: PrimaryColor,
+              backgroundColor: Colore.primario,
               elevation: 0,
               leading: IconButton(
                 icon: Icon(
                   Icons.arrow_back_ios,
-                  color: BackgroundColor,
+                  color: Colore.chiaro,
                 ),
                 onPressed: () {
                   Navigator.pop(context);
@@ -305,7 +306,7 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
           Container(
             padding: EdgeInsets.all(20.0),
             decoration: BoxDecoration(
-              color: BackgroundColor,
+              color: Colore.chiaro,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(20.0),
                 topRight: Radius.circular(20.0),
@@ -318,7 +319,7 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
                   ? null
                   : Text(
                       title,
-                      style: TitleDetaileStyle,
+                      style: StileTesto.corpo,
                     ),
               subtitle: child,
             ),

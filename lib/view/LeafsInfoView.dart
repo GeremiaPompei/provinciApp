@@ -1,6 +1,7 @@
 import 'package:provinciApp/controller/controller.dart';
 import 'package:provinciApp/model/risorsa.dart';
-import 'package:provinciApp/utility/Style.dart';
+import 'package:provinciApp/utility/stile/colore.dart';
+import 'package:provinciApp/utility/stile/stiletesto.dart';
 import 'package:provinciApp/view/DetailedLeafInfoView.dart';
 import 'package:flutter/material.dart';
 
@@ -27,12 +28,12 @@ class _LeafsInfoViewState extends State<LeafsInfoView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: BackgroundColor2,
+      backgroundColor: Colore.sfondo,
       appBar: AppBar(
-        backgroundColor: PrimaryColor,
+        backgroundColor: Colore.primario,
         title: Text(
           _title,
-          style: ReverseTitleTextStyle,
+          style: StileTesto.titoloChiaro,
         ),
         leading: new IconButton(
           icon: new Icon(Icons.arrow_back_ios),
@@ -54,7 +55,7 @@ class _LeafsInfoViewState extends State<LeafsInfoView> {
               alignment: Alignment.center,
               height: 85,
               child: Card(
-                color: BackgroundColor,
+                color: Colore.chiaro,
                 child: Container(
                   height: 80,
                   alignment: Alignment.center,
