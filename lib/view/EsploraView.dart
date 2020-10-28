@@ -161,7 +161,7 @@ class _EsploraViewState extends State<EsploraView> {
             )),
             loader: LoadingView(),
             onSearch: (input) async =>
-                await _controller.cercaFromParola(input, input, Icona.cerca),
+                await _controller.cercaFromParola(input, Icona.cerca),
             onError: (err) => EmptyView(null),
             onItemFound: (input, num) {
               return Container(

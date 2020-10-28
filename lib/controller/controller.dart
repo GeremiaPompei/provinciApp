@@ -13,7 +13,6 @@ import 'package:provinciApp/model/pacchetto.dart';
 import 'package:provinciApp/utility/costanti/costanti_unitcache.dart';
 import 'package:provinciApp/utility/costanti/costanti_web.dart';
 import 'package:provinciApp/model/web/http_request.dart';
-import 'package:provinciApp/utility/stile/icona.dart';
 
 /// Un Controller non è altro che il controller dell'MVC che sei occupa di
 /// fornire alla view le funzioni per accedere al backend e reperire le
@@ -159,9 +158,20 @@ class Controller {
     return offline;
   }
 
+  /// Metodo utile per la posizione locale.
+  Future<String> cercaPosizione() async {
+    final Geolocator geolocator = Geolocator()..forceAndroidLocationManager;
+    Position position = await geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.best);
+    List<Placemark> placemark =
+    await geolocator.placemarkFromPosition(position);
+    String location = placemark[0].locality;
+    return location;
+  }
+
   /// Metodo utile per cercare pacchetti in base ad una parola chiave.
-  Future<dynamic> cercaFromParola(String name, String url, int image) async =>
-      cercaFromUrl(name, CostantiWeb.urlProvinciaSearch + url, image);
+  Future<dynamic> cercaFromParola(String name, int image) async =>
+      cercaFromUrl(name, CostantiWeb.urlProvinciaSearch + name, image);
 
   /// Metodo utile per cercare pacchetti in base ad un url.
   Future<dynamic> cercaFromUrl(String name, String url, int image) async {
@@ -184,18 +194,6 @@ class Controller {
       cacheUnit.updateDate();
     this._cache.keyUltimiPacchetti = url;
     return ultimiPacchetti;
-  }
-
-  /// Metodo utile per cercare pacchetti in base alla posizione locale.
-  Future<String> cercaFromPosizione() async {
-    final Geolocator geolocator = Geolocator()..forceAndroidLocationManager;
-    Position position = await geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.best);
-    List<Placemark> placemark =
-        await geolocator.placemarkFromPosition(position);
-    String location = placemark[0].locality;
-    cercaFromParola(location, location, Icona.posizione);
-    return location;
   }
 
   /// Metodo utile per cercare risorse in base ad un url.

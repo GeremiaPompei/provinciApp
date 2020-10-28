@@ -29,6 +29,7 @@ class _HomeViewState extends State<HomeView> {
   String _title;
   Widget _varWidget;
   int _index;
+  String _location;
 
   _HomeViewState(this._controller, this._index) {
     init(this._index);
@@ -71,6 +72,11 @@ class _HomeViewState extends State<HomeView> {
     setState(() {
       init(index);
     });
+  }
+
+  Future<dynamic> _findFromLocation() async {
+    this._location = await this._controller.cercaPosizione();
+    return this._controller.cercaFromParola(this._location, Icona.posizione);
   }
 
   @override
@@ -125,15 +131,15 @@ class _HomeViewState extends State<HomeView> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => FutureBuilder<dynamic>(
-                      future: this._controller.cercaFromPosizione(),
+                      future: _findFromLocation(),
                       builder: (BuildContext context,
                           AsyncSnapshot<dynamic> snapshot) {
                         Widget varWidget;
                         if (snapshot.hasData) if (snapshot.data.isNotEmpty)
                           varWidget =
-                              ScrollListView(this._controller, snapshot.data);
+                              ScrollListView(this._controller, this._location);
                         else
-                          varWidget = EmptyView(snapshot.data);
+                          varWidget = EmptyView(this._location);
                         else if (snapshot.hasError)
                           varWidget = OfflineView('Posizione');
                         else
