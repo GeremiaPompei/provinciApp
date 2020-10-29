@@ -95,10 +95,13 @@ Per evidenziare le caratteristiche della nostra applicazione è fondamentale dis
 
 #### *Esplora*
 
-
-[<img width="15" height="15" style="float: center;" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/FrecciaBack.png">](https://github.com/GeremiaPompei/provinciApp#provinciapp)
-
-[<img width="15" height="15" style="float: right;" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Home.png">](https://github.com/GeremiaPompei/provinciApp#struttura-online)
+[<p align="center">
+	<img src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/FrecciaBack.png" width="15" height="15" align="left" Hspace="10" Vspace="0" 
+Border="0">](https://github.com/GeremiaPompei/provinciApp#provinciapp)
+	
+[<p align="right">
+	<img src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/FrecciaBack.png" width="15" height="15" align="left" Hspace="10" Vspace="0" 
+Border="0">](https://github.com/GeremiaPompei/provinciApp#struttura-online)
 
 
 
