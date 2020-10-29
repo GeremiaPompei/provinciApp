@@ -1,5 +1,5 @@
 <p>  
-	<font color="blue"> 
+	<font color="blu"> 
 		 <h1 align="center">provinciApp</h1>
 	</font>
 </p>
@@ -96,38 +96,23 @@ Per evidenziare le caratteristiche della nostra applicazione è fondamentale dis
 #### *Esplora*
 
 
-[<img src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/FrecciaBack.png" width="15" height="25" align="left" Hspace="10" Vspace="0" 
+[<img src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/FrecciaBack.png" width="15" height="15" align="center" Hspace="10" Vspace="0" 
 Border="0">](https://github.com/GeremiaPompei/provinciApp#provinciapp)
 
-[<img src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Home.png" width="15" height="25" align="center" Hspace="5" Vspace="0" 
+[<img src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Home.png" width="15" height="15" align="center" Hspace="0" Vspace="0" 
 Border="0">](https://github.com/GeremiaPompei/provinciApp#struttura-online)
 
   
   
 
 #### *Comuni*
-[<img src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/FrecciaBack.png" width="15" height="25" align="left" Hspace="10" Vspace="0" 
-Border="0">](https://github.com/GeremiaPompei/provinciApp#provinciapp)
-
-[<img src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Home.png" width="15" height="25" align="center" Hspace="5" Vspace="0" 
-Border="0">](https://github.com/GeremiaPompei/provinciApp#struttura-online)
-
 
 
 #### *Categorie*
-[<img src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/FrecciaBack.png" width="15" height="25" align="left" Hspace="10" Vspace="0" 
-Border="0">](https://github.com/GeremiaPompei/provinciApp#provinciapp)
 
-[<img src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Home.png" width="15" height="25" align="center" Hspace="5" Vspace="0" 
-Border="0">](https://github.com/GeremiaPompei/provinciApp#struttura-online)
 
 
 #### *Lista di elementi scaricati*
-[<img src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/FrecciaBack.png" width="15" height="25" align="left" Hspace="10" Vspace="0" 
-Border="0">](https://github.com/GeremiaPompei/provinciApp#provinciapp)
-
-[<img src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Home.png" width="15" height="25" align="center" Hspace="5" Vspace="0" 
-Border="0">](https://github.com/GeremiaPompei/provinciApp#struttura-online)
 
 
 
@@ -160,6 +145,8 @@ Cliccando sul pulsante 'Offline' si accederà alla schermata offline ([qui](http
 
 ## Specifiche
 
+
+#### Api
 
 #### Flutter
 [1]:https://github.com/GeremiaPompei/mc/blob/master/README.md#flutter
@@ -224,7 +211,7 @@ Una volta condiviso l'evento, l'interazione sarà possibile attraverso un click 
 
 
 ## Autori
-- [Geremia Pompei](https://github.com/GeremiaPompei)
-- [Alex Pop](https://github.com/axel2104)
-- [Lorenzo Longarini](https://github.com/LorenzoLongarini)
+- [*Geremia Pompei*](https://github.com/GeremiaPompei)
+- [*Alex Pop*](https://github.com/axel2104)
+- [*Lorenzo Longarini*](https://github.com/LorenzoLongarini)
  
