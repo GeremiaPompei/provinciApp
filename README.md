@@ -99,7 +99,7 @@ Per evidenziare le caratteristiche della nostra applicazione è fondamentale dis
 	<img src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/FrecciaBack.png" width="15" height="15" Hspace="10" Vspace="0" Border="0">](https://github.com/GeremiaPompei/provinciApp#provinciapp)
 	
 [<p align="left">
-	<img src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Home.png" width="15" height="15">](https://github.com/GeremiaPompei/provinciApp#struttura-online)
+	<img src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Home.png" width="15" height="15" Hspace="10" Vspace="0" Border="0">](https://github.com/GeremiaPompei/provinciApp#struttura-online)
 
 Hspace="10" Vspace="0" 
 Border="0"
