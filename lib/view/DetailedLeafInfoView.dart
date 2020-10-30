@@ -67,7 +67,7 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
               )),
           child: Text(
             this._leafInfo.nome,
-            style: StileTesto.corpo,
+            style: StileTesto.sottotitolo,
             textAlign: TextAlign.center,
           ),
         ),
@@ -319,7 +319,7 @@ class _DetailedLeafInfoViewState extends State<DetailedLeafInfoView> {
                   ? null
                   : Text(
                       title,
-                      style: StileTesto.corpo,
+                      style: StileTesto.sottotitolo,
                     ),
               subtitle: child,
             ),

@@ -13,8 +13,10 @@ class DeserializzaOffline {
     List<Risorsa> listRes = [];
     List<dynamic> listIn = json.decode(contents);
     for (var element in listIn) {
-      Risorsa risorsa = Risorsa(element[CostantiOffline.listaElementi],
-          CostantiOffline.idUrl, int.parse(element[CostantiOffline.idIndice]));
+      Risorsa risorsa = Risorsa(
+          element[CostantiOffline.listaElementi],
+          element[CostantiOffline.idUrl],
+          int.parse(element[CostantiOffline.idIndice]));
       await _deserializzaImmagine(
           element[CostantiOffline.pathImmagine], risorsa);
       listRes.add(risorsa);

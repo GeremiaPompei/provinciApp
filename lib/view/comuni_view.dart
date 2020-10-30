@@ -6,29 +6,26 @@ import 'package:provinciApp/utility/stile/colore.dart';
 import 'package:provinciApp/utility/stile/icona.dart';
 import 'package:provinciApp/utility/stile/stiletesto.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'EmptyView.dart';
-import 'LoadingView.dart';
-import 'OfflineView.dart';
-import 'ScrollListView.dart';
+import 'custom/custom_futurebuilder.dart';
+import 'lista_pacchetti_view.dart';
 
-class OrganizationsView extends StatefulWidget {
+class ComuniView extends StatefulWidget {
   Controller _controller;
 
-  OrganizationsView(this._controller);
+  ComuniView(this._controller);
 
   @override
-  _OrganizationsViewState createState() =>
-      _OrganizationsViewState(this._controller);
+  _ComuniViewState createState() => _ComuniViewState();
 }
 
-class _OrganizationsViewState extends State<OrganizationsView> {
-  Controller _controller;
+class _ComuniViewState extends State<ComuniView> {
   List<Future<Pacchetto>> _nodes;
   RefreshController _refreshController =
       RefreshController(initialRefresh: false);
 
-  _OrganizationsViewState(this._controller) {
-    this._nodes = this._controller.comuni;
+  @override
+  void initState() {
+    this._nodes = widget._controller.comuni;
   }
 
   Widget _getImage(dynamic image) => image == null
@@ -47,9 +44,9 @@ class _OrganizationsViewState extends State<OrganizationsView> {
         controller: _refreshController,
         onRefresh: () {
           setState(() {
-            this._controller.comuni.removeWhere((element) => true);
-            this._controller.initComuni().then((value) {
-              this._nodes = this._controller.comuni;
+            widget._controller.comuni.removeWhere((element) => true);
+            widget._controller.initComuni().then((value) {
+              this._nodes = widget._controller.comuni;
               (context as Element).reassemble();
               _refreshController.refreshCompleted();
             });
@@ -83,7 +80,7 @@ class _OrganizationsViewState extends State<OrganizationsView> {
                               Center(
                                 child: Text(
                                   node.nome,
-                                  style: StileTesto.sottotitolo,
+                                  style: StileTesto.corpo,
                                   maxLines: 3,
                                 ),
                               ),
@@ -92,42 +89,25 @@ class _OrganizationsViewState extends State<OrganizationsView> {
                           onPressed: () {
                             setState(() {
                               Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          FutureBuilder<dynamic>(
-                                            future: this
-                                                ._controller
-                                                .cercaFromUrl(node.nome,
-                                                    node.url, Icona.comuni),
-                                            builder: (BuildContext context,
-                                                AsyncSnapshot<dynamic>
-                                                    snapshot) {
-                                              Widget tmpWidget;
-                                              if (snapshot.hasData) if (snapshot
-                                                  .data.isNotEmpty)
-                                                tmpWidget = ScrollListView(
-                                                    this._controller,
-                                                    node.nome);
-                                              else
-                                                tmpWidget = Scaffold(
-                                                  body: EmptyView(node.nome),
-                                                );
-                                              else if (snapshot.hasError) {
-                                                tmpWidget =
-                                                    OfflineView(node.nome);
-                                              } else
-                                                tmpWidget = LoadingView();
-                                              return tmpWidget;
-                                            },
-                                          )));
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => CustomFutureBuilder(
+                                    widget._controller.cercaFromUrl(
+                                        node.nome, node.url, Icona.comuni),
+                                    node.nome,
+                                    ListaPacchettiView(widget._controller),
+                                  ),
+                                ),
+                              );
                             });
                           },
                         ),
                       ]),
                     );
                   } else if (snapshot.hasError) {
-                    tmpWidget = Container();
+                    tmpWidget = Card(
+                      color: Colore.chiaro,
+                    );
                   } else {
                     tmpWidget = Card(
                       color: Colore.chiaro,

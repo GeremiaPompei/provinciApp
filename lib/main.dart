@@ -1,9 +1,10 @@
-import 'package:provinciApp/view/HomeView.dart';
-import 'package:provinciApp/view/LoadingView.dart';
-import 'package:provinciApp/view/SavedView.dart';
+import 'package:provinciApp/view/main_view/main_view.dart';
+import 'package:provinciApp/view/loading_view.dart';
+import 'package:provinciApp/view/salvati_view.dart';
 import 'package:flutter/material.dart';
 import 'controller/controller.dart';
 
+/// Metodo main da dove viene lanciata l'applicazione provinciApp.
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   Controller controller = Controller();
@@ -15,7 +16,7 @@ void main() {
         builder: (context, snapshot) {
           Widget tmpWidget;
           if (snapshot.hasData)
-            tmpWidget = HomeView(
+            tmpWidget = MainView(
               controller,
               1,
             );
@@ -25,8 +26,8 @@ void main() {
         },
       ),
       routes: {
-        '/online': (context) => HomeView(controller, 1),
-        '/offline': (context) => SavedWidget(controller),
+        '/online': (context) => MainView(controller, 1),
+        '/offline': (context) => SalvatiView(controller),
       },
     ),
   );

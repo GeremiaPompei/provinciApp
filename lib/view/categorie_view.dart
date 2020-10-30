@@ -3,30 +3,27 @@ import 'package:provinciApp/model/pacchetto.dart';
 import 'package:provinciApp/utility/stile/colore.dart';
 import 'package:provinciApp/utility/stile/icona.dart';
 import 'package:provinciApp/utility/stile/stiletesto.dart';
-import 'package:provinciApp/view/EmptyView.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'LoadingView.dart';
-import 'OfflineView.dart';
-import 'ScrollListView.dart';
+import 'custom/custom_futurebuilder.dart';
+import 'lista_pacchetti_view.dart';
 
-class CategoriesView extends StatefulWidget {
+class CategorieView extends StatefulWidget {
   Controller _controller;
 
-  CategoriesView(this._controller);
+  CategorieView(this._controller);
 
   @override
-  _CategoriesViewState createState() => _CategoriesViewState(this._controller);
+  _CategorieViewState createState() => _CategorieViewState();
 }
 
-class _CategoriesViewState extends State<CategoriesView> {
-  Controller _controller;
+class _CategorieViewState extends State<CategorieView> {
   List<Future<Pacchetto>> _nodes;
   RefreshController _refreshController =
       RefreshController(initialRefresh: false);
 
-  _CategoriesViewState(this._controller) {
-    this._nodes = this._controller.categorie;
+  _CategorieViewState() {
+    this._nodes = widget._controller.categorie;
   }
 
   Widget _getImage(dynamic image) => image == null
@@ -47,9 +44,9 @@ class _CategoriesViewState extends State<CategoriesView> {
       controller: _refreshController,
       onRefresh: () {
         setState(() {
-          this._controller.categorie.removeWhere((element) => true);
-          this._controller.initCategorie().then((value) {
-            this._nodes = this._controller.categorie;
+          widget._controller.categorie.removeWhere((element) => true);
+          widget._controller.initCategorie().then((value) {
+            this._nodes = widget._controller.categorie;
             (context as Element).reassemble();
             _refreshController.refreshCompleted();
           });
@@ -84,27 +81,11 @@ class _CategoriesViewState extends State<CategoriesView> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) =>
-                                        FutureBuilder<dynamic>(
-                                      future: _controller.cercaFromUrl(
+                                    builder: (context) => CustomFutureBuilder(
+                                      widget._controller.cercaFromUrl(
                                           node.nome, node.url, Icona.categorie),
-                                      builder: (BuildContext context,
-                                          AsyncSnapshot<dynamic> snapshot) {
-                                        Widget tmpWidget;
-                                        if (snapshot.hasData) if (snapshot
-                                            .data.isNotEmpty)
-                                          tmpWidget = ScrollListView(
-                                              this._controller, node.nome);
-                                        else
-                                          tmpWidget = Scaffold(
-                                            body: EmptyView(node.nome),
-                                          );
-                                        else if (snapshot.hasError)
-                                          tmpWidget = OfflineView(node.nome);
-                                        else
-                                          tmpWidget = LoadingView();
-                                        return tmpWidget;
-                                      },
+                                      node.nome,
+                                      ListaPacchettiView(widget._controller),
                                     ),
                                   ),
                                 );
@@ -112,7 +93,7 @@ class _CategoriesViewState extends State<CategoriesView> {
                               child: Center(
                                 child: Text(
                                   node.nome.toString(),
-                                  style: StileTesto.sottotitolo,
+                                  style: StileTesto.corpo,
                                 ),
                               ),
                             ),

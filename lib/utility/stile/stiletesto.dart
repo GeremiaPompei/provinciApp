@@ -23,16 +23,16 @@ class StileTesto {
   /// Stile di testo utilizzato per il sottotitolo.
   static TextStyle sottotitolo = TextStyle(
     fontFamily: 'Poppins',
-    fontWeight: FontWeight.w400,
-    fontSize: 17,
-    color: Colore.scuro,
+    fontWeight: FontWeight.w600,
+    fontSize: 20,
+    color: Colore.primario,
   );
 
   /// Stile di testo utilizzato per corpo.
   static TextStyle corpo = TextStyle(
     fontFamily: 'Poppins',
-    fontWeight: FontWeight.w600,
-    fontSize: 20,
-    color: Colore.primario,
+    fontWeight: FontWeight.w400,
+    fontSize: 17,
+    color: Colore.scuro,
   );
 }

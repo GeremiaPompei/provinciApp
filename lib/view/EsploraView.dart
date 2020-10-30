@@ -5,16 +5,15 @@ import 'package:provinciApp/utility/costanti/costanti_unitcache.dart';
 import 'package:provinciApp/utility/stile/colore.dart';
 import 'package:provinciApp/utility/stile/icona.dart';
 import 'package:provinciApp/utility/stile/stiletesto.dart';
-import 'package:provinciApp/view/EmptyView.dart';
-import 'package:provinciApp/view/LeafsInfoView.dart';
-import 'package:provinciApp/view/LoadingView.dart';
-import 'package:provinciApp/view/ScrollListView.dart';
+import 'package:provinciApp/view/vuoto_view.dart';
+import 'package:provinciApp/view/loading_view.dart';
+import 'package:provinciApp/view/lista_pacchetti_view.dart';
 import 'package:flappy_search_bar/flappy_search_bar.dart';
 import 'package:flappy_search_bar/search_bar_style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'OfflineView.dart';
+import 'custom/custom_futurebuilder.dart';
+import 'lista_risorse_view.dart';
 
 class EsploraView extends StatefulWidget {
   Controller _controller;
@@ -73,7 +72,7 @@ class _EsploraViewState extends State<EsploraView> {
                               Center(
                                 child: Text(
                                   _list[i].value.nome,
-                                  style: StileTesto.sottotitolo,
+                                  style: StileTesto.corpo,
                                   maxLines: 2,
                                 ),
                               ),
@@ -84,23 +83,11 @@ class _EsploraViewState extends State<EsploraView> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => FutureBuilder<dynamic>(
-                                    future: _func(_list[i].value.nome,
-                                        _list[i].key, _list[i].value.icona),
-                                    builder: (BuildContext context,
-                                        AsyncSnapshot<dynamic> snapshot) {
-                                      Widget tmpWidget;
-                                      if (snapshot.hasData)
-                                        tmpWidget =
-                                            _funcWidget(_list[i].value.nome);
-                                      else if (snapshot.hasError) {
-                                        tmpWidget =
-                                            OfflineView(_list[i].value.nome);
-                                      } else
-                                        tmpWidget = LoadingView();
-                                      return tmpWidget;
-                                    },
-                                  ),
+                                  builder: (context) => CustomFutureBuilder(
+                                      _func(_list[i].value.nome, _list[i].key,
+                                          _list[i].value.icona),
+                                      _list[i].value.nome,
+                                      _funcWidget(_list[i].value.nome)),
                                 ),
                               ).then((value) {
                                 setState(() {
@@ -139,7 +126,7 @@ class _EsploraViewState extends State<EsploraView> {
                             !element.key.contains(CostantiUnitCache.idVuoto))
                         .toList(),
                     this._controller.cercaFromUrl,
-                    (name) => ScrollListView(this._controller, name),
+                    (name) => ListaPacchettiView(this._controller),
                     context),
                 SizedBox(
                   height: 20,
@@ -152,7 +139,8 @@ class _EsploraViewState extends State<EsploraView> {
                             !element.key.contains(CostantiUnitCache.idVuoto))
                         .toList(),
                     this._controller.cercaRisorse,
-                    (name) => LeafsInfoView(this._controller, name),
+                    (name) => ListaRisorseView(
+                        widget._controller, widget._controller.ultimeRisorse),
                     context),
                 SizedBox(
                   height: 10,
@@ -162,7 +150,7 @@ class _EsploraViewState extends State<EsploraView> {
             loader: LoadingView(),
             onSearch: (input) async =>
                 await _controller.cercaFromParola(input, Icona.cerca),
-            onError: (err) => EmptyView(null),
+            onError: (err) => VuotoView(),
             onItemFound: (input, num) {
               return Container(
                 child: ListTile(
@@ -181,21 +169,12 @@ class _EsploraViewState extends State<EsploraView> {
                     Navigator.of(context)
                         .push(
                       MaterialPageRoute(
-                        builder: (context) => FutureBuilder<dynamic>(
-                          future: _controller.cercaRisorse(input.nome,
-                              input.url, Icona.trovaIcona(input.nome)),
-                          builder: (BuildContext context,
-                              AsyncSnapshot<dynamic> snapshot) {
-                            Widget tmpWidget;
-                            if (snapshot.hasData)
-                              tmpWidget =
-                                  LeafsInfoView(_controller, input.nome);
-                            else if (snapshot.hasError)
-                              tmpWidget = OfflineView(input.nome);
-                            else
-                              tmpWidget = LoadingView();
-                            return tmpWidget;
-                          },
+                        builder: (context) => CustomFutureBuilder(
+                          _controller.cercaRisorse(input.nome, input.url,
+                              Icona.trovaIcona(input.nome)),
+                          input.nome,
+                          ListaRisorseView(widget._controller,
+                              widget._controller.ultimeRisorse),
                         ),
                       ),
                     )

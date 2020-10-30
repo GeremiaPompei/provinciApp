@@ -14,6 +14,24 @@ class Icona {
   /// Icona rappresentante la posizione.
   static final posizione = Icons.location_on.codePoint;
 
+  /// Icona rappresentante gli extra.
+  static final extra = Icons.extension_rounded.codePoint;
+
+  /// Icona rappresentante la parte online di provinciApp.
+  static final online = Icons.file_upload.codePoint;
+
+  /// Icona rappresentante la parte offline di provinciApp.
+  static final offline = Icons.file_download.codePoint;
+
+  /// Icona rappresentante la freccia indietro.
+  static final indietro = Icons.arrow_back_ios.codePoint;
+
+  /// Icona rappresentante il salvataggio offline.
+  static final salvaOffline = Icons.add_circle_outline.codePoint;
+
+  /// Icona rappresentante la rimozione dagli elementi offline.
+  static final rimuoviOffline = Icons.remove_circle_outline.codePoint;
+
   /// Metodo utile per ritrovare il codice dell'intero corrispondente all'icona
   /// data una parola.
   static int trovaIcona(String name) {
