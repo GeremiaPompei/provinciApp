@@ -1,9 +1,9 @@
 import 'package:provinciApp/controller/controller.dart';
 import 'package:provinciApp/utility/stile/colore.dart';
 import 'package:provinciApp/view/main_view/bottombar_main_view.dart';
-import 'package:provinciApp/view/categorie_view.dart';
+import 'package:provinciApp/view/lista_categorie_view.dart';
 import 'package:provinciApp/view/EsploraView.dart';
-import 'package:provinciApp/view/comuni_view.dart';
+import 'package:provinciApp/view/lista_comuni_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'appbar_main_view.dart';
@@ -29,9 +29,9 @@ class _MainViewState extends State<MainView> {
   @override
   void initState() {
     _widgets = [
-      ['Comuni', ComuniView(widget._controller)],
+      ['Comuni', ListaComuniView(widget._controller)],
       ['Esplora', EsploraView(widget._controller)],
-      ['Categorie', CategorieView(widget._controller)],
+      ['Categorie', ListaCategorieView(widget._controller)],
     ];
   }
 
