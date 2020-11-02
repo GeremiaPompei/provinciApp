@@ -1,13 +1,13 @@
 import 'dart:convert';
+import 'package:provinciApp/model/costanti/costanti_pacchetto.dart';
+import 'package:provinciApp/model/costanti/costanti_unitcache.dart';
 import 'package:provinciApp/model/persistenza/store_manager.dart';
-import '../../cache/cache.dart';
-import '../../../utility/costanti/costanti_risorsa.dart';
-import '../../risorsa.dart';
-import '../../pacchetto.dart';
-import '../../cache/unit_cache.dart';
-import '../../../utility/costanti/costanti_cache.dart';
-import '../../../utility/costanti/costanti_pacchetto.dart';
-import '../../../utility/costanti/costanti_unitcache.dart';
+import 'package:provinciApp/model/cache/cache.dart';
+import 'package:provinciApp/model/costanti/costanti_risorsa.dart';
+import 'package:provinciApp/model/risorsa.dart';
+import 'package:provinciApp/model/pacchetto.dart';
+import 'package:provinciApp/model/cache/unit_cache.dart';
+import 'package:provinciApp/model/costanti/costanti_cache.dart';
 
 /// DeserializzaCache permette tramite un metodo pubblico di deserializzare una
 /// stringa in una cache.

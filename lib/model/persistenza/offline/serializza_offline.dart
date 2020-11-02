@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'package:provinciApp/utility/costanti/costanti_offline.dart';
-import '../../risorsa.dart';
+import 'package:provinciApp/model/costanti/costanti_offline.dart';
+import 'package:provinciApp/model/risorsa.dart';
 
 /// SerializzaOffline permette tramite un metodo pubblico di serializzare una
 /// lista di risorse in una stringa.

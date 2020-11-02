@@ -1,5 +1,5 @@
 import 'package:provinciApp/view/main_view/main_view.dart';
-import 'package:provinciApp/view/loading_view.dart';
+import 'package:provinciApp/view/costanti/loading_view.dart';
 import 'package:provinciApp/view/salvati_view.dart';
 import 'package:flutter/material.dart';
 import 'controller/controller.dart';
@@ -20,7 +20,10 @@ void main() {
               controller,
               1,
             );
-          else
+          else if (snapshot.hasError) {
+            tmpWidget = LoadingView();
+            print(snapshot.error);
+          } else
             tmpWidget = LoadingView();
           return tmpWidget;
         },

@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:provinciApp/utility/costanti/costanti_offline.dart';
+import 'package:provinciApp/model/costanti/costanti_offline.dart';
 import 'package:provinciApp/model/risorsa.dart';
 import 'package:provinciApp/model/persistenza/store_manager.dart';
 import 'package:provinciApp/model/web/http_request.dart';

@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:geolocator/geolocator.dart';
-import 'package:provinciApp/utility/costanti/costanti_nomefile.dart';
+import 'package:provinciApp/model/costanti/costanti_nomefile.dart';
+import 'package:provinciApp/model/costanti/costanti_unitcache.dart';
 import 'package:provinciApp/model/cache/cache.dart';
 import 'package:provinciApp/model/persistenza/cache/deserializza_cache.dart';
 import 'package:provinciApp/model/persistenza/cache/serializza_cache.dart';
@@ -10,8 +11,7 @@ import 'package:provinciApp/model/persistenza/store_manager.dart';
 import 'package:provinciApp/model/cache/unit_cache.dart';
 import 'package:provinciApp/model/risorsa.dart';
 import 'package:provinciApp/model/pacchetto.dart';
-import 'package:provinciApp/utility/costanti/costanti_unitcache.dart';
-import 'package:provinciApp/utility/costanti/costanti_web.dart';
+import 'package:provinciApp/model/costanti/costanti_web.dart';
 import 'package:provinciApp/model/web/http_request.dart';
 
 /// Un Controller non è altro che il controller dell'MVC che sei occupa di
@@ -100,14 +100,12 @@ class Controller {
   /// vuoti immessi per la sostituzione.
   void _initUnitCache(int countNodes, int countLeafs) {
     for (int i = countNodes - 1; i >= 0; i--)
-      this._cache.pacchetti[CostantiUnitCache.idVuoto + ' $i'] = UnitCache(
-          null,
+      this._cache.pacchetti[CostantiUnitCache.idVuoto + ' $i'] = UnitCache([],
           DateTime.now().subtract(Duration(days: 5)),
           CostantiUnitCache.nomeVuoto,
           null);
     for (int i = 0; i < countLeafs; i++)
-      this._cache.risorse[CostantiUnitCache.idVuoto + ' $i'] = UnitCache(
-          null,
+      this._cache.risorse[CostantiUnitCache.idVuoto + ' $i'] = UnitCache([],
           DateTime.now().subtract(Duration(days: 5)),
           CostantiUnitCache.nomeVuoto,
           null);
@@ -164,14 +162,14 @@ class Controller {
     Position position = await geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.best);
     List<Placemark> placemark =
-    await geolocator.placemarkFromPosition(position);
+        await geolocator.placemarkFromPosition(position);
     String location = placemark[0].locality;
     return location;
   }
 
   /// Metodo utile per cercare pacchetti in base ad una parola chiave.
   Future<dynamic> cercaFromParola(String name, int image) async =>
-      cercaFromUrl(name, CostantiWeb.urlProvinciaSearch + name, image);
+      await cercaFromUrl(name, CostantiWeb.urlProvinciaSearch + name, image);
 
   /// Metodo utile per cercare pacchetti in base ad un url.
   Future<dynamic> cercaFromUrl(String name, String url, int image) async {
@@ -309,6 +307,9 @@ class Controller {
     }
     return list;
   }
+
+  /// Metodo che fornisce i pacchetti degli extra.
+  List<Pacchetto> get extra => CostantiWeb.urlsExtra;
 
   List<Future<Pacchetto>> get comuni => this._cache.comuni;
 

@@ -2,7 +2,7 @@ import 'package:provinciApp/controller/controller.dart';
 import 'package:provinciApp/model/pacchetto.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provinciApp/view/comune_view.dart';
+import 'package:provinciApp/view/comune_view/comune_view.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 /// Vista rappresentante la vista della lista dei comuni.

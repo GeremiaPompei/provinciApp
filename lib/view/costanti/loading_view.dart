@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:provinciApp/view/costanti/costanti_assets.dart';
 import 'package:provinciApp/utility/stile/colore.dart';
 
 /// LoadingView offre la vista della schermata di caricamento.
@@ -12,8 +13,8 @@ class LoadingView extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image(
-            image: AssetImage("assets/logo_mc.PNG"),
+          Image.asset(
+            CostantiAssets.logo,
             height: 180,
           ),
           SpinKitCubeGrid(

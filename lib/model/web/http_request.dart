@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:provinciApp/model/pacchetto.dart';
 import 'package:http/http.dart' as http;
 import 'package:provinciApp/model/risorsa.dart';
-import 'package:provinciApp/utility/costanti/costanti_web.dart';
+import 'package:provinciApp/model/costanti/costanti_web.dart';
 
 /// Un HttpRequest ha la responsibilità di fornire metodi per fare le varie
 /// richieste rest per prelevare i dati dal server.

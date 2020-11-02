@@ -2,10 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provinciApp/controller/controller.dart';
 import 'package:provinciApp/model/pacchetto.dart';
+import 'package:provinciApp/view/costanti/costanti_assets.dart';
 import 'package:provinciApp/utility/stile/icona.dart';
 import 'package:provinciApp/utility/stile/stiletesto.dart';
-import 'custom/custom_futurebuilder.dart';
-import 'lista_pacchetti_view.dart';
+import 'package:provinciApp/view/custom/custom_futurebuilder.dart';
+import 'package:provinciApp/view/pacchetto_view/lista_pacchetti_view.dart';
 
 /// CategoriaView offre la vista di una singola categoria.
 class CategoriaView extends StatefulWidget {
@@ -22,18 +23,7 @@ class CategoriaView extends StatefulWidget {
 
 class _CategoriaViewState extends State<CategoriaView> {
   /// Widget rappresentante l'immagine di una categoria vuota.
-  Widget _categoriaImmagineVuota;
-
-  @override
-  void initState() {
-    this._categoriaImmagineVuota = Image(
-      image: AssetImage(
-        'assets/empty.png',
-      ),
-      height: 87,
-      width: 87,
-    );
-  }
+  Widget _categoriaImmagineVuota = Image.asset(CostantiAssets.categoriaVuota);
 
   /// Widget rappresentantel'immagine della categoria.
   Widget _immagine(dynamic image) => image == null
@@ -48,9 +38,7 @@ class _CategoriaViewState extends State<CategoriaView> {
   Widget build(BuildContext context) {
     return new Stack(children: <Widget>[
       new Container(
-        height: 124.0,
-        width: MediaQuery.of(context).size.width,
-        margin: new EdgeInsets.only(left: 46.0),
+        margin: new EdgeInsets.only(left: 43.5),
         child: Card(
           child: widget._categoria == null
               ? null

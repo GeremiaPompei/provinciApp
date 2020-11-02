@@ -5,7 +5,8 @@ import 'dart:developer';
 /// che determina se il pacchetto contiene o no altri elementi. Gli elementi che
 /// contiene un pacchetto sono identificati dall'url e possono essere risorse o
 /// altri pacchetti. Sia le categorie che le organizzazioni sono pacchetti che
-/// contengono altri pacchetti.
+/// contengono altri pacchetti. Anche gli extra sono particolari pacchetti che
+/// contengono l'url a cui si verrà indirizzati nel browser.
 class Pacchetto {
   /// Nome del pacchetto.
   String _nome;

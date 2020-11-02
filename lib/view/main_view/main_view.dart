@@ -1,9 +1,9 @@
 import 'package:provinciApp/controller/controller.dart';
 import 'package:provinciApp/utility/stile/colore.dart';
 import 'package:provinciApp/view/main_view/bottombar_main_view.dart';
-import 'package:provinciApp/view/lista_categorie_view.dart';
-import 'package:provinciApp/view/EsploraView.dart';
-import 'package:provinciApp/view/lista_comuni_view.dart';
+import 'package:provinciApp/view/categoria_view/lista_categorie_view.dart';
+import 'package:provinciApp/view/esplora_view/esplora_view.dart';
+import 'package:provinciApp/view/comune_view/lista_comuni_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'appbar_main_view.dart';

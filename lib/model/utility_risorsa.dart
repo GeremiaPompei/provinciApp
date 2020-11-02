@@ -1,4 +1,4 @@
-import 'package:provinciApp/utility/costanti/costanti_risorsa.dart';
+import 'package:provinciApp/model/costanti/costanti_risorsa.dart';
 
 /// Un UtilityRisorsa fornisce ad una risorsa i metodi per controllare e
 /// ripulire i propri parametri.

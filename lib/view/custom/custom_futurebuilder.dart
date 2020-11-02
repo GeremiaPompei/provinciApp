@@ -1,16 +1,27 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../loading_view.dart';
-import '../offline_view.dart';
-import '../vuoto_view.dart';
-import 'custom_appbar.dart';
+import 'package:provinciApp/view/costanti/loading_view.dart';
+import 'package:provinciApp/view/costanti/offline_view.dart';
+import 'package:provinciApp/view/costanti/vuoto_view.dart';
+import 'package:provinciApp/view/custom/custom_appbar.dart';
 
+/// CustomFutureBuilder fornisce un FutureBuilder personalizzato per provinciApp
+/// che facilita il suo uso.
 class CustomFutureBuilder extends StatefulWidget {
+  /// Future del FutureBuilder.
   Future<dynamic> _future;
-  String _title;
-  Widget bodyVistaSuccessiva;
 
-  CustomFutureBuilder(this._future, this._title, this.bodyVistaSuccessiva);
+  /// Titolo dell'AppBar.
+  String _title;
+
+  /// Widget del corpo dello scaffold.
+  Widget _corpo;
+
+  CustomFutureBuilder(this._future, this._title, this._corpo);
+
+  set title(String value) {
+    _title = value;
+  }
 
   @override
   _CustomFutureBuilderState createState() => _CustomFutureBuilderState();
@@ -23,14 +34,16 @@ class _CustomFutureBuilderState extends State<CustomFutureBuilder> {
       future: widget._future,
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
         Widget tmpWidget;
-        if (snapshot.hasData) if (snapshot.data.isNotEmpty)
-          tmpWidget = widget.bodyVistaSuccessiva;
-        else
-          tmpWidget = VuotoView();
-        else if (snapshot.hasError)
+        if (snapshot.hasData) {
+          if (snapshot.data.isNotEmpty)
+            tmpWidget = widget._corpo;
+          else
+            tmpWidget = VuotoView();
+        } else if (snapshot.hasError) {
           tmpWidget = OfflineView();
-        else
+        } else {
           tmpWidget = LoadingView();
+        }
         return Scaffold(
           appBar: CustomAppBar(
             title: widget._title,

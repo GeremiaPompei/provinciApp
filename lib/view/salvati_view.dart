@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provinciApp/utility/stile/colore.dart';
 import 'package:provinciApp/utility/stile/icona.dart';
-import 'package:provinciApp/view/lista_risorse_view.dart';
+import 'package:provinciApp/view/risorsa_view/lista_risorse_view.dart';
 import 'custom/custom_appbar.dart';
 import 'custom/custom_icon.dart';
 

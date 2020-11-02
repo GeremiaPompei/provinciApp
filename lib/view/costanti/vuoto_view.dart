@@ -12,7 +12,8 @@ class VuotoView extends StatefulWidget {
 class _VuotoViewState extends State<VuotoView> {
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return Container(
+      alignment: Alignment.center,
       child: Text(
         'Vuoto',
         style: StileTesto.titoloPrimario,

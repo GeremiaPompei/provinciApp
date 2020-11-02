@@ -1,7 +1,7 @@
 import 'package:provinciApp/controller/controller.dart';
 import 'package:provinciApp/model/pacchetto.dart';
 import 'package:flutter/material.dart';
-import 'package:provinciApp/view/categoria_view.dart';
+import 'package:provinciApp/view/categoria_view/categoria_view.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 /// ListaCategorieView rappresenta la vista della lista delle categorie.

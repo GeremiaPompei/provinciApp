@@ -24,8 +24,6 @@ class CostantiWeb {
   static const urlProvinciaCategorieShow = urlProvincia + 'group_show?id=';
 
   /// Urls Extra
-
-  /// Url di cronache maceratesi.
   static final urlsExtra = [
     Pacchetto(
         'Cronache Maceratesi', 'News', 'https://www.cronachemaceratesi.it/',

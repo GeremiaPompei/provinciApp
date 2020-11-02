@@ -6,7 +6,8 @@ import 'package:provinciApp/utility/stile/stiletesto.dart';
 
 import 'custom_icon.dart';
 
-/// AppBar personalizzata per provinciApp che facilita il suo uso.
+/// CustomAppBar fornisce un'AppBar personalizzata per provinciApp che facilita
+/// il suo uso.
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
   /// Flag che indica se lo sfondo deve essere chiaro o no.
   bool _sfondoChiaro = false;

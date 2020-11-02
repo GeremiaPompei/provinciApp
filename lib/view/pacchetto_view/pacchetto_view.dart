@@ -1,0 +1,65 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:provinciApp/controller/controller.dart';
+import 'package:provinciApp/model/pacchetto.dart';
+import 'package:provinciApp/view/costanti/costanti_assets.dart';
+import 'package:provinciApp/utility/stile/colore.dart';
+import 'package:provinciApp/utility/stile/icona.dart';
+import '../custom/custom_futurebuilder.dart';
+import '../custom/custom_icon.dart';
+import '../risorsa_view/lista_risorse_view.dart';
+
+/// PacchettoView da la vista personalizzata di un Pacchetto.
+class PacchettoView extends StatefulWidget {
+  Controller _controller;
+
+  /// Pacchetto da mostrare.
+  Pacchetto _pacchetto;
+
+  PacchettoView(this._controller, this._pacchetto);
+
+  @override
+  _PacchettoViewState createState() => _PacchettoViewState();
+}
+
+class _PacchettoViewState extends State<PacchettoView> {
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Text(
+        widget._pacchetto.nome,
+        maxLines: 2,
+      ),
+      subtitle: Text(
+        widget._pacchetto.descrizione.toString(),
+        maxLines: 2,
+      ),
+      leading: Stack(alignment: Alignment.center, children: [
+        Image.asset(CostantiAssets.vuoto),
+        CustomIcon(
+          Icona.trovaIcona(widget._pacchetto.nome),
+          Colore.chiaro,
+        )
+      ]),
+      onTap: () {
+        setState(() {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => CustomFutureBuilder(
+                widget._controller.cercaRisorse(
+                  widget._pacchetto.nome,
+                  widget._pacchetto.url,
+                  Icona.trovaIcona(widget._pacchetto.nome),
+                ),
+                widget._pacchetto.nome,
+                ListaRisorseView(
+                    widget._controller, widget._controller.ultimeRisorse),
+              ),
+            ),
+          );
+        });
+      },
+    );
+  }
+}

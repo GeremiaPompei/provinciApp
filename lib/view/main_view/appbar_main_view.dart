@@ -4,9 +4,9 @@ import 'package:provinciApp/controller/controller.dart';
 import 'package:provinciApp/utility/stile/colore.dart';
 import 'package:provinciApp/utility/stile/icona.dart';
 import 'package:provinciApp/view/custom/custom_icon.dart';
+import 'package:provinciApp/view/extra_view/lista_extra_view.dart';
 import 'package:provinciApp/view/posizione_view.dart';
-import '../custom/custom_appbar.dart';
-import '../extra_view.dart';
+import 'package:provinciApp/view/custom/custom_appbar.dart';
 
 /// AppBarMainView è l'appBar della mainView che mostra il titolo della
 /// sottoVista e offre pulsanti per funzionalità aggiuntive come accesso ad
@@ -43,7 +43,7 @@ class _AppBarMainViewState extends State<AppBarMainView> {
             onPressed: () {
               showDialog(
                 context: context,
-                builder: (context) => ExtraView(),
+                builder: (context) => ListaExtraView(widget._controller),
               );
             }),
         IconButton(
