@@ -168,7 +168,7 @@ class Controller {
   }
 
   /// Metodo utile per cercare pacchetti in base ad una parola chiave.
-  Future<dynamic> cercaFromParola(String name, int image) async =>
+  Future<List<dynamic>> cercaFromParola(String name, int image) async =>
       await cercaFromUrl(name, CostantiWeb.urlProvinciaSearch + name, image);
 
   /// Metodo utile per cercare pacchetti in base ad un url.

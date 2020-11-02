@@ -40,9 +40,10 @@ class _EsploraViewState extends State<EsploraView> {
           minimumChars: 1,
           placeHolder: PlaceHolderEsploraView(widget._controller),
           loader: LoadingView(),
-          onSearch: (input) async =>
-              await widget._controller.cercaFromParola(input, Icona.cerca),
+          onSearch: (input) =>
+              widget._controller.cercaFromParola(input, Icona.cerca),
           onError: (err) => VuotoView(),
+          emptyWidget: VuotoView(),
           onItemFound: (input, num) =>
               OnItemFoundEsploraView(widget._controller, input),
         ),
