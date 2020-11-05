@@ -1,9 +1,9 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provinciApp/utility/stile/colore.dart';
-import 'package:provinciApp/utility/stile/icona.dart';
-import 'package:provinciApp/view/custom/custom_icon.dart';
+import 'package:provinciApp/view/stile/colore.dart';
+import 'package:provinciApp/view/stile/icona.dart';
+import 'package:provinciApp/view/costanti/custom_icon.dart';
 
 /// BottomBarMainView è la barra al di sotto della vista principale con la quale
 /// selezionare le sottoviste.

@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provinciApp/controller/controller.dart';
 import 'package:provinciApp/model/risorsa.dart';
-import 'package:provinciApp/utility/stile/colore.dart';
+import 'package:provinciApp/view/stile/colore.dart';
 import 'package:provinciApp/view/risorsa_view/risorsa_view.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 

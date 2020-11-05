@@ -1,5 +1,5 @@
 import 'package:provinciApp/controller/controller.dart';
-import 'package:provinciApp/utility/stile/colore.dart';
+import 'package:provinciApp/view/stile/colore.dart';
 import 'package:provinciApp/view/main_view/bottombar_main_view.dart';
 import 'package:provinciApp/view/categoria_view/lista_categorie_view.dart';
 import 'package:provinciApp/view/esplora_view/esplora_view.dart';

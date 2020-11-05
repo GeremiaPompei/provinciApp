@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provinciApp/model/pacchetto.dart';
-import 'package:provinciApp/utility/stile/stiletesto.dart';
+import 'package:provinciApp/view/stile/stiletesto.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 /// ExtraView è la vista che mostra un extra. Quando questo viene pigiato si

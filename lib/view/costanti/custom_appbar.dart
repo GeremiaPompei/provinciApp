@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provinciApp/utility/stile/colore.dart';
-import 'package:provinciApp/utility/stile/icona.dart';
-import 'package:provinciApp/utility/stile/stiletesto.dart';
+import 'package:provinciApp/view/stile/colore.dart';
+import 'package:provinciApp/view/stile/icona.dart';
+import 'package:provinciApp/view/stile/stiletesto.dart';
 
 import 'custom_icon.dart';
 

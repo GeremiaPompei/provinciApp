@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provinciApp/utility/stile/stiletesto.dart';
+import 'package:provinciApp/view/stile/stiletesto.dart';
 
 /// VuotoView informa quando un elemento ricercato non presenta altri elementi
 /// all'interno.

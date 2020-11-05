@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:provinciApp/controller/controller.dart';
 import 'package:provinciApp/model/pacchetto.dart';
 import 'package:provinciApp/view/costanti/costanti_assets.dart';
-import 'package:provinciApp/utility/stile/colore.dart';
-import 'package:provinciApp/utility/stile/icona.dart';
-import '../custom/custom_futurebuilder.dart';
-import '../custom/custom_icon.dart';
-import '../risorsa_view/lista_risorse_view.dart';
+import 'package:provinciApp/view/stile/colore.dart';
+import 'package:provinciApp/view/stile/icona.dart';
+import 'package:provinciApp/view/costanti/custom_futurebuilder.dart';
+import 'package:provinciApp/view/costanti/custom_icon.dart';
+import 'package:provinciApp/view/risorsa_view/lista_risorse_view.dart';
 
 /// PacchettoView da la vista personalizzata di un Pacchetto.
 class PacchettoView extends StatefulWidget {
@@ -53,11 +53,14 @@ class _PacchettoViewState extends State<PacchettoView> {
                   Icona.trovaIcona(widget._pacchetto.nome),
                 ),
                 widget._pacchetto.nome,
-                ListaRisorseView(
-                    widget._controller, widget._controller.ultimeRisorse),
+                (list) => ListaRisorseView(widget._controller, list),
               ),
             ),
-          );
+          ).then((value) {
+            setState(() {
+              (context as Element).reassemble();
+            });
+          });
         });
       },
     );

@@ -12,7 +12,7 @@ class ListaUnitCacheView extends StatefulWidget {
   Future<dynamic> Function(String name, String url, int image) _funcFuture;
 
   /// Funzione ritornante il widget della UnitCache.
-  Widget Function(String name) _funcWidget;
+  Widget Function() _funcWidget;
 
   ListaUnitCacheView(this._list, this._funcFuture, this._funcWidget);
 

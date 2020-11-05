@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:provinciApp/controller/controller.dart';
 import 'package:provinciApp/model/pacchetto.dart';
 import 'package:provinciApp/view/costanti/costanti_assets.dart';
-import 'package:provinciApp/utility/stile/colore.dart';
-import 'package:provinciApp/utility/stile/icona.dart';
-import 'package:provinciApp/utility/stile/stiletesto.dart';
-import 'package:provinciApp/view/custom/custom_futurebuilder.dart';
+import 'package:provinciApp/view/stile/colore.dart';
+import 'package:provinciApp/view/stile/icona.dart';
+import 'package:provinciApp/view/stile/stiletesto.dart';
+import 'package:provinciApp/view/costanti/custom_futurebuilder.dart';
 import 'package:provinciApp/view/pacchetto_view/lista_pacchetti_view.dart';
 
 /// ComuneView offre la vista di un singolo comune.
@@ -68,7 +68,7 @@ class _ComuneViewState extends State<ComuneView> {
                           widget._controller.cercaFromUrl(widget._comune.nome,
                               widget._comune.url, Icona.comuni),
                           widget._comune.nome,
-                          ListaPacchettiView(widget._controller),
+                          (list) => ListaPacchettiView(widget._controller),
                         ),
                       ),
                     );

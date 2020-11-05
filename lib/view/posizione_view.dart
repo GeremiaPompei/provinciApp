@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provinciApp/controller/controller.dart';
-import 'package:provinciApp/utility/stile/icona.dart';
-import 'custom/custom_futurebuilder.dart';
+import 'package:provinciApp/view/stile/icona.dart';
+import 'package:provinciApp/view/costanti//custom_futurebuilder.dart';
 import 'pacchetto_view/lista_pacchetti_view.dart';
 
 /// PosizioneView offre la vista della ricerca dei pacchetti tramite la
@@ -26,7 +26,7 @@ class _PosizioneViewState extends State<PosizioneView> {
     _customFutureBuilder = CustomFutureBuilder(
       _cercaFromPosizione(),
       'Posizione',
-      ListaPacchettiView(widget._controller),
+      (list) => ListaPacchettiView(list),
     );
   }
 

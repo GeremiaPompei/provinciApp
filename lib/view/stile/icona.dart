@@ -32,6 +32,18 @@ class Icona {
   /// Icona rappresentante la rimozione dagli elementi offline.
   static final rimuoviOffline = Icons.remove_circle_outline.codePoint;
 
+  /// Icona rappresentante la condivisione.
+  static final condividi = Icons.share.codePoint;
+
+  /// Icona rappresentante l'email.
+  static final email = Icons.mail.codePoint;
+
+  /// Icona rappresentante il collegamento ad un url.
+  static final link = Icons.link.codePoint;
+
+  /// Icona rappresentante il telefono.
+  static final telefono = Icons.phone.codePoint;
+
   /// Metodo utile per ritrovare il codice dell'intero corrispondente all'icona
   /// data una parola.
   static int trovaIcona(String name) {

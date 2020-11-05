@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provinciApp/view/costanti/loading_view.dart';
 import 'package:provinciApp/view/costanti/offline_view.dart';
 import 'package:provinciApp/view/costanti/vuoto_view.dart';
-import 'package:provinciApp/view/custom/custom_appbar.dart';
+import 'package:provinciApp/view/costanti/custom_appbar.dart';
 
 /// CustomFutureBuilder fornisce un FutureBuilder personalizzato per provinciApp
 /// che facilita il suo uso.
@@ -12,15 +12,15 @@ class CustomFutureBuilder extends StatefulWidget {
   Future<dynamic> _future;
 
   /// Titolo dell'AppBar.
-  String _title;
+  String _titolo;
 
-  /// Widget del corpo dello scaffold.
-  Widget _corpo;
+  /// Funzione che genera il Widget del corpo dello scaffold.
+  Widget Function(dynamic) _corpo;
 
-  CustomFutureBuilder(this._future, this._title, this._corpo);
+  CustomFutureBuilder(this._future, this._titolo, this._corpo);
 
   set title(String value) {
-    _title = value;
+    _titolo = value;
   }
 
   @override
@@ -36,7 +36,7 @@ class _CustomFutureBuilderState extends State<CustomFutureBuilder> {
         Widget tmpWidget;
         if (snapshot.hasData) {
           if (snapshot.data.isNotEmpty)
-            tmpWidget = widget._corpo;
+            tmpWidget = widget._corpo(snapshot.data);
           else
             tmpWidget = VuotoView();
         } else if (snapshot.hasError) {
@@ -46,7 +46,7 @@ class _CustomFutureBuilderState extends State<CustomFutureBuilder> {
         }
         return Scaffold(
           appBar: CustomAppBar(
-            title: widget._title,
+            title: widget._titolo,
           ),
           body: tmpWidget,
         );

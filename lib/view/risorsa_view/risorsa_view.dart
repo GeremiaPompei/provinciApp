@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:provinciApp/controller/controller.dart';
 import 'package:provinciApp/model/risorsa.dart';
 import 'package:provinciApp/view/costanti/costanti_assets.dart';
-import 'package:provinciApp/utility/stile/colore.dart';
-import 'package:provinciApp/utility/stile/icona.dart';
-import '../DetailedLeafInfoView.dart';
-import '../custom/custom_icon.dart';
+import 'package:provinciApp/view/stile/colore.dart';
+import 'package:provinciApp/view/stile/icona.dart';
+import 'package:provinciApp/view/risorsa_view/dettagiorisorsa_view.dart';
+import 'package:provinciApp/view/costanti/custom_icon.dart';
 
 /// RisorsaView da la vista personalizzata di una risorsa.
 class RisorsaView extends StatefulWidget {
@@ -67,15 +67,9 @@ class _RisorsaViewState extends State<RisorsaView> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => DetailedLeafInfoView(
-                    widget._risorsa.nome,
+                  builder: (context) => DettaglioRisorsaView(
                     widget._risorsa,
                     widget._controller,
-                    widget._risorsa.immagineFile == null
-                        ? null
-                        : Image.file(
-                            widget._risorsa.immagineFile,
-                          ),
                   ),
                 ),
               ).then((value) {

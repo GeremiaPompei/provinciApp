@@ -2,11 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provinciApp/controller/controller.dart';
 import 'package:provinciApp/model/pacchetto.dart';
-import 'package:provinciApp/utility/stile/colore.dart';
-import 'package:provinciApp/utility/stile/icona.dart';
+import 'package:provinciApp/view/stile/colore.dart';
+import 'package:provinciApp/view/stile/icona.dart';
 import 'package:provinciApp/view/costanti/costanti_assets.dart';
-import 'package:provinciApp/view/custom/custom_futurebuilder.dart';
-import 'package:provinciApp/view/custom/custom_icon.dart';
+import 'package:provinciApp/view/costanti/custom_futurebuilder.dart';
+import 'package:provinciApp/view/costanti/custom_icon.dart';
 import 'package:provinciApp/view/risorsa_view/lista_risorse_view.dart';
 
 /// OnItemFoundEsploraView rappresentante l'onItemFound dell'EsploraView.
@@ -45,8 +45,7 @@ class _OnItemFoundEsploraViewState extends State<OnItemFoundEsploraView> {
                   Icona.trovaIcona(widget._pacchetto.nome),
                 ),
                 widget._pacchetto.nome,
-                ListaRisorseView(
-                    widget._controller, widget._controller.ultimeRisorse),
+                (list) => ListaRisorseView(widget._controller, list),
               ),
             ),
           )

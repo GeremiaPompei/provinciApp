@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provinciApp/model/cache/unit_cache.dart';
-import 'package:provinciApp/utility/stile/colore.dart';
-import 'package:provinciApp/utility/stile/stiletesto.dart';
+import 'package:provinciApp/view/stile/colore.dart';
+import 'package:provinciApp/view/stile/stiletesto.dart';
 import 'package:provinciApp/view/costanti/costanti_assets.dart';
-import 'package:provinciApp/view/custom/custom_futurebuilder.dart';
-import 'package:provinciApp/view/custom/custom_icon.dart';
+import 'package:provinciApp/view/costanti/custom_futurebuilder.dart';
+import 'package:provinciApp/view/costanti/custom_icon.dart';
 
 /// UnitCacheView fornisce la vista uìdi una singola UnitCache.
 class UnitCacheView extends StatefulWidget {
@@ -17,7 +17,7 @@ class UnitCacheView extends StatefulWidget {
   Future<dynamic> Function(String name, String url, int image) _funcFuture;
 
   /// Funzione ritornante il widget della UnitCache.
-  Widget Function(String name) _funcWidget;
+  Widget Function() _funcWidget;
 
   UnitCacheView(this._mapEntry, this._funcFuture, this._funcWidget);
 
@@ -67,7 +67,7 @@ class _UnitCacheViewState extends State<UnitCacheView> {
                   widget._funcFuture(widget._mapEntry.value.nome,
                       widget._mapEntry.key, widget._mapEntry.value.icona),
                   widget._mapEntry.value.nome,
-                  widget._funcWidget(widget._mapEntry.value.nome),
+                  (list) => widget._funcWidget(),
                 ),
               ),
             ).then((value) {

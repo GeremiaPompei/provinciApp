@@ -1,6 +1,6 @@
 import 'package:provinciApp/controller/controller.dart';
-import 'package:provinciApp/utility/stile/colore.dart';
-import 'package:provinciApp/utility/stile/icona.dart';
+import 'package:provinciApp/view/stile/colore.dart';
+import 'package:provinciApp/view/stile/icona.dart';
 import 'package:provinciApp/view/costanti/vuoto_view.dart';
 import 'package:provinciApp/view/costanti/loading_view.dart';
 import 'package:provinciApp/view/esplora_view/onitmefound_esplora_view.dart';
@@ -9,7 +9,7 @@ import 'package:flappy_search_bar/flappy_search_bar.dart';
 import 'package:flappy_search_bar/search_bar_style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provinciApp/view/custom/custom_icon.dart';
+import 'package:provinciApp/view/costanti/custom_icon.dart';
 
 /// EsploraView rappresenta la sottovista  contenente le UnitCache e la label
 /// di ricerca.

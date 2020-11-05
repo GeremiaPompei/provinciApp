@@ -21,7 +21,7 @@ class _PlaceHolderEsploraViewState extends State<PlaceHolderEsploraView> {
           List<MapEntry<String, UnitCache>> _list,
           Future<dynamic> Function(String name, String url, int image)
               _funcFuture,
-          Widget Function(String name) _funcWidget,
+          Widget Function() _funcWidget,
           BuildContext context) =>
       _list.isEmpty
           ? Container()
@@ -37,7 +37,7 @@ class _PlaceHolderEsploraViewState extends State<PlaceHolderEsploraView> {
                   .where((element) => element.value.elemento.isNotEmpty)
                   .toList(),
               widget._controller.cercaFromUrl,
-              (name) => ListaPacchettiView(widget._controller),
+              () => ListaPacchettiView(widget._controller),
               context),
           SizedBox(
             height: 20,
@@ -47,7 +47,7 @@ class _PlaceHolderEsploraViewState extends State<PlaceHolderEsploraView> {
                   .where((element) => element.value.elemento.isNotEmpty)
                   .toList(),
               widget._controller.cercaRisorse,
-              (name) => ListaRisorseView(
+              () => ListaRisorseView(
                   widget._controller, widget._controller.ultimeRisorse),
               context),
           SizedBox(
