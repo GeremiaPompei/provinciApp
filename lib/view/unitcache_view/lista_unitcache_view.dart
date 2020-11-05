@@ -11,10 +11,14 @@ class ListaUnitCacheView extends StatefulWidget {
   /// Funzione ritornante il future della UnitCache.
   Future<dynamic> Function(String name, String url, int image) _funcFuture;
 
-  /// Funzione ritornante il widget della UnitCache.
-  Widget Function() _funcWidget;
+  /// Widget della UnitCache.
+  Widget _widget;
 
-  ListaUnitCacheView(this._list, this._funcFuture, this._funcWidget);
+  /// Contesto del padre per l'aggiornamento.
+  BuildContext _contextParent;
+
+  ListaUnitCacheView(
+      this._list, this._funcFuture, this._widget, this._contextParent);
 
   @override
   _ListaUnitCacheViewState createState() => _ListaUnitCacheViewState();
@@ -31,8 +35,8 @@ class _ListaUnitCacheViewState extends State<ListaUnitCacheView> {
       crossAxisCount: 2,
       children: List.generate(
         widget._list.length,
-        (i) => UnitCacheView(
-            widget._list[i], widget._funcFuture, widget._funcWidget),
+        (i) => UnitCacheView(widget._list[i], widget._funcFuture,
+            widget._widget, widget._contextParent),
       ),
     );
   }

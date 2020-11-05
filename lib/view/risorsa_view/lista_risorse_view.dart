@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provinciApp/controller/controller.dart';
 import 'package:provinciApp/model/risorsa.dart';
+import 'package:provinciApp/view/costanti/vuoto_view.dart';
 import 'package:provinciApp/view/stile/colore.dart';
 import 'package:provinciApp/view/risorsa_view/risorsa_view.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -37,14 +38,18 @@ class _ListaRisorseViewState extends State<ListaRisorseView> {
         header: ClassicHeader(),
         controller: _refreshController,
         onRefresh: () => widget._update(_refreshController),
-        child: ListView.builder(
-          scrollDirection: Axis.vertical,
-          shrinkWrap: true,
-          padding: const EdgeInsets.all(8),
-          itemCount: widget._risorse.length,
-          itemBuilder: (context, index) =>
-              RisorsaView(widget._controller, widget._risorse[index]),
-        ),
+        child: widget._risorse.isEmpty
+            ? VuotoView()
+            : ListView.builder(
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                padding: const EdgeInsets.all(8),
+                itemCount: widget._risorse.length,
+                itemBuilder: (context, index) => RisorsaView(
+                  widget._controller,
+                  widget._risorse[index],
+                ),
+              ),
       ),
     );
   }

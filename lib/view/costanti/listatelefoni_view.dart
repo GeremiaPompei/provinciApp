@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:provinciApp/view/stile/colore.dart';
 import 'package:provinciApp/view/stile/icona.dart';
@@ -30,14 +31,17 @@ class _ListaTelefoniViewState extends State<ListaTelefoniView> {
           await FlutterPhoneDirectCaller.callNumber(
               '${widget._telefoni[index]}');
         },
-        child: Row(
-          children: <Widget>[
-            CustomIcon(
-              Icona.telefono,
-              Colore.scuro,
-            ),
-            Text('${widget._telefoni[index]}')
-          ],
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: <Widget>[
+              CustomIcon(
+                Icona.telefono,
+                Colore.scuro,
+              ),
+              Text('${widget._telefoni[index]}')
+            ],
+          ),
         ),
       ),
     );

@@ -3,7 +3,7 @@ import 'package:provinciApp/model/risorsa.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provinciApp/view/costanti/listatelefoni_view.dart';
-import 'package:provinciApp/view/costanti/listinfo_view.dart';
+import 'package:provinciApp/view/costanti/listainfo_view.dart';
 import 'package:provinciApp/view/costanti/mappa_view.dart';
 import 'package:provinciApp/view/stile/colore.dart';
 import 'package:provinciApp/view/stile/stiletesto.dart';
@@ -69,7 +69,7 @@ class _DettaglioRisorsaViewState extends State<DettaglioRisorsaView> {
                   )),
                 if (widget._risorsa.info.isNotEmpty)
                   _addPadding(ContainerBorderRadiusView(
-                    ListInfoView(widget._risorsa.info),
+                    ListaInfoView(widget._risorsa.info),
                     titolo: 'Info',
                   )),
                 if (widget._risorsa.telefoni != null)

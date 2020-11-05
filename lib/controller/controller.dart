@@ -89,7 +89,8 @@ class Controller {
     for (MapEntry<String, dynamic> entry in this._cache.risorse.entries) {
       if (!entry.key.contains(CostantiUnitCache.idVuoto)) {
         entry.value.elemento = await _httpRequest.cercaRisorsa(entry.key);
-        for (Risorsa leaf in entry.value.elemento) await _salvaImmagine(leaf);
+        for (Risorsa risorsa in entry.value.elemento)
+          await _salvaImmagine(risorsa);
       }
     }
     this._cache.keyUltimeRisorse = tmpCache.keyUltimeRisorse;
@@ -98,17 +99,21 @@ class Controller {
 
   /// Metodo utile per inizializzare le unità di cache della cache con dati
   /// vuoti immessi per la sostituzione.
-  void _initUnitCache(int countNodes, int countLeafs) {
-    for (int i = countNodes - 1; i >= 0; i--)
+  void _initUnitCache(int countPacchetti, int countRisorse) {
+    for (int i = countPacchetti - 1; i >= 0; i--) {
       this._cache.pacchetti[CostantiUnitCache.idVuoto + ' $i'] = UnitCache([],
           DateTime.now().subtract(Duration(days: 5)),
           CostantiUnitCache.nomeVuoto,
           null);
-    for (int i = 0; i < countLeafs; i++)
+      this._cache.keyUltimiPacchetti = CostantiUnitCache.idVuoto + ' $i';
+    }
+    for (int i = countRisorse - 1; i >= 0; i--) {
       this._cache.risorse[CostantiUnitCache.idVuoto + ' $i'] = UnitCache([],
           DateTime.now().subtract(Duration(days: 5)),
           CostantiUnitCache.nomeVuoto,
           null);
+      this._cache.keyUltimeRisorse = CostantiUnitCache.idVuoto + ' $i';
+    }
   }
 
   /// Metodo utile per inizializzare i comuni.
