@@ -1,6 +1,6 @@
 import 'package:provinciApp/model/risorsa.dart';
 import 'package:provinciApp/model/pacchetto.dart';
-import 'unit_cache.dart';
+import 'package:provinciApp/model/cache/unit_cache.dart';
 
 /// Una Cache ha la responsabilità tener traccia e gestire la lista delle categorie,
 /// la lista dei comuni, la lista delle risorse offline e le ultime ricerche sia

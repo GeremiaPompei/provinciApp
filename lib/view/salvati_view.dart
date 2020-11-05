@@ -1,7 +1,6 @@
 import 'package:provinciApp/controller/controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provinciApp/view/costanti/vuoto_view.dart';
 import 'package:provinciApp/view/stile/colore.dart';
 import 'package:provinciApp/view/stile/icona.dart';
 import 'package:provinciApp/view/risorsa_view/lista_risorse_view.dart';

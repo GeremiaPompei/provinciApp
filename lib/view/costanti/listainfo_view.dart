@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
+import 'package:provinciApp/view/stile/stiletesto.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 /// ListaInfoView offre una vista di una lista di informazioni.
@@ -25,8 +26,10 @@ class _ListaInfoViewState extends State<ListaInfoView> {
       itemBuilder: (context, index) => ListTile(
         title: Text(
           widget._info.keys.toList()[index],
+          style: StileTesto.testo,
         ),
         subtitle: Linkify(
+          style: StileTesto.corpo,
           text: '${widget._info.values.toList()[index]}',
           onOpen: (LinkableElement link) async {
             if (await canLaunch(widget._info.values.toList()[index]))

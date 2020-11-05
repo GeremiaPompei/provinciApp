@@ -64,6 +64,7 @@ class _DettaglioRisorsaViewState extends State<DettaglioRisorsaView> {
                   _addPadding(ContainerBorderRadiusView(
                     Text(
                       widget._risorsa.descrizione,
+                      style: StileTesto.testo,
                       textAlign: TextAlign.center,
                     ),
                   )),

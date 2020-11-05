@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provinciApp/view/stile/colore.dart';
 import 'package:provinciApp/view/stile/icona.dart';
 import 'package:provinciApp/view/stile/stiletesto.dart';
-
-import 'custom_icon.dart';
+import 'package:provinciApp/view/costanti/custom_icon.dart';
 
 /// CustomAppBar fornisce un'AppBar personalizzata per provinciApp che facilita
 /// il suo uso.

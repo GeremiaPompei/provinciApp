@@ -6,7 +6,7 @@ import 'package:provinciApp/view/esplora_view/esplora_view.dart';
 import 'package:provinciApp/view/comune_view/lista_comuni_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'appbar_main_view.dart';
+import 'package:provinciApp/view/main_view/appbar_main_view.dart';
 
 /// Widget della vista principale dove risiedono le tre sottoviste principali
 /// (comuni, esplora e categorie).

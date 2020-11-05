@@ -3,7 +3,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:provinciApp/view/stile/colore.dart';
 import 'package:provinciApp/view/stile/icona.dart';
 import 'package:latlong/latlong.dart';
-import 'custom_icon.dart';
+import 'package:provinciApp/view/costanti/custom_icon.dart';
 
 /// MappaView offre la vista di una certa area geografica in una mappa.
 class MappaView extends StatefulWidget {

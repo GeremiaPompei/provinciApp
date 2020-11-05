@@ -5,7 +5,7 @@ import 'package:map_launcher/map_launcher.dart' as mapLauncher;
 import 'package:provinciApp/view/stile/colore.dart';
 import 'package:provinciApp/view/stile/icona.dart';
 import 'package:provinciApp/view/costanti/custom_icon.dart';
-import 'menumappa_view.dart';
+import 'package:provinciApp/view/costanti/menumappa_view.dart';
 
 /// IconButtonPosizioneView offre la vista di un bottone utile per visualizzare
 /// una posizione all'interno di un'applicazione mappe esterna.

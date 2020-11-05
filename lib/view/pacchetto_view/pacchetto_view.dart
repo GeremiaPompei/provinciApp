@@ -8,6 +8,7 @@ import 'package:provinciApp/view/stile/icona.dart';
 import 'package:provinciApp/view/costanti/custom_futurebuilder.dart';
 import 'package:provinciApp/view/costanti/custom_icon.dart';
 import 'package:provinciApp/view/risorsa_view/lista_risorse_view.dart';
+import 'package:provinciApp/view/stile/stiletesto.dart';
 
 /// PacchettoView da la vista personalizzata di un Pacchetto.
 class PacchettoView extends StatefulWidget {
@@ -28,10 +29,12 @@ class _PacchettoViewState extends State<PacchettoView> {
     return ListTile(
       title: Text(
         widget._pacchetto.nome,
+        style: StileTesto.corpo,
         maxLines: 2,
       ),
       subtitle: Text(
         widget._pacchetto.descrizione.toString(),
+        style: StileTesto.testo,
         maxLines: 2,
       ),
       leading: Stack(alignment: Alignment.center, children: [

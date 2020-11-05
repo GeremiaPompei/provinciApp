@@ -4,7 +4,8 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:provinciApp/view/stile/colore.dart';
 import 'package:provinciApp/view/stile/icona.dart';
-import 'custom_icon.dart';
+import 'package:provinciApp/view/stile/stiletesto.dart';
+import 'package:provinciApp/view/costanti/custom_icon.dart';
 
 /// ListaTelefoniView offre la vista di un elenco di numeri di telefono da poter
 /// chiamare.
@@ -39,7 +40,10 @@ class _ListaTelefoniViewState extends State<ListaTelefoniView> {
                 Icona.telefono,
                 Colore.scuro,
               ),
-              Text('${widget._telefoni[index]}')
+              Text(
+                '${widget._telefoni[index]}',
+                style: StileTesto.corpo,
+              )
             ],
           ),
         ),

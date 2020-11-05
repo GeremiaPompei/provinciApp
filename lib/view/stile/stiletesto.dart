@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'colore.dart';
+import 'package:provinciApp/view/stile/colore.dart';
 
 /// StileTesto è la classe contenente gli stili di testo utilizzati in
 /// provinciApp.
@@ -33,6 +33,14 @@ class StileTesto {
     fontFamily: 'Poppins',
     fontWeight: FontWeight.w400,
     fontSize: 17,
+    color: Colore.scuro,
+  );
+
+  /// Stile di testo utilizzato per il testo.
+  static TextStyle testo = TextStyle(
+    fontFamily: 'Poppins',
+    fontWeight: FontWeight.w300,
+    fontSize: 15,
     color: Colore.scuro,
   );
 }

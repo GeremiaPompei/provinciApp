@@ -7,6 +7,7 @@ import 'package:provinciApp/view/stile/colore.dart';
 import 'package:provinciApp/view/stile/icona.dart';
 import 'package:provinciApp/view/risorsa_view/dettagiorisorsa_view.dart';
 import 'package:provinciApp/view/costanti/custom_icon.dart';
+import 'package:provinciApp/view/stile/stiletesto.dart';
 
 /// RisorsaView da la vista personalizzata di una risorsa.
 class RisorsaView extends StatefulWidget {
@@ -55,12 +56,14 @@ class _RisorsaViewState extends State<RisorsaView> {
             ),
             title: Text(
               widget._risorsa.nome,
+              style: StileTesto.corpo,
               maxLines: 2,
             ),
             subtitle: widget._risorsa.descrizione == null
                 ? Text('')
                 : Text(
                     widget._risorsa.descrizione,
+                    style: StileTesto.testo,
                     maxLines: 2,
                   ),
             onTap: () {

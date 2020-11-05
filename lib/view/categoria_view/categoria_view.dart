@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provinciApp/controller/controller.dart';
 import 'package:provinciApp/model/pacchetto.dart';
 import 'package:provinciApp/view/costanti/costanti_assets.dart';
+import 'package:provinciApp/view/stile/colore.dart';
 import 'package:provinciApp/view/stile/icona.dart';
 import 'package:provinciApp/view/stile/stiletesto.dart';
 import 'package:provinciApp/view/costanti/custom_futurebuilder.dart';
@@ -40,6 +41,7 @@ class _CategoriaViewState extends State<CategoriaView> {
       new Container(
         margin: new EdgeInsets.only(left: 43.5),
         child: Card(
+          color: Colore.chiaro,
           child: widget._categoria == null
               ? null
               : FlatButton(
@@ -58,9 +60,11 @@ class _CategoriaViewState extends State<CategoriaView> {
                       ),
                     );
                   },
-                  child: Center(
+                  child: Container(
+                    margin: new EdgeInsets.only(left: 30),
+                    alignment: Alignment.center,
                     child: Text(
-                      widget._categoria.nome.toString(),
+                      widget._categoria.nome,
                       style: StileTesto.corpo,
                     ),
                   ),
@@ -69,9 +73,10 @@ class _CategoriaViewState extends State<CategoriaView> {
       ),
       if (widget._categoria != null)
         new Container(
-            margin: new EdgeInsets.symmetric(vertical: 10.0),
-            alignment: FractionalOffset.centerLeft,
-            child: _immagine(widget._categoria.immagineUrl)),
+          margin: new EdgeInsets.symmetric(vertical: 12.0),
+          alignment: FractionalOffset.centerLeft,
+          child: _immagine(widget._categoria.immagineUrl),
+        ),
     ]);
   }
 }
