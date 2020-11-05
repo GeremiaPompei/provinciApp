@@ -13,11 +13,11 @@ class _OfflineViewState extends State<OfflineView> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colore.chiaro,
+      color: Colore.sfondo,
       child: Center(
         child: RaisedButton(
-            child: Text('Offline', style: StileTesto.titoloPrimario),
-            color: Colore.sfondo,
+            child: Text('Offline', style: StileTesto.titoloChiaro),
+            color: Colore.primario,
             elevation: 6,
             onPressed: () {
               setState(() {

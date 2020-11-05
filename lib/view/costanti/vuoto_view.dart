@@ -14,7 +14,7 @@ class _VuotoViewState extends State<VuotoView> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colore.chiaro,
+      color: Colore.sfondo,
       alignment: Alignment.center,
       child: Text(
         'Vuoto',

@@ -26,7 +26,7 @@ class _PosizioneViewState extends State<PosizioneView> {
     _customFutureBuilder = CustomFutureBuilder(
       _cercaFromPosizione(),
       'Posizione',
-      (list) => ListaPacchettiView(list),
+      (list) => ListaPacchettiView(widget._controller),
     );
   }
 

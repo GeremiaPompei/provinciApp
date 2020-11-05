@@ -9,7 +9,7 @@ class LoadingView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colore.chiaro,
+      color: Colore.sfondo,
       alignment: Alignment.center,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
