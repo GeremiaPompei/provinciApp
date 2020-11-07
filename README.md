@@ -1,3 +1,4 @@
+<div>
 <p>  
 	<font color="blu"> 
 		 <h1 align="center">provinciApp</h1>
@@ -22,7 +23,7 @@
 
 ## Introduzione
 
-<h4 align = "left"> Cos'è?</h1>
+<h4 align = "left"> Cos'è?</h4>
 
 ```
 provinciApp è la nostra idea di applicazione per la provincia di Macerata
