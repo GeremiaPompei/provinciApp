@@ -33,7 +33,7 @@ class _AppBarMainViewState extends State<AppBarMainView> {
     return CustomAppBar(
       primaSchermata: true,
       sfondoChiaro: true,
-      title: widget._title,
+      titolo: widget._title,
       actions: [
         IconButton(
             icon: CustomIcon(

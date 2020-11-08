@@ -43,7 +43,7 @@ class _CategoriaViewState extends State<CategoriaView> {
         child: Card(
           color: Colore.chiaro,
           child: widget._categoria == null
-              ? null
+              ? Container()
               : FlatButton(
                   onPressed: () {
                     Navigator.push(

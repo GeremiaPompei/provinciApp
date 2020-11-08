@@ -46,7 +46,7 @@ class _CustomFutureBuilderState extends State<CustomFutureBuilder> {
         }
         return Scaffold(
           appBar: CustomAppBar(
-            title: widget._titolo,
+            titolo: widget._titolo,
           ),
           body: tmpWidget,
         );

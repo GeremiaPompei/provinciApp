@@ -16,7 +16,7 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
   bool _primaSchermata = false;
 
   /// Titolo dell'AppBar.
-  String _title;
+  String _titolo;
 
   /// Lista di widget da aggiungere all'AppBar.
   List<Widget> _actions;
@@ -24,11 +24,11 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
   CustomAppBar(
       {bool sfondoChiaro,
       bool primaSchermata,
-      String title,
+      String titolo,
       List<Widget> actions}) {
     this._sfondoChiaro = sfondoChiaro == null ? false : sfondoChiaro;
     this._primaSchermata = primaSchermata == null ? false : primaSchermata;
-    this._title = title;
+    this._titolo = titolo == null ? '' : titolo;
     this._actions = actions;
   }
 
@@ -73,7 +73,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
       brightness: _brightness,
       backgroundColor: _coloreSfondo,
       title: Text(
-        widget._title,
+        widget._titolo,
         style: _stileScritta,
       ),
       actions: widget._actions,

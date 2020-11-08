@@ -17,12 +17,12 @@ class ListaPacchettiView extends StatefulWidget {
 class _ListaPacchettiViewState extends State<ListaPacchettiView> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colore.chiaro,
-      child: ListView.separated(
+    return Scaffold(
+      backgroundColor: Colore.chiaro,
+      body: ListView.separated(
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
-        padding: const EdgeInsets.all(8),
+        padding: const EdgeInsets.fromLTRB(8, 8, 8, 28),
         itemCount: widget._controller.ultimiPacchetti.length,
         itemBuilder: (context, index) => PacchettoView(
             widget._controller, widget._controller.ultimiPacchetti[index]),

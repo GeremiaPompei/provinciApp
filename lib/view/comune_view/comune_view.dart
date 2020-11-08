@@ -40,7 +40,7 @@ class _ComuneViewState extends State<ComuneView> {
     return Card(
       color: Colore.chiaro,
       child: widget._comune == null
-          ? null
+          ? Container()
           : Stack(children: [
               FlatButton(
                 child: Column(

@@ -23,7 +23,7 @@ class _SalvatiViewState extends State<SalvatiView> {
     return Scaffold(
       appBar: CustomAppBar(
         primaSchermata: true,
-        title: 'Offline',
+        titolo: 'Offline',
         actions: [
           IconButton(
             icon: CustomIcon(Icona.online, Colore.chiaro),

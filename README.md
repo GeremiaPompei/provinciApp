@@ -20,7 +20,6 @@
 </div>
 
 
-
 ## Introduzione
 
 <h4 align = "left"> Cos'è?</h4>
@@ -29,7 +28,7 @@
 provinciApp è la nostra idea di applicazione per la provincia di Macerata
 secondo il concorso *Un'app per la provincia di Macerata.
 Il progetto nasce da tre giovani studenti con molta voglia di impegnarsi
-e mettersiù in gioco.
+e mettersi in gioco.
 Lo sviluppo dell'applicazione nasce dalla base dei requisiti richiesti dal
 concorso, arricchiti dalle nostre idee e competenze al fine di creare qualcosa 
 di  articolato ma intuitivo, tale da essere fruibile da ogni fascia di età. 

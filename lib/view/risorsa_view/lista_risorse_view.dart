@@ -43,7 +43,7 @@ class _ListaRisorseViewState extends State<ListaRisorseView> {
             : ListView.builder(
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
-                padding: const EdgeInsets.all(8),
+                padding: const EdgeInsets.fromLTRB(8, 8, 8, 28),
                 itemCount: widget._risorse.length,
                 itemBuilder: (context, index) => RisorsaView(
                   widget._controller,

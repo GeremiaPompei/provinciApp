@@ -12,12 +12,12 @@ class HttpRequest {
   /// pacchetti dato un url.
   Future<List<Pacchetto>> cercaPacchetto(String url) async {
     Map<String, dynamic> map = await _getResult(url);
-    List<Pacchetto> nodes = [];
+    List<Pacchetto> pacchetti = [];
     for (Map value in map['results']) {
-      nodes.add(Pacchetto(value['title'], value['organization']['title'],
+      pacchetti.add(Pacchetto(value['title'], value['organization']['title'],
           value['resources'][1]['url']));
     }
-    return nodes;
+    return pacchetti;
   }
 
   /// Metodo capace di fornire grazie ad una chiamata asincrona una lista di

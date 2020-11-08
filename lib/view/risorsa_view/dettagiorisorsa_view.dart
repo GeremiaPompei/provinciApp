@@ -50,34 +50,43 @@ class _DettaglioRisorsaViewState extends State<DettaglioRisorsaView> {
             SliverList(
               delegate: SliverChildListDelegate.fixed([
                 if (widget._risorsa.immagineFile != null)
-                  _addPadding(ImmagineView(
-                    Image.file(
-                      widget._risorsa.immagineFile,
+                  _addPadding(
+                    ImmagineView(
+                      Image.file(widget._risorsa.immagineFile),
+                      widget._risorsa.nome,
                     ),
-                  )),
-                _addPadding(Text(
-                  widget._risorsa.nome,
-                  style: StileTesto.titoloChiaro,
-                  textAlign: TextAlign.center,
-                )),
+                  ),
+                _addPadding(
+                  Text(
+                    widget._risorsa.nome,
+                    style: StileTesto.titoloChiaro,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
                 if (widget._risorsa.descrizione != null)
-                  _addPadding(ContainerBorderRadiusView(
-                    Text(
-                      widget._risorsa.descrizione,
-                      style: StileTesto.testo,
-                      textAlign: TextAlign.center,
+                  _addPadding(
+                    ContainerBorderRadiusView(
+                      Text(
+                        widget._risorsa.descrizione,
+                        style: StileTesto.testo,
+                        textAlign: TextAlign.center,
+                      ),
                     ),
-                  )),
+                  ),
                 if (widget._risorsa.info.isNotEmpty)
-                  _addPadding(ContainerBorderRadiusView(
-                    ListaInfoView(widget._risorsa.info),
-                    titolo: 'Info',
-                  )),
+                  _addPadding(
+                    ContainerBorderRadiusView(
+                      ListaInfoView(widget._risorsa.info),
+                      titolo: 'Info',
+                    ),
+                  ),
                 if (widget._risorsa.telefoni != null)
-                  _addPadding(ContainerBorderRadiusView(
-                    ListaTelefoniView(widget._risorsa.telefoni),
-                    titolo: 'Telefono',
-                  )),
+                  _addPadding(
+                    ContainerBorderRadiusView(
+                      ListaTelefoniView(widget._risorsa.telefoni),
+                      titolo: 'Telefono',
+                    ),
+                  ),
                 if (widget._risorsa.posizione != null)
                   _addPadding(MappaView(widget._risorsa.posizione)),
                 _addPadding(
