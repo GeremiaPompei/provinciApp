@@ -18,7 +18,10 @@ class AppBarMainView extends StatefulWidget implements PreferredSizeWidget {
   /// Titolo della sottoView.
   String _title;
 
-  AppBarMainView(this._controller, this._title);
+  /// Contesto del padre utile per l'aggiornamento.
+  BuildContext _parentContext;
+
+  AppBarMainView(this._controller, this._title, this._parentContext);
 
   @override
   _AppBarMainViewState createState() => _AppBarMainViewState();
@@ -59,6 +62,7 @@ class _AppBarMainViewState extends State<AppBarMainView> {
               ).then((value) {
                 setState(() {
                   (context as Element).reassemble();
+                  (widget._parentContext as Element).reassemble();
                 });
               });
             });

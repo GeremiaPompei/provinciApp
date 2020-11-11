@@ -47,7 +47,8 @@ class _MainViewState extends State<MainView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colore.sfondo,
-      appBar: AppBarMainView(widget._controller, _widgets[widget._index][0]),
+      appBar: AppBarMainView(
+          widget._controller, _widgets[widget._index][0], context),
       body: _widgets[widget._index][1],
       bottomNavigationBar:
           BottomBarMainView(_selezionaSottoView, widget._index),

@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
@@ -11,7 +12,7 @@ class ImmagineView extends StatefulWidget {
   String _nome;
 
   /// Immagine da mostrare.
-  Image _immagine;
+  File _immagine;
 
   ImmagineView(this._immagine, this._nome);
 
@@ -22,6 +23,7 @@ class ImmagineView extends StatefulWidget {
 class _ImmagineViewState extends State<ImmagineView> {
   @override
   Widget build(BuildContext context) {
+    ImageProvider _image = Image.file(widget._immagine).image;
     return FlatButton(
       child: Container(
         width: 150.0,
@@ -30,7 +32,7 @@ class _ImmagineViewState extends State<ImmagineView> {
           shape: BoxShape.circle,
           image: new DecorationImage(
             fit: BoxFit.fill,
-            image: widget._immagine.image,
+            image: _image,
           ),
         ),
       ),
@@ -46,7 +48,7 @@ class _ImmagineViewState extends State<ImmagineView> {
                 color: Colore.scuro,
                 alignment: Alignment.center,
                 child: PhotoView(
-                  imageProvider: widget._immagine.image,
+                  imageProvider: _image,
                 ),
               ),
             ),

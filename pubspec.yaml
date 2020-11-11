@@ -32,7 +32,7 @@ dependencies:
   flutter_html: 0.9.7
   path_provider: ^1.2.0
   flappy_search_bar: 1.4.1
-  share: ^0.6.3+1
+  share: ^0.6.5+4
   url_launcher: ^5.5.0
   flutter_phone_direct_caller: ^1.0.1
   pull_to_refresh: ^1.6.0

@@ -52,7 +52,7 @@ class _DettaglioRisorsaViewState extends State<DettaglioRisorsaView> {
                 if (widget._risorsa.immagineFile != null)
                   _addPadding(
                     ImmagineView(
-                      Image.file(widget._risorsa.immagineFile),
+                      widget._risorsa.immagineFile,
                       widget._risorsa.nome,
                     ),
                   ),
