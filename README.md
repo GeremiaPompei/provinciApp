@@ -188,9 +188,9 @@ Una volta condiviso l'evento, l'interazione sarà possibile attraverso un click 
 #### Connessione dati
 [9]:https://github.com/GeremiaPompei/mc/blob/master/README.md#connessione-dati
 .... da completare ...
+<a href="#introduzione"> <img style="float: right;" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Home.png" width="15" height="15" Hspace="4"></a>&nbsp
 
-[<img style="float: right;" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Home.png" width="15" height="15" Hspace="4">](https://github.com/GeremiaPompei/provinciApp#provinciapp)
-[<img src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/FrecciaBack.png" width="15" height="15">](https://github.com/GeremiaPompei/provinciApp#struttura)
+<a href="#specifiche"><img src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/FrecciaBack.png" width="15" height="15"></a>&nbsp
 
 ## Autori
 - [*Geremia Pompei*](https://github.com/GeremiaPompei)
