@@ -9,10 +9,10 @@
   <img width="260" height="400" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/IMG_E0052%5B1%5D.JPG">
 
 <p align="center">
-<a href="#introduzione">Introduzione</a>&nbsp•
-<a href="#struttura">Struttura</a>&nbsp•
-<a href="#utilizzo">Utilizzo</a>&nbsp•
-<a href="#specifiche">Specifiche</a>&nbsp•
+<a href="#introduzione">Introduzione</a>•
+<a href="#struttura">Struttura</a>•
+<a href="#utilizzo">Utilizzo</a>•
+<a href="#specifiche">Specifiche</a>•
 <a href="#autori">Autori</a>
 </p>
 <br>
@@ -188,9 +188,9 @@ Una volta condiviso l'evento, l'interazione sarà possibile attraverso un click 
 #### Connessione dati
 [9]:https://github.com/GeremiaPompei/mc/blob/master/README.md#connessione-dati
 .... da completare ...
-<a href="#introduzione"> <img style="float: right;" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Home.png" width="15" height="15" Hspace="4"></a>&nbsp
+<a href="#introduzione"> <img style="float: right;" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Home.png" width="15" height="15" Hspace="4"></a>
 
-<a href="#specifiche"><img src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/FrecciaBack.png" width="15" height="15"></a>&nbsp
+<a href="#specifiche"><img src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/FrecciaBack.png" width="15" height="15"></a>
 
 ## Autori
 - [*Geremia Pompei*](https://github.com/GeremiaPompei)
