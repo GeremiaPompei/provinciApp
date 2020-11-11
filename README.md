@@ -9,10 +9,10 @@
   <img width="260" height="400" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/IMG_E0052%5B1%5D.JPG">
 
 <p align="center">
-<a href="#introduzione">Introduzione</a>•
-<a href="#struttura">Struttura</a>•
-<a href="#utilizzo">Utilizzo</a>•
-<a href="#specifiche">Specifiche</a>•
+<a href="#introduzione">Introduzione</a>&nbsp•
+<a href="#struttura">Struttura</a>&nbsp•
+<a href="#utilizzo">Utilizzo</a>&nbsp•
+<a href="#specifiche">Specifiche</a>&nbsp•
 <a href="#autori">Autori</a>
 </p>
 <br>
