@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:provinciApp/controller/controller.dart';
 import 'package:provinciApp/view/pacchetto_view/lista_pacchetti_view.dart';
 import 'package:provinciApp/view/risorsa_view/lista_risorse_view.dart';
+import 'package:provinciApp/view/stile/stiletesto.dart';
 import 'package:provinciApp/view/unitcache_view/lista_unitcache_view.dart';
 
 /// PlaceHolderEsploraView rappresentante il placeHolder dell'EsploraView.
@@ -28,7 +29,8 @@ class _PlaceHolderEsploraViewState extends State<PlaceHolderEsploraView> {
                     .toList(),
                 widget._controller.cercaFromUrl,
                 ListaPacchettiView(widget._controller),
-                context),
+                context,
+                'Pacchetti'),
             ListaUnitCacheView(
                 widget._controller.risorse
                     .where((element) => element.value.elemento.isNotEmpty)
@@ -36,7 +38,8 @@ class _PlaceHolderEsploraViewState extends State<PlaceHolderEsploraView> {
                 widget._controller.cercaRisorse,
                 ListaRisorseView(
                     widget._controller, widget._controller.ultimeRisorse),
-                context),
+                context,
+                'Risorse'),
           ],
         ),
       ),
