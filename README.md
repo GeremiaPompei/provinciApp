@@ -26,7 +26,7 @@
 
 ```
 provinciApp è la nostra idea di applicazione per la provincia di Macerata
-secondo il concorso *Un'app per la provincia di Macerata.
+secondo il concorso "Un'app per la provincia di Macerata".
 Il progetto nasce da tre giovani studenti con molta voglia di impegnarsi
 e mettersi in gioco.
 Lo sviluppo dell'applicazione nasce dalla base dei requisiti richiesti dal
@@ -90,25 +90,7 @@ Per evidenziare le caratteristiche della nostra applicazione è fondamentale dis
 
 
 #### Offline:
-- [lista di elementi scaricati](https://github.com/GeremiaPompei/mc/blob/master/README.md#lista-di-elementi-scaricati)
-
-
-#### *Esplora*
-
-[<img style="float: right;" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Home.png" width="15" height="15" Hspace="4">](https://github.com/GeremiaPompei/provinciApp#provinciapp)
-[<img src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/FrecciaBack.png" width="15" height="15">](https://github.com/GeremiaPompei/provinciApp#struttura)
-
-Border="0"
-
-
-#### *Comuni*
-
-
-#### *Categorie*
-
-
-
-#### *Lista di elementi scaricati*
+- [Risorse Offline](https://github.com/GeremiaPompei/mc/blob/master/README.md#lista-di-elementi-scaricati)
 
 
 
@@ -138,73 +120,77 @@ Se non è presente connessione ad internet sarà la stessa applicazione a forzar
 
 Cliccando sul pulsante 'Offline' si accederà alla schermata offline ([qui](https://github.com/GeremiaPompei/mc/blob/master/README.md#lista-di-elementi-scaricati)). 
 
+#### *Esplora*
+
+[<img style="float: right;" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Home.png" width="15" height="15" Hspace="4">](https://github.com/GeremiaPompei/provinciApp#provinciapp)
+[<img src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/FrecciaBack.png" width="15" height="15">](https://github.com/GeremiaPompei/provinciApp#struttura)
+
+#### *Comuni*
+#### *Categorie*
+#### *Lista di elementi scaricati*
+
+
 
 ## Specifiche
 
 
 #### Api
-
+[https://ckan.org/portfolio/api/](https://ckan.org/portfolio/api/ "https://ckan.org/portfolio/api/")
+[<img style="float: right;" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Home.png" width="15" height="15" Hspace="4">](https://github.com/GeremiaPompei/provinciApp#provinciapp)
+[<img src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/FrecciaBack.png" width="15" height="15">](https://github.com/GeremiaPompei/provinciApp#struttura)
 #### Flutter
 [1]:https://github.com/GeremiaPompei/mc/blob/master/README.md#flutter
 Lo sviluppo dell'applicazione è stato effettuato tramite l'utilizzo di **Flutter**, un framework open-source creato da Google per la creazione di interfacce native per iOS e Android.
-**Dart** è il linguaggio che abbiamo scelto per il progetto, nato all'interno dell'IDE Intellij e simulato con Android Studio e ..
-
-[Torna ad Obiettivi](https://github.com/GeremiaPompei/mc/blob/master/README.md#obiettivi-del-concorso)
-
+**Dart** è il linguaggio che abbiamo scelto per il progetto, nato all'interno dell'IDE Intellij e simulato con Android Studio e XCode.
+[<img style="float: right;" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Home.png" width="15" height="15" Hspace="4">](https://github.com/GeremiaPompei/provinciApp#provinciapp)
+[<img src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/FrecciaBack.png" width="15" height="15">](https://github.com/GeremiaPompei/provinciApp#struttura)
 #### Layout
 [2]:https://github.com/GeremiaPompei/mc/blob/master/README.md#layout
 Il linguaggio utilizzato ci ha permesso di creare un layout molto versatile e moderno, sfruttando quelli che sono i colori della provincia di Macerata, inoltre i dati organizzati secondo le informazioni del database sono stati organizzati in modo tale rendere semplice la fruizione degli stessi.
-
-[Torna ad Obiettivi](https://github.com/GeremiaPompei/mc/blob/master/README.md#obiettivi-del-concorso)
+[<img style="float: right;" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Home.png" width="15" height="15" Hspace="4">](https://github.com/GeremiaPompei/provinciApp#provinciapp)
+[<img src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/FrecciaBack.png" width="15" height="15">](https://github.com/GeremiaPompei/provinciApp#struttura)
 
 #### Cache
 [3]:https://github.com/GeremiaPompei/mc/blob/master/README.md#cache
 Il sistema di caching impostato permette di accedere con molta più facilità alle ultime ricerche effettuate: in questo modo è possibile accedere alle informazioni con velocità maggiore e senza la necessità di una connessione dati attiva.
-
-[Torna ad Obiettivi](https://github.com/GeremiaPompei/mc/blob/master/README.md#obiettivi-del-concorso)
+[<img style="float: right;" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Home.png" width="15" height="15" Hspace="4">](https://github.com/GeremiaPompei/provinciApp#provinciapp)
+[<img src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/FrecciaBack.png" width="15" height="15">](https://github.com/GeremiaPompei/provinciApp#struttura)
 
 #### Dimensione
 [4]:https://github.com/GeremiaPompei/mc/blob/master/README.md#dimensione
-La dimensione dell'applicazione è di circa 120Mb, ad indicare come, sebbene essa possegga una grande quantitità di dati frubili dall'utente, sia molto leggera e facilmente scaricabile con la sola connessione dati del proprio smartphone.
-
-[Torna ad Obiettivi](https://github.com/GeremiaPompei/mc/blob/master/README.md#obiettivi-del-concorso)
-
+La dimensione dell'applicazione è di circa 21Mb, ad indicare come, sebbene essa possegga una grande quantitità di dati frubili dall'utente, sia molto leggera e facilmente scaricabile con la sola connessione dati del proprio smartphone.
+[<img style="float: right;" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Home.png" width="15" height="15" Hspace="4">](https://github.com/GeremiaPompei/provinciApp#provinciapp)
+[<img src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/FrecciaBack.png" width="15" height="15">](https://github.com/GeremiaPompei/provinciApp#struttura)
 #### Offline
 [5]:https://github.com/GeremiaPompei/mc/blob/master/README.md#offline
 All'interno dell'applicazione è possibile scaricare alcuni elementi ai quali è poi possibile accedere senza l'utilizzo della connessione ad internet. I dati salvati possono essere reperibili nell'apposita sezione alla quale è possibile accedere tramite il pulsante 'Offline' in alto a destra.
 
-[Cliccare qui per il funzionamento](https://github.com/GeremiaPompei/mc/blob/master/README.md#introduzione-allutilizzo-dellapplicazione)
-
-[Torna ad Obiettivi](https://github.com/GeremiaPompei/mc/blob/master/README.md#obiettivi-del-concorso)
-
+[<img style="float: right;" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Home.png" width="15" height="15" Hspace="4">](https://github.com/GeremiaPompei/provinciApp#provinciapp)
+[<img src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/FrecciaBack.png" width="15" height="15">](https://github.com/GeremiaPompei/provinciApp#struttura)
 #### Database
 [6]:https://github.com/GeremiaPompei/mc/blob/master/README.md#database
 L'organizzazione dei dati segue il modello del database fornito, inoltre la struttura del modeling all'interno del progetto rende facilmente possibile l'aggiunta di nuove informazioni, le quali verranno mostrate poi sul proprio smartphone.
-
-[Torna ad Obiettivi](https://github.com/GeremiaPompei/mc/blob/master/README.md#obiettivi-del-concorso)
-
+[<img style="float: right;" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Home.png" width="15" height="15" Hspace="4">](https://github.com/GeremiaPompei/provinciApp#provinciapp)
+[<img src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/FrecciaBack.png" width="15" height="15">](https://github.com/GeremiaPompei/provinciApp#struttura)
 #### Gps
 [7]:https://github.com/GeremiaPompei/mc/blob/master/README.md#gps
 All'interno di **provinciApp** è possibile visualizzare la posizione dell'evento cercato tramite una mappa posizionata in fondo alla pagina aperta. Se presente all'interno del proprio smartphone sarà inoltre possibile aprire la mappa all'interno di *google maps*, così da avere informazioni aggiuntive relative alla posizione di ricerca in relazione a quella dell'utente.
-
-[Cliccare qui per il funzionamento](https://github.com/GeremiaPompei/mc/blob/master/README.md#introduzione-allutilizzo-dellapplicazione)
-
-[Torna ad Obiettivi](https://github.com/GeremiaPompei/mc/blob/master/README.md#obiettivi-del-concorso)
+[<img style="float: right;" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Home.png" width="15" height="15" Hspace="4">](https://github.com/GeremiaPompei/provinciApp#provinciapp)
+[<img src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/FrecciaBack.png" width="15" height="15">](https://github.com/GeremiaPompei/provinciApp#struttura)
 
 #### Social
 [8]:https://github.com/GeremiaPompei/mc/blob/master/README.md#social
 La funzionalità legata ai social consiste nella possibilità di condividere l'informazione cercata dall'utente nelle varie piattaforme social presenti all'interno del proprio smartphone.
 Una volta condiviso l'evento, l'interazione sarà possibile attraverso un click sul link url.
-
-[Cliccare qui per il funzionamento](https://github.com/GeremiaPompei/mc/blob/master/README.md#introduzione-allutilizzo-dellapplicazione)
-
-[Torna ad Obiettivi](https://github.com/GeremiaPompei/mc/blob/master/README.md#obiettivi-del-concorso)
+[<img style="float: right;" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Home.png" width="15" height="15" Hspace="4">](https://github.com/GeremiaPompei/provinciApp#provinciapp)
+[<img src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/FrecciaBack.png" width="15" height="15">](https://github.com/GeremiaPompei/provinciApp#struttura)
 
 #### Connessione dati
 [9]:https://github.com/GeremiaPompei/mc/blob/master/README.md#connessione-dati
 .... da completare ...
 
-
+[<img style="float: right;" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Home.png" width="15" height="15" Hspace="4">](https://github.com/GeremiaPompei/provinciApp#provinciapp)
+[<img src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/FrecciaBack.png" width="15" height="15">](https://github.com/GeremiaPompei/provinciApp#struttura)
 
 ## Autori
 - [*Geremia Pompei*](https://github.com/GeremiaPompei)
