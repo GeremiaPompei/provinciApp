@@ -90,7 +90,7 @@ Per evidenziare le caratteristiche della nostra applicazione è fondamentale dis
 
 
 #### Offline:
-- <a href="#{risorse offline}">Risorse Offline</a>
+- <a href="#risorseoffline">Risorse Offline</a>
 
 
 
