@@ -84,13 +84,13 @@ appassionati;
 Per evidenziare le caratteristiche della nostra applicazione è fondamentale distinguere cosa può essere effettuato con la connessione internet e cosa no. 
 
 #### Online: 
-- [*Esplora*](https://github.com/GeremiaPompei/mc/blob/master/README.md#esplora)
-- [*Comuni*](https://github.com/GeremiaPompei/mc/blob/master/README.md#comuni)
-- [*Categorie*](https://github.com/GeremiaPompei/mc/blob/master/README.md#categorie)
+- <a href="#esplora">Esplora</a>
+- <a href="#comuni">Comuni</a>
+- <a href="#categorie">Categorie</a>
 
 
 #### Offline:
-- [Risorse Offline](https://github.com/GeremiaPompei/mc/blob/master/README.md#lista-di-elementi-scaricati)
+- <a href="#risorse offline">Risorse Offline</a>
 
 
 
@@ -127,7 +127,7 @@ Cliccando sul pulsante 'Offline' si accederà alla schermata offline ([qui](http
 
 #### *Comuni*
 #### *Categorie*
-#### *Lista di elementi scaricati*
+#### *Risorse Offline*
 
 
 
