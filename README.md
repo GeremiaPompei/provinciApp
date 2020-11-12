@@ -6,7 +6,7 @@
 </p>
 
 <p align="center">
-  <img width="260" height="400" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/IMG_E0052%5B1%5D.JPG">
+  <img width="260" height="400" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/logo_provinciApp.JPG">
 
 <p align="center">
 <a href="#introduzione">Introduzione</a>&nbsp•
