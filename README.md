@@ -127,7 +127,7 @@ Cliccando sul pulsante 'Offline' si accederà alla schermata offline ([qui](http
 
 #### *Comuni*
 #### *Categorie*
-#### *Risorse Offline*
+#### *RisorseOffline*
 
 
 
