@@ -116,11 +116,6 @@ Se presente la connessione ad internet all'apertura dell'applicazione, ci ritrov
 <p align="center">
 	<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Categorie.PNG">
 
-#### *RisorseOffline*
-
-<p align="center">
-	<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/RisorseOffline.PNG">
-
 
 Il primo pulsante è utile alla **geolocalizzazione**. Al primo utilizzo verrà richiesto di consentire all'applicazione di accedere alla posizione corrente:
 
@@ -137,7 +132,10 @@ Una volta consentito l'accesso per ogni altro utilizzo il consenso di utilizzo d
 
 Il secondo pulsante  ci permette di accedere alla schermata **offline**.  (La sezione è spiegata nello specifico [qui](https://github.com/GeremiaPompei/mc/blob/master/README.md#lista-di-elementi-scaricati))
 
------->pic pulsante offline<-------------
+#### *RisorseOffline*
+
+<p align="center">
+	<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/RisorseOffline.PNG">
 
 Se non è presente connessione ad internet sarà la stessa applicazione a forzare l'utilizzo della modalità offline: effettuata una qualsiasi ricerca in assenza di rete comparirà la seguente schermata:
 
