@@ -107,6 +107,9 @@ Per cominciare è bene fare una distinzione tra funzionamento online e funzionam
 
 Se presente la connessione ad internet all'apertura dell'applicazione, ci ritroveremo automaticamente alla schermata online. Quest'ultima è organizzata in tre sezioni le quali hanno in comune un'appbar in alto all'interno della quale è presente il nome della sezione singola e tre ulteriori pulsanti:
 
+<p align="center">
+	<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/MainAppBar.PNG">
+
 #### *Esplora*
 
 <p align="center">
