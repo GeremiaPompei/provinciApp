@@ -99,17 +99,41 @@ Per evidenziare le caratteristiche della nostra applicazione è fondamentale dis
 In questa sezione viene illustrato come utilizzare provinciApp, mostrandone le varie funzionalità.
 Per cominciare è bene fare una distinzione tra funzionamento online e funzionamento offline, in quanto alcune funzionalità dell'applicazione non possono essere eseguite senza una connessione ad internet. Nonostante questo, la sezione offline permette comunque di accedere ad informazioni salvate in precedenza.
 
-Se presente la connessione ad internet all'apertura dell'applicazione, ci ritroveremo automaticamente alla schermata online. Quest'ultima è organizzata in 4 sezioni le quali hanno in comune una toolbar in alto all'interno della quale è presente il nome della sezione singola e due ulteriori pulsanti:
+Se presente la connessione ad internet all'apertura dell'applicazione, ci ritroveremo automaticamente alla schermata online. Quest'ultima è organizzata in tre sezioni le quali hanno in comune un'appbar in alto all'interno della quale è presente il nome della sezione singola e tre ulteriori pulsanti:
 
--------------------------------->pic schermate<--------------------------------------------
+#### *Esplora*
+
+<p align="center">
+	<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Esplora.PNG">
+
+#### *Comuni*
+
+<p align="center">
+	<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Comuni.PNG">
+
+#### *Categorie*
+
+<p align="center">
+	<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Categorie.PNG">
+
+#### *RisorseOffline*
+
+<p align="center">
+	<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/RisorseOffline.PNG">
+
 
 Il primo pulsante è utile alla **geolocalizzazione**. Al primo utilizzo verrà richiesto di consentire all'applicazione di accedere alla posizione corrente:
 
---->pic con richiesta geolocalizzazione
+<p align="center">
+  <img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/PermessiPosizione.PNG">
 
 Una volta consentito l'accesso per ogni altro utilizzo il consenso di utilizzo della posizione non sarà più richiesto. A questo punto l'applicazione sfruttando la posizione attuale dell'utente mostrerà i risultati relativi alle informazioni presenti nell'area trovata.
 
------->pic zona<-----
+<p align="center">
+<div>
+	<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/LoadingPosizione.PNG">
+	<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/RicercaPosizione.PNG">
+</div>
 
 Il secondo pulsante  ci permette di accedere alla schermata **offline**.  (La sezione è spiegata nello specifico [qui](https://github.com/GeremiaPompei/mc/blob/master/README.md#lista-di-elementi-scaricati))
 
@@ -117,38 +141,10 @@ Il secondo pulsante  ci permette di accedere alla schermata **offline**.  (La se
 
 Se non è presente connessione ad internet sarà la stessa applicazione a forzare l'utilizzo della modalità offline: effettuata una qualsiasi ricerca in assenza di rete comparirà la seguente schermata:
 
---------------> pic schermata offline <----------
+<p align="center">
+  <img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/RicercaOffline.PNG">
 
 Cliccando sul pulsante 'Offline' si accederà alla schermata offline ([qui](https://github.com/GeremiaPompei/mc/blob/master/README.md#lista-di-elementi-scaricati)). 
-
-#### *Esplora*
-
-<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Esplora.PNG">
-	
-<a href="#provinciapp"> <img style="float: right;" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Home.png" width="15" height="15" Hspace="4"></a>
-<a href="#utilizzo"><img src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/FrecciaBack.png" width="15" height="15"></a>
-
-#### *Comuni*
-
-<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Comuni.PNG">
-	
-<a href="#provinciapp"> <img style="float: right;" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Home.png" width="15" height="15" Hspace="4"></a>
-<a href="#utilizzo"><img src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/FrecciaBack.png" width="15" height="15"></a>
-
-#### *Categorie*
-
-<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Categorie.PNG">
-	
-<a href="#provinciapp"> <img style="float: right;" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Home.png" width="15" height="15" Hspace="4"></a>
-<a href="#utilizzo"><img src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/FrecciaBack.png" width="15" height="15"></a>
-
-#### *RisorseOffline*
-
-<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/RisorseOffline.PNG">
-	
-<a href="#provinciapp"> <img style="float: right;" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Home.png" width="15" height="15" Hspace="4"></a>
-<a href="#utilizzo"><img src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/FrecciaBack.png" width="15" height="15"></a>
-
 
 
 ## Specifiche
