@@ -158,7 +158,7 @@ Cliccando sul pulsante 'Offline' si accederà alla schermata offline ([qui](http
 
 #### Api
 [0]:https://github.com/GeremiaPompei/mc/blob/master/README.md#api
-L'applicazione fornisce dati resi disponibili da un database appartenente alla provincia di Macerata a cui è possibile accedere tramite l'API CKAN: [https://ckan.org/portfolio/api/](https://ckan.org/portfolio/api/ "https://ckan.org/portfolio/api/")
+L'applicazione fornisce dati resi disponibili da un database appartenente alla provincia di Macerata a cui è possibile accedere tramite l'API CKAN: [https://ckan.org/portfolio/api/](https://ckan.org/portfolio/api/ "https://ckan.org/portfolio/api/").
 
 #### Flutter
 [1]:https://github.com/GeremiaPompei/mc/blob/master/README.md#flutter
