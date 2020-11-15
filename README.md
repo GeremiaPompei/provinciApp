@@ -154,7 +154,7 @@ Come visto in precedenza, la struttura è organizzata in base a cosa può essere
 #### *Esplora*
 
 <div style=”border: 1px solid #000″>  
-<img src= "https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Esplora.PNG"  style=”float : right; margin: 10px”>  
+<img width="260" src= "https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Esplora.PNG"  style="float : right">  
 <p>Aperta l'applicazione, questa è la prima schermata che l'utente visionerà. 
 In 'Esplora' è possibile effettuare delle ricerche rispetto ciò che si intende ricercare, e verrà restituito se presente all'interno del database. 
 La schermata risulterà vuota al primo utilizzo, ossia quando nessuna ricerca è stata effettuata, mentre si andrà a comporre di due due sottosezioni relative alle ultime ricerche effettuate. 
