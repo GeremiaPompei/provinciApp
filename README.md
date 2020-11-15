@@ -153,12 +153,13 @@ Come visto in precedenza, la struttura è organizzata in base a cosa può essere
 
 #### *Esplora*
 
-Aperta l'applicazione, questa è la prima schermata che l'utente visionerà. 
+<div style=”border: 1px solid #000″>  
+<img src= "https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Esplora.PNG"  style=”float : right; margin: 10px”>  
+<p>Aperta l'applicazione, questa è la prima schermata che l'utente visionerà. 
 In 'Esplora' è possibile effettuare delle ricerche rispetto ciò che si intende ricercare, e verrà restituito se presente all'interno del database. 
 La schermata risulterà vuota al primo utilizzo, ossia quando nessuna ricerca è stata effettuata, mentre si andrà a comporre di due due sottosezioni relative alle ultime ricerche effettuate. 
-L'utente vedrà quindi comparire *Ultime ricerche Pacchetti*, che mostrerà le ultime quattro ricerche effettuate tramite la barra di ricerca; e *Ultime ricerche Risorse*, che mostrerà le ultime quattro ricerche effettuate a partire dalle cards presenti nella sezione Comuni. <img style="float: left;" width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Esplora.PNG">
-
-	
+L'utente vedrà quindi comparire *Ultime ricerche Pacchetti*, che mostrerà le ultime quattro ricerche effettuate tramite la barra di ricerca; e *Ultime ricerche Risorse*, che mostrerà le ultime quattro ricerche effettuate a partire dalle cards presenti nella sezione Comuni.</p>  
+</div>
 
 #### *Comuni*
 
