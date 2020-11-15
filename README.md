@@ -153,12 +153,14 @@ Come visto in precedenza, la struttura è organizzata in base a cosa può essere
 
 #### *Esplora*
 
-<div style=”border: 1px solid #000″>  
-<img width="260" src= "https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Esplora.PNG"  style="float : right">  
-<p>Aperta l'applicazione, questa è la prima schermata che l'utente visionerà. 
-In 'Esplora' è possibile effettuare delle ricerche rispetto ciò che si intende ricercare, e verrà restituito se presente all'interno del database. 
-La schermata risulterà vuota al primo utilizzo, ossia quando nessuna ricerca è stata effettuata, mentre si andrà a comporre di due due sottosezioni relative alle ultime ricerche effettuate. 
-L'utente vedrà quindi comparire *Ultime ricerche Pacchetti*, che mostrerà le ultime quattro ricerche effettuate tramite la barra di ricerca; e *Ultime ricerche Risorse*, che mostrerà le ultime quattro ricerche effettuate a partire dalle cards presenti nella sezione Comuni.</p>  
+<div>  
+	<img width="260" src= 							 "https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Esplora.PNG"  	style="float:right">  
+	<p>
+	Aperta l'applicazione, questa è la prima schermata che l'utente visionerà. 
+	In 'Esplora' è possibile effettuare delle ricerche rispetto ciò che si intende ricercare, e verrà 						restituito se presente all'interno del database. 
+	La schermata risulterà vuota al primo utilizzo, ossia quando nessuna ricerca è stata effettuata, 		mentre si andrà a comporre di due due sottosezioni relative alle ultime ricerche effettuate. 
+	L'utente vedrà quindi comparire *Ultime ricerche Pacchetti*, che mostrerà le ultime quattro 	ricerche effettuate tramite la barra di ricerca; e *Ultime ricerche Risorse*, che mostrerà le ultime 		quattro ricerche effettuate a partire dalle cards presenti nella sezione Comuni.
+	</p>  
 </div>
 
 #### *Comuni*
@@ -212,43 +214,51 @@ Cliccando sul pulsante 'Offline' si accederà alla schermata offline ([qui](http
 ## Specifiche
 
 
-#### Api
-[0]:https://github.com/GeremiaPompei/mc/blob/master/README.md#api
-L'applicazione fornisce dati resi disponibili da un database appartenente alla provincia di Macerata a cui è possibile accedere tramite l'API CKAN: [https://ckan.org/portfolio/api/](https://ckan.org/portfolio/api/ "https://ckan.org/portfolio/api/").
+
 
 #### Flutter
-[1]:https://github.com/GeremiaPompei/mc/blob/master/README.md#flutter
+
 Lo sviluppo dell'applicazione è stato effettuato tramite l'utilizzo di **Flutter**, un framework open-source creato da Google per la creazione di interfacce native per iOS e Android.
-**Dart** è il linguaggio che abbiamo scelto per il progetto, nato all'interno dell'IDE Intellij e simulato con Android Studio e XCode.
+**Dart** è il linguaggio che abbiamo scelto per il progetto, nato all'interno dell'IDE Intellij e simulato in opportuni dispositivi tramite *Android Studio* e *XCode*.
 
 #### Layout
-[2]:https://github.com/GeremiaPompei/mc/blob/master/README.md#layout
-Il linguaggio utilizzato ci ha permesso di creare un layout molto versatile e moderno, sfruttando quelli che sono i colori della provincia di Macerata, inoltre i dati organizzati secondo le informazioni del database sono stati organizzati in modo tale rendere semplice la fruizione degli stessi.
+
+Il linguaggio utilizzato ci ha permesso di creare un layout molto versatile e moderno, sfruttando quelli che sono i colori della provincia di Macerata. 
+Con un'ottima organizzazione dei dati a disposizione, l'applicazione risulta fluida ed intuibile fin dal primo utilizzo.
 
 #### Cache
-[3]:https://github.com/GeremiaPompei/mc/blob/master/README.md#cache
-Il sistema di caching impostato permette di accedere con molta più facilità alle ultime ricerche effettuate: in questo modo è possibile accedere alle informazioni con velocità maggiore e senza la necessità di una connessione dati attiva.
+
+Il sistema di caching impostato permette di accedere con molta più facilità alle ultime ricerche effettuate: in questo modo è possibile accedere con maggiore velocità alle informazioni e senza la necessità di una connessione dati attiva.
 
 #### Dimensione
-[4]:https://github.com/GeremiaPompei/mc/blob/master/README.md#dimensione
-La dimensione dell'applicazione è di circa 21Mb, ad indicare come, sebbene essa possegga una grande quantitità di dati frubili dall'utente, sia molto leggera e facilmente scaricabile con la sola connessione dati del proprio smartphone.
+
+La dimensione dell'applicazione è di circa 21Mb. 
+La dimensione così ridotta  permette il download anche con la semplice connessione dati del proprio smartphone ed è allo stesso tempo completa di ogni informazione di cui l'utente può necessitare.
 
 #### Offline
-[5]:https://github.com/GeremiaPompei/mc/blob/master/README.md#offline
-All'interno dell'applicazione è possibile scaricare alcuni elementi ai quali è poi possibile accedere senza l'utilizzo della connessione ad internet. I dati salvati possono essere reperibili nell'apposita sezione alla quale è possibile accedere tramite il pulsante 'Offline' in alto a destra.
+
+All'interno dell'applicazione è possibile scaricare alcuni elementi accessibili senza l'utilizzo della connessione ad internet.
+I dati salvati sono reperibili nell'apposita sezione alla quale è possibile accedere come spiegato in precedenza.
 
 #### Database
-[6]:https://github.com/GeremiaPompei/mc/blob/master/README.md#database
-L'organizzazione dei dati segue il modello del database fornito, dal quale è possibile reperire le informazioni che verranno elaborate in modo dinamico dall'applicazione.
+
+ProvinciApp sfrutta un database reso disponibile dalla stessa provincia di Macerata.
+L'[API CKAN](https://ckan.org/portfolio/api/ "https://ckan.org/portfolio/api/") ci ha permesso di utilizzare i dati formato json e strutturarli nella forma più opportuna all'utilizzo dell'utente.
+
 
 #### Gps
-[7]:https://github.com/GeremiaPompei/mc/blob/master/README.md#gps
-All'interno di **provinciApp** è possibile ricercare informazioni nel database della provincia di Macerata tramite la *geolocalizzazione* che, dopo aver dato il consenso all'uso del gps, trova la posizione in cui si trova l'utente e il nome di questa che viene utilizzato per la ricerca. Tale funzione velocizza la ricerca dell'utente se questo si trova direttamente nel comune  in cui voleva effettuare quest'ultima.
+
+All'interno di **provinciApp** è possibile ricercare informazioni nel database della provincia di Macerata tramite la *geolocalizzazione*. 
+Dopo aver dato il consenso all'utilizzo del gps, verrà individuata la posizione in cui si trova l'utente e il nome di quest'ultima verrà utilizzato per effettuare ricerca. 
 
 #### Social
-[8]:https://github.com/GeremiaPompei/mc/blob/master/README.md#social
+
 La funzionalità legata ai social consiste nella possibilità di condividere l'informazione cercata dall'utente nelle varie piattaforme social presenti all'interno del proprio smartphone.
 Una volta condiviso l'evento, l'interazione sarà possibile attraverso un click sul link url.
+
+<br>
+<br>
+
 <p align="center">
 <a href="#provinciapp"> <img style="float: right;" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Home.png" width="15" height="15" Hspace="4"></a>
 <a href="#specifiche"><img src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/FrecciaBack.png" width="15" height="15"></a>
