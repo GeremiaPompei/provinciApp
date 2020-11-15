@@ -55,6 +55,7 @@ class _ComuneViewState extends State<ComuneView> {
                         widget._comune.nome,
                         style: StileTesto.corpo,
                         maxLines: 3,
+                        textAlign: TextAlign.center,
                       ),
                     ),
                   ],

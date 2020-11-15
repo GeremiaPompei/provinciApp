@@ -28,7 +28,7 @@ class _PlaceHolderEsploraViewState extends State<PlaceHolderEsploraView> {
                     .where((element) => element.value.elemento.isNotEmpty)
                     .toList(),
                 widget._controller.cercaFromUrl,
-                ListaPacchettiView(widget._controller),
+                (list) => ListaPacchettiView(widget._controller),
                 context,
                 'Pacchetti'),
             ListaUnitCacheView(
@@ -36,8 +36,7 @@ class _PlaceHolderEsploraViewState extends State<PlaceHolderEsploraView> {
                     .where((element) => element.value.elemento.isNotEmpty)
                     .toList(),
                 widget._controller.cercaRisorse,
-                ListaRisorseView(
-                    widget._controller, widget._controller.ultimeRisorse),
+                (list) => ListaRisorseView(widget._controller, list),
                 context,
                 'Risorse'),
           ],
