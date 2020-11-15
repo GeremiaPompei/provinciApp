@@ -78,10 +78,10 @@ appassionati;
  dell’applicazione in mobilità minimizzando il consumo di banda mobile internet 
  e/o saturazione dell’accesspoint nel caso di wi-fi pubblico.
 ```
-
+<p align="center">
 <a href="#provinciapp"> <img style="float: right;" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Home.png" width="15" height="15" Hspace="4"></a>
 <a href="#introduzione"><img src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/FrecciaBack.png" width="15" height="15"></a>
-
+</p>
 
 ## Struttura
 Per evidenziare le caratteristiche della nostra applicazione è fondamentale distinguere cosa può 
@@ -93,8 +93,8 @@ La struttura online si presenta divisa in 3 macrocategorie
 - <a href="#comuni">***Comuni***</a>
 - <a href="#categorie">***Categorie***</a>
 
-<img style="float: left;" width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Esplora.PNG"> &emsp;
-<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Comuni.PNG"> &emsp;
+<img style="float: left;" width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Esplora.PNG"> &emsp; &emsp;
+<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Comuni.PNG"> &emsp; &emsp;
 <img style="float: right;" width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Categorie.PNG">
 <br>
 Come si nota dalle immagini è possibile scorrere da una macrocategoria all'altra semplicemente premendo sopra l'icona ad essa corrispondente. 
@@ -104,16 +104,19 @@ Ogni sezione offre una particolare funzionalità dell'applicazione, spiegata nel
 #### Offline
 La struttura offline presenta una sola macrocategoria:
 
-- <a href="#risorseoffline">***Risorse Offline***</a>
+- <a href="#risorseoffline">Risorse Offline</a>
 
 <p align="center">
 	<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/RisorseOffline.PNG">
+</p>
 <br>
 La sezione in questione permette di visualizzare i dati che l'utente può decidere di scaricare mentre è presente la connessione dati, ma ai quali si può accedere senza quest'ultima.
 <br>
 <br>
+<p align="center">
 <a href="#provinciapp"> <img style="float: right;" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Home.png" width="15" height="15" Hspace="4"></a>
 <a href="#struttura"><img src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/FrecciaBack.png" width="15" height="15"></a>
+</p>
 
 
 ## Utilizzo
@@ -124,6 +127,7 @@ Se presente la connessione ad internet all'apertura dell'applicazione, ci ritrov
 
 <p align="center">
 	<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/MainAppBar.PNG">
+</p>
 
 #### *Esplora*
 
