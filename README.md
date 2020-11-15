@@ -87,20 +87,31 @@ appassionati;
 Per evidenziare le caratteristiche della nostra applicazione è fondamentale distinguere cosa può 
 essere effettuato con la connessione internet e cosa no. 
 
-<img style="float: left;" width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Esplora.PNG">
-<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Comuni.PNG">
+#### Online
+La struttura online si presenta divisa in 3 macrocategorie
+- <a href="#esplora">***Esplora***</a>
+- <a href="#comuni">***Comuni***</a>
+- <a href="#categorie">***Categorie***</a>
+
+<img style="float: left;" width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Esplora.PNG"> &emsp;
+<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Comuni.PNG"> &emsp;
 <img style="float: right;" width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Categorie.PNG">
+<br>
+Come si nota dalle immagini è possibile scorrere da una macrocategoria all'altra semplicemente premendo sopra l'icona ad essa corrispondente. 
+Ogni sezione offre una particolare funzionalità dell'applicazione, spiegata nella sezione apposita relativa all'utilizzo.
 
 
-#### Online: 
-- <a href="#esplora">Esplora</a>
-- <a href="#comuni">Comuni</a>
-- <a href="#categorie">Categorie</a>
+#### Offline
+La struttura offline presenta una sola macrocategoria:
 
+- <a href="#risorseoffline">***Risorse Offline***</a>
 
-#### Offline:
-- <a href="#risorseoffline">RisorseOffline</a>
-
+<p align="center">
+	<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/RisorseOffline.PNG">
+<br>
+La sezione in questione permette di visualizzare i dati che l'utente può decidere di scaricare mentre è presente la connessione dati, ma ai quali si può accedere senza quest'ultima.
+<br>
+<br>
 <a href="#provinciapp"> <img style="float: right;" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Home.png" width="15" height="15" Hspace="4"></a>
 <a href="#struttura"><img src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/FrecciaBack.png" width="15" height="15"></a>
 
@@ -142,9 +153,9 @@ Una volta consentito l'accesso per ogni altro utilizzo il consenso di utilizzo d
 <p align="center">
 	<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/RicercaPosizione.PNG">
 
-Il secondo pulsante  ci permette di accedere alla schermata **offline**.  (La sezione è spiegata nello specifico [qui](https://github.com/GeremiaPompei/mc/blob/master/README.md#lista-di-elementi-scaricati))
+Il secondo pulsante  ci permette di accedere alla schermata **offline**.  (La sezione è spiegata nello specifico 
 
-#### *RisorseOffline*
+#### *Risorse Offline*
 
 <p align="center">
 	<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/RisorseOffline.PNG">
