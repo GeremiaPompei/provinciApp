@@ -512,9 +512,4 @@ Una volta condiviso l'evento, l'interazione sarà possibile attraverso un click 
 - [*Geremia Pompei*](https://github.com/GeremiaPompei)
 - [*Alex Pop*](https://github.com/axel2104)
 - [*Lorenzo Longarini*](https://github.com/LorenzoLongarini)
- 
 
-- [*Geremia Pompei*](https://github.com/GeremiaPompei)
-- [*Alex Pop*](https://github.com/axel2104)
-- [*Lorenzo Longarini*](https://github.com/LorenzoLongarini)
- 
