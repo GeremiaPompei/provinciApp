@@ -1,9 +1,7 @@
 
 <div>
 <p>  
-	<font color="blu"> 
 		 <h1 align="center">provinciApp</h1>
-	</font>
 </p>
 
 <p align="center">
@@ -86,7 +84,13 @@ appassionati;
 
 
 ## Struttura
-Per evidenziare le caratteristiche della nostra applicazione è fondamentale distinguere cosa può essere effettuato con la connessione internet e cosa no. 
+Per evidenziare le caratteristiche della nostra applicazione è fondamentale distinguere cosa può 
+essere effettuato con la connessione internet e cosa no. 
+
+<img style="float: left;" width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Esplora.PNG">&nbsp&nbsp
+<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Comuni.PNG">&nbsp
+<img style="float: right;" width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Categorie.PNG">
+
 
 #### Online: 
 - <a href="#esplora">Esplora</a>
@@ -112,17 +116,17 @@ Se presente la connessione ad internet all'apertura dell'applicazione, ci ritrov
 
 #### *Esplora*
 
-<p align="center">
+<p align="right">
 	<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Esplora.PNG">
 
 #### *Comuni*
 
-<p align="center">
+<p align="left">
 	<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Comuni.PNG">
 
 #### *Categorie*
 
-<p align="center">
+<p align="right">
 	<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Categorie.PNG">
 
 
