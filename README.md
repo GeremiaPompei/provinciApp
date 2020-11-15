@@ -92,25 +92,34 @@ La struttura online si presenta divisa in 3 macrocategorie
 - <a href="#esplora">***Esplora***</a>
 - <a href="#comuni">***Comuni***</a>
 - <a href="#categorie">***Categorie***</a>
+<br>
+<br>
+Nelle immagini seguenti si può notare che per scorrere da una macrocategoria all'altra è sufficiente premere sopra l'icona ad essa corrispondente. 
+Ogni sezione offre una particolare funzionalità dell'applicazione, spiegata nella sezione apposita relativa all'utilizzo.
+<br>
+<br>
 
 <img style="float: left;" width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Esplora.PNG"> &emsp; &emsp;
 <img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Comuni.PNG"> &emsp; &emsp;
 <img style="float: right;" width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Categorie.PNG">
-<br>
-Come si nota dalle immagini è possibile scorrere da una macrocategoria all'altra semplicemente premendo sopra l'icona ad essa corrispondente. 
-Ogni sezione offre una particolare funzionalità dell'applicazione, spiegata nella sezione apposita relativa all'utilizzo.
+
 
 
 #### Offline
 La struttura offline presenta una sola macrocategoria:
 
 - <a href="#risorseoffline">Risorse Offline</a>
+<br>
+<br>
+
+La sezione in questione permette di visualizzare i dati che l'utente può decidere di scaricare mentre è presente la connessione dati, ma ai quali si può accedere senza quest'ultima.
+<br>
+<br>
 
 <p align="center">
 	<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/RisorseOffline.PNG">
 </p>
-<br>
-La sezione in questione permette di visualizzare i dati che l'utente può decidere di scaricare mentre è presente la connessione dati, ma ai quali si può accedere senza quest'ultima.
+
 <br>
 <br>
 <p align="center">
