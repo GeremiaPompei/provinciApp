@@ -132,7 +132,10 @@ La struttura offline presenta una sola macrocategoria:
 - <a href="#risorseoffline">Risorse Offline</a>
 <br>
 
-La sezione in questione permette di visualizzare i dati che l'utente può decidere di scaricare mentre è presente la connessione dati, ma ai quali si può accedere senza quest'ultima. <img style="float: right;" width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/RisorseOffline.PNG">
+La sezione in questione permette di visualizzare i dati che l'utente può decidere di scaricare mentre è presente la connessione dati, ma ai quali si può accedere senza quest'ultima. 
+<p align="left">
+<img  width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/RisorseOffline.PNG">
+</p>
 
 
 <br>
