@@ -104,9 +104,7 @@ Ogni sezione offre una particolare funzionalità dell'applicazione, spiegata nel
 <br>
 
 
-<img style="float: left;" width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Esplora.PNG"> &emsp; &emsp;
-<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Comuni.PNG"> &emsp; &emsp;
-<img style="float: right;" width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Categorie.PNG">
+<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/MainView.gif">
 
 <br>
 <br>
