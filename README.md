@@ -104,7 +104,7 @@ Ogni sezione offre una particolare funzionalità dell'applicazione, spiegata nel
 <br>
 
 
-<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/MainView.gif">
+<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/MainView.mp4">
 
 <br>
 <br>
@@ -183,9 +183,7 @@ Il primo pulsante è utile alla **geolocalizzazione**. Al primo utilizzo verrà 
 Una volta consentito l'accesso per ogni altro utilizzo il consenso di utilizzo della posizione non sarà più richiesto. A questo punto l'applicazione sfruttando la posizione attuale dell'utente mostrerà i risultati relativi alle informazioni presenti nell'area trovata.
 
 <p align="center">
-	<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/LoadingPosizione.PNG">
-<p align="center">
-	<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/RicercaPosizione.PNG">
+	<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Posizione.mp4">
 
 #### Offline
 
