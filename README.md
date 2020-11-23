@@ -155,16 +155,21 @@ Come visto in precedenza, la struttura è organizzata in base a cosa può essere
 <div>  
 	<img width="260" src= 							 "https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Esplora.PNG"  	style="float:right">  
 	<p>
-	Aperta l'applicazione, questa è la prima schermata che l'utente visionerà. \ In 'Esplora' è possibile effettuare delle ricerche rispetto ciò che si intende ricercare, e verrà 						restituito se presente all'interno del database. 
-	La schermata risulterà vuota al primo utilizzo, ossia quando nessuna ricerca è stata effettuata, 		mentre si andrà a comporre di due due sottosezioni relative alle ultime ricerche effettuate. 
-	L'utente vedrà quindi comparire *Ultime ricerche Pacchetti*, che mostrerà le ultime quattro 	ricerche effettuate tramite la barra di ricerca; e *Ultime ricerche Risorse*, che mostrerà le ultime 		quattro ricerche effettuate a partire dalle cards presenti nella sezione Comuni.
+Aperta l'applicazione, questa è la prima schermata che l'utente visionerà. 
+
+In 'Esplora' è possibile effettuare delle ricerche rispetto ciò che si intende ricercare, e verrà 						restituito se presente all'interno del database. 
+
+La schermata risulterà vuota al primo utilizzo, ossia quando nessuna ricerca è stata effettuata, 		mentre si andrà a comporre di due due sottosezioni relative alle ultime ricerche effettuate. 
+
+L'utente vedrà quindi comparire *Ultime ricerche Pacchetti*, che mostrerà le ultime quattro 	ricerche effettuate tramite la barra di ricerca; e *Ultime ricerche Risorse*, che mostrerà le ultime 		quattro ricerche effettuate a partire dalle cards presenti nella sezione Comuni.
 	</p>  
 </div>
 
 #### *Comuni*
 
 
-La partizione  *Comuni* è costituita da tante cards quanti sono i comuni della provincia di macerata.\\
+La partizione  *Comuni* è costituita da tante cards quanti sono i comuni della provincia di macerata.
+
 Per visualizzare il contenuto di ogni card è sufficiente premere sopra quella desiderata. La singola card è strutturata in settori secondo il modello del database e per ognuno di questi ne troveremo dunque di differenti tipologie. 
 Ogni sezione può essere aperta cliccando su di essa, questa nel particolare è strutturata in:
 - Una **descrizione** della particolare sezione selezionata dall'utente che ne descrive le caratteristiche principali
@@ -178,22 +183,28 @@ Ogni sezione può essere aperta cliccando su di essa, questa nel particolare è 
 	<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Comuni.PNG">
 
 #### *Categorie*
-La partizione *Categorie* permette di accedere a sezioni di informazioni. A differenza della partizione *Comuni* in questo caso le informazioni sono state suddivise per categorie: l'utente può dunque ricercare una serie di informazioni legate a quella sezione, la quale ne mostrerà tutti i risultati relativi alla stessa all'interno della provincia.\
+La partizione *Categorie* permette di accedere a sezioni di informazioni. A differenza della partizione *Comuni* in questo caso le informazioni sono state suddivise per categorie: l'utente può dunque ricercare una serie di informazioni legate a quella sezione, la quale ne mostrerà tutti i risultati relativi alla stessa all'interno della provincia.
+
 ```Se ad esempio un utente fosse interessato nella ricerca di informazioni legate alla sezione *Chiesa*, questa mostrerà tutte le chiese presenti all'interno della provincia di Macerata.```
+
 L'organizzazione interna della sezione risulta poi identica a quella descritta per la partizione *Comuni*.
 <p align="right">
 	<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Categorie.PNG">
 
 #### Extra
-Il primo pulsante in alto nella toolbar, partendo da sinistra è quello relativo agli *Extra*.  \\ L'idea che ci ha portato a decidere di inserire gli extra è stata quella di avere un'interazione più semplice e diretta da parte dell'utente rispetto ad alcune applicazioni che avrebbe già potuto conoscere, tra cui:
+Il primo pulsante in alto nella toolbar, partendo da sinistra è quello relativo agli *Extra*. 
+
+L'idea che ci ha portato a decidere di inserire gli extra è stata quella di avere un'interazione più semplice e diretta da parte dell'utente rispetto ad alcune applicazioni che avrebbe già potuto conoscere, tra cui:
 - *Cronache Maceratesi*;
 - *Groupon*;
-- *TheFork*.\
+- *TheFork*.
 
 Ogni sezione rimanda alla pagina corrispondente: in questo modo l'utente non avrà più bisogno di avere diverse applicazioni all'interno del telefono, ma con più facilità potrà direttamente accedere ai vari servizi con maggiore semplicità (essendo qui accorpate)  e risparmiare spazio in memoria.
 #### Geolocalizzazione
 
-Il secondo pulsante è utile alla *Geolocalizzazione*.\  Al primo utilizzo verrà richiesto di consentire all'applicazione di accedere alla posizione corrente:
+Il secondo pulsante è utile alla *Geolocalizzazione*.
+
+Al primo utilizzo verrà richiesto di consentire all'applicazione di accedere alla posizione corrente:
 
 <p align="center">
 	<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/PermessiPosizione.PNG">
@@ -207,7 +218,9 @@ Una volta consentito l'accesso per ogni altro utilizzo il consenso di utilizzo d
 
 #### Risorse Offline
 
-Il secondo pulsante  ci permette di accedere alla schermata *offline*.\ La presenza del pulsantino identificato dal *+* permette come descritto in precedenza di accedere alle informazioni anche senza una connessione internet: le stesse saranno accessibili all'utente nella sezione *Risorse Offline*.
+Il secondo pulsante  ci permette di accedere alla schermata *offline*.
+
+La presenza del pulsantino identificato dal *+* permette come descritto in precedenza di accedere alle informazioni anche senza una connessione internet: le stesse saranno accessibili all'utente nella sezione *Risorse Offline*.
 
 <p align="center">
 	<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/RisorseOffline.PNG">
