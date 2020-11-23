@@ -91,7 +91,7 @@ Per evidenziare le caratteristiche della nostra applicazione è fondamentale dis
 essere effettuato con la connessione internet e cosa no. 
 
 #### Online
-La struttura online si presenta divisa in 3 macrocategorie: 
+La struttura online si presenta divisa in 3 partizioni: 
 - <a href="#esplora">***Esplora***</a>
 - <a href="#comuni">***Comuni***</a>
 - <a href="#categorie">***Categorie***</a>
@@ -126,12 +126,12 @@ Analizzando gli stessi da sinistra verso destra:
 <br>
 
 #### Offline
-La struttura offline presenta una sola macrocategoria:
+La struttura offline presenta una sola partizione:
 
 - <a href="#risorseoffline">Risorse Offline</a>
 <br>
 
-La sezione in questione permette di visualizzare i dati che l'utente può decidere di scaricare mentre è presente la connessione dati, ma ai quali si può accedere senza quest'ultima. 
+La macrocategoria in questione permette di visualizzare i dati che l'utente può decidere di scaricare mentre è presente la connessione dati, ma ai quali si può accedere senza quest'ultima. 
 <p align="center">
 <img  width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/RisorseOffline.PNG">
 </p>
@@ -147,7 +147,7 @@ La sezione in questione permette di visualizzare i dati che l'utente può decide
 
 ## Utilizzo
 In questa sezione viene illustrato come utilizzare provinciApp, mostrandone le varie funzionalità.
-Come visto in precedenza, la struttura è organizzata in base a cosa può essere effettuato con la connessione e cosa no, nel particolare andremo ad analizzare ogni macrocategoria.
+Come visto in precedenza, la struttura è organizzata in base a cosa può essere effettuato con la connessione e cosa no, nel particolare andremo ad analizzare ogni partizione.
 
 
 #### *Esplora*
@@ -164,19 +164,36 @@ Come visto in precedenza, la struttura è organizzata in base a cosa può essere
 
 #### *Comuni*
 
+
+La partizione  *Comuni* è costituita da tante cards quanti sono i comuni della provincia di macerata.\\
+Per visualizzare il contenuto di ogni card è sufficiente premere sopra quella desiderata. La singola card è strutturata in settori secondo il modello del database e per ognuno di questi ne troveremo dunque di differenti tipologie. 
+Ogni sezione può essere aperta cliccando su di essa, questa nel particolare è strutturata in:
+- Una **descrizione** della particolare sezione selezionata dall'utente che ne descrive le caratteristiche principali
+- Alcune **Informazioni** sotto la voce *Info* la quale mostra alcune proprietà della sezione scelta (quali il nome del titolare di un ristorante ad esempio) le quali differiscono a seconda della sezione stessa e dunque non omogenee per tutte (ad esempio una sezione di ristoranti non conterrà le stesse informazioni che può contenere la sezione teatri)
+- La presenza di due particolari pulsanti:
+					- Il primo permette di reindirizzare l'utente al sito internet della sezione scelta;
+					- il secondo permette la condivisione della sezione attraverso i social presenti all'interno dello smartphone.
+- Un pulsantino con il simbolo *+* :  questo permette il salvataggio dell'informazione che sarà poi accessibile nelle *Risorse Offline* anche senza la presenza di una connesione internet.
+
 <p align="left">
 	<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Comuni.PNG">
 
 #### *Categorie*
-
+La partizione *Categorie* permette di accedere a sezioni di informazioni. A differenza della partizione *Comuni* in questo caso le informazioni sono state suddivise per categorie: l'utente può dunque ricercare una serie di informazioni legate a quella sezione, la quale ne mostrerà tutti i risultati relativi alla stessa all'interno della provincia.  \\ 
+```Se ad esempio un utente fosse interessato nella ricerca di informazioni legate alla sezione *Chiesa*, questa mostrerà tutte le chiese presenti all'interno della provincia di Macerata.```
+L'organizzazione interna della sezione risulta poi identica a quella descritta per la partizione *Comuni*.
 <p align="right">
 	<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Categorie.PNG">
 
 #### Extra
-
+Il primo pulsante in alto nella toolbar, partendo da sinistra è quello relativo agli *Extra*.  \\ L'idea che ci ha portato a decidere di inserire gli extra è stata quella di avere un'interazione più semplice e diretta da parte dell'utente rispetto ad alcune applicazioni che avrebbe già potuto conoscere, tra cui:
+- *Cronache Maceratesi*;
+- *Groupon*;
+- *TheFork*.
+Ogni sezione rimanda alla pagina corrispondente: in questo modo l'utente non avrà più bisogno di avere diverse applicazioni all'interno del telefono, ma con più facilità potrà direttamente accedere ai vari servizi con maggiore semplicità (essendo qui accorpate)  e risparmiare spazio in memoria.
 #### Geolocalizzazione
 
-Il primo pulsante è utile alla **geolocalizzazione**. Al primo utilizzo verrà richiesto di consentire all'applicazione di accedere alla posizione corrente:
+Il secondo pulsante è utile alla *Geolocalizzazione*.  \\ Al primo utilizzo verrà richiesto di consentire all'applicazione di accedere alla posizione corrente:
 
 <p align="center">
 	<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/PermessiPosizione.PNG">
@@ -190,9 +207,7 @@ Una volta consentito l'accesso per ogni altro utilizzo il consenso di utilizzo d
 
 #### Offline
 
-Il secondo pulsante  ci permette di accedere alla schermata **offline**. 
-
-#### *Risorse Offline*
+Il secondo pulsante  ci permette di accedere alla schermata *offline*.  \\ La presenza del pulsantino identificato dal *+* permette come descritto in precedenza di accedere alle informazioni anche senza una connessione internet: le stesse saranno accessibili all'utente nella sezione **Risorse Offline**.
 
 <p align="center">
 	<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/RisorseOffline.PNG">
@@ -202,7 +217,6 @@ Se non è presente connessione ad internet sarà la stessa applicazione a forzar
 <p align="center">
   <img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/RicercaOffline.PNG">
 
-Cliccando sul pulsante 'Offline' si accederà alla schermata offline ([qui](https://github.com/GeremiaPompei/mc/blob/master/README.md#lista-di-elementi-scaricati)). 
 
 <p align="center">
 <a href="#provinciapp"> <img style="float: right;" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Home.png" width="15" height="15" Hspace="4"></a>
