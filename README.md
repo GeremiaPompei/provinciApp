@@ -215,7 +215,7 @@ Il secondo pulsante  ci permette di accedere alla schermata *offline*.  \\ La pr
 Se non è presente connessione ad internet sarà la stessa applicazione a forzare l'utilizzo della modalità offline: effettuata una qualsiasi ricerca in assenza di rete comparirà la seguente schermata:
 
 <p align="center">
-  <img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/RicercaOffline.PNG">
+  <img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/RicercaOffline.PNG"> 
 
 
 <p align="center">
