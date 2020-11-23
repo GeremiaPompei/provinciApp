@@ -121,7 +121,7 @@ Ogni sezione offre una particolare funzionalità dell'applicazione, spiegata nel
 Analizzando gli stessi da sinistra verso destra:
 - il primo ci permetterà di accedere ad alcune funzionalità  <a href="#extra">Extra</a>  quali Cronache Maceratesi, Groupon e The Fork;
 - -il secondo ci permette la  <a href="#geolocalizzazione">Geolocalizzazione</a> dell'utente;
-- il terzo consente l'accesso da parte dell'utente alle <a href="#risorse offline">Risorse Offline</a>.
+- il terzo consente l'accesso da parte dell'utente alle <a href="#risorse offline">Offline</a>.
 <br>
 <br>
 
@@ -155,8 +155,7 @@ Come visto in precedenza, la struttura è organizzata in base a cosa può essere
 <div>  
 	<img width="260" src= 							 "https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Esplora.PNG"  	style="float:right">  
 	<p>
-	Aperta l'applicazione, questa è la prima schermata che l'utente visionerà. 
-	In 'Esplora' è possibile effettuare delle ricerche rispetto ciò che si intende ricercare, e verrà 						restituito se presente all'interno del database. 
+	Aperta l'applicazione, questa è la prima schermata che l'utente visionerà. \ In 'Esplora' è possibile effettuare delle ricerche rispetto ciò che si intende ricercare, e verrà 						restituito se presente all'interno del database. 
 	La schermata risulterà vuota al primo utilizzo, ossia quando nessuna ricerca è stata effettuata, 		mentre si andrà a comporre di due due sottosezioni relative alle ultime ricerche effettuate. 
 	L'utente vedrà quindi comparire *Ultime ricerche Pacchetti*, che mostrerà le ultime quattro 	ricerche effettuate tramite la barra di ricerca; e *Ultime ricerche Risorse*, che mostrerà le ultime 		quattro ricerche effettuate a partire dalle cards presenti nella sezione Comuni.
 	</p>  
@@ -179,7 +178,7 @@ Ogni sezione può essere aperta cliccando su di essa, questa nel particolare è 
 	<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Comuni.PNG">
 
 #### *Categorie*
-La partizione *Categorie* permette di accedere a sezioni di informazioni. A differenza della partizione *Comuni* in questo caso le informazioni sono state suddivise per categorie: l'utente può dunque ricercare una serie di informazioni legate a quella sezione, la quale ne mostrerà tutti i risultati relativi alla stessa all'interno della provincia.  \\ 
+La partizione *Categorie* permette di accedere a sezioni di informazioni. A differenza della partizione *Comuni* in questo caso le informazioni sono state suddivise per categorie: l'utente può dunque ricercare una serie di informazioni legate a quella sezione, la quale ne mostrerà tutti i risultati relativi alla stessa all'interno della provincia.\
 ```Se ad esempio un utente fosse interessato nella ricerca di informazioni legate alla sezione *Chiesa*, questa mostrerà tutte le chiese presenti all'interno della provincia di Macerata.```
 L'organizzazione interna della sezione risulta poi identica a quella descritta per la partizione *Comuni*.
 <p align="right">
@@ -189,11 +188,12 @@ L'organizzazione interna della sezione risulta poi identica a quella descritta p
 Il primo pulsante in alto nella toolbar, partendo da sinistra è quello relativo agli *Extra*.  \\ L'idea che ci ha portato a decidere di inserire gli extra è stata quella di avere un'interazione più semplice e diretta da parte dell'utente rispetto ad alcune applicazioni che avrebbe già potuto conoscere, tra cui:
 - *Cronache Maceratesi*;
 - *Groupon*;
-- *TheFork*.
+- *TheFork*.\
+
 Ogni sezione rimanda alla pagina corrispondente: in questo modo l'utente non avrà più bisogno di avere diverse applicazioni all'interno del telefono, ma con più facilità potrà direttamente accedere ai vari servizi con maggiore semplicità (essendo qui accorpate)  e risparmiare spazio in memoria.
 #### Geolocalizzazione
 
-Il secondo pulsante è utile alla *Geolocalizzazione*.  \\ Al primo utilizzo verrà richiesto di consentire all'applicazione di accedere alla posizione corrente:
+Il secondo pulsante è utile alla *Geolocalizzazione*.\  Al primo utilizzo verrà richiesto di consentire all'applicazione di accedere alla posizione corrente:
 
 <p align="center">
 	<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/PermessiPosizione.PNG">
@@ -205,9 +205,9 @@ Una volta consentito l'accesso per ogni altro utilizzo il consenso di utilizzo d
 <p align="center">
 	<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/RicercaPosizione.PNG">
 
-#### Offline
+#### Risorse Offline
 
-Il secondo pulsante  ci permette di accedere alla schermata *offline*.  \\ La presenza del pulsantino identificato dal *+* permette come descritto in precedenza di accedere alle informazioni anche senza una connessione internet: le stesse saranno accessibili all'utente nella sezione **Risorse Offline**.
+Il secondo pulsante  ci permette di accedere alla schermata *offline*.\ La presenza del pulsantino identificato dal *+* permette come descritto in precedenza di accedere alle informazioni anche senza una connessione internet: le stesse saranno accessibili all'utente nella sezione *Risorse Offline*.
 
 <p align="center">
 	<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/RisorseOffline.PNG">
@@ -215,7 +215,7 @@ Il secondo pulsante  ci permette di accedere alla schermata *offline*.  \\ La pr
 Se non è presente connessione ad internet sarà la stessa applicazione a forzare l'utilizzo della modalità offline: effettuata una qualsiasi ricerca in assenza di rete comparirà la seguente schermata:
 
 <p align="center">
-  <img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/RicercaOffline.PNG"> 
+  <img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/RicercaOffline.PNG">
 
 
 <p align="center">
