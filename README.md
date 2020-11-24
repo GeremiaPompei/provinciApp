@@ -177,6 +177,8 @@ La partizione  *Comuni* è costituita da tante cards quanti sono i comuni della 
 
 Premendo su una di queste cards si visualizzerà l'elenco dei pacchetti inerenti al proprio comune.
 
+Per aggiornare questa schermata basta trascinarla verso il basso.
+
 #### *Categorie*
 
 <p align="center"> <img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Categorie.PNG">
@@ -185,8 +187,10 @@ La partizione *Categorie* è costituita da tante cards quanti sono le categorie 
 
 Premendo su una di queste cards si visualizzerà l'elenco dei pacchetti inerenti alla categoria selezionata.
 
-#### Extra
-Il primo pulsante in alto nella toolbar, partendo da sinistra è quello relativo agli *Extra*. 
+Per aggiornare questa schermata basta trascinarla verso il basso.
+
+#### *Extra*
+Il primo pulsante in alto nell'appbar, partendo da sinistra è quello relativo agli *Extra*. 
 
 L'idea che ci ha portato a decidere di inserire gli extra è stata quella di avere un'interazione più semplice e diretta da parte dell'utente rispetto ad alcune applicazioni che avrebbe già potuto conoscere, tra cui:
 - *Cronache Maceratesi*;
@@ -194,7 +198,7 @@ L'idea che ci ha portato a decidere di inserire gli extra è stata quella di ave
 - *TheFork*.
 
 Ogni sezione rimanda alla pagina corrispondente: in questo modo l'utente non avrà più bisogno di avere diverse applicazioni all'interno del telefono, ma con più facilità potrà direttamente accedere ai vari servizi con maggiore semplicità (essendo qui accorpate)  e risparmiare spazio in memoria.
-#### Geolocalizzazione
+#### *Geolocalizzazione*
 
 Il secondo pulsante è utile alla *Geolocalizzazione*.
 
@@ -203,7 +207,7 @@ Al primo utilizzo verrà richiesto di consentire all'applicazione di accedere al
 <p align="center">
 	<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/PermessiPosizione.PNG">
 
-Una volta consentito l'accesso per ogni altro utilizzo il consenso di utilizzo della posizione non sarà più richiesto. A questo punto l'applicazione sfruttando la posizione attuale dell'utente mostrerà i risultati relativi alle informazioni presenti nell'area trovata.
+Una volta consentito l'accesso l'applicazione sfruttando la posizione attuale dell'utente mostrerà i risultati relativi alle informazioni presenti nell'area trovata.
 
 <p align="center">
 	<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/LoadingPosizione.PNG">
@@ -224,6 +228,62 @@ Se non è presente connessione ad internet sarà la stessa applicazione a forzar
 <p align="center">
   <img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/RicercaOffline.PNG">
 
+In questa sezione è possibile eliminare le risorse tramite il relativo pulsante *-*. La risorsa non scompare dalla sezione però fino ad un aggiornamento così da permettere all'utente di recuperare questa in caso di errore.
+
+Per aggiornare le risorse offline basta trascinare la schermata verso il basso.
+
+#### *Lista Pacchetti*
+
+Una volta eseguita una ricerca tramite le *4 modalità*:
+
+- Barra di ricerca in <a href="#esplora">Esplora</a>;
+- Pulsante della <a href="#geolocalizzazione">Geolocalizzazione</a>;
+- Pulsante relativo ad un Comune nella schermata <a href="#comuni">Comuni</a>;
+- Pulsante relativo ad una Categoria nella schermata <a href="#categorie">Categorie</a>;
+
+Si viene reindirizzati ad una schermata contenente la *lista dei pacchetti* inerenti alla ricerca.
+
+Ognuno di questi pacchetti se premuto offre un'altra schermata relativa alle risorse inerenti al pacchetto selezionato.
+
+É possibile eseguire una ricerca di una lista di pacchetti anche grazie alle ultime ricerche nella sezione *esplora*. In questo caso la ricerca risulterà immediata poiché sfrutterà la cache e non verrà fatta tramite internet.
+
+<p align="center">
+  <img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/ListaPacchetti.PNG">
+
+#### *Lista Risorse*
+
+Effettuata una ricerca tramite un pacchetto grazie alla singola pressione sul pulsante che lo identifica si verrà reindirizzati ad una nuova schermata che mostra la *lista delle risorse* ricercate.
+
+Premendo poi su una di queste risorse si verrà reindirizzati ad una schermata relativa al dettaglio di quest'ultima.
+
+Premendo invece nel bottone "*+*" a destra di ogni risorsa è possibile salvare quest'ultima offline nella <a href="#risorseoffline">sezione apposita</a> (con il pulsante "*-*" invece è possibile eliminarla dalla sezione offline).
+
+É possibile eseguire una ricerca di una lista di risorse anche grazie alle ultime ricerche nella sezione *esplora*. In questo caso la ricerca risulterà immediata poiché sfrutterà la cache e non verrà fatta tramite internet.
+
+<p align="center">
+  <img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/ListaRisorse.PNG">
+
+#### *Dettaglio Risorsa*
+
+Arrivati ad una lista di risorse ricercate o alla schermata delle risorse offline basta premere su una di queste per visualizzare con una nuova schermata la risorsa nel dettaglio. In particolare verranno visualizzati:
+
+- **Immagine** della risorsa;
+- **Nome** della risorsa;
+- **Descrizione** della risorsa ;
+- **Info** relative ad ulteriori dati inerenti alla risorsa;
+- **Telefono**, ovvero l'elenco dei numeri di telefono della risorsa;
+- **Mappa**, ovvero una visualizzazione grafica della posizione della risorsa in una mappa;
+- Il pulsante relativo all'**Email** per contattare tramite questa la risorsa;
+- Il pulsante relativo alla **Posizione** per aprire la posizione della risorsa in un'altra app specifica per le mappe interna al dispositivo utilizzato;
+- Il pulsante relativo al **Link** per visualizzare la risorsa nel proprio sito;
+- Il pulsante relativo a **Condividi** per inviare il link della risorsa tramite social;
+
+Non tutte le risorse presentano tali informazioni, infatti esse cambiano dal tipo di risorsa visualizzata.
+
+Oltre a ciò in alto a destra è possibile visualizzare il pulsante "*+*" per salvare la risorsa offline ("*-*" se la risorsa è gia stata salvata).
+
+<p align="center">
+  <img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/DettaglioRisorsa.PNG">
 
 <p align="center">
 <a href="#provinciapp"> <img style="float: right;" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Home.png" width="15" height="15" Hspace="4"></a>
@@ -232,9 +292,6 @@ Se non è presente connessione ad internet sarà la stessa applicazione a forzar
 
 
 ## Specifiche
-
-
-
 
 #### Flutter
 
