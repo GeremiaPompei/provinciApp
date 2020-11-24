@@ -156,7 +156,7 @@ Spiegati questi due termini fondamentali per la comprensione dello sviluppo dell
 
 #### *Esplora*
 
-<img width="260" src= 							 "https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Esplora.PNG">  
+<p align="center"> <img width="260" src= 					"https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Esplora.PNG">  
 
 Aperta l'applicazione, questa è la prima schermata che l'utente visionerà. 
 
