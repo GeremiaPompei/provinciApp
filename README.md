@@ -191,6 +191,10 @@ Premendo su una di queste cards si visualizzerà l'elenco dei pacchetti inerenti
 Per aggiornare questa schermata basta trascinarla verso il basso.
 
 #### *Extra*
+
+<p align="center">
+  <img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Extra.PNG">
+  
 Il primo pulsante in alto nell'appbar, partendo da sinistra è quello relativo agli *Extra*. 
 
 L'idea che ci ha portato a decidere di inserire gli extra è stata quella di avere un'interazione più semplice e diretta da parte dell'utente rispetto ad alcune applicazioni che avrebbe già potuto conoscere, tra cui:
@@ -283,7 +287,10 @@ Non tutte le risorse presentano tali informazioni, infatti esse cambiano dal tip
 Oltre a ciò in alto a destra è possibile visualizzare il pulsante "*+*" per salvare la risorsa offline ("*-*" se la risorsa è gia stata salvata).
 
 <p align="center">
-  <img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/DettaglioRisorsa.PNG">
+  <img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/DettaglioRisorsa1.PNG"> &emsp; &emsp;
+  <img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/DettaglioRisorsa2.PNG"> &emsp; &emsp;
+  <img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/DettaglioRisorsa3.PNG"> &emsp; &emsp;
+  <img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/DettaglioRisorsa4.PNG">
 
 <p align="center">
 <a href="#provinciapp"> <img style="float: right;" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Home.png" width="15" height="15" Hspace="4"></a>
