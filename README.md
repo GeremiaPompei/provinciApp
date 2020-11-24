@@ -211,7 +211,7 @@ Al primo utilizzo verrà richiesto di consentire all'applicazione di accedere al
 Una volta consentito l'accesso l'applicazione sfruttando la posizione attuale dell'utente mostrerà i risultati relativi alle informazioni presenti nell'area trovata.
 
 <p align="center">
-	<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/LoadingPosizione.PNG">
+	<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/LoadingPosizione.PNG"> &emsp; &emsp;
 <img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/RicercaPosizione.PNG">
 
 #### *RisorseOffline*
