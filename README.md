@@ -105,9 +105,9 @@ Ogni sezione offre una particolare funzionalità dell'applicazione, spiegata nel
 <br>
 
 <p align="center">
-	<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Esplora.PNG"> &emsp; &emsp;
-<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Comuni.PNG"> &emsp; &emsp;
-<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Categorie.PNG"> &emsp; &emsp;
+	<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Esplora.PNG">
+<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Comuni.PNG">
+<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Categorie.PNG">
 
 <br>
 <br>
@@ -157,7 +157,7 @@ Spiegati questi due termini fondamentali per la comprensione dello sviluppo dell
 
 #### *Esplora*
 
-<p align="center"> <img width="260" src= 					"https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Esplora.PNG">  &emsp; &emsp;
+<p align="center"> <img width="260" src= 					"https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Esplora.PNG">
 
 Aperta l'applicazione, questa è la prima schermata che l'utente visionerà. 
 
@@ -172,7 +172,7 @@ L'utente vedrà quindi comparire
 
 #### *Comuni*
 
-<p align="center"> <img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Comuni.PNG"> &emsp; &emsp;
+<p align="center"> <img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Comuni.PNG">
 
 La partizione  *Comuni* è costituita da tante cards quanti sono i comuni della provincia di macerata.
 
@@ -182,7 +182,7 @@ Per aggiornare questa schermata basta trascinarla verso il basso.
 
 #### *Categorie*
 
-<p align="center"> <img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Categorie.PNG"> &emsp; &emsp;
+<p align="center"> <img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Categorie.PNG">
 
 La partizione *Categorie* è costituita da tante cards quanti sono le categorie in cui sono raggruppati i pacchetti delle risorse della provincia di macerata.
 
@@ -193,7 +193,7 @@ Per aggiornare questa schermata basta trascinarla verso il basso.
 #### *Extra*
 
 <p align="center">
-  <img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Extra.PNG"> &emsp; &emsp;
+  <img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Extra.PNG">
   
 Il primo pulsante in alto nell'appbar, partendo da sinistra è quello relativo agli *Extra*. 
 
@@ -210,13 +210,13 @@ Il secondo pulsante è utile alla *Geolocalizzazione*.
 Al primo utilizzo verrà richiesto di consentire all'applicazione di accedere alla posizione corrente:
 
 <p align="center">
-	<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/PermessiPosizione.PNG"> &emsp; &emsp;
+	<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/PermessiPosizione.PNG">
 
 Una volta consentito l'accesso l'applicazione sfruttando la posizione attuale dell'utente mostrerà i risultati relativi alle informazioni presenti nell'area trovata.
 
 <p align="center">
-	<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/LoadingPosizione.PNG"> &emsp; &emsp;
-<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/RicercaPosizione.PNG"> &emsp; &emsp;
+	<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/LoadingPosizione.PNG">
+<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/RicercaPosizione.PNG">
 
 #### *RisorseOffline*
 
@@ -225,7 +225,7 @@ Il secondo pulsante  ci permette di accedere alla schermata *offline*.
 La presenza del pulsantino identificato dal "*+*" permette come descritto in precedenza di accedere alle informazioni anche senza una connessione internet: le stesse saranno accessibili all'utente nella sezione *Risorse Offline*.
 
 <p align="center">
-	<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/RisorseOffline.PNG"> &emsp; &emsp;
+	<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/RisorseOffline.PNG">
 
 Se non è presente connessione ad internet sarà la stessa applicazione a forzare l'utilizzo della modalità offline: effettuata una qualsiasi ricerca in assenza di rete comparirà la seguente schermata:
 
@@ -252,7 +252,7 @@ Ognuno di questi pacchetti se premuto offre un'altra schermata relativa alle ris
 É possibile eseguire una ricerca di una lista di pacchetti anche grazie alle ultime ricerche nella sezione *esplora*. In questo caso la ricerca risulterà immediata poiché sfrutterà la cache e non verrà fatta tramite internet.
 
 <p align="center">
-  <img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/ListaPacchetti.PNG"> &emsp; &emsp;
+  <img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/ListaPacchetti.PNG">
 
 #### *Lista Risorse*
 
@@ -265,7 +265,7 @@ Premendo invece nel bottone "*+*" a destra di ogni risorsa è possibile salvare 
 É possibile eseguire una ricerca di una lista di risorse anche grazie alle ultime ricerche nella sezione *esplora*. In questo caso la ricerca risulterà immediata poiché sfrutterà la cache e non verrà fatta tramite internet.
 
 <p align="center">
-  <img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/ListaRisorse.PNG"> &emsp; &emsp;
+  <img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/ListaRisorse.PNG">
 
 #### *Dettaglio Risorsa*
 
@@ -287,10 +287,10 @@ Non tutte le risorse presentano tali informazioni, infatti esse cambiano dal tip
 Oltre a ciò in alto a destra è possibile visualizzare il pulsante "*+*" per salvare la risorsa offline ("*-*" se la risorsa è gia stata salvata).
 
 <p align="center">
-  <img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/DettaglioRisorsa1.PNG"> &emsp; &emsp;
-  <img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/DettaglioRisorsa2.PNG"> &emsp; &emsp;
-  <img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/DettaglioRisorsa3.PNG"> &emsp; &emsp;
-  <img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/DettaglioRisorsa4.PNG"> &emsp; &emsp;
+  <img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/DettaglioRisorsa1.PNG">
+  <img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/DettaglioRisorsa2.PNG">
+  <img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/DettaglioRisorsa3.PNG">
+  <img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/DettaglioRisorsa4.PNG">
 
 <p align="center">
 <a href="#provinciapp"> <img style="float: right;" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Home.png" width="15" height="15" Hspace="4"></a>
