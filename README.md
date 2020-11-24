@@ -104,9 +104,10 @@ Ogni sezione offre una particolare funzionalità dell'applicazione, spiegata nel
 <br>
 <br>
 
-<img style="float: left;" width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Esplora.PNG"> &emsp; &emsp;
+<p align="center">
+	<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Esplora.PNG"> &emsp; &emsp;
 <img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Comuni.PNG"> &emsp; &emsp;
-<img style="float: right;" width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Categorie.PNG">
+<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Categorie.PNG">
 
 <br>
 <br>
@@ -211,14 +212,13 @@ Una volta consentito l'accesso l'applicazione sfruttando la posizione attuale de
 
 <p align="center">
 	<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/LoadingPosizione.PNG">
-<p align="center">
-	<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/RicercaPosizione.PNG">
+<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/RicercaPosizione.PNG">
 
 #### *RisorseOffline*
 
 Il secondo pulsante  ci permette di accedere alla schermata *offline*.
 
-La presenza del pulsantino identificato dal *+* permette come descritto in precedenza di accedere alle informazioni anche senza una connessione internet: le stesse saranno accessibili all'utente nella sezione *Risorse Offline*.
+La presenza del pulsantino identificato dal "*+*" permette come descritto in precedenza di accedere alle informazioni anche senza una connessione internet: le stesse saranno accessibili all'utente nella sezione *Risorse Offline*.
 
 <p align="center">
 	<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/RisorseOffline.PNG">
@@ -228,7 +228,7 @@ Se non è presente connessione ad internet sarà la stessa applicazione a forzar
 <p align="center">
   <img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/RicercaOffline.PNG">
 
-In questa sezione è possibile eliminare le risorse tramite il relativo pulsante *-*. La risorsa non scompare dalla sezione però fino ad un aggiornamento così da permettere all'utente di recuperare questa in caso di errore.
+In questa sezione è possibile eliminare le risorse tramite il relativo pulsante "*-*". La risorsa non scompare dalla sezione però fino ad un aggiornamento così da permettere all'utente di recuperare questa in caso di errore.
 
 Per aggiornare le risorse offline basta trascinare la schermata verso il basso.
 
