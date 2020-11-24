@@ -1,4 +1,5 @@
 
+
 <div>
 <p>  
 		 <h1 align="center">provinciApp</h1>
@@ -120,8 +121,8 @@ Ogni sezione offre una particolare funzionalità dell'applicazione, spiegata nel
 
 Analizzando gli stessi da sinistra verso destra:
 - il primo ci permetterà di accedere ad alcune funzionalità  <a href="#extra">Extra</a>  quali Cronache Maceratesi, Groupon e The Fork;
-- -il secondo ci permette la  <a href="#geolocalizzazione">Geolocalizzazione</a> dell'utente;
-- il terzo consente l'accesso da parte dell'utente alle <a href="#risorse offline">Offline</a>.
+- il secondo ci permette la  <a href="#geolocalizzazione">Geolocalizzazione</a> dell'utente;
+- il terzo consente l'accesso da parte dell'utente alle <a href="#risorseoffline">Risorse Offline</a>.
 <br>
 <br>
 
@@ -147,49 +148,42 @@ La macrocategoria in questione permette di visualizzare i dati che l'utente può
 
 ## Utilizzo
 In questa sezione viene illustrato come utilizzare provinciApp, mostrandone le varie funzionalità.
-Come visto in precedenza, la struttura è organizzata in base a cosa può essere effettuato con la connessione e cosa no, nel particolare andremo ad analizzare ogni partizione.
+Importante è distinguere innanzitutto ciò che viene identificato come risultato di una ricerca. Gli elementi ricavati da quest'ultima possono essere di due tipi:
+- **Pacchetti**:  Sono i risultati delle ricerche effettuate tramite: la barra apposita di  <a href="#esplora">Esplora</a>, tramite il pulsante presente nella schermata principale in alto a destra per la <a href="#geolocalizzazione">Geolocalizzazione</a>, tramite un Comune presente nella relativa schermata sui <a href="#comuni">Comuni</a> e tramite una Categoria presente nella relativa schermata sulle <a href="#categorie">Categorie</a>. Ogni Pacchetto presentato se premuto permetterà la visualizzazione di una serie di Risorse.
+- **Risorse**: Sono i risultati delle ricerche effettuate tramite un Pacchetto. Presentati una serie di Pacchetti trovati con una prima ricerca premendo su uno di questi viene visualizzata una lista di Risorse. Premendo su una Risorsa si accederà ad una schermata che presenta la visualizzazione dettagliata di quest'ultima.
 
+Spiegati questi due termini fondamentali per la comprensione dello sviluppo dell'applicazione procediamo con le specifiche di ogni macropartizione.
 
 #### *Esplora*
 
-<div>  
-	<img width="260" src= 							 "https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Esplora.PNG"  	style="float:right">  
-	<p>
+<img width="260" src= 							 "https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Esplora.PNG">  
+
 Aperta l'applicazione, questa è la prima schermata che l'utente visionerà. 
 
-In 'Esplora' è possibile effettuare delle ricerche rispetto ciò che si intende ricercare, e verrà 						restituito se presente all'interno del database. 
+In 'Esplora' è possibile effettuare delle ricerche tramite una parola chiave immessa nella barra apposita, e verranno restituiti se presenti i pacchetti inerenti alla parola chiave in una lista. Con la pressione su uno dei pacchetti presentati verrà visualizzata in un'altra schermata la lista delle risorse contenute in esso. 
 
-La schermata risulterà vuota al primo utilizzo, ossia quando nessuna ricerca è stata effettuata, 		mentre si andrà a comporre di due due sottosezioni relative alle ultime ricerche effettuate. 
+La schermata sotto la barra di ricerca risulterà vuota al primo utilizzo, ossia quando nessuna ricerca è stata effettuata, mentre si andrà a comporre di due a due sottosezioni relative alle ultime ricerche effettuate. 
 
-L'utente vedrà quindi comparire *Ultime ricerche Pacchetti*, che mostrerà le ultime quattro 	ricerche effettuate tramite la barra di ricerca; e *Ultime ricerche Risorse*, che mostrerà le ultime 		quattro ricerche effettuate a partire dalle cards presenti nella sezione Comuni.
-	</p>  
-</div>
+L'utente vedrà quindi comparire 
+- *Ultime ricerche Pacchetti*: che mostrerà le ultime quattro ricerche sui Pacchetti (ovvero le ultime ricerche effettuate tramite la barra apposita in esplora, la geolocalizzazione, un comune o una categoria). Premendo su uno di essi verrà visualizzata una nuova schermata con l'elenco dei pacchetti relativi all'ultima ricerca selezionata.
+
+- *Ultime ricerche Risorse*: che mostrerà le ultime quattro ricerche effettuate sulle Risorse (ovvero le ultime liste di risorse visualizzate premendo sui pacchetti). Premendo su una di esse verrà visualizzata una nuova schermata con l'elenco delle risorse relative all'ultimo pacchetto ricercato.
 
 #### *Comuni*
 
+<p align="center"> <img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Comuni.PNG">
 
 La partizione  *Comuni* è costituita da tante cards quanti sono i comuni della provincia di macerata.
 
-Per visualizzare il contenuto di ogni card è sufficiente premere sopra quella desiderata. La singola card è strutturata in settori secondo il modello del database e per ognuno di questi ne troveremo dunque di differenti tipologie. 
-Ogni sezione può essere aperta cliccando su di essa, questa nel particolare è strutturata in:
-- Una **descrizione** della particolare sezione selezionata dall'utente che ne descrive le caratteristiche principali
-- Alcune **Informazioni** sotto la voce *Info* la quale mostra alcune proprietà della sezione scelta (quali il nome del titolare di un ristorante ad esempio) le quali differiscono a seconda della sezione stessa e dunque non omogenee per tutte (ad esempio una sezione di ristoranti non conterrà le stesse informazioni che può contenere la sezione teatri)
-- La presenza di due particolari pulsanti:
-					- Il primo permette di reindirizzare l'utente al sito internet della sezione scelta;
-					- il secondo permette la condivisione della sezione attraverso i social presenti all'interno dello smartphone.
-- Un pulsantino con il simbolo *+* :  questo permette il salvataggio dell'informazione che sarà poi accessibile nelle *Risorse Offline* anche senza la presenza di una connesione internet.
-
-<p align="left">
-	<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Comuni.PNG">
+Premendo su una di queste cards si visualizzerà l'elenco dei pacchetti inerenti al proprio comune.
 
 #### *Categorie*
-La partizione *Categorie* permette di accedere a sezioni di informazioni. A differenza della partizione *Comuni* in questo caso le informazioni sono state suddivise per categorie: l'utente può dunque ricercare una serie di informazioni legate a quella sezione, la quale ne mostrerà tutti i risultati relativi alla stessa all'interno della provincia.
 
-```Se ad esempio un utente fosse interessato nella ricerca di informazioni legate alla sezione *Chiesa*, questa mostrerà tutte le chiese presenti all'interno della provincia di Macerata.```
+<p align="center"> <img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Categorie.PNG">
 
-L'organizzazione interna della sezione risulta poi identica a quella descritta per la partizione *Comuni*.
-<p align="right">
-	<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Categorie.PNG">
+La partizione *Categorie* è costituita da tante cards quanti sono le categorie in cui sono raggruppati i pacchetti delle risorse della provincia di macerata.
+
+Premendo su una di queste cards si visualizzerà l'elenco dei pacchetti inerenti alla categoria selezionata.
 
 #### Extra
 Il primo pulsante in alto nella toolbar, partendo da sinistra è quello relativo agli *Extra*. 
@@ -216,7 +210,7 @@ Una volta consentito l'accesso per ogni altro utilizzo il consenso di utilizzo d
 <p align="center">
 	<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/RicercaPosizione.PNG">
 
-#### Risorse Offline
+#### *RisorseOffline*
 
 Il secondo pulsante  ci permette di accedere alla schermata *offline*.
 
