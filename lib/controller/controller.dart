@@ -134,6 +134,7 @@ class Controller {
       }
     }
     _scriviCache();
+    initExtra();
     return this.comuni;
   }
 
@@ -150,6 +151,7 @@ class Controller {
       }
     }
     _scriviCache();
+    initExtra();
     return this.categorie;
   }
 
@@ -163,6 +165,7 @@ class Controller {
         el = list[el.idIndice];
       }
     } catch (e) {}
+    initExtra();
     return offline;
   }
 

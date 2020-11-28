@@ -25,5 +25,5 @@ class CostantiWeb {
 
   /// Url Extra
   static final urlExtra =
-      'https://raw.githubusercontent.com/GeremiaPompei/provinciApp/master/assets/extra.json';
+      'https://raw.githubusercontent.com/GeremiaPompei/provinciApp-extra/main/extra.json';
 }
