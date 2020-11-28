@@ -1,5 +1,6 @@
 
 
+
 <div>
 <p>  
 		 <h1 align="center">provinciApp</h1>
@@ -200,9 +201,15 @@ Il primo pulsante in alto nell'appbar, partendo da sinistra è quello relativo a
 L'idea che ci ha portato a decidere di inserire gli extra è stata quella di avere un'interazione più semplice e diretta da parte dell'utente rispetto ad alcune applicazioni che avrebbe già potuto conoscere, tra cui:
 - *Cronache Maceratesi*;
 - *Groupon*;
-- *TheFork*.
+- *TheFork*;
+- ...
 
 Ogni sezione rimanda alla pagina corrispondente: in questo modo l'utente non avrà più bisogno di avere diverse applicazioni all'interno del telefono, ma con più facilità potrà direttamente accedere ai vari servizi con maggiore semplicità (essendo qui accorpate)  e risparmiare spazio in memoria.
+
+Il bottone Extra compare solamente se l'utente è online. Se al contrario risulta offline, dopodiché si riconnette alla rete, con un semplice refresh ricompare il pulsante.
+
+Gli Extra sono stati concepiti in maniera dinamica; ovvero è stata usata una costruzione specifica basata su un file json che contiene una lista di informazioni scritte in un modo prestabilito. In tal modo è stato possibile eseguire una chiamata online ad un certo [url](https://raw.githubusercontent.com/GeremiaPompei/provinciApp-extra/main/extra.json) che restituisce tale file json così da rendere possibile la modifica delle informazioni senza aggiornare nuovamente l'app.
+
 #### *Geolocalizzazione*
 
 Il secondo pulsante è utile alla *Geolocalizzazione*.
