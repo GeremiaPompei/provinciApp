@@ -40,6 +40,9 @@ class Controller {
   /// Attributo che permette di deserializzare una stringa in lista di risorse.
   DeserializzaOffline _deserializeOffline;
 
+  /// Attributo che pèermette di tener traccia dei Pacchetti extra.
+  List<Pacchetto> _extra;
+
   /// Costruttore del controller che inizializza le varie variabili.
   Controller() {
     _cache = new Cache();
@@ -49,6 +52,7 @@ class Controller {
     _deserializeCache = new DeserializzaCache();
     _serializeOffline = new SerializzaOffline();
     _deserializeOffline = new DeserializzaOffline();
+    _extra = [];
   }
 
   /// Metodo utile per inizializzare il controller caricando i dati iniziali.
@@ -62,6 +66,7 @@ class Controller {
         this._cache = await _leggiCacheDaFile();
       }
       await initOffline();
+      await initExtra();
       _scriviCache();
       _scriviOffline();
     }
@@ -159,6 +164,15 @@ class Controller {
       }
     } catch (e) {}
     return offline;
+  }
+
+  /// Metodo utile per inizializzare i pacchetti extra.
+  Future<dynamic> initExtra() async {
+    try {
+      this._extra = await this._httpRequest.getExtra();
+    } catch (e) {
+      this._extra = [];
+    }
   }
 
   /// Metodo utile per la posizione locale.
@@ -314,7 +328,7 @@ class Controller {
   }
 
   /// Metodo che fornisce i pacchetti degli extra.
-  List<Pacchetto> get extra => CostantiWeb.urlsExtra;
+  List<Pacchetto> get extra => this._extra;
 
   List<Future<Pacchetto>> get comuni => this._cache.comuni;
 

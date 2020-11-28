@@ -16,10 +16,7 @@ void main() {
         builder: (context, snapshot) {
           Widget tmpWidget;
           if (snapshot.hasData)
-            tmpWidget = MainView(
-              controller,
-              1,
-            );
+            tmpWidget = MainView(controller, 1);
           else
             tmpWidget = LoadingView();
           return tmpWidget;

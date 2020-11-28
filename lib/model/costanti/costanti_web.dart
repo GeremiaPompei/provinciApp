@@ -23,18 +23,7 @@ class CostantiWeb {
   /// Url per la ricerca di una categoria con un certo id.
   static const urlProvinciaCategorieShow = urlProvincia + 'group_show?id=';
 
-  /// Urls Extra
-  static final urlsExtra = [
-    Pacchetto(
-        'Cronache Maceratesi', 'News', 'https://www.cronachemaceratesi.it/',
-        immagineUrl:
-            'https://www.cronachemaceratesi.it/wp-content/uploads/static/img/apple/touch-icon-iphone.png'),
-    Pacchetto('GROUPON', 'Promo', 'https://www.groupon.it/offerte/macerata/',
-        immagineUrl:
-            'https://www2.grouponcdn.com/layout/assets/grpn-favicon-76x76-13990cf550.png'),
-    Pacchetto('thefork', 'Ristorazione',
-        'https://www.thefork.it/search/?cityId=326991',
-        immagineUrl:
-            'https://cdn.theforkmanager.com/static/body-images/gerez-efficacement-vos-reservations-avec-la-fourchette-the-fork-systeme-de-reservation.jpg'),
-  ];
+  /// Url Extra
+  static final urlExtra =
+      'https://raw.githubusercontent.com/GeremiaPompei/provinciApp/master/assets/extra.json';
 }

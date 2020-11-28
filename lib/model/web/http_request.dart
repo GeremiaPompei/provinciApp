@@ -90,4 +90,16 @@ class HttpRequest {
   Future<http.Response> _responseByGet(String url) async {
     return await http.Client().get(Uri.parse(url));
   }
+
+  /// Metodo che permette di ricavare il json degli extra da un file json
+  /// online.
+  Future<dynamic> getExtra() async {
+    Map<String, dynamic> map = await _getBody(CostantiWeb.urlExtra);
+    List<Pacchetto> result = [];
+    for (Map extra in map['extra']) {
+      result.add(Pacchetto(extra['nome'], extra['descrizione'], extra['url'],
+          immagineUrl: extra['urlImmagine']));
+    }
+    return result;
+  }
 }

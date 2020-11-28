@@ -38,17 +38,18 @@ class _AppBarMainViewState extends State<AppBarMainView> {
       sfondoChiaro: true,
       titolo: widget._title,
       actions: [
-        IconButton(
-            icon: CustomIcon(
-              Icona.extra,
-              Colore.primario,
-            ),
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (context) => ListaExtraView(widget._controller),
-              );
-            }),
+        if (widget._controller.extra.isNotEmpty)
+          IconButton(
+              icon: CustomIcon(
+                Icona.extra,
+                Colore.primario,
+              ),
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => ListaExtraView(widget._controller),
+                );
+              }),
         IconButton(
           color: Colore.primario,
           icon: CustomIcon(Icona.posizione, Colore.primario),
