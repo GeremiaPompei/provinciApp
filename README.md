@@ -151,8 +151,14 @@ La macrocategoria in questione permette di visualizzare i dati che l'utente può
 ## Utilizzo
 In questa sezione viene illustrato come utilizzare provinciApp, mostrandone le varie funzionalità.
 Importante è distinguere innanzitutto ciò che viene identificato come risultato di una ricerca. Gli elementi ricavati da quest'ultima possono essere di due tipi:
-- **Pacchetti**:  Sono i risultati delle ricerche effettuate tramite: la barra apposita di  <a href="#esplora">Esplora</a>, tramite il pulsante presente nella schermata principale in alto a destra per la <a href="#geolocalizzazione">Geolocalizzazione</a>, tramite un Comune presente nella relativa schermata sui <a href="#comuni">Comuni</a> e tramite una Categoria presente nella relativa schermata sulle <a href="#categorie">Categorie</a>. Ogni Pacchetto presentato se premuto permetterà la visualizzazione di una serie di Risorse.
-- **Risorse**: Sono i risultati delle ricerche effettuate tramite un Pacchetto. Presentati una serie di Pacchetti trovati con una prima ricerca premendo su uno di questi viene visualizzata una lista di Risorse. Premendo su una Risorsa si accederà ad una schermata che presenta la visualizzazione dettagliata di quest'ultima.
+- **Pacchetti**:  Sono i risultati delle ricerche effettuate tramite: 
+- la barra apposita di  <a href="#esplora">Esplora</a>,;
+- il pulsante presente nella schermata principale in alto a destra per la <a href="#geolocalizzazione">Geolocalizzazione</a>;
+- tramite un Comune presente nella relativa schermata dei <a href="#comuni">Comuni</a>;
+- tramite una Categoria presente nella relativa schermata sulle <a href="#categorie">Categorie</a>.
+
+Ogni Pacchetto presentato se premuto permetterà la visualizzazione di una serie di Risorse.
+- **Risorse**: Sono i risultati delle ricerche effettuate tramite un Pacchetto. Nella schermata vengono resentati una serie di Pacchetti dovuti ad una precedente ricerca: premendo su uno di questi verrà visualizzata una lista di Risorse. Premendo su una Risorsa si accederà ad una schermata che presenta la visualizzazione dettagliata di quest'ultima.
 
 Spiegati questi due termini fondamentali per la comprensione dello sviluppo dell'applicazione procediamo con le specifiche di ogni macropartizione.
 
@@ -162,14 +168,14 @@ Spiegati questi due termini fondamentali per la comprensione dello sviluppo dell
 
 Aperta l'applicazione, questa è la prima schermata che l'utente visionerà. 
 
-In 'Esplora' è possibile effettuare delle ricerche tramite una parola chiave immessa nella barra apposita, e verranno restituiti se presenti i pacchetti inerenti alla parola chiave in una lista. Con la pressione su uno dei pacchetti presentati verrà visualizzata in un'altra schermata la lista delle risorse contenute in esso. 
+In 'Esplora' è possibile effettuare delle ricerche tramite una parola chiave immessa nella barra apposita, e verranno restituiti se presenti i pacchetti inerenti alla parola chiave in una lista. Premendo sopra uno dei pacchetti presentati, verrà visualizzata in un'altra schermata la lista delle risorse contenute in esso. 
 
 La schermata sotto la barra di ricerca risulterà vuota al primo utilizzo, ossia quando nessuna ricerca è stata effettuata, mentre si andrà a comporre di due a due sottosezioni relative alle ultime ricerche effettuate. 
 
-L'utente vedrà quindi comparire 
-- *Ultime ricerche Pacchetti*: che mostrerà le ultime quattro ricerche sui Pacchetti (ovvero le ultime ricerche effettuate tramite la barra apposita in esplora, la geolocalizzazione, un comune o una categoria). Premendo su uno di essi verrà visualizzata una nuova schermata con l'elenco dei pacchetti relativi all'ultima ricerca selezionata.
+L'utente vedrà quindi comparire: 
+- *Ultime ricerche Pacchetti*: che mostrerà le ultime quattro ricerche dei Pacchetti (ovvero le ultime ricerche effettuate tramite la barra apposita in esplora, la geolocalizzazione, un comune o una categoria). Premendo su uno di essi verrà visualizzata una nuova schermata con l'elenco dei pacchetti relativi all'ultima ricerca selezionata.
 
-- *Ultime ricerche Risorse*: che mostrerà le ultime quattro ricerche effettuate sulle Risorse (ovvero le ultime liste di risorse visualizzate premendo sui pacchetti). Premendo su una di esse verrà visualizzata una nuova schermata con l'elenco delle risorse relative all'ultimo pacchetto ricercato.
+- *Ultime ricerche Risorse*: mostrerà le ultime quattro ricerche effettuate sulle Risorse (ovvero le ultime liste di risorse visualizzate premendo sui pacchetti). Premendo su una di esse verrà visualizzata una nuova schermata con l'elenco delle risorse relative all'ultimo pacchetto ricercato.
 
 #### *Comuni*
 
@@ -185,11 +191,11 @@ Per aggiornare questa schermata basta trascinarla verso il basso.
 
 <p align="center"> <img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Categorie.PNG">
 
-La partizione *Categorie* è costituita da tante cards quanti sono le categorie in cui sono raggruppati i pacchetti delle risorse della provincia di macerata.
+La partizione *Categorie* è costituita da diverse cards secondo il numero dellecategorie in cui sono raggruppati i pacchetti delle risorse della provincia di macerata.
 
 Premendo su una di queste cards si visualizzerà l'elenco dei pacchetti inerenti alla categoria selezionata.
 
-Per aggiornare questa schermata basta trascinarla verso il basso.
+Per aggiornare questa schermata è sufficiente trascinarla verso il basso.
 
 #### *Extra*
 
@@ -204,11 +210,12 @@ L'idea che ci ha portato a decidere di inserire gli extra è stata quella di ave
 - *TheFork*;
 - ...
 
-Ogni sezione rimanda alla pagina corrispondente: in questo modo l'utente non avrà più bisogno di avere diverse applicazioni all'interno del telefono, ma con più facilità potrà direttamente accedere ai vari servizi con maggiore semplicità (essendo qui accorpate)  e risparmiare spazio in memoria.
+Ogni extra rimanda alla pagina corrispondente: in questo modo l'utente non avrà più bisogno di avere diverse applicazioni all'interno del telefono, ma con più facilità potrà direttamente accedere ai vari servizi con maggiore semplicità (essendo qui accorpate)  e risparmiare spazio in memoria.
 
-Il bottone Extra compare solamente se l'utente è online. Se al contrario risulta offline, dopodiché si riconnette alla rete, con un semplice refresh ricompare il pulsante.
+Il bottone Extra compare solamente se l'utente è online. Se al contrario risulta offline, esso non sarà presente: non appena ci si riconnette alla rete, (sarà sufficiente effettuare un refresh facendo scorrere la pagina verso il basso) il pulsante sarà nuovamente disponibile.
 
-Gli Extra sono stati concepiti in maniera dinamica; ovvero è stata usata una costruzione specifica basata su un file json che contiene una lista di informazioni scritte in un modo prestabilito. In tal modo è stato possibile eseguire una chiamata online ad un certo [url](https://raw.githubusercontent.com/GeremiaPompei/provinciApp-extra/main/extra.json) che restituisce tale file json così da rendere possibile la modifica delle informazioni senza aggiornare nuovamente l'app.
+Gli Extra sono stati concepiti in maniera dinamica, ovvero è stata usata una costruzione specifica basata su un file json che contiene una lista di informazioni scritte in un modo prestabilito. 
+Questo semplifica notevolmente la possibilità di aggiungere in qualunque momento ulteriori extra (è infatti sufficiente aggiungerlo seguendo il modello al seguente [url](https://raw.githubusercontent.com/GeremiaPompei/provinciApp-extra/main/extra.json) ).
 
 #### *Geolocalizzazione*
 
@@ -229,7 +236,7 @@ Una volta consentito l'accesso l'applicazione sfruttando la posizione attuale de
 
 Il secondo pulsante  ci permette di accedere alla schermata *offline*.
 
-La presenza del pulsantino identificato dal "*+*" permette come descritto in precedenza di accedere alle informazioni anche senza una connessione internet: le stesse saranno accessibili all'utente nella sezione *Risorse Offline*.
+La presenza del pulsantino identificato dal `+` permette come descritto in precedenza di accedere alle informazioni anche senza una connessione internet: le stesse saranno accessibili all'utente nella sezione *Risorse Offline*.
 
 <p align="center">
 	<img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/RisorseOffline.PNG">
@@ -239,7 +246,7 @@ Se non è presente connessione ad internet sarà la stessa applicazione a forzar
 <p align="center">
   <img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/RicercaOffline.PNG">
 
-In questa sezione è possibile eliminare le risorse tramite il relativo pulsante "*-*". La risorsa non scompare dalla sezione però fino ad un aggiornamento così da permettere all'utente di recuperare questa in caso di errore.
+In questa sezione è possibile eliminare le risorse tramite il relativo pulsante `-`. La risorsa non scompare dalla sezione però fino ad un aggiornamento così da permettere all'utente di recuperare questa in caso di errore.
 
 Per aggiornare le risorse offline basta trascinare la schermata verso il basso.
 
@@ -267,7 +274,7 @@ Effettuata una ricerca tramite un pacchetto grazie alla singola pressione sul pu
 
 Premendo poi su una di queste risorse si verrà reindirizzati ad una schermata relativa al dettaglio di quest'ultima.
 
-Premendo invece nel bottone "*+*" a destra di ogni risorsa è possibile salvare quest'ultima offline nella <a href="#risorseoffline">sezione apposita</a> (con il pulsante "*-*" invece è possibile eliminarla dalla sezione offline).
+Premendo invece sul bottone `+` a destra di ogni risorsa è possibile salvare quest'ultima offline nella <a href="#risorseoffline">sezione apposita</a> (con il pulsante `-` invece è possibile eliminarla dalla sezione offline).
 
 É possibile eseguire una ricerca di una lista di risorse anche grazie alle ultime ricerche nella sezione *esplora*. In questo caso la ricerca risulterà immediata poiché sfrutterà la cache e non verrà fatta tramite internet.
 
@@ -291,7 +298,7 @@ Arrivati ad una lista di risorse ricercate o alla schermata delle risorse offlin
 
 Non tutte le risorse presentano tali informazioni, infatti esse cambiano dal tipo di risorsa visualizzata.
 
-Oltre a ciò in alto a destra è possibile visualizzare il pulsante "*+*" per salvare la risorsa offline ("*-*" se la risorsa è gia stata salvata).
+Oltre a ciò in alto a destra è possibile visualizzare il pulsante `+` per salvare la risorsa offline (`-` se la risorsa è gia stata salvata).
 
 <p align="center">
   <img width="260" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/DettaglioRisorsa1.PNG">
