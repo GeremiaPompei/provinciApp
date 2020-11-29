@@ -152,10 +152,10 @@ La macrocategoria in questione permette di visualizzare i dati che l'utente può
 In questa sezione viene illustrato come utilizzare provinciApp, mostrandone le varie funzionalità.
 Importante è distinguere innanzitutto ciò che viene identificato come risultato di una ricerca. Gli elementi ricavati da quest'ultima possono essere di due tipi:
 - **Pacchetti**:  Sono i risultati delle ricerche effettuate tramite: 
-- la barra apposita di  <a href="#esplora">Esplora</a>,;
-- il pulsante presente nella schermata principale in alto a destra per la <a href="#geolocalizzazione">Geolocalizzazione</a>;
-- tramite un Comune presente nella relativa schermata dei <a href="#comuni">Comuni</a>;
-- tramite una Categoria presente nella relativa schermata sulle <a href="#categorie">Categorie</a>.
+	- la barra apposita di  <a href="#esplora">Esplora</a>,;
+	- il pulsante presente nella schermata principale in alto a destra per la <a href="#geolocalizzazione">Geolocalizzazione</a>;
+	- tramite un Comune presente nella relativa schermata dei <a href="#comuni">Comuni</a>;
+	- tramite una Categoria presente nella relativa schermata sulle <a href="#categorie">Categorie</a>.
 
 Ogni Pacchetto presentato se premuto permetterà la visualizzazione di una serie di Risorse.
 - **Risorse**: Sono i risultati delle ricerche effettuate tramite un Pacchetto. Nella schermata vengono resentati una serie di Pacchetti dovuti ad una precedente ricerca: premendo su uno di questi verrà visualizzata una lista di Risorse. Premendo su una Risorsa si accederà ad una schermata che presenta la visualizzazione dettagliata di quest'ultima.
