@@ -158,7 +158,7 @@ Importante è distinguere innanzitutto ciò che viene identificato come risultat
 	- tramite una Categoria presente nella relativa schermata sulle <a href="#categorie">Categorie</a>.
 
 Ogni Pacchetto presentato se premuto permetterà la visualizzazione di una serie di Risorse.
-- **Risorse**: Sono i risultati delle ricerche effettuate tramite un Pacchetto. Nella schermata vengono resentati una serie di Pacchetti dovuti ad una precedente ricerca: premendo su uno di questi verrà visualizzata una lista di Risorse. Premendo su una Risorsa si accederà ad una schermata che presenta la visualizzazione dettagliata di quest'ultima.
+- **Risorse**: Sono i risultati delle ricerche effettuate tramite un Pacchetto. Nella schermata vengono presentati una serie di Pacchetti relativi ad una precedente ricerca: premendo su uno di questi verrà visualizzata una lista di Risorse. Premendo su una Risorsa si accederà ad una schermata che presenta la visualizzazione dettagliata di quest'ultima.
 
 Spiegati questi due termini fondamentali per la comprensione dello sviluppo dell'applicazione procediamo con le specifiche di ogni macropartizione.
 
