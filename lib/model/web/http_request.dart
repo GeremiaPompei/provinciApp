@@ -14,8 +14,13 @@ class HttpRequest {
     Map<String, dynamic> map = await _getResult(url);
     List<Pacchetto> pacchetti = [];
     for (Map value in map['results']) {
-      pacchetti.add(Pacchetto(value['title'], value['organization']['title'],
-          value['resources'][1]['url']));
+      try {
+        pacchetti.add(Pacchetto(
+            value['title'],
+            value['organization']['title'],
+            value['resources']
+                .firstWhere((element) => element['format'] == 'JSON')['url']));
+      } catch (e) {}
     }
     return pacchetti;
   }
