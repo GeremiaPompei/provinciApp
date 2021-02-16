@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the runCommand method from the CommandRunner class, for the Dart programming language.">
+  <title>runCommand method - CommandRunner class - command_runner library - Dart API</title>
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500,400i,400,300|Source+Sans+Pro:400,300,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="../../static-assets/github.css">
+  <link rel="stylesheet" href="../../static-assets/styles.css">
+  <link rel="icon" href="../../static-assets/favicon.png">
+
+</head>
+
+<body data-base-href="../../"
+      data-using-base-href="false">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">provinciApp</a></li>
+    <li><a href="../../package-args_command_runner/package-args_command_runner-library.html">command_runner</a></li>
+    <li><a href="../../package-args_command_runner/CommandRunner-class.html">CommandRunner<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
+    <li class="self-crumb">runCommand method</li>
+  </ol>
+  <div class="self-name">runCommand</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+  <div id="dartdoc-sidebar-left" class="col-xs-6 col-sm-3 col-md-2 sidebar sidebar-offcanvas-left">
+    <header id="header-search-sidebar" class="hidden-l">
+      <form class="search-sidebar" role="search">
+        <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+      </form>
+    </header>
+    
+    <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+      <li><a href="../../index.html">provinciApp</a></li>
+      <li><a href="../../package-args_command_runner/package-args_command_runner-library.html">command_runner</a></li>
+      <li><a href="../../package-args_command_runner/CommandRunner-class.html">CommandRunner<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
+      <li class="self-crumb">runCommand method</li>
+    </ol>
+    
+    <h5>CommandRunner class</h5>
+    <ol>
+    
+        <li class="section-title"><a href="../../package-args_command_runner/CommandRunner-class.html#constructors">Constructors</a></li>
+        <li><a href="../../package-args_command_runner/CommandRunner/CommandRunner.html">CommandRunner</a></li>
+    
+        <li class="section-title">
+            <a href="../../package-args_command_runner/CommandRunner-class.html#instance-properties">Properties</a>
+        </li>
+        <li><a href="../../package-args_command_runner/CommandRunner/argParser.html">argParser</a></li>
+        <li><a href="../../package-args_command_runner/CommandRunner/commands.html">commands</a></li>
+        <li><a href="../../package-args_command_runner/CommandRunner/description.html">description</a></li>
+        <li><a href="../../package-args_command_runner/CommandRunner/executableName.html">executableName</a></li>
+        <li><a href="../../package-args_command_runner/CommandRunner/invocation.html">invocation</a></li>
+        <li><a href="../../package-args_command_runner/CommandRunner/usage.html">usage</a></li>
+        <li><a href="../../package-args_command_runner/CommandRunner/usageFooter.html">usageFooter</a></li>
+        <li class="inherited"><a href="../../dart-core/Object/hashCode.html">hashCode</a></li>
+        <li class="inherited"><a href="../../dart-core/Object/runtimeType.html">runtimeType</a></li>
+    
+        <li class="section-title"><a href="../../package-args_command_runner/CommandRunner-class.html#instance-methods">Methods</a></li>
+        <li><a href="../../package-args_command_runner/CommandRunner/addCommand.html">addCommand</a></li>
+        <li><a href="../../package-args_command_runner/CommandRunner/parse.html">parse</a></li>
+        <li><a href="../../package-args_command_runner/CommandRunner/printUsage.html">printUsage</a></li>
+        <li><a href="../../package-args_command_runner/CommandRunner/run.html">run</a></li>
+        <li><a href="../../package-args_command_runner/CommandRunner/runCommand.html">runCommand</a></li>
+        <li><a href="../../package-args_command_runner/CommandRunner/usageException.html">usageException</a></li>
+        <li class="inherited"><a href="../../dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
+        <li class="inherited"><a href="../../dart-core/Object/toString.html">toString</a></li>
+    
+        <li class="section-title inherited"><a href="../../package-args_command_runner/CommandRunner-class.html#operators">Operators</a></li>
+        <li class="inherited"><a href="../../dart-core/Object/operator_equals.html">operator ==</a></li>
+    
+    
+    
+    
+    
+    </ol>
+  </div><!--/.sidebar-offcanvas-->
+
+  <div id="dartdoc-main-content" class="col-xs-12 col-sm-9 col-md-8 main-content">
+      <div><h1><span class="kind-method">runCommand</span> method</h1></div>
+
+    <section class="multi-line-signature">
+      <span class="returntype"><a href="../../dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>
+            <span class="name ">runCommand</span>
+(<wbr><ol class="parameter-list"><li><span class="parameter" id="runCommand-param-topLevelResults"><span class="type-annotation"><a href="../../package-args_args/ArgResults-class.html">ArgResults</a></span> <span class="parameter-name">topLevelResults</span></span></li>
+</ol>)
+      
+    </section>
+    <section class="desc markdown">
+      <p>Runs the command specified by <code>topLevelResults</code>.</p>
+<p>This is notionally a protected method. It may be overridden or called from
+subclasses, but it shouldn't be called externally.</p>
+<p>It's useful to override this to handle global flags and/or wrap the entire
+command in a block. For example, you might handle the <code>--verbose</code> flag
+here to enable verbose logging before running the command.</p>
+<p>This returns the return value of <a href="../../package-args_command_runner/Command/run.html">Command.run</a>.</p>
+    </section>
+    
+    <section class="summary source-code" id="source">
+      <h2><span>Implementation</span></h2>
+      <pre class="language-dart"><code class="language-dart">Future&lt;T&gt; runCommand(ArgResults topLevelResults) async {
+  var argResults = topLevelResults;
+  var commands = _commands;
+  Command command;
+  var commandString = executableName;
+
+  while (commands.isNotEmpty) {
+    if (argResults.command == null) {
+      if (argResults.rest.isEmpty) {
+        if (command == null) {
+          &#47;&#47; No top-level command was chosen.
+          printUsage();
+          return null;
+        }
+
+        command.usageException(&#39;Missing subcommand for &quot;$commandString&quot;.&#39;);
+      } else {
+        if (command == null) {
+          usageException(
+              &#39;Could not find a command named &quot;${argResults.rest[0]}&quot;.&#39;);
+        }
+
+        command.usageException(&#39;Could not find a subcommand named &#39;
+            &#39;&quot;${argResults.rest[0]}&quot; for &quot;$commandString&quot;.&#39;);
+      }
+    }
+
+    &#47;&#47; Step into the command.
+    argResults = argResults.command;
+    command = commands[argResults.name];
+    command._globalResults = topLevelResults;
+    command._argResults = argResults;
+    commands = command._subcommands;
+    commandString += &#39; ${argResults.name}&#39;;
+
+    if (argResults.options.contains(&#39;help&#39;) &amp;&amp; argResults[&#39;help&#39;]) {
+      command.printUsage();
+      return null;
+    }
+  }
+
+  if (topLevelResults[&#39;help&#39;]) {
+    command.printUsage();
+    return null;
+  }
+
+  &#47;&#47; Make sure there aren&#39;t unexpected arguments.
+  if (!command.takesArguments &amp;&amp; argResults.rest.isNotEmpty) {
+    command.usageException(
+        &#39;Command &quot;${argResults.name}&quot; does not take any arguments.&#39;);
+  }
+
+  return (await command.run()) as T;
+}</code></pre>
+    </section>
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-right" class="col-xs-6 col-sm-6 col-md-2 sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    provinciApp
+      1.0.0+1
+  </span>
+
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="../../static-assets/typeahead.bundle.min.js"></script>
+<script src="../../static-assets/highlight.pack.js"></script>
+<script src="../../static-assets/URI.js"></script>
+<script src="../../static-assets/script.js"></script>
+
+
+</body>
+
+</html>

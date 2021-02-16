@@ -1,0 +1,30 @@
+[
+    {
+        "merged": "/Volumes/DISK0S3/Progetti/Flutter/provinciApp/build/app/intermediates/res/merged/debug/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "/Volumes/DISK0S3/Progetti/Flutter/provinciApp/android/app/src/main/res/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Volumes/DISK0S3/Progetti/Flutter/provinciApp/build/app/intermediates/res/merged/debug/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "/Volumes/DISK0S3/Progetti/Flutter/provinciApp/android/app/src/main/res/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Volumes/DISK0S3/Progetti/Flutter/provinciApp/build/app/intermediates/res/merged/debug/drawable_launch_background.xml.flat",
+        "source": "/Volumes/DISK0S3/Progetti/Flutter/provinciApp/android/app/src/main/res/drawable/launch_background.xml"
+    },
+    {
+        "merged": "/Volumes/DISK0S3/Progetti/Flutter/provinciApp/build/app/intermediates/res/merged/debug/drawable_logo_mc.png.flat",
+        "source": "/Volumes/DISK0S3/Progetti/Flutter/provinciApp/android/app/src/main/res/drawable/logo_mc.png"
+    },
+    {
+        "merged": "/Volumes/DISK0S3/Progetti/Flutter/provinciApp/build/app/intermediates/res/merged/debug/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "/Volumes/DISK0S3/Progetti/Flutter/provinciApp/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Volumes/DISK0S3/Progetti/Flutter/provinciApp/build/app/intermediates/res/merged/debug/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "/Volumes/DISK0S3/Progetti/Flutter/provinciApp/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Volumes/DISK0S3/Progetti/Flutter/provinciApp/build/app/intermediates/res/merged/debug/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "/Volumes/DISK0S3/Progetti/Flutter/provinciApp/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png"
+    }
+]

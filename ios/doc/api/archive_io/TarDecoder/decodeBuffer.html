@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the decodeBuffer method from the TarDecoder class, for the Dart programming language.">
+  <title>decodeBuffer method - TarDecoder class - archive_io library - Dart API</title>
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500,400i,400,300|Source+Sans+Pro:400,300,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="../../static-assets/github.css">
+  <link rel="stylesheet" href="../../static-assets/styles.css">
+  <link rel="icon" href="../../static-assets/favicon.png">
+
+</head>
+
+<body data-base-href="../../"
+      data-using-base-href="false">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">provinciApp</a></li>
+    <li><a href="../../archive_io/archive_io-library.html">archive_io</a></li>
+    <li><a href="../../archive_io/TarDecoder-class.html">TarDecoder</a></li>
+    <li class="self-crumb">decodeBuffer method</li>
+  </ol>
+  <div class="self-name">decodeBuffer</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+  <div id="dartdoc-sidebar-left" class="col-xs-6 col-sm-3 col-md-2 sidebar sidebar-offcanvas-left">
+    <header id="header-search-sidebar" class="hidden-l">
+      <form class="search-sidebar" role="search">
+        <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+      </form>
+    </header>
+    
+    <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+      <li><a href="../../index.html">provinciApp</a></li>
+      <li><a href="../../archive_io/archive_io-library.html">archive_io</a></li>
+      <li><a href="../../archive_io/TarDecoder-class.html">TarDecoder</a></li>
+      <li class="self-crumb">decodeBuffer method</li>
+    </ol>
+    
+    <h5>TarDecoder class</h5>
+    <ol>
+    
+        <li class="section-title"><a href="../../archive_io/TarDecoder-class.html#constructors">Constructors</a></li>
+        <li><a href="../../archive_io/TarDecoder/TarDecoder.html">TarDecoder</a></li>
+    
+        <li class="section-title">
+            <a href="../../archive_io/TarDecoder-class.html#instance-properties">Properties</a>
+        </li>
+        <li><a href="../../archive_io/TarDecoder/files.html">files</a></li>
+        <li class="inherited"><a href="../../dart-core/Object/hashCode.html">hashCode</a></li>
+        <li class="inherited"><a href="../../dart-core/Object/runtimeType.html">runtimeType</a></li>
+    
+        <li class="section-title"><a href="../../archive_io/TarDecoder-class.html#instance-methods">Methods</a></li>
+        <li><a href="../../archive_io/TarDecoder/decodeBuffer.html">decodeBuffer</a></li>
+        <li><a href="../../archive_io/TarDecoder/decodeBytes.html">decodeBytes</a></li>
+        <li class="inherited"><a href="../../dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
+        <li class="inherited"><a href="../../dart-core/Object/toString.html">toString</a></li>
+    
+        <li class="section-title inherited"><a href="../../archive_io/TarDecoder-class.html#operators">Operators</a></li>
+        <li class="inherited"><a href="../../dart-core/Object/operator_equals.html">operator ==</a></li>
+    
+    
+    
+    
+    
+    </ol>
+  </div><!--/.sidebar-offcanvas-->
+
+  <div id="dartdoc-main-content" class="col-xs-12 col-sm-9 col-md-8 main-content">
+      <div><h1><span class="kind-method">decodeBuffer</span> method</h1></div>
+
+    <section class="multi-line-signature">
+      <span class="returntype"><a href="../../archive_io/Archive-class.html">Archive</a></span>
+            <span class="name ">decodeBuffer</span>
+(<wbr><ol class="parameter-list"><li><span class="parameter" id="decodeBuffer-param-input"><span class="type-annotation"><a href="../../archive_io/InputStreamBase-class.html">InputStreamBase</a></span> <span class="parameter-name">input</span>, </span></li>
+<li><span class="parameter" id="decodeBuffer-param-verify">{<span class="type-annotation"><a href="../../dart-core/bool-class.html">bool</a></span> <span class="parameter-name">verify</span>: <span class="default-value">false</span>, </span></li>
+<li><span class="parameter" id="decodeBuffer-param-storeData"><span class="type-annotation"><a href="../../dart-core/bool-class.html">bool</a></span> <span class="parameter-name">storeData</span>: <span class="default-value">true</span>}</span></li>
+</ol>)
+      
+    </section>
+    
+    <section class="summary source-code" id="source">
+      <h2><span>Implementation</span></h2>
+      <pre class="language-dart"><code class="language-dart">Archive decodeBuffer(InputStreamBase input,
+    {bool verify = false, bool storeData = true}) {
+  final archive = Archive();
+  files.clear();
+
+  String nextName;
+
+  &#47;&#47; TarFile paxHeader = null;
+  while (!input.isEOS) {
+    &#47;&#47; End of archive when two consecutive 0&#39;s are found.
+    final end_check = input.peekBytes(2);
+    if (end_check.length &lt; 2 || (end_check[0] == 0 &amp;&amp; end_check[1] == 0)) {
+      break;
+    }
+
+    final tf = TarFile.read(input, storeData: storeData);
+    &#47;&#47; GNU tar puts filenames in files when they exceed tar&#39;s native length.
+    if (tf.filename == &#39;.&#47;.&#47;@LongLink&#39;) {
+      nextName = tf.rawContent.readString();
+      continue;
+    }
+
+    &#47;&#47; In POSIX formatted tar files, a separate &#39;PAX&#39; file contains extended
+    &#47;&#47; metadata for files. These are identified by having a type flag &#39;X&#39;.
+    &#47;&#47; TODO: parse these metadata values.
+    if (tf.typeFlag == TarFile.TYPE_G_EX_HEADER ||
+        tf.typeFlag == TarFile.TYPE_G_EX_HEADER2) {
+      &#47;&#47; TODO handle PAX global header.
+    }
+    if (tf.typeFlag == TarFile.TYPE_EX_HEADER ||
+        tf.typeFlag == TarFile.TYPE_EX_HEADER2) {
+      &#47;&#47;paxHeader = tf;
+    } else {
+      files.add(tf);
+
+      final file = ArchiveFile(
+          nextName ?? tf.filename,
+          tf.fileSize,
+          tf.rawContent);
+
+      file.mode = tf.mode;
+      file.ownerId = tf.ownerId;
+      file.groupId = tf.groupId;
+      file.lastModTime = tf.lastModTime;
+      file.isFile = tf.isFile;
+      file.isSymbolicLink = tf.typeFlag == TarFile.TYPE_SYMBOLIC_LINK;
+      file.nameOfLinkedFile = tf.nameOfLinkedFile;
+
+      archive.addFile(file);
+
+      nextName = null;
+    }
+  }
+
+  return archive;
+}</code></pre>
+    </section>
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-right" class="col-xs-6 col-sm-6 col-md-2 sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    provinciApp
+      1.0.0+1
+  </span>
+
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="../../static-assets/typeahead.bundle.min.js"></script>
+<script src="../../static-assets/highlight.pack.js"></script>
+<script src="../../static-assets/URI.js"></script>
+<script src="../../static-assets/script.js"></script>
+
+
+</body>
+
+</html>

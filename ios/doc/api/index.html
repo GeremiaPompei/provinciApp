@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="generator" content="made with love by dartdoc 0.30.3">
+  <meta name="description" content="provinciApp API docs, for the Dart programming language.">
+  <title>provinciApp - Dart API docs</title>
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500,400i,400,300|Source+Sans+Pro:400,300,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="static-assets/github.css">
+  <link rel="stylesheet" href="static-assets/styles.css">
+  <link rel="icon" href="static-assets/favicon.png">
+
+</head>
+
+<body data-base-href=""
+      data-using-base-href="false">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li class="self-crumb">provinciApp package</li>
+  </ol>
+  <div class="self-name">provinciApp</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+  <div id="dartdoc-sidebar-left" class="col-xs-6 col-sm-3 col-md-2 sidebar sidebar-offcanvas-left">
+    <header id="header-search-sidebar" class="hidden-l">
+      <form class="search-sidebar" role="search">
+        <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+      </form>
+    </header>
+    
+    <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+      <li class="self-crumb">provinciApp package</li>
+    </ol>
+    
+    <h5 class="hidden-xs"><span class="package-name">provinciApp</span> <span class="package-kind">package</span></h5>
+    <ol>
+          <li class="section-title">Libraries</li>
+          <li><a href="dart-ui/dart-ui-library.html">dart:ui</a></li>
+          <li class="section-subtitle">Core</li>
+            <li class="section-subitem"><a href="dart-async/dart-async-library.html">dart:async</a></li>
+            <li class="section-subitem"><a href="dart-collection/dart-collection-library.html">dart:collection</a></li>
+            <li class="section-subitem"><a href="dart-convert/dart-convert-library.html">dart:convert</a></li>
+            <li class="section-subitem"><a href="dart-core/dart-core-library.html">dart:core</a></li>
+            <li class="section-subitem"><a href="dart-developer/dart-developer-library.html">dart:developer</a></li>
+            <li class="section-subitem"><a href="dart-math/dart-math-library.html">dart:math</a></li>
+            <li class="section-subitem"><a href="dart-typed_data/dart-typed_data-library.html">dart:typed_data</a></li>
+          <li class="section-subtitle">VM</li>
+            <li class="section-subitem"><a href="dart-ffi/dart-ffi-library.html">dart:ffi</a></li>
+            <li class="section-subitem"><a href="dart-io/dart-io-library.html">dart:io</a></li>
+            <li class="section-subitem"><a href="dart-isolate/dart-isolate-library.html">dart:isolate</a></li>
+          <li class="section-subtitle">Web</li>
+            <li class="section-subitem"><a href="dart-html/dart-html-library.html">dart:html</a></li>
+            <li class="section-subitem"><a href="dart-js/dart-js-library.html">dart:js</a></li>
+            <li class="section-subitem"><a href="dart-js_util/dart-js_util-library.html">dart:js_util</a></li>
+    </ol>
+  </div>
+
+  <div id="dartdoc-main-content" class="col-xs-12 col-sm-9 col-md-8 main-content">
+      <section class="desc markdown">
+        <p>  
+	<font color="blue"> 
+		 </font></p><h1 align="center"><font color="blue">provinciApp</font></h1><font color="blue">
+	</font>
+<p></p><p align="center">
+  <img width="260" height="400" src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/IMG_E0052%5B1%5D.JPG"></p><p align="center">
+<a href="#introduzione">Introduzione</a>&nbsp;•
+<a href="#struttura">Struttura</a>&nbsp;•
+<a href="#utilizzo">Utilizzo</a>&nbsp;•
+<a href="#specifiche">Specifiche</a>&nbsp;•
+<a href="#autori">Autori</a>
+</p>
+<br>
+<br>
+
+<h2 id="introduzione">Introduzione</h2>
+<p></p><h4 align="left"> Cos'è?</h4><p></p>
+<pre class="language-dart"><code>provinciApp è la nostra idea di applicazione per la provincia di Macerata
+secondo il concorso *Un'app per la provincia di Macerata.
+Il progetto nasce da tre giovani studenti con molta voglia di impegnarsi
+e mettersiù in gioco.
+Lo sviluppo dell'applicazione nasce dalla base dei requisiti richiesti dal
+concorso, arricchiti dalle nostre idee e competenze al fine di creare qualcosa 
+di  articolato ma intuitivo, tale da essere fruibile da ogni fascia di età. 
+</code></pre>
+<h4 id="obiettivi-del-concorso">Obiettivi del concorso</h4>
+<p><em>L’applicazione mobile dovrà presentare le seguenti caratteristiche tecniche:</em>  </p>
+<pre class="language-dart"><code>• dovrà essere realizzata con linguaggio open source secondo modalità 
+“cross-platform”, funzionando correttamente su dispositivi basati sia su 
+sistema operativo iOS (versione 6 o superiore) che su Android (versione 3.2
+ o superiore);  
+</code></pre>
+<pre class="language-dart"><code>• layout grafico progettato e realizzato per dispositivi mobile sia di tipo 
+smartphone sia di tipo tablet;  
+</code></pre>
+<pre class="language-dart"><code>• dovrà utilizzare un sistema di caching delle informazioni multimediali per 
+ottimizzare i tempi e le modalità di reperimento dei dati;  
+</code></pre>
+<pre class="language-dart"><code>• avere una dimensione al download compatibile con l’installazione via 3G;  
+</code></pre>
+<pre class="language-dart"><code>• funzionare anche in modalità off-line;  
+</code></pre>
+<pre class="language-dart"><code>• dovrà basarsi sull’utilizzo degli Opendata della provincia di Macerata, 
+pubblicati e reperibili al link 'http://dati.provincia.mc.it', e potrà trattarsi
+ di un’applicazione per la rappresentazione di dati geo-riferiti.
+</code></pre>
+<p><em>Saranno ritenuti motivo di maggiore punteggio:</em></p>
+<pre class="language-dart"><code>• l’utilizzo dei sensori del dispositivo mobile (GPS, bussola, accelerometro, 
+fotocamera, ecc.);  
+</code></pre>
+<pre class="language-dart"><code>• l’interoperabilità con il mondo dei social network: possibilità di interazione 
+con le APP social presenti sui device, all’interno delle community di 
+appassionati;  
+</code></pre>
+<pre class="language-dart"><code>• l’ottimizzazione dei tempi di risposta necessari ad un utilizzo
+ dell’applicazione in mobilità minimizzando il consumo di banda mobile internet 
+ e/o saturazione dell’accesspoint nel caso di wi-fi pubblico.
+</code></pre>
+<h2 id="struttura">Struttura</h2>
+<p>Per evidenziare le caratteristiche della nostra applicazione è fondamentale distinguere cosa può essere effettuato con la connessione internet e cosa no. </p>
+<h4 id="online">Online:</h4>
+<ul>
+<li><a href="https://github.com/GeremiaPompei/mc/blob/master/README.md#esplora"><em>Esplora</em></a></li>
+<li><a href="https://github.com/GeremiaPompei/mc/blob/master/README.md#comuni"><em>Comuni</em></a></li>
+<li><a href="https://github.com/GeremiaPompei/mc/blob/master/README.md#categorie"><em>Categorie</em></a></li>
+</ul>
+<h4 id="offline">Offline:</h4>
+<ul>
+<li><a href="https://github.com/GeremiaPompei/mc/blob/master/README.md#lista-di-elementi-scaricati">lista di elementi scaricati</a></li>
+</ul>
+<h4 id="esplora"><em>Esplora</em></h4>
+<p><a href="https://github.com/GeremiaPompei/provinciApp#provinciapp"><img src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/FrecciaBack.png" width="15" height="25" align="left" hspace="10" vspace="0" border="0"></a></p>
+<p><a href="https://github.com/GeremiaPompei/provinciApp#struttura-online"><img src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Home.png" width="15" height="25" align="center" hspace="5" vspace="0" border="0"></a></p>
+<h4 id="comuni"><em>Comuni</em></h4>
+<p><a href="https://github.com/GeremiaPompei/provinciApp#provinciapp"><img src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/FrecciaBack.png" width="15" height="25" align="left" hspace="10" vspace="0" border="0"></a></p>
+<p><a href="https://github.com/GeremiaPompei/provinciApp#struttura-online"><img src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Home.png" width="15" height="25" align="center" hspace="5" vspace="0" border="0"></a></p>
+<h4 id="categorie"><em>Categorie</em></h4>
+<p><a href="https://github.com/GeremiaPompei/provinciApp#provinciapp"><img src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/FrecciaBack.png" width="15" height="25" align="left" hspace="10" vspace="0" border="0"></a></p>
+<p><a href="https://github.com/GeremiaPompei/provinciApp#struttura-online"><img src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Home.png" width="15" height="25" align="center" hspace="5" vspace="0" border="0"></a></p>
+<h4 id="lista-di-elementi-scaricati"><em>Lista di elementi scaricati</em></h4>
+<p><a href="https://github.com/GeremiaPompei/provinciApp#provinciapp"><img src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/FrecciaBack.png" width="15" height="25" align="left" hspace="10" vspace="0" border="0"></a></p>
+<p><a href="https://github.com/GeremiaPompei/provinciApp#struttura-online"><img src="https://github.com/GeremiaPompei/provinciApp/blob/master/READMEImage/Home.png" width="15" height="25" align="center" hspace="5" vspace="0" border="0"></a></p>
+<h2 id="utilizzo">Utilizzo</h2>
+<p>In questa sezione viene illustrato come utilizzare provinciApp, mostrandone le varie funzionalità.
+Per cominciare è bene fare una distinzione tra funzionamento online e funzionamento offline, in quanto alcune funzionalità dell'applicazione non possono essere eseguite senza una connessione ad internet. Nonostante questo, la sezione offline permette comunque di accedere ad informazioni salvate in precedenza.</p>
+<p>Se presente la connessione ad internet all'apertura dell'applicazione, ci ritroveremo automaticamente alla schermata online. Quest'ultima è organizzata in 4 sezioni le quali hanno in comune una toolbar in alto all'interno della quale è presente il nome della sezione singola e due ulteriori pulsanti:</p>
+<p>--------------------------------&gt;pic schermate&lt;--------------------------------------------</p>
+<p>Il primo pulsante è utile alla <strong>geolocalizzazione</strong>. Al primo utilizzo verrà richiesto di consentire all'applicazione di accedere alla posizione corrente:</p>
+<p>---&gt;pic con richiesta geolocalizzazione</p>
+<p>Una volta consentito l'accesso per ogni altro utilizzo il consenso di utilizzo della posizione non sarà più richiesto. A questo punto l'applicazione sfruttando la posizione attuale dell'utente mostrerà i risultati relativi alle informazioni presenti nell'area trovata.</p>
+<p>------&gt;pic zona&lt;-----</p>
+<p>Il secondo pulsante  ci permette di accedere alla schermata <strong>offline</strong>.  (La sezione è spiegata nello specifico <a href="https://github.com/GeremiaPompei/mc/blob/master/README.md#lista-di-elementi-scaricati">qui</a>)</p>
+<p>------&gt;pic pulsante offline&lt;-------------</p>
+<p>Se non è presente connessione ad internet sarà la stessa applicazione a forzare l'utilizzo della modalità offline: effettuata una qualsiasi ricerca in assenza di rete comparirà la seguente schermata:</p>
+<p>--------------&gt; pic schermata offline &lt;----------</p>
+<p>Cliccando sul pulsante 'Offline' si accederà alla schermata offline (<a href="https://github.com/GeremiaPompei/mc/blob/master/README.md#lista-di-elementi-scaricati">qui</a>). </p>
+<h2 id="specifiche">Specifiche</h2>
+<h4 id="flutter">Flutter</h4>
+<p>Lo sviluppo dell'applicazione è stato effettuato tramite l'utilizzo di <strong>Flutter</strong>, un framework open-source creato da Google per la creazione di interfacce native per iOS e Android.
+<strong>Dart</strong> è il linguaggio che abbiamo scelto per il progetto, nato all'interno dell'IDE Intellij e simulato con Android Studio e ..</p>
+<p><a href="https://github.com/GeremiaPompei/mc/blob/master/README.md#obiettivi-del-concorso">Torna ad Obiettivi</a></p>
+<h4 id="layout">Layout</h4>
+<p>Il linguaggio utilizzato ci ha permesso di creare un layout molto versatile e moderno, sfruttando quelli che sono i colori della provincia di Macerata, inoltre i dati organizzati secondo le informazioni del database sono stati organizzati in modo tale rendere semplice la fruizione degli stessi.</p>
+<p><a href="https://github.com/GeremiaPompei/mc/blob/master/README.md#obiettivi-del-concorso">Torna ad Obiettivi</a></p>
+<h4 id="cache">Cache</h4>
+<p>Il sistema di caching impostato permette di accedere con molta più facilità alle ultime ricerche effettuate: in questo modo è possibile accedere alle informazioni con velocità maggiore e senza la necessità di una connessione dati attiva.</p>
+<p><a href="https://github.com/GeremiaPompei/mc/blob/master/README.md#obiettivi-del-concorso">Torna ad Obiettivi</a></p>
+<h4 id="dimensione">Dimensione</h4>
+<p>La dimensione dell'applicazione è di circa 120Mb, ad indicare come, sebbene essa possegga una grande quantitità di dati frubili dall'utente, sia molto leggera e facilmente scaricabile con la sola connessione dati del proprio smartphone.</p>
+<p><a href="https://github.com/GeremiaPompei/mc/blob/master/README.md#obiettivi-del-concorso">Torna ad Obiettivi</a></p>
+<h4 id="offline-2">Offline</h4>
+<p>All'interno dell'applicazione è possibile scaricare alcuni elementi ai quali è poi possibile accedere senza l'utilizzo della connessione ad internet. I dati salvati possono essere reperibili nell'apposita sezione alla quale è possibile accedere tramite il pulsante 'Offline' in alto a destra.</p>
+<p><a href="https://github.com/GeremiaPompei/mc/blob/master/README.md#introduzione-allutilizzo-dellapplicazione">Cliccare qui per il funzionamento</a></p>
+<p><a href="https://github.com/GeremiaPompei/mc/blob/master/README.md#obiettivi-del-concorso">Torna ad Obiettivi</a></p>
+<h4 id="database">Database</h4>
+<p>L'organizzazione dei dati segue il modello del database fornito, inoltre la struttura del modeling all'interno del progetto rende facilmente possibile l'aggiunta di nuove informazioni, le quali verranno mostrate poi sul proprio smartphone.</p>
+<p><a href="https://github.com/GeremiaPompei/mc/blob/master/README.md#obiettivi-del-concorso">Torna ad Obiettivi</a></p>
+<h4 id="gps">Gps</h4>
+<p>All'interno di <strong>provinciApp</strong> è possibile visualizzare la posizione dell'evento cercato tramite una mappa posizionata in fondo alla pagina aperta. Se presente all'interno del proprio smartphone sarà inoltre possibile aprire la mappa all'interno di <em>google maps</em>, così da avere informazioni aggiuntive relative alla posizione di ricerca in relazione a quella dell'utente.</p>
+<p><a href="https://github.com/GeremiaPompei/mc/blob/master/README.md#introduzione-allutilizzo-dellapplicazione">Cliccare qui per il funzionamento</a></p>
+<p><a href="https://github.com/GeremiaPompei/mc/blob/master/README.md#obiettivi-del-concorso">Torna ad Obiettivi</a></p>
+<h4 id="social">Social</h4>
+<p>La funzionalità legata ai social consiste nella possibilità di condividere l'informazione cercata dall'utente nelle varie piattaforme social presenti all'interno del proprio smartphone.
+Una volta condiviso l'evento, l'interazione sarà possibile attraverso un click sul link url.</p>
+<p><a href="https://github.com/GeremiaPompei/mc/blob/master/README.md#introduzione-allutilizzo-dellapplicazione">Cliccare qui per il funzionamento</a></p>
+<p><a href="https://github.com/GeremiaPompei/mc/blob/master/README.md#obiettivi-del-concorso">Torna ad Obiettivi</a></p>
+<h4 id="connessione-dati">Connessione dati</h4>
+<p>.... da completare ...</p>
+<h2 id="autori">Autori</h2>
+<ul>
+<li><a href="https://github.com/GeremiaPompei">Geremia Pompei</a></li>
+<li><a href="https://github.com/axel2104">Alex Pop</a></li>
+<li><a href="https://github.com/LorenzoLongarini">Lorenzo Longarini</a></li>
+</ul>
+      </section>
+      
+        <section class="summary">
+            <h2>Libraries</h2>
+          <dl>
+            <dt id="dart:ui">
+              <span class="name"><a href="dart-ui/dart-ui-library.html">dart:ui</a></span>             
+            </dt>
+            <dd>
+              Built-in types and core primitives for a Flutter application. <a href="dart-ui/dart-ui-library.html">[...]</a>
+            </dd>
+            <h3>Core</h3>
+              <dt id="dart:async">
+                <span class="name"><a href="dart-async/dart-async-library.html">dart:async</a></span>               
+              </dt>
+              <dd>
+                Support for asynchronous programming,
+with classes such as Future and Stream. <a href="dart-async/dart-async-library.html">[...]</a>
+              </dd>
+              <dt id="dart:collection">
+                <span class="name"><a href="dart-collection/dart-collection-library.html">dart:collection</a></span>               
+              </dt>
+              <dd>
+                Classes and utilities that supplement the collection support in dart:core. <a href="dart-collection/dart-collection-library.html">[...]</a>
+              </dd>
+              <dt id="dart:convert">
+                <span class="name"><a href="dart-convert/dart-convert-library.html">dart:convert</a></span>               
+              </dt>
+              <dd>
+                Encoders and decoders for converting between different data representations,
+including JSON and UTF-8. <a href="dart-convert/dart-convert-library.html">[...]</a>
+              </dd>
+              <dt id="dart:core">
+                <span class="name"><a href="dart-core/dart-core-library.html">dart:core</a></span>               
+              </dt>
+              <dd>
+                Built-in types, collections,
+and other core functionality for every Dart program. <a href="dart-core/dart-core-library.html">[...]</a>
+              </dd>
+              <dt id="dart:developer">
+                <span class="name"><a href="dart-developer/dart-developer-library.html">dart:developer</a></span>               
+              </dt>
+              <dd>
+                Interact with developer tools such as the debugger and inspector. <a href="dart-developer/dart-developer-library.html">[...]</a>
+              </dd>
+              <dt id="dart:math">
+                <span class="name"><a href="dart-math/dart-math-library.html">dart:math</a></span>               
+              </dt>
+              <dd>
+                Mathematical constants and functions, plus a random number generator. <a href="dart-math/dart-math-library.html">[...]</a>
+              </dd>
+              <dt id="dart:typed_data">
+                <span class="name"><a href="dart-typed_data/dart-typed_data-library.html">dart:typed_data</a></span>               
+              </dt>
+              <dd>
+                Lists that efficiently handle fixed sized data
+(for example, unsigned 8 byte integers) and SIMD numeric types. <a href="dart-typed_data/dart-typed_data-library.html">[...]</a>
+              </dd>
+            <h3>VM</h3>
+              <dt id="dart:ffi">
+                <span class="name"><a href="dart-ffi/dart-ffi-library.html">dart:ffi</a></span>               
+              </dt>
+              <dd>
+                Foreign Function Interface for interoperability with the C programming language. <a href="dart-ffi/dart-ffi-library.html">[...]</a>
+              </dd>
+              <dt id="dart:io">
+                <span class="name"><a href="dart-io/dart-io-library.html">dart:io</a></span>               
+              </dt>
+              <dd>
+                File, socket, HTTP, and other I/O support for non-web applications. <a href="dart-io/dart-io-library.html">[...]</a>
+              </dd>
+              <dt id="dart:isolate">
+                <span class="name"><a href="dart-isolate/dart-isolate-library.html">dart:isolate</a></span>               
+              </dt>
+              <dd>
+                Concurrent programming using <em>isolates</em>:
+independent workers that are similar to threads
+but don't share memory,
+communicating only via messages. <a href="dart-isolate/dart-isolate-library.html">[...]</a>
+              </dd>
+            <h3>Web</h3>
+              <dt id="dart:html">
+                <span class="name"><a href="dart-html/dart-html-library.html">dart:html</a></span>               
+              </dt>
+              <dd>
+                HTML elements and other resources for web-based applications that need to
+interact with the browser and the DOM (Document Object Model). <a href="dart-html/dart-html-library.html">[...]</a>
+              </dd>
+              <dt id="dart:js">
+                <span class="name"><a href="dart-js/dart-js-library.html">dart:js</a></span>               
+              </dt>
+              <dd>
+                Low-level support for interoperating with JavaScript. <a href="dart-js/dart-js-library.html">[...]</a>
+              </dd>
+              <dt id="dart:js_util">
+                <span class="name"><a href="dart-js_util/dart-js_util-library.html">dart:js_util</a></span>               
+              </dt>
+              <dd>
+                Utility methods to manipulate <code>package:js</code> annotated JavaScript interop
+objects in cases where the name to call is not known at runtime. <a href="dart-js_util/dart-js_util-library.html">[...]</a>
+              </dd>
+          </dl>
+        </section>
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-right" class="col-xs-6 col-sm-6 col-md-2 sidebar sidebar-offcanvas-right">
+  </div>
+
+</main>
+
+<footer>
+  <span class="no-break">
+    provinciApp
+      1.0.0+1
+  </span>
+
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="static-assets/typeahead.bundle.min.js"></script>
+<script src="static-assets/highlight.pack.js"></script>
+<script src="static-assets/URI.js"></script>
+<script src="static-assets/script.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "applicationId": "com.yanisalfian.flutterphonedirectcaller",
+  "variantType": "LIBRARY",
+  "elements": [
+    {
+      "outputType": {
+        "type": "MERGED_MANIFESTS"
+      },
+      "apkData": {
+        "type": "MAIN",
+        "splits": [],
+        "versionCode": -1,
+        "outputFile": "flutter_phone_direct_caller-debug.aar",
+        "fullName": "debug",
+        "baseName": "debug",
+        "dirName": ""
+      },
+      "path": "../../library_manifest/debug/AndroidManifest.xml",
+      "properties": {
+        "packageId": "com.yanisalfian.flutterphonedirectcaller",
+        "split": ""
+      }
+    }
+  ]
+}

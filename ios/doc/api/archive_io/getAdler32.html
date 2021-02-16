@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the getAdler32 function from the archive_io library, for the Dart programming language.">
+  <title>getAdler32 function - archive_io library - Dart API</title>
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500,400i,400,300|Source+Sans+Pro:400,300,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="../static-assets/github.css">
+  <link rel="stylesheet" href="../static-assets/styles.css">
+  <link rel="icon" href="../static-assets/favicon.png">
+
+</head>
+
+<body data-base-href="../"
+      data-using-base-href="false">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../index.html">provinciApp</a></li>
+    <li><a href="../archive_io/archive_io-library.html">archive_io</a></li>
+    <li class="self-crumb">getAdler32 function</li>
+  </ol>
+  <div class="self-name">getAdler32</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+  <div id="dartdoc-sidebar-left" class="col-xs-6 col-sm-3 col-md-2 sidebar sidebar-offcanvas-left">
+    <header id="header-search-sidebar" class="hidden-l">
+      <form class="search-sidebar" role="search">
+        <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+      </form>
+    </header>
+    
+    <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+      <li><a href="../index.html">provinciApp</a></li>
+      <li><a href="../archive_io/archive_io-library.html">archive_io</a></li>
+      <li class="self-crumb">getAdler32 function</li>
+    </ol>
+    
+    <h5>archive_io library</h5>
+    <ol>
+      <li class="section-title"><a href="../archive_io/archive_io-library.html#classes">Classes</a></li>
+      <li><a href="../archive_io/Adler32-class.html">Adler32</a></li>
+      <li><a href="../archive_io/Archive-class.html">Archive</a></li>
+      <li><a href="../archive_io/ArchiveFile-class.html">ArchiveFile</a></li>
+      <li><a href="../archive_io/Bz2BitReader-class.html">Bz2BitReader</a></li>
+      <li><a href="../archive_io/Bz2BitWriter-class.html">Bz2BitWriter</a></li>
+      <li><a href="../archive_io/BZip2-class.html">BZip2</a></li>
+      <li><a href="../archive_io/BZip2Decoder-class.html">BZip2Decoder</a></li>
+      <li><a href="../archive_io/BZip2Encoder-class.html">BZip2Encoder</a></li>
+      <li><a href="../archive_io/Crc32-class.html">Crc32</a></li>
+      <li><a href="../archive_io/Deflate-class.html">Deflate</a></li>
+      <li><a href="../archive_io/GZipDecoder-class.html">GZipDecoder</a></li>
+      <li><a href="../archive_io/GZipEncoder-class.html">GZipEncoder</a></li>
+      <li><a href="../archive_io/HuffmanTable-class.html">HuffmanTable</a></li>
+      <li><a href="../archive_io/Inflate-class.html">Inflate</a></li>
+      <li><a href="../archive_io/InputFileStream-class.html">InputFileStream</a></li>
+      <li><a href="../archive_io/InputStream-class.html">InputStream</a></li>
+      <li><a href="../archive_io/InputStreamBase-class.html">InputStreamBase</a></li>
+      <li><a href="../archive_io/MemPtr-class.html">MemPtr</a></li>
+      <li><a href="../archive_io/OutputFileStream-class.html">OutputFileStream</a></li>
+      <li><a href="../archive_io/OutputStream-class.html">OutputStream</a></li>
+      <li><a href="../archive_io/OutputStreamBase-class.html">OutputStreamBase</a></li>
+      <li><a href="../archive_io/TarDecoder-class.html">TarDecoder</a></li>
+      <li><a href="../archive_io/TarEncoder-class.html">TarEncoder</a></li>
+      <li><a href="../archive_io/TarFile-class.html">TarFile</a></li>
+      <li><a href="../archive_io/TarFileEncoder-class.html">TarFileEncoder</a></li>
+      <li><a href="../archive_io/ZipDecoder-class.html">ZipDecoder</a></li>
+      <li><a href="../archive_io/ZipDirectory-class.html">ZipDirectory</a></li>
+      <li><a href="../archive_io/ZipEncoder-class.html">ZipEncoder</a></li>
+      <li><a href="../archive_io/ZipFile-class.html">ZipFile</a></li>
+      <li><a href="../archive_io/ZipFileEncoder-class.html">ZipFileEncoder</a></li>
+      <li><a href="../archive_io/ZipFileHeader-class.html">ZipFileHeader</a></li>
+      <li><a href="../archive_io/ZLibDecoder-class.html">ZLibDecoder</a></li>
+      <li><a href="../archive_io/ZLibDecoderBase-class.html">ZLibDecoderBase</a></li>
+      <li><a href="../archive_io/ZLibEncoder-class.html">ZLibEncoder</a></li>
+    
+    
+    
+      <li class="section-title"><a href="../archive_io/archive_io-library.html#constants">Constants</a></li>
+      <li><a href="../archive_io/BIG_ENDIAN-constant.html">BIG_ENDIAN</a></li>
+      <li><a href="../archive_io/LITTLE_ENDIAN-constant.html">LITTLE_ENDIAN</a></li>
+    
+    
+      <li class="section-title"><a href="../archive_io/archive_io-library.html#functions">Functions</a></li>
+      <li><a href="../archive_io/CRC32.html">CRC32</a></li>
+      <li><a href="../archive_io/createArchiveFromDirectory.html">createArchiveFromDirectory</a></li>
+      <li><a href="../archive_io/createZLibDecoder.html">createZLibDecoder</a></li>
+      <li><a href="../archive_io/getAdler32.html">getAdler32</a></li>
+      <li><a href="../archive_io/getCrc32.html">getCrc32</a></li>
+    
+    
+    
+      <li class="section-title"><a href="../archive_io/archive_io-library.html#exceptions">Exceptions</a></li>
+      <li><a href="../archive_io/ArchiveException-class.html">ArchiveException</a></li>
+    </ol>
+  </div><!--/.sidebar-offcanvas-left-->
+
+  <div id="dartdoc-main-content" class="col-xs-12 col-sm-9 col-md-8 main-content">
+      <div><h1><span class="kind-function">getAdler32</span> function </h1></div>
+
+    <section class="multi-line-signature">
+        <span class="returntype"><a href="../dart-core/int-class.html">int</a></span>
+                <span class="name ">getAdler32</span>
+(<wbr><ol class="parameter-list"><li><span class="parameter" id="getAdler32-param-array"><span class="type-annotation"><a href="../dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../dart-core/int-class.html">int</a></span>&gt;</span></span> <span class="parameter-name">array</span>, </span></li>
+<li><span class="parameter" id="getAdler32-param-adler">[<span class="type-annotation"><a href="../dart-core/int-class.html">int</a></span> <span class="parameter-name">adler</span> = <span class="default-value">1</span>]</span></li>
+</ol>)
+    </section>
+    <section class="desc markdown">
+      <p>Get the Adler-32 checksum for the given array. You can append bytes to an
+already computed adler checksum by specifying the previous <code>adler</code> value.</p>
+    </section>
+    
+    <section class="summary source-code" id="source">
+      <h2><span>Implementation</span></h2>
+      <pre class="language-dart"><code class="language-dart">int getAdler32(List&lt;int&gt; array, [int adler = 1]) {
+  &#47;&#47; largest prime smaller than 65536
+  const BASE = 65521;
+
+  var s1 = adler &amp; 0xffff;
+  var s2 = adler &gt;&gt; 16;
+  var len = array.length;
+  var i = 0;
+  while (len &gt; 0) {
+    var n = 3800;
+    if (n &gt; len) {
+      n = len;
+    }
+    len -= n;
+    while (--n &gt;= 0) {
+      s1 = s1 + (array[i++] &amp; 0xff);
+      s2 = s2 + s1;
+    }
+    s1 %= BASE;
+    s2 %= BASE;
+  }
+
+  return (s2 &lt;&lt; 16) | s1;
+}</code></pre>
+    </section>
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-right" class="col-xs-6 col-sm-6 col-md-2 sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    provinciApp
+      1.0.0+1
+  </span>
+
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="../static-assets/typeahead.bundle.min.js"></script>
+<script src="../static-assets/highlight.pack.js"></script>
+<script src="../static-assets/URI.js"></script>
+<script src="../static-assets/script.js"></script>
+
+
+</body>
+
+</html>

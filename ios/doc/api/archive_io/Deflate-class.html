@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the Deflate class from the archive_io library, for the Dart programming language.">
+  <title>Deflate class - archive_io library - Dart API</title>
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500,400i,400,300|Source+Sans+Pro:400,300,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="../static-assets/github.css">
+  <link rel="stylesheet" href="../static-assets/styles.css">
+  <link rel="icon" href="../static-assets/favicon.png">
+
+</head>
+
+<body data-base-href="../"
+      data-using-base-href="false">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../index.html">provinciApp</a></li>
+    <li><a href="../archive_io/archive_io-library.html">archive_io</a></li>
+    <li class="self-crumb">Deflate class</li>
+  </ol>
+  <div class="self-name">Deflate</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+  <div id="dartdoc-sidebar-left" class="col-xs-6 col-sm-3 col-md-2 sidebar sidebar-offcanvas-left">
+    <header id="header-search-sidebar" class="hidden-l">
+      <form class="search-sidebar" role="search">
+        <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+      </form>
+    </header>
+    
+    <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+      <li><a href="../index.html">provinciApp</a></li>
+      <li><a href="../archive_io/archive_io-library.html">archive_io</a></li>
+      <li class="self-crumb">Deflate class</li>
+    </ol>
+    
+    <h5>archive_io library</h5>
+    <ol>
+      <li class="section-title"><a href="../archive_io/archive_io-library.html#classes">Classes</a></li>
+      <li><a href="../archive_io/Adler32-class.html">Adler32</a></li>
+      <li><a href="../archive_io/Archive-class.html">Archive</a></li>
+      <li><a href="../archive_io/ArchiveFile-class.html">ArchiveFile</a></li>
+      <li><a href="../archive_io/Bz2BitReader-class.html">Bz2BitReader</a></li>
+      <li><a href="../archive_io/Bz2BitWriter-class.html">Bz2BitWriter</a></li>
+      <li><a href="../archive_io/BZip2-class.html">BZip2</a></li>
+      <li><a href="../archive_io/BZip2Decoder-class.html">BZip2Decoder</a></li>
+      <li><a href="../archive_io/BZip2Encoder-class.html">BZip2Encoder</a></li>
+      <li><a href="../archive_io/Crc32-class.html">Crc32</a></li>
+      <li><a href="../archive_io/Deflate-class.html">Deflate</a></li>
+      <li><a href="../archive_io/GZipDecoder-class.html">GZipDecoder</a></li>
+      <li><a href="../archive_io/GZipEncoder-class.html">GZipEncoder</a></li>
+      <li><a href="../archive_io/HuffmanTable-class.html">HuffmanTable</a></li>
+      <li><a href="../archive_io/Inflate-class.html">Inflate</a></li>
+      <li><a href="../archive_io/InputFileStream-class.html">InputFileStream</a></li>
+      <li><a href="../archive_io/InputStream-class.html">InputStream</a></li>
+      <li><a href="../archive_io/InputStreamBase-class.html">InputStreamBase</a></li>
+      <li><a href="../archive_io/MemPtr-class.html">MemPtr</a></li>
+      <li><a href="../archive_io/OutputFileStream-class.html">OutputFileStream</a></li>
+      <li><a href="../archive_io/OutputStream-class.html">OutputStream</a></li>
+      <li><a href="../archive_io/OutputStreamBase-class.html">OutputStreamBase</a></li>
+      <li><a href="../archive_io/TarDecoder-class.html">TarDecoder</a></li>
+      <li><a href="../archive_io/TarEncoder-class.html">TarEncoder</a></li>
+      <li><a href="../archive_io/TarFile-class.html">TarFile</a></li>
+      <li><a href="../archive_io/TarFileEncoder-class.html">TarFileEncoder</a></li>
+      <li><a href="../archive_io/ZipDecoder-class.html">ZipDecoder</a></li>
+      <li><a href="../archive_io/ZipDirectory-class.html">ZipDirectory</a></li>
+      <li><a href="../archive_io/ZipEncoder-class.html">ZipEncoder</a></li>
+      <li><a href="../archive_io/ZipFile-class.html">ZipFile</a></li>
+      <li><a href="../archive_io/ZipFileEncoder-class.html">ZipFileEncoder</a></li>
+      <li><a href="../archive_io/ZipFileHeader-class.html">ZipFileHeader</a></li>
+      <li><a href="../archive_io/ZLibDecoder-class.html">ZLibDecoder</a></li>
+      <li><a href="../archive_io/ZLibDecoderBase-class.html">ZLibDecoderBase</a></li>
+      <li><a href="../archive_io/ZLibEncoder-class.html">ZLibEncoder</a></li>
+    
+    
+    
+      <li class="section-title"><a href="../archive_io/archive_io-library.html#constants">Constants</a></li>
+      <li><a href="../archive_io/BIG_ENDIAN-constant.html">BIG_ENDIAN</a></li>
+      <li><a href="../archive_io/LITTLE_ENDIAN-constant.html">LITTLE_ENDIAN</a></li>
+    
+    
+      <li class="section-title"><a href="../archive_io/archive_io-library.html#functions">Functions</a></li>
+      <li><a href="../archive_io/CRC32.html">CRC32</a></li>
+      <li><a href="../archive_io/createArchiveFromDirectory.html">createArchiveFromDirectory</a></li>
+      <li><a href="../archive_io/createZLibDecoder.html">createZLibDecoder</a></li>
+      <li><a href="../archive_io/getAdler32.html">getAdler32</a></li>
+      <li><a href="../archive_io/getCrc32.html">getCrc32</a></li>
+    
+    
+    
+      <li class="section-title"><a href="../archive_io/archive_io-library.html#exceptions">Exceptions</a></li>
+      <li><a href="../archive_io/ArchiveException-class.html">ArchiveException</a></li>
+    </ol>
+  </div>
+
+  <div id="dartdoc-main-content" class="col-xs-12 col-sm-9 col-md-8 main-content">
+      <div><h1><span class="kind-class">Deflate</span> class </h1></div>
+
+    
+
+    <section class="summary offset-anchor" id="constructors">
+      <h2>Constructors</h2>
+
+      <dl class="constructor-summary-list">
+        <dt id="Deflate" class="callable">
+          <span class="name"><a href="../archive_io/Deflate/Deflate.html">Deflate</a></span><span class="signature">(<span class="parameter" id="-param-bytes"><span class="type-annotation"><a href="../dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../dart-core/int-class.html">int</a></span>&gt;</span></span> <span class="parameter-name">bytes</span>, </span><wbr><span class="parameter" id="-param-level">{<span class="type-annotation"><a href="../dart-core/int-class.html">int</a></span> <span class="parameter-name">level</span>: <span class="default-value">DEFAULT_COMPRESSION</span>, </span><wbr><span class="parameter" id="-param-flush"><span class="type-annotation"><a href="../dart-core/int-class.html">int</a></span> <span class="parameter-name">flush</span>: <span class="default-value">FINISH</span>, </span><wbr><span class="parameter" id="-param-output"><span class="type-annotation">dynamic</span> <span class="parameter-name">output</span>}</span><wbr>)</span>
+        </dt>
+        <dd>
+           
+        </dd>
+        <dt id="Deflate.buffer" class="callable">
+          <span class="name"><a href="../archive_io/Deflate/Deflate.buffer.html">Deflate.buffer</a></span><span class="signature">(<span class="parameter" id="buffer-param-_input"><span class="type-annotation"><a href="../archive_io/InputStreamBase-class.html">InputStreamBase</a></span> <span class="parameter-name">_input</span>, </span><wbr><span class="parameter" id="buffer-param-level">{<span class="type-annotation"><a href="../dart-core/int-class.html">int</a></span> <span class="parameter-name">level</span>: <span class="default-value">DEFAULT_COMPRESSION</span>, </span><wbr><span class="parameter" id="buffer-param-flush"><span class="type-annotation"><a href="../dart-core/int-class.html">int</a></span> <span class="parameter-name">flush</span>: <span class="default-value">FINISH</span>, </span><wbr><span class="parameter" id="buffer-param-output"><span class="type-annotation">dynamic</span> <span class="parameter-name">output</span>}</span><wbr>)</span>
+        </dt>
+        <dd>
+           
+        </dd>
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor" id="instance-properties">
+      <h2>Properties</h2>
+
+      <dl class="properties">
+        <dt id="crc32" class="property">
+          <span class="name"><a href="../archive_io/Deflate/crc32.html">crc32</a></span>
+          <span class="signature">&#8596; <a href="../dart-core/int-class.html">int</a></span>         
+        </dt>
+        <dd>
+           
+                  <div class="features">read / write</div>
+</dd>
+        <dt id="level" class="property">
+          <span class="name"><a href="../archive_io/Deflate/level.html">level</a></span>
+          <span class="signature">&#8594; <a href="../dart-core/int-class.html">int</a></span>         
+        </dt>
+        <dd>
+          Compression level used (1..9) 
+                  <div class="features">read-only</div>
+</dd>
+        <dt id="total" class="property">
+          <span class="name"><a href="../archive_io/Deflate/total.html">total</a></span>
+          <span class="signature">&#8596; <a href="../dart-core/int-class.html">int</a></span>         
+        </dt>
+        <dd>
+          Read a buffer from the current input stream, update the adler32
+and total number of bytes read.  All deflate() input goes through
+this function so some applications may wish to modify it to avoid
+allocating a large strm-&gt;next_in buffer and copying from it.
+(See also flush_pending()). 
+                  <div class="features">read / write</div>
+</dd>
+        <dt id="hashCode" class="property inherited">
+          <span class="name"><a href="../dart-core/Object/hashCode.html">hashCode</a></span>
+          <span class="signature">&#8594; <a href="../dart-core/int-class.html">int</a></span>         
+        </dt>
+        <dd class="inherited">
+          The hash code for this object. <a href="../dart-core/Object/hashCode.html">[...]</a>
+                  <div class="features">read-only, inherited</div>
+</dd>
+        <dt id="runtimeType" class="property inherited">
+          <span class="name"><a href="../dart-core/Object/runtimeType.html">runtimeType</a></span>
+          <span class="signature">&#8594; <a href="../dart-core/Type-class.html">Type</a></span>         
+        </dt>
+        <dd class="inherited">
+          A representation of the runtime type of the object. 
+                  <div class="features">read-only, inherited</div>
+</dd>
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor" id="instance-methods">
+      <h2>Methods</h2>
+      <dl class="callables">
+        <dt id="addBuffer" class="callable">
+          <span class="name"><a href="../archive_io/Deflate/addBuffer.html">addBuffer</a></span><span class="signature">(<wbr><span class="parameter" id="addBuffer-param-buffer"><span class="type-annotation"><a href="../archive_io/InputStream-class.html">InputStream</a></span> <span class="parameter-name">buffer</span>, </span><wbr><span class="parameter" id="addBuffer-param-flush">{<span class="type-annotation"><a href="../dart-core/int-class.html">int</a></span> <span class="parameter-name">flush</span>: <span class="default-value">FINISH</span>}</span><wbr>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+                  </dt>
+        <dd>
+          Add more data to be deflated. 
+                  
+</dd>
+        <dt id="addBytes" class="callable">
+          <span class="name"><a href="../archive_io/Deflate/addBytes.html">addBytes</a></span><span class="signature">(<wbr><span class="parameter" id="addBytes-param-bytes"><span class="type-annotation"><a href="../dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../dart-core/int-class.html">int</a></span>&gt;</span></span> <span class="parameter-name">bytes</span>, </span><wbr><span class="parameter" id="addBytes-param-flush">{<span class="type-annotation"><a href="../dart-core/int-class.html">int</a></span> <span class="parameter-name">flush</span>: <span class="default-value">FINISH</span>}</span><wbr>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+                  </dt>
+        <dd>
+          Add more data to be deflated. 
+                  
+</dd>
+        <dt id="biFlush" class="callable">
+          <span class="name"><a href="../archive_io/Deflate/biFlush.html">biFlush</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+                  </dt>
+        <dd>
+          Flush the bit buffer, keeping at most 7 bits in it. 
+                  
+</dd>
+        <dt id="finish" class="callable">
+          <span class="name"><a href="../archive_io/Deflate/finish.html">finish</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+                  </dt>
+        <dd>
+           
+                  
+</dd>
+        <dt id="getBytes" class="callable">
+          <span class="name"><a href="../archive_io/Deflate/getBytes.html">getBytes</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; <a href="../dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../dart-core/int-class.html">int</a></span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd>
+          Get the resulting compressed bytes. 
+                  
+</dd>
+        <dt id="setDataType" class="callable">
+          <span class="name"><a href="../archive_io/Deflate/setDataType.html">setDataType</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+                  </dt>
+        <dd>
+          Set the data type to ASCII or BINARY, using a crude approximation:
+binary if more than 20% of the bytes are &lt;= 6 or &gt;= 128, ascii otherwise.
+IN assertion: the fields freq of dyn_ltree are set and the total of all
+frequencies does not exceed 64K (to fit in an int on 16 bit machines). 
+                  
+</dd>
+        <dt id="takeBytes" class="callable">
+          <span class="name"><a href="../archive_io/Deflate/takeBytes.html">takeBytes</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; <a href="../dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../dart-core/int-class.html">int</a></span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd>
+          Get the resulting compressed bytes without storing the resulting data to
+minimize memory usage. 
+                  
+</dd>
+        <dt id="noSuchMethod" class="callable inherited">
+          <span class="name"><a href="../dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="../dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span><wbr>)
+            <span class="returntype parameter">&#8594; dynamic</span>
+          </span>
+                  </dt>
+        <dd class="inherited">
+          Invoked when a non-existent method or property is accessed. <a href="../dart-core/Object/noSuchMethod.html">[...]</a>
+                  <div class="features">inherited</div>
+</dd>
+        <dt id="toString" class="callable inherited">
+          <span class="name"><a href="../dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; <a href="../dart-core/String-class.html">String</a></span>
+          </span>
+                  </dt>
+        <dd class="inherited">
+          Returns a string representation of this object. 
+                  <div class="features">inherited</div>
+</dd>
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor inherited" id="operators">
+      <h2>Operators</h2>
+      <dl class="callables">
+        <dt id="operator ==" class="callable inherited">
+          <span class="name"><a href="../dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="../dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span><wbr>)
+            <span class="returntype parameter">&#8594; <a href="../dart-core/bool-class.html">bool</a></span>
+          </span>
+                  </dt>
+        <dd class="inherited">
+          The equality operator. <a href="../dart-core/Object/operator_equals.html">[...]</a>
+                  <div class="features">inherited</div>
+</dd>
+      </dl>
+    </section>
+
+
+
+    <section class="summary offset-anchor" id="constants">
+      <h2>Constants</h2>
+
+      <dl class="properties">
+        <dt id="BEST_COMPRESSION" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/BEST_COMPRESSION-constant.html">BEST_COMPRESSION</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+           
+                  
+  <div>
+            <span class="signature"><code>9</code></span>
+          </div>
+        </dd>
+        <dt id="BEST_SPEED" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/BEST_SPEED-constant.html">BEST_SPEED</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+           
+                  
+  <div>
+            <span class="signature"><code>1</code></span>
+          </div>
+        </dd>
+        <dt id="BL_CODES" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/BL_CODES-constant.html">BL_CODES</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+           
+                  
+  <div>
+            <span class="signature"><code>19</code></span>
+          </div>
+        </dd>
+        <dt id="BLOCK_DONE" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/BLOCK_DONE-constant.html">BLOCK_DONE</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+          block flush performed 
+                  
+  <div>
+            <span class="signature"><code>1</code></span>
+          </div>
+        </dd>
+        <dt id="BUF_SIZE" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/BUF_SIZE-constant.html">BUF_SIZE</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+           
+                  
+  <div>
+            <span class="signature"><code>8 * 2</code></span>
+          </div>
+        </dd>
+        <dt id="BUSY_STATE" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/BUSY_STATE-constant.html">BUSY_STATE</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+           
+                  
+  <div>
+            <span class="signature"><code>113</code></span>
+          </div>
+        </dd>
+        <dt id="D_CODES" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/D_CODES-constant.html">D_CODES</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+           
+                  
+  <div>
+            <span class="signature"><code>30</code></span>
+          </div>
+        </dd>
+        <dt id="DEF_MEM_LEVEL" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/DEF_MEM_LEVEL-constant.html">DEF_MEM_LEVEL</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+           
+                  
+  <div>
+            <span class="signature"><code>8</code></span>
+          </div>
+        </dd>
+        <dt id="DEFAULT_COMPRESSION" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/DEFAULT_COMPRESSION-constant.html">DEFAULT_COMPRESSION</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+           
+                  
+  <div>
+            <span class="signature"><code>6</code></span>
+          </div>
+        </dd>
+        <dt id="DYN_TREES" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/DYN_TREES-constant.html">DYN_TREES</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+           
+                  
+  <div>
+            <span class="signature"><code>2</code></span>
+          </div>
+        </dd>
+        <dt id="END_BLOCK" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/END_BLOCK-constant.html">END_BLOCK</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+           
+                  
+  <div>
+            <span class="signature"><code>256</code></span>
+          </div>
+        </dd>
+        <dt id="FAST" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/FAST-constant.html">FAST</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+           
+                  
+  <div>
+            <span class="signature"><code>1</code></span>
+          </div>
+        </dd>
+        <dt id="FINISH" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/FINISH-constant.html">FINISH</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+           
+                  
+  <div>
+            <span class="signature"><code>4</code></span>
+          </div>
+        </dd>
+        <dt id="FINISH_DONE" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/FINISH_DONE-constant.html">FINISH_DONE</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+          finish done, accept no more input or output 
+                  
+  <div>
+            <span class="signature"><code>3</code></span>
+          </div>
+        </dd>
+        <dt id="FINISH_STARTED" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/FINISH_STARTED-constant.html">FINISH_STARTED</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+          finish started, need only more output at next deflate 
+                  
+  <div>
+            <span class="signature"><code>2</code></span>
+          </div>
+        </dd>
+        <dt id="FINISH_STATE" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/FINISH_STATE-constant.html">FINISH_STATE</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+           
+                  
+  <div>
+            <span class="signature"><code>666</code></span>
+          </div>
+        </dd>
+        <dt id="FULL_FLUSH" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/FULL_FLUSH-constant.html">FULL_FLUSH</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+           
+                  
+  <div>
+            <span class="signature"><code>3</code></span>
+          </div>
+        </dd>
+        <dt id="HEAP_SIZE" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/HEAP_SIZE-constant.html">HEAP_SIZE</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+           
+                  
+  <div>
+            <span class="signature"><code>(2 * L_CODES + 1)</code></span>
+          </div>
+        </dd>
+        <dt id="INIT_STATE" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/INIT_STATE-constant.html">INIT_STATE</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+           
+                  
+  <div>
+            <span class="signature"><code>42</code></span>
+          </div>
+        </dd>
+        <dt id="L_CODES" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/L_CODES-constant.html">L_CODES</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+           
+                  
+  <div>
+            <span class="signature"><code>(LITERALS + 1 + LENGTH_CODES)</code></span>
+          </div>
+        </dd>
+        <dt id="LENGTH_CODES" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/LENGTH_CODES-constant.html">LENGTH_CODES</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+           
+                  
+  <div>
+            <span class="signature"><code>29</code></span>
+          </div>
+        </dd>
+        <dt id="LITERALS" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/LITERALS-constant.html">LITERALS</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+           
+                  
+  <div>
+            <span class="signature"><code>256</code></span>
+          </div>
+        </dd>
+        <dt id="MAX_BITS" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/MAX_BITS-constant.html">MAX_BITS</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+           
+                  
+  <div>
+            <span class="signature"><code>15</code></span>
+          </div>
+        </dd>
+        <dt id="MAX_MATCH" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/MAX_MATCH-constant.html">MAX_MATCH</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+           
+                  
+  <div>
+            <span class="signature"><code>258</code></span>
+          </div>
+        </dd>
+        <dt id="MAX_MEM_LEVEL" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/MAX_MEM_LEVEL-constant.html">MAX_MEM_LEVEL</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+           
+                  
+  <div>
+            <span class="signature"><code>9</code></span>
+          </div>
+        </dd>
+        <dt id="MAX_WBITS" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/MAX_WBITS-constant.html">MAX_WBITS</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+          32K LZ77 window 
+                  
+  <div>
+            <span class="signature"><code>15</code></span>
+          </div>
+        </dd>
+        <dt id="MIN_LOOKAHEAD" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/MIN_LOOKAHEAD-constant.html">MIN_LOOKAHEAD</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+           
+                  
+  <div>
+            <span class="signature"><code>(MAX_MATCH + MIN_MATCH + 1)</code></span>
+          </div>
+        </dd>
+        <dt id="MIN_MATCH" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/MIN_MATCH-constant.html">MIN_MATCH</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+           
+                  
+  <div>
+            <span class="signature"><code>3</code></span>
+          </div>
+        </dd>
+        <dt id="NEED_MORE" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/NEED_MORE-constant.html">NEED_MORE</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+          block not completed, need more input or more output 
+                  
+  <div>
+            <span class="signature"><code>0</code></span>
+          </div>
+        </dd>
+        <dt id="NO_COMPRESSION" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/NO_COMPRESSION-constant.html">NO_COMPRESSION</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+           
+                  
+  <div>
+            <span class="signature"><code>0</code></span>
+          </div>
+        </dd>
+        <dt id="NO_FLUSH" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/NO_FLUSH-constant.html">NO_FLUSH</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+           
+                  
+  <div>
+            <span class="signature"><code>0</code></span>
+          </div>
+        </dd>
+        <dt id="PARTIAL_FLUSH" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/PARTIAL_FLUSH-constant.html">PARTIAL_FLUSH</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+           
+                  
+  <div>
+            <span class="signature"><code>1</code></span>
+          </div>
+        </dd>
+        <dt id="REP_3_6" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/REP_3_6-constant.html">REP_3_6</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+          repeat previous bit length 3-6 times (2 bits of repeat count) 
+                  
+  <div>
+            <span class="signature"><code>16</code></span>
+          </div>
+        </dd>
+        <dt id="REPZ_3_10" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/REPZ_3_10-constant.html">REPZ_3_10</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+          repeat a zero length 3-10 times  (3 bits of repeat count) 
+                  
+  <div>
+            <span class="signature"><code>17</code></span>
+          </div>
+        </dd>
+        <dt id="REPZ_11_138" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/REPZ_11_138-constant.html">REPZ_11_138</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+          repeat a zero length 11-138 times  (7 bits of repeat count) 
+                  
+  <div>
+            <span class="signature"><code>18</code></span>
+          </div>
+        </dd>
+        <dt id="SLOW" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/SLOW-constant.html">SLOW</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+           
+                  
+  <div>
+            <span class="signature"><code>2</code></span>
+          </div>
+        </dd>
+        <dt id="STATIC_TREES" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/STATIC_TREES-constant.html">STATIC_TREES</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+           
+                  
+  <div>
+            <span class="signature"><code>1</code></span>
+          </div>
+        </dd>
+        <dt id="STORED" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/STORED-constant.html">STORED</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+           
+                  
+  <div>
+            <span class="signature"><code>0</code></span>
+          </div>
+        </dd>
+        <dt id="STORED_BLOCK" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/STORED_BLOCK-constant.html">STORED_BLOCK</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+           
+                  
+  <div>
+            <span class="signature"><code>0</code></span>
+          </div>
+        </dd>
+        <dt id="SYNC_FLUSH" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/SYNC_FLUSH-constant.html">SYNC_FLUSH</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+           
+                  
+  <div>
+            <span class="signature"><code>2</code></span>
+          </div>
+        </dd>
+        <dt id="Z_ASCII" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/Z_ASCII-constant.html">Z_ASCII</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+           
+                  
+  <div>
+            <span class="signature"><code>1</code></span>
+          </div>
+        </dd>
+        <dt id="Z_BINARY" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/Z_BINARY-constant.html">Z_BINARY</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+           
+                  
+  <div>
+            <span class="signature"><code>0</code></span>
+          </div>
+        </dd>
+        <dt id="Z_BUF_ERROR" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/Z_BUF_ERROR-constant.html">Z_BUF_ERROR</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+           
+                  
+  <div>
+            <span class="signature"><code>-5</code></span>
+          </div>
+        </dd>
+        <dt id="Z_DATA_ERROR" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/Z_DATA_ERROR-constant.html">Z_DATA_ERROR</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+           
+                  
+  <div>
+            <span class="signature"><code>-3</code></span>
+          </div>
+        </dd>
+        <dt id="Z_DEFAULT_COMPRESSION" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/Z_DEFAULT_COMPRESSION-constant.html">Z_DEFAULT_COMPRESSION</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+           
+                  
+  <div>
+            <span class="signature"><code>-1</code></span>
+          </div>
+        </dd>
+        <dt id="Z_DEFAULT_STRATEGY" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/Z_DEFAULT_STRATEGY-constant.html">Z_DEFAULT_STRATEGY</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+           
+                  
+  <div>
+            <span class="signature"><code>0</code></span>
+          </div>
+        </dd>
+        <dt id="Z_DEFLATED" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/Z_DEFLATED-constant.html">Z_DEFLATED</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+          The deflate compression method 
+                  
+  <div>
+            <span class="signature"><code>8</code></span>
+          </div>
+        </dd>
+        <dt id="Z_ERRNO" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/Z_ERRNO-constant.html">Z_ERRNO</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+           
+                  
+  <div>
+            <span class="signature"><code>-1</code></span>
+          </div>
+        </dd>
+        <dt id="Z_FILTERED" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/Z_FILTERED-constant.html">Z_FILTERED</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+           
+                  
+  <div>
+            <span class="signature"><code>1</code></span>
+          </div>
+        </dd>
+        <dt id="Z_HUFFMAN_ONLY" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/Z_HUFFMAN_ONLY-constant.html">Z_HUFFMAN_ONLY</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+           
+                  
+  <div>
+            <span class="signature"><code>2</code></span>
+          </div>
+        </dd>
+        <dt id="Z_MEM_ERROR" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/Z_MEM_ERROR-constant.html">Z_MEM_ERROR</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+           
+                  
+  <div>
+            <span class="signature"><code>-4</code></span>
+          </div>
+        </dd>
+        <dt id="Z_NEED_DICT" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/Z_NEED_DICT-constant.html">Z_NEED_DICT</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+           
+                  
+  <div>
+            <span class="signature"><code>2</code></span>
+          </div>
+        </dd>
+        <dt id="Z_OK" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/Z_OK-constant.html">Z_OK</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+           
+                  
+  <div>
+            <span class="signature"><code>0</code></span>
+          </div>
+        </dd>
+        <dt id="Z_STREAM_END" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/Z_STREAM_END-constant.html">Z_STREAM_END</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+           
+                  
+  <div>
+            <span class="signature"><code>1</code></span>
+          </div>
+        </dd>
+        <dt id="Z_STREAM_ERROR" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/Z_STREAM_ERROR-constant.html">Z_STREAM_ERROR</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+           
+                  
+  <div>
+            <span class="signature"><code>-2</code></span>
+          </div>
+        </dd>
+        <dt id="Z_UNKNOWN" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/Z_UNKNOWN-constant.html">Z_UNKNOWN</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+           
+                  
+  <div>
+            <span class="signature"><code>2</code></span>
+          </div>
+        </dd>
+        <dt id="Z_VERSION_ERROR" class="constant">
+          <span class="name "><a href="../archive_io/Deflate/Z_VERSION_ERROR-constant.html">Z_VERSION_ERROR</a></span>
+          <span class="signature">&#8594; const <a href="../dart-core/int-class.html">int</a></span>
+                  </dt>
+        <dd>
+           
+                  
+  <div>
+            <span class="signature"><code>-6</code></span>
+          </div>
+        </dd>
+      </dl>
+    </section>
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-right" class="col-xs-6 col-sm-6 col-md-2 sidebar sidebar-offcanvas-right">
+    <ol>
+    
+      <li class="section-title"><a href="../archive_io/Deflate-class.html#constructors">Constructors</a></li>
+      <li><a href="../archive_io/Deflate/Deflate.html">Deflate</a></li>
+      <li><a href="../archive_io/Deflate/Deflate.buffer.html">buffer</a></li>
+    
+      <li class="section-title">
+        <a href="../archive_io/Deflate-class.html#instance-properties">Properties</a>
+      </li>
+      <li><a href="../archive_io/Deflate/crc32.html">crc32</a></li>
+      <li><a href="../archive_io/Deflate/level.html">level</a></li>
+      <li><a href="../archive_io/Deflate/total.html">total</a></li>
+      <li class="inherited"><a href="../dart-core/Object/hashCode.html">hashCode</a></li>
+      <li class="inherited"><a href="../dart-core/Object/runtimeType.html">runtimeType</a></li>
+    
+      <li class="section-title"><a href="../archive_io/Deflate-class.html#instance-methods">Methods</a></li>
+      <li><a href="../archive_io/Deflate/addBuffer.html">addBuffer</a></li>
+      <li><a href="../archive_io/Deflate/addBytes.html">addBytes</a></li>
+      <li><a href="../archive_io/Deflate/biFlush.html">biFlush</a></li>
+      <li><a href="../archive_io/Deflate/finish.html">finish</a></li>
+      <li><a href="../archive_io/Deflate/getBytes.html">getBytes</a></li>
+      <li><a href="../archive_io/Deflate/setDataType.html">setDataType</a></li>
+      <li><a href="../archive_io/Deflate/takeBytes.html">takeBytes</a></li>
+      <li class="inherited"><a href="../dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
+      <li class="inherited"><a href="../dart-core/Object/toString.html">toString</a></li>
+    
+      <li class="section-title inherited"><a href="../archive_io/Deflate-class.html#operators">Operators</a></li>
+      <li class="inherited"><a href="../dart-core/Object/operator_equals.html">operator ==</a></li>
+    
+    
+    
+      <li class="section-title"><a href="../archive_io/Deflate-class.html#constants">Constants</a></li>
+      <li><a href="../archive_io/Deflate/BEST_COMPRESSION-constant.html">BEST_COMPRESSION</a></li>
+      <li><a href="../archive_io/Deflate/BEST_SPEED-constant.html">BEST_SPEED</a></li>
+      <li><a href="../archive_io/Deflate/BL_CODES-constant.html">BL_CODES</a></li>
+      <li><a href="../archive_io/Deflate/BLOCK_DONE-constant.html">BLOCK_DONE</a></li>
+      <li><a href="../archive_io/Deflate/BUF_SIZE-constant.html">BUF_SIZE</a></li>
+      <li><a href="../archive_io/Deflate/BUSY_STATE-constant.html">BUSY_STATE</a></li>
+      <li><a href="../archive_io/Deflate/D_CODES-constant.html">D_CODES</a></li>
+      <li><a href="../archive_io/Deflate/DEF_MEM_LEVEL-constant.html">DEF_MEM_LEVEL</a></li>
+      <li><a href="../archive_io/Deflate/DEFAULT_COMPRESSION-constant.html">DEFAULT_COMPRESSION</a></li>
+      <li><a href="../archive_io/Deflate/DYN_TREES-constant.html">DYN_TREES</a></li>
+      <li><a href="../archive_io/Deflate/END_BLOCK-constant.html">END_BLOCK</a></li>
+      <li><a href="../archive_io/Deflate/FAST-constant.html">FAST</a></li>
+      <li><a href="../archive_io/Deflate/FINISH-constant.html">FINISH</a></li>
+      <li><a href="../archive_io/Deflate/FINISH_DONE-constant.html">FINISH_DONE</a></li>
+      <li><a href="../archive_io/Deflate/FINISH_STARTED-constant.html">FINISH_STARTED</a></li>
+      <li><a href="../archive_io/Deflate/FINISH_STATE-constant.html">FINISH_STATE</a></li>
+      <li><a href="../archive_io/Deflate/FULL_FLUSH-constant.html">FULL_FLUSH</a></li>
+      <li><a href="../archive_io/Deflate/HEAP_SIZE-constant.html">HEAP_SIZE</a></li>
+      <li><a href="../archive_io/Deflate/INIT_STATE-constant.html">INIT_STATE</a></li>
+      <li><a href="../archive_io/Deflate/L_CODES-constant.html">L_CODES</a></li>
+      <li><a href="../archive_io/Deflate/LENGTH_CODES-constant.html">LENGTH_CODES</a></li>
+      <li><a href="../archive_io/Deflate/LITERALS-constant.html">LITERALS</a></li>
+      <li><a href="../archive_io/Deflate/MAX_BITS-constant.html">MAX_BITS</a></li>
+      <li><a href="../archive_io/Deflate/MAX_MATCH-constant.html">MAX_MATCH</a></li>
+      <li><a href="../archive_io/Deflate/MAX_MEM_LEVEL-constant.html">MAX_MEM_LEVEL</a></li>
+      <li><a href="../archive_io/Deflate/MAX_WBITS-constant.html">MAX_WBITS</a></li>
+      <li><a href="../archive_io/Deflate/MIN_LOOKAHEAD-constant.html">MIN_LOOKAHEAD</a></li>
+      <li><a href="../archive_io/Deflate/MIN_MATCH-constant.html">MIN_MATCH</a></li>
+      <li><a href="../archive_io/Deflate/NEED_MORE-constant.html">NEED_MORE</a></li>
+      <li><a href="../archive_io/Deflate/NO_COMPRESSION-constant.html">NO_COMPRESSION</a></li>
+      <li><a href="../archive_io/Deflate/NO_FLUSH-constant.html">NO_FLUSH</a></li>
+      <li><a href="../archive_io/Deflate/PARTIAL_FLUSH-constant.html">PARTIAL_FLUSH</a></li>
+      <li><a href="../archive_io/Deflate/REP_3_6-constant.html">REP_3_6</a></li>
+      <li><a href="../archive_io/Deflate/REPZ_3_10-constant.html">REPZ_3_10</a></li>
+      <li><a href="../archive_io/Deflate/REPZ_11_138-constant.html">REPZ_11_138</a></li>
+      <li><a href="../archive_io/Deflate/SLOW-constant.html">SLOW</a></li>
+      <li><a href="../archive_io/Deflate/STATIC_TREES-constant.html">STATIC_TREES</a></li>
+      <li><a href="../archive_io/Deflate/STORED-constant.html">STORED</a></li>
+      <li><a href="../archive_io/Deflate/STORED_BLOCK-constant.html">STORED_BLOCK</a></li>
+      <li><a href="../archive_io/Deflate/SYNC_FLUSH-constant.html">SYNC_FLUSH</a></li>
+      <li><a href="../archive_io/Deflate/Z_ASCII-constant.html">Z_ASCII</a></li>
+      <li><a href="../archive_io/Deflate/Z_BINARY-constant.html">Z_BINARY</a></li>
+      <li><a href="../archive_io/Deflate/Z_BUF_ERROR-constant.html">Z_BUF_ERROR</a></li>
+      <li><a href="../archive_io/Deflate/Z_DATA_ERROR-constant.html">Z_DATA_ERROR</a></li>
+      <li><a href="../archive_io/Deflate/Z_DEFAULT_COMPRESSION-constant.html">Z_DEFAULT_COMPRESSION</a></li>
+      <li><a href="../archive_io/Deflate/Z_DEFAULT_STRATEGY-constant.html">Z_DEFAULT_STRATEGY</a></li>
+      <li><a href="../archive_io/Deflate/Z_DEFLATED-constant.html">Z_DEFLATED</a></li>
+      <li><a href="../archive_io/Deflate/Z_ERRNO-constant.html">Z_ERRNO</a></li>
+      <li><a href="../archive_io/Deflate/Z_FILTERED-constant.html">Z_FILTERED</a></li>
+      <li><a href="../archive_io/Deflate/Z_HUFFMAN_ONLY-constant.html">Z_HUFFMAN_ONLY</a></li>
+      <li><a href="../archive_io/Deflate/Z_MEM_ERROR-constant.html">Z_MEM_ERROR</a></li>
+      <li><a href="../archive_io/Deflate/Z_NEED_DICT-constant.html">Z_NEED_DICT</a></li>
+      <li><a href="../archive_io/Deflate/Z_OK-constant.html">Z_OK</a></li>
+      <li><a href="../archive_io/Deflate/Z_STREAM_END-constant.html">Z_STREAM_END</a></li>
+      <li><a href="../archive_io/Deflate/Z_STREAM_ERROR-constant.html">Z_STREAM_ERROR</a></li>
+      <li><a href="../archive_io/Deflate/Z_UNKNOWN-constant.html">Z_UNKNOWN</a></li>
+      <li><a href="../archive_io/Deflate/Z_VERSION_ERROR-constant.html">Z_VERSION_ERROR</a></li>
+    
+    </ol>
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    provinciApp
+      1.0.0+1
+  </span>
+
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="../static-assets/typeahead.bundle.min.js"></script>
+<script src="../static-assets/highlight.pack.js"></script>
+<script src="../static-assets/URI.js"></script>
+<script src="../static-assets/script.js"></script>
+
+
+</body>
+
+</html>

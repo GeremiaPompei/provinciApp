@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the ZipFile constructor from the Class ZipFile class from the archive_io library, for the Dart programming language.">
+  <title>ZipFile constructor - ZipFile class - archive_io library - Dart API</title>
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500,400i,400,300|Source+Sans+Pro:400,300,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="../../static-assets/github.css">
+  <link rel="stylesheet" href="../../static-assets/styles.css">
+  <link rel="icon" href="../../static-assets/favicon.png">
+
+</head>
+
+<body data-base-href="../../"
+      data-using-base-href="false">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">provinciApp</a></li>
+    <li><a href="../../archive_io/archive_io-library.html">archive_io</a></li>
+    <li><a href="../../archive_io/ZipFile-class.html">ZipFile</a></li>
+    <li class="self-crumb">ZipFile constructor</li>
+  </ol>
+  <div class="self-name">ZipFile</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+  <div id="dartdoc-sidebar-left" class="col-xs-6 col-sm-3 col-md-2 sidebar sidebar-offcanvas-left">
+    <header id="header-search-sidebar" class="hidden-l">
+      <form class="search-sidebar" role="search">
+        <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+      </form>
+    </header>
+    
+    <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+      <li><a href="../../index.html">provinciApp</a></li>
+      <li><a href="../../archive_io/archive_io-library.html">archive_io</a></li>
+      <li><a href="../../archive_io/ZipFile-class.html">ZipFile</a></li>
+      <li class="self-crumb">ZipFile constructor</li>
+    </ol>
+    
+    <h5>ZipFile class</h5>
+    <ol>
+    
+      <li class="section-title"><a href="../../archive_io/ZipFile-class.html#constructors">Constructors</a></li>
+      <li><a href="../../archive_io/ZipFile/ZipFile.html">ZipFile</a></li>
+    
+      <li class="section-title">
+        <a href="../../archive_io/ZipFile-class.html#instance-properties">Properties</a>
+      </li>
+      <li><a href="../../archive_io/ZipFile/compressedSize.html">compressedSize</a></li>
+      <li><a href="../../archive_io/ZipFile/compressionMethod.html">compressionMethod</a></li>
+      <li><a href="../../archive_io/ZipFile/content.html">content</a></li>
+      <li><a href="../../archive_io/ZipFile/crc32.html">crc32</a></li>
+      <li><a href="../../archive_io/ZipFile/extraField.html">extraField</a></li>
+      <li><a href="../../archive_io/ZipFile/filename.html">filename</a></li>
+      <li><a href="../../archive_io/ZipFile/flags.html">flags</a></li>
+      <li><a href="../../archive_io/ZipFile/header.html">header</a></li>
+      <li><a href="../../archive_io/ZipFile/lastModFileDate.html">lastModFileDate</a></li>
+      <li><a href="../../archive_io/ZipFile/lastModFileTime.html">lastModFileTime</a></li>
+      <li><a href="../../archive_io/ZipFile/rawContent.html">rawContent</a></li>
+      <li><a href="../../archive_io/ZipFile/signature.html">signature</a></li>
+      <li><a href="../../archive_io/ZipFile/uncompressedSize.html">uncompressedSize</a></li>
+      <li><a href="../../archive_io/ZipFile/version.html">version</a></li>
+      <li class="inherited"><a href="../../dart-core/Object/hashCode.html">hashCode</a></li>
+      <li class="inherited"><a href="../../dart-core/Object/runtimeType.html">runtimeType</a></li>
+    
+      <li class="section-title"><a href="../../archive_io/ZipFile-class.html#instance-methods">Methods</a></li>
+      <li><a href="../../archive_io/ZipFile/toString.html">toString</a></li>
+      <li><a href="../../archive_io/ZipFile/verifyCrc32.html">verifyCrc32</a></li>
+      <li class="inherited"><a href="../../dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
+    
+      <li class="section-title inherited"><a href="../../archive_io/ZipFile-class.html#operators">Operators</a></li>
+      <li class="inherited"><a href="../../dart-core/Object/operator_equals.html">operator ==</a></li>
+    
+    
+    
+      <li class="section-title"><a href="../../archive_io/ZipFile-class.html#constants">Constants</a></li>
+      <li><a href="../../archive_io/ZipFile/BZIP2-constant.html">BZIP2</a></li>
+      <li><a href="../../archive_io/ZipFile/DEFLATE-constant.html">DEFLATE</a></li>
+      <li><a href="../../archive_io/ZipFile/SIGNATURE-constant.html">SIGNATURE</a></li>
+      <li><a href="../../archive_io/ZipFile/STORE-constant.html">STORE</a></li>
+    
+    </ol>
+  </div><!--/.sidebar-offcanvas-left-->
+
+  <div id="dartdoc-main-content" class="col-xs-12 col-sm-9 col-md-8 main-content">
+      <div><h1><span class="kind-constructor">ZipFile</span> constructor</h1></div>
+
+    <section class="multi-line-signature">
+      
+      <span class="name ">ZipFile</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="-param-input">[<span class="type-annotation"><a href="../../archive_io/InputStream-class.html">InputStream</a></span> <span class="parameter-name">input</span>, </span></li>
+<li><span class="parameter" id="-param-header"><span class="type-annotation"><a href="../../archive_io/ZipFileHeader-class.html">ZipFileHeader</a></span> <span class="parameter-name">header</span>, </span></li>
+<li><span class="parameter" id="-param-password"><span class="type-annotation"><a href="../../dart-core/String-class.html">String</a></span> <span class="parameter-name">password</span>]</span></li>
+</ol>)
+    </section>
+
+    
+    <section class="summary source-code" id="source">
+      <h2><span>Implementation</span></h2>
+      <pre class="language-dart"><code class="language-dart">ZipFile([InputStream input, this.header, String password]) {
+  if (input != null) {
+    signature = input.readUint32();
+    if (signature != SIGNATURE) {
+      throw ArchiveException(&#39;Invalid Zip Signature&#39;);
+    }
+
+    version = input.readUint16();
+    flags = input.readUint16();
+    compressionMethod = input.readUint16();
+    lastModFileTime = input.readUint16();
+    lastModFileDate = input.readUint16();
+    crc32 = input.readUint32();
+    compressedSize = input.readUint32();
+    uncompressedSize = input.readUint32();
+    final fn_len = input.readUint16();
+    final ex_len = input.readUint16();
+    filename = input.readString(size: fn_len);
+    extraField = input.readBytes(ex_len).toUint8List();
+
+    &#47;&#47; Read compressedSize bytes for the compressed data.
+    _rawContent = input.readBytes(header.compressedSize);
+
+    if (password != null) {
+      _initKeys(password);
+      _isEncrypted = true;
+    }
+
+    &#47;&#47; If bit 3 (0x08) of the flags field is set, then the CRC-32 and file
+    &#47;&#47; sizes are not known when the header is written. The fields in the
+    &#47;&#47; local header are filled with zero, and the CRC-32 and size are
+    &#47;&#47; appended in a 12-byte structure (optionally preceded by a 4-byte
+    &#47;&#47; signature) immediately after the compressed data:
+    if (flags &amp; 0x08 != 0) {
+      final sigOrCrc = input.readUint32();
+      if (sigOrCrc == 0x08074b50) {
+        crc32 = input.readUint32();
+      } else {
+        crc32 = sigOrCrc;
+      }
+
+      compressedSize = input.readUint32();
+      uncompressedSize = input.readUint32();
+    }
+  }
+}</code></pre>
+    </section>
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-right" class="col-xs-6 col-sm-6 col-md-2 sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    provinciApp
+      1.0.0+1
+  </span>
+
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="../../static-assets/typeahead.bundle.min.js"></script>
+<script src="../../static-assets/highlight.pack.js"></script>
+<script src="../../static-assets/URI.js"></script>
+<script src="../../static-assets/script.js"></script>
+
+
+</body>
+
+</html>

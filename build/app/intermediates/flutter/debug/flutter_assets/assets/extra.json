@@ -1,0 +1,22 @@
+{
+  "extra": [
+    {
+      "nome": "Cronache Maceratesi",
+      "descrizione": "News",
+      "url": "https://www.cronachemaceratesi.it/",
+      "urlImmagine": "https://www.cronachemaceratesi.it/wp-content/uploads/static/img/apple/touch-icon-iphone.png"
+    },
+    {
+      "nome": "GROUPON",
+      "descrizione": "Promo",
+      "url": "https://www.groupon.it/offerte/macerata/",
+      "urlImmagine": "https://www2.grouponcdn.com/layout/assets/grpn-favicon-76x76-13990cf550.png"
+    },
+    {
+      "nome": "thefork",
+      "descrizione": "Ristorazione",
+      "url": "https://www.thefork.it/search/?cityId=326991",
+      "urlImmagine": "https://cdn.theforkmanager.com/static/body-images/gerez-efficacement-vos-reservations-avec-la-fourchette-the-fork-systeme-de-reservation.jpg"
+    }
+  ]
+}
