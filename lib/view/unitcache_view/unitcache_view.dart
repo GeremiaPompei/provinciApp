@@ -34,7 +34,7 @@ class _UnitCacheViewState extends State<UnitCacheView> {
   Widget build(BuildContext context) {
     return Card(
       color: Colore.chiaro,
-      child: FlatButton(
+      child: ElevatedButton(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.stretch,

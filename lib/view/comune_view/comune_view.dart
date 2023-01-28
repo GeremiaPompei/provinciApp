@@ -42,7 +42,7 @@ class _ComuneViewState extends State<ComuneView> {
       child: widget._comune == null
           ? Container()
           : Stack(children: [
-              FlatButton(
+              ElevatedButton(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.stretch,

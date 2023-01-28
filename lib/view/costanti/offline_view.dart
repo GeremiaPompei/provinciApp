@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provinciApp/view/stile/colore.dart';
 import 'package:provinciApp/view/stile/stiletesto.dart';
@@ -15,10 +14,10 @@ class _OfflineViewState extends State<OfflineView> {
     return Container(
       color: Colore.sfondo,
       child: Center(
-        child: RaisedButton(
+        child: ElevatedButton(
             child: Text('Offline', style: StileTesto.titoloChiaro),
-            color: Colore.primario,
-            elevation: 6,
+            // color: Colore.primario,
+            // elevation: 6,
             onPressed: () {
               setState(() {
                 Navigator.pushNamedAndRemoveUntil(

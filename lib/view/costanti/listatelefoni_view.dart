@@ -27,7 +27,7 @@ class _ListaTelefoniViewState extends State<ListaTelefoniView> {
       shrinkWrap: true,
       primary: false,
       itemCount: widget._telefoni.length,
-      itemBuilder: (context, index) => FlatButton(
+      itemBuilder: (context, index) => ElevatedButton(
         onPressed: () async {
           await FlutterPhoneDirectCaller.callNumber(
               '${widget._telefoni[index]}');

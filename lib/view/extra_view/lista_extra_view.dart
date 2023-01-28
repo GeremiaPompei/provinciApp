@@ -34,7 +34,7 @@ class _ListaExtraViewState extends State<ListaExtraView> {
             ),
           )),
       actions: [
-        FlatButton(
+        ElevatedButton(
             onPressed: () {
               Navigator.pop(context);
             },

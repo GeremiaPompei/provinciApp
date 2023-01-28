@@ -24,7 +24,7 @@ class _ImmagineViewState extends State<ImmagineView> {
   @override
   Widget build(BuildContext context) {
     ImageProvider _image = Image.file(widget._immagine).image;
-    return FlatButton(
+    return ElevatedButton(
       child: Container(
         width: 150.0,
         height: 150.0,

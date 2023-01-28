@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provinciApp/controller/controller.dart';
 import 'package:provinciApp/model/pacchetto.dart';
@@ -44,7 +43,7 @@ class _CategoriaViewState extends State<CategoriaView> {
           color: Colore.chiaro,
           child: widget._categoria == null
               ? Container()
-              : FlatButton(
+              : ElevatedButton(
                   onPressed: () {
                     Navigator.push(
                       context,
